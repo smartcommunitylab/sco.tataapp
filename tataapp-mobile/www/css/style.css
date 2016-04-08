@@ -1,0 +1,14 @@
+/*
+ * TATA APP STRUCTURE AND STYLE
+ */
+
+
+/* APP STRUCTURE */
+
+
+/* APP STYLE OVVERRIDES */
+
+.tataapp-theme {}
+.tataapp-theme ion-side-menu ion-item span {
+    font-size: smaller;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <widget id="it.smartcommunitylab.tataapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+        <name>TataAPP</name>
+        <description>
+            La tua Tata Affidabile, Premurosa, Preparata
+        </description>
+        <author email="o.zambotti@fbk.eu" href="http://www.smartcommunitylab.it/">
+            SmartCommunityLab
+        </author>
+        <content src="index.html" />
+        <access origin="*" />
+        <access launch-external="yes" origin="mailto:*" />
+        <access launch-external="yes" origin="tel:*" />
+        <allow-navigation href="https://*.smartcommunitylab.it/*" />
+        <preference name="webviewbounce" value="false" />
+        <preference name="UIWebViewBounce" value="false" />
+        <preference name="DisallowOverscroll" value="true" />
+        <preference name="android-minSdkVersion" value="16" />
+        <preference name="BackupWebStorage" value="none" />
+        <preference name="SplashScreen" value="screen" />
+        <preference name="SplashScreenDelay" value="3000" />
+        <!--<preference name="FadeSplashScreen" value="false" />-->
+        <preference name="FadeSplashScreenDuration" value="1000" />
+        <preference name="ShowSplashScreenSpinner" value="false" />
+        <feature name="StatusBar">
+            <param name="ios-package" value="CDVStatusBar" onload="true" />
+        </feature>
+    </widget>
