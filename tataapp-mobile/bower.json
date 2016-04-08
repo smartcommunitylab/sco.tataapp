@@ -8,6 +8,7 @@
         "path": "www/lib",
         "sources": {
             "ionic": "bower_components/ionic/**",
+            "ngCordova": "bower_components/ngCordova/dist/ng-cordova.min.js",
             "angular-i18n": "bower_components/angular-i18n/angular-locale_it-it.js",
             "angular-translate": "bower_components/angular-translate/angular-translate.min.js",
             "moment": "bower_components/moment/min/moment-with-locales.min.js",
