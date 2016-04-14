@@ -1,0 +1,19 @@
+<ion-view title="{{'menu_faq' | translate}}">
+    <ion-nav-buttons side="right">
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-list class="list-accordion">
+            <div class="item-accordion" ng-repeat="entry in faq">
+                <ion-item class="item-accordion-header item-icon-right" ng-click="toggleActiveItem(entry)">
+                    <div ng-bind-html="entry.question | translate"></div>
+                    <!--<i class="icon" ng-class="{'ion-arrow-down-b': !isActiveItem(entry), 'ion-arrow-up-b': isActiveItem(entry)}"></i>-->
+                    <i class="icon ion-arrow-down-b" ng-class="{'open': isActiveItem(entry)}"></i>
+                </ion-item>
+                <ion-item class="item-accordion-content" ng-show="isActiveItem(entry)">
+                    <div ng-bind-html="entry.answer | translate"></div>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

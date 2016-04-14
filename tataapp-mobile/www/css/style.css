@@ -5,10 +5,110 @@
 
 /* APP STRUCTURE */
 
+.list-accordion .list .item-accordion .item-accordion-header,
+.list-accordion .list .item-accordion .item-accordion-content,
+.list-accordion .list .item-accordion .item-accordion-content p {
+    white-space: normal;
+}
+.list-accordion .list .item-accordion .item-accordion-header i {
+    transition: all 0.2s linear;
+}
+.list-accordion .list .item-accordion .item-accordion-header i.open {
+    transform: rotate(-180deg);
+}
+.list-accordion .list .item-accordion .item-accordion-header i::before {
+    font-size: 0.5em;
+}
+.list-accordion .list .item-accordion .item-accordion-content {
+    border-top: 0;
+    transition: all 0.2s linear;
+}
+.list-accordion .list .item-accordion .item-accordion-content.ng-hide {
+    line-height: 0px;
+    opacity: 0;
+}
 
 /* APP STYLE OVVERRIDES */
 
-.tataapp-theme {}
-.tataapp-theme ion-side-menu ion-item span {
+.tataapp-theme a,
+.tataapp-theme a:hover,
+.tataapp-theme a:active,
+.tataapp-theme a:visited {
+    color: #ee7b40;
+}
+.tataapp-theme .bar.bar-energized {
+    background-color: #ee7b40;
+    border-color: #ee7b40;
+    background-image: none;
+}
+.tataapp-theme .bar.bar-energized .title {
+    color: #fff;
+}
+.tataapp-theme .bar.bar-energized .button {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+.tataapp-theme .menu,
+.tataapp-theme .menu .list,
+.tataapp-theme .menu .list .item,
+.tataapp-theme .menu .list .item .item-content {
+    color: #fff;
+    background-color: #68615d;
+    border-color: #68615d;
+}
+.tataapp-theme .menu .list .item span {
     font-size: smaller;
+}
+.tataapp-theme .button {
+    text-transform: uppercase;
+    font-size: 1em;
+}
+.tataapp-theme .button.button-stable {
+    border-color: transparent;
+    background-color: #c8c8c8;
+    color: #68615d;
+}
+.tataapp-theme .button.button-stable.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #c8c8c8;
+}
+.tataapp-theme .button.button-stable.button-outline {
+    border-color: #c8c8c8;
+    background: transparent;
+    color: #c8c8c8;
+}
+.tataapp-theme .button.button-stable.button-outline.active,
+.tataapp-theme .button.button-stable.button-outline.activated {
+    background-color: #c8c8c8;
+    box-shadow: none;
+    color: #68615d;
+}
+.tataapp-theme .button.button-positive {
+    border-color: transparent;
+    background-color: #eecf40;
+    color: #68615d;
+}
+.tataapp-theme .button.button-positive.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #eecf40;
+}
+.tataapp-theme .button.button-positive.button-outline {
+    border-color: #eecf40;
+    background: transparent;
+    color: #eecf40;
+}
+.tataapp-theme .button.button-positive.button-outline.active,
+.tataapp-theme .button.button-positive.button-outline.activated {
+    background-color: #eecf40;
+    box-shadow: none;
+    color: #68615d;
+}
+.tataapp-theme .list-accordion .list .item-accordion .item-accordion-header.activated {
+    /* orange */
+    background-color: rgba(238, 123, 64, 0.3);
 }
