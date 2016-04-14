@@ -4,7 +4,17 @@
 
 
 /* APP STRUCTURE */
-
+.button.button-fab {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    top: 17px;
+    right: 11px;
+    bottom: auto;
+    left: auto;
+    border-radius: 22px;
+    /*box-shadow: 2px 2px 2px #c8c8c8;*/
+}
 .list-accordion .list .item-accordion .item-accordion-header,
 .list-accordion .list .item-accordion .item-accordion-content,
 .list-accordion .list .item-accordion .item-accordion-content p {
@@ -48,6 +58,9 @@
     color: #fff;
     text-transform: uppercase;
     font-size: 1em;
+}
+.tataapp-theme .bar.bar-energized .button.button-fab {
+    color: #68615d;
 }
 .tataapp-theme .menu,
 .tataapp-theme .menu .list,
