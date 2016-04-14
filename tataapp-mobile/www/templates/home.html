@@ -1,13 +1,37 @@
-<ion-view title="{{'app_name' | translate}}">
+<ion-view title="{{'app_name' | translate}}" class="home">
     <ion-nav-buttons side="right">
         <button class="button button-positive button-fab" ng-click="goTo('app.search', true, true)">
             <i class="icon ion-search"></i>
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding">
-        <a class="button button-positive button-block" href="mailto:o.zambotti@fbk.eu?subject={{'mail_ask4info1' | translate}}&body={{'mail_ask4info2' | translate}}">
-            {{'btn_info' | translate}}
-        </a>
+    <!--<ion-slides pager="false" options="swiperOptions" slider="swiper">
+        <ion-slide-page>
+            <img src="../img/homepage_01.png" />
+        </ion-slide-page>
+        <ion-slide-page>
+            <img src="../img/homepage_02.png" />
+        </ion-slide-page>
+        <ion-slide-page>
+            <img src="../img/homepage_03.png" />
+        </ion-slide-page>
+    </ion-slides>-->
+    <ion-content class="has-header">
+        <ion-slide-box auto-play="!!swiperOptions.autoplay" does-continue="!!swiperOptions.loop" slide-interval="{{swiperOptions.autoplay}}" show-pager="false">
+            <ion-slide>
+                <img src="../img/homepage_01.png" />
+            </ion-slide>
+            <ion-slide>
+                <img src="../img/homepage_02.png" />
+            </ion-slide>
+            <ion-slide>
+                <img src="../img/homepage_03.png" />
+            </ion-slide>
+        </ion-slide-box>
+        <div class="padding-horizontal">
+            <a class="button button-positive button-block" href="mailto:o.zambotti@fbk.eu?subject={{'mail_ask4info1' | translate}}&body={{'mail_ask4info2' | translate}}">
+                {{'btn_info' | translate}}
+            </a>
+        </div>
     </ion-content>
 </ion-view>
