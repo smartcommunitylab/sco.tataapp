@@ -9,7 +9,35 @@ public class TataPoint {
 	private String name;
 	private String address;
 	private String city;
+	private long startEvent;
+	private long endEvent;
+	private TataPointContact contact;
+
 	private String agencyId;
+
+	public TataPointContact getContact() {
+		return contact;
+	}
+
+	public void setContact(TataPointContact contact) {
+		this.contact = contact;
+	}
+
+	public long getStartEvent() {
+		return startEvent;
+	}
+
+	public void setStartEvent(long startEvent) {
+		this.startEvent = startEvent;
+	}
+
+	public long getEndEvent() {
+		return endEvent;
+	}
+
+	public void setEndEvent(long endEvent) {
+		this.endEvent = endEvent;
+	}
 
 	public String getId() {
 		return id;

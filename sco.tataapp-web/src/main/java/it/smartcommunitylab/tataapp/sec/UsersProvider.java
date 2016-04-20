@@ -23,7 +23,6 @@ public class UsersProvider {
 
 	@PostConstruct
 	private void init() {
-		//
 		Yaml yaml = new Yaml(new Constructor(YamlUsers.class));
 		try {
 			YamlUsers data = (YamlUsers) yaml.load(resource.getInputStream());

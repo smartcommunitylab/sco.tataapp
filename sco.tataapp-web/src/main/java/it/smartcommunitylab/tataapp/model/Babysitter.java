@@ -18,6 +18,9 @@ public class Babysitter {
 	private String email;
 	private String address;
 	private String city;
+
+	private Availability availability;
+
 	private String agencyId;
 
 	public String getAgencyId() {
@@ -93,5 +96,13 @@ public class Babysitter {
 		if (StringUtils.isBlank(agencyId)) {
 			throw new IllegalArgumentException("agency cannot be empty");
 		}
+	}
+
+	public Availability getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
 	}
 }

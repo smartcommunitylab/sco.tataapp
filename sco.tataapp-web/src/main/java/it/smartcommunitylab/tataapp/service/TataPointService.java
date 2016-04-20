@@ -33,6 +33,6 @@ public class TataPointService {
 	}
 
 	public void delete(String agencyId, String id) {
-		repo.delete(id);
+		repo.deleteByAgencyIdAndId(agencyId, id);
 	}
 }
