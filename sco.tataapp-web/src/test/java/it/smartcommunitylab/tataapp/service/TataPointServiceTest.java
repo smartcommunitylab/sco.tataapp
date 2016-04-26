@@ -20,7 +20,7 @@ public class TataPointServiceTest {
 	private static final String AGENCY_ID = "tataapp";
 
 	@Autowired
-	private TataPointService service;
+	private TataPointServiceImpl service;
 
 	@Autowired
 	private MongoTemplate mongoTemplate;

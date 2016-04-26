@@ -15,7 +15,7 @@ public class MongoConfig {
 	public static final String DEFAULT_DB_NAME = "tataapp";
 
 	@Autowired
-	Environment env;
+	private Environment env;
 
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {

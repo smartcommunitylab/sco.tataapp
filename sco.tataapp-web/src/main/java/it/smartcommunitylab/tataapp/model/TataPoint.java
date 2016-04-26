@@ -1,6 +1,7 @@
 package it.smartcommunitylab.tataapp.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 public class TataPoint {
 
@@ -9,34 +10,63 @@ public class TataPoint {
 	private String name;
 	private String address;
 	private String city;
-	private long startEvent;
-	private long endEvent;
-	private TataPointContact contact;
+	private long startDate;
+	private long endDate;
+	private long startTime;
+	private long endTime;
+	private Recurrence recurrence;
+
+	public Recurrence getRecurrence() {
+		return recurrence;
+	}
+
+	public void setRecurrence(String frequency, String[] days) {
+		this.recurrence = new Recurrence(frequency, days);
+	}
+
+	public long getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(long beginPeriod) {
+		this.startDate = beginPeriod;
+	}
+
+	public long getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(long endPeriod) {
+		this.endDate = endPeriod;
+	}
+
+	public String getContactDescription() {
+		return contactDescription;
+	}
+
+	public void setContactDescription(String contactDescription) {
+		this.contactDescription = contactDescription;
+	}
+
+	@Field("description")
+	private String contactDescription;
 
 	private String agencyId;
 
-	public TataPointContact getContact() {
-		return contact;
+	public long getStartTime() {
+		return startTime;
 	}
 
-	public void setContact(TataPointContact contact) {
-		this.contact = contact;
+	public void setStartTime(long startEvent) {
+		this.startTime = startEvent;
 	}
 
-	public long getStartEvent() {
-		return startEvent;
+	public long getEndTime() {
+		return endTime;
 	}
 
-	public void setStartEvent(long startEvent) {
-		this.startEvent = startEvent;
-	}
-
-	public long getEndEvent() {
-		return endEvent;
-	}
-
-	public void setEndEvent(long endEvent) {
-		this.endEvent = endEvent;
+	public void setEndTime(long endEvent) {
+		this.endTime = endEvent;
 	}
 
 	public String getId() {
@@ -77,6 +107,33 @@ public class TataPoint {
 
 	public void setAgencyId(String agencyId) {
 		this.agencyId = agencyId;
+	}
+
+}
+
+class Recurrence {
+	private String frequency;
+	private String[] days;
+
+	public Recurrence(String frequency, String[] days) {
+		this.frequency = frequency;
+		this.days = days;
+	}
+
+	public String getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
+	}
+
+	public String[] getDays() {
+		return days;
+	}
+
+	public void setDays(String[] days) {
+		this.days = days;
 	}
 
 }
