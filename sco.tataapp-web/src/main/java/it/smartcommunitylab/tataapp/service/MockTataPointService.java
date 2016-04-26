@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,14 +19,9 @@ import it.smartcommunitylab.tataapp.model.TataPoint;
 @Profile({ "mock" })
 public class MockTataPointService implements TataPointService {
 
-	private static List<TataPoint> mocks;
+	private List<TataPoint> mocks = mockResult();
 
 	private static Integer idGen = new Integer(1);
-
-	@PostConstruct
-	private void init() {
-		mocks = mockResult();
-	}
 
 	@Override
 	public TataPoint save(TataPoint tp) {

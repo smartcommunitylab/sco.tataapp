@@ -1,49 +1,28 @@
 package it.smartcommunitylab.tataapp.service;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import it.smartcommunitylab.tataapp.model.Babysitter;
-import it.smartcommunitylab.tataapp.repo.BabysitterRepo;
 
-@Component
-public class BabysitterService {
+@Service
+public interface BabysitterService {
 
-	@Autowired
-	private BabysitterRepo babysitterRepo;
+	Babysitter save(Babysitter babysitter);
 
-	public Babysitter save(Babysitter babysitter) {
-		babysitter.verify();
-		return babysitterRepo.save(babysitter);
-	}
+	Babysitter load(String agencyId, String id);
 
-	public Babysitter load(String agencyId, String id) {
-		return babysitterRepo.findByAgencyIdAndId(agencyId, id);
-	}
+	Babysitter load(String id);
 
-	public Babysitter load(String id) {
-		return babysitterRepo.findOne(id);
-	}
+	Set<Babysitter> loadAll(String agencyId);
 
-	public Set<Babysitter> loadAll(String agencyId) {
-		return new HashSet<>(babysitterRepo.findAll());
-	}
+	Page<Babysitter> loadAll(String agencyId, Pageable p);
 
-	public Page<Babysitter> loadAll(String agencyId, Pageable p) {
-		return babysitterRepo.findByAgencyId(agencyId, p);
-	}
+	Page<Babysitter> loadAll(Pageable p);
 
-	public Page<Babysitter> loadAll(Pageable p) {
-		return babysitterRepo.findAll(p);
-	}
-
-	public void delete(String agencyId, String id) {
-		babysitterRepo.delete(id);
-	}
+	void delete(String agencyId, String id);
 
 }

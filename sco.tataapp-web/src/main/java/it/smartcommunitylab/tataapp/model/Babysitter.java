@@ -1,6 +1,6 @@
 package it.smartcommunitylab.tataapp.model;
 
-import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
@@ -14,12 +14,29 @@ public class Babysitter {
 	private String name;
 	private String surname;
 
-	private Date birthdate;
+	private long birthdate;
 	private String email;
 	private String address;
 	private String city;
 
-	private Availability availability;
+	private List<String> languages;
+	private boolean carOwner;
+
+	public List<String> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(List<String> languages) {
+		this.languages = languages;
+	}
+
+	public boolean isCarOwner() {
+		return carOwner;
+	}
+
+	public void setCarOwner(boolean carOwner) {
+		this.carOwner = carOwner;
+	}
 
 	private String agencyId;
 
@@ -47,11 +64,11 @@ public class Babysitter {
 		this.surname = surname;
 	}
 
-	public Date getBirthdate() {
+	public long getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(long birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -98,11 +115,4 @@ public class Babysitter {
 		}
 	}
 
-	public Availability getAvailability() {
-		return availability;
-	}
-
-	public void setAvailability(Availability availability) {
-		this.availability = availability;
-	}
 }
