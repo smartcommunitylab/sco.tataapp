@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 
 @Component
@@ -101,6 +102,11 @@ public class MockBabysitterService implements BabysitterService {
 		results.add(b);
 		return results;
 
+	}
+
+	@Override
+	public Page<Babysitter> search(SearchCriteria criteria, Pageable p) {
+		return new PageImpl<>(babysitters.subList(0, 2));
 	}
 
 }

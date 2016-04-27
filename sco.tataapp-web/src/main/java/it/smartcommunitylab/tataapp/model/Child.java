@@ -1,52 +1,23 @@
 package it.smartcommunitylab.tataapp.model;
 
-import java.util.Date;
-
 public class Child {
-	private String name;
-	private String surname;
-	private String birthCity;
-	private Date birthDate;
-	private String fiscalCode;
+	private long birthDate;
+	private boolean disability;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getBirthCity() {
-		return birthCity;
-	}
-
-	public void setBirthCity(String birthCity) {
-		this.birthCity = birthCity;
-	}
-
-	public Date getBirthDate() {
+	public long getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(long birthDate) {
 		this.birthDate = birthDate;
 	}
 
-	public String getFiscalCode() {
-		return fiscalCode;
+	public boolean isDisability() {
+		return disability;
 	}
 
-	public void setFiscalCode(String fiscalCode) {
-		this.fiscalCode = fiscalCode;
+	public void setDisability(boolean disability) {
+		this.disability = disability;
 	}
 
 }

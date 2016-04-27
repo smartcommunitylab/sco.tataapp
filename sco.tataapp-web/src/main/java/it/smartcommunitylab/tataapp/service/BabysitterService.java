@@ -6,23 +6,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 
 @Service
 public interface BabysitterService {
 
-	Babysitter save(Babysitter babysitter);
+	public Babysitter save(Babysitter babysitter);
 
-	Babysitter load(String agencyId, String id);
+	public Babysitter load(String agencyId, String id);
 
-	Babysitter load(String id);
+	public Babysitter load(String id);
 
-	Set<Babysitter> loadAll(String agencyId);
+	public Set<Babysitter> loadAll(String agencyId);
 
-	Page<Babysitter> loadAll(String agencyId, Pageable p);
+	public Page<Babysitter> loadAll(String agencyId, Pageable p);
 
-	Page<Babysitter> loadAll(Pageable p);
+	public Page<Babysitter> loadAll(Pageable p);
 
-	void delete(String agencyId, String id);
+	public void delete(String agencyId, String id);
 
+	public Page<Babysitter> search(SearchCriteria criteria, Pageable p);
 }

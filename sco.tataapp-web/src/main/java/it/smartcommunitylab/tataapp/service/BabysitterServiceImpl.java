@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.repo.BabysitterRepo;
 
@@ -46,6 +47,12 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	public void delete(String agencyId, String id) {
 		babysitterRepo.delete(id);
+	}
+
+	@Override
+	public Page<Babysitter> search(SearchCriteria criteria, Pageable p) {
+
+		return null;
 	}
 
 }

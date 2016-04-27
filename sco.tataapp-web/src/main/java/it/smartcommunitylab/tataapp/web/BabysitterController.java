@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
 
@@ -29,11 +30,17 @@ public class BabysitterController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/tata")
-	public Babysitter read(@RequestBody Babysitter b, @PathVariable String agencyId) {
+	public Babysitter save(@RequestBody Babysitter b, @PathVariable String agencyId) {
 		return service.save(b);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/api/agency/{agencyId}/tata/{babysitterId}")
 	public void delete(@PathVariable String agencyId, @PathVariable String babysitterId) {
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/tata/search")
+	public Page<Babysitter> search(@RequestBody SearchCriteria criteria, @PathVariable String agencyId,
+			Pageable pageable) {
+		return service.loadAll(agencyId, pageable);
 	}
 }
