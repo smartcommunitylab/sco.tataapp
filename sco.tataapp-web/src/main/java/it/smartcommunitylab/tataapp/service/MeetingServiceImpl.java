@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import it.smartcommunitylab.tataapp.model.Meeting;
 
 @Component
-@Profile({ "default,prod" })
+@Profile({ "default" })
 public class MeetingServiceImpl implements MeetingService {
 
 	@Override

@@ -14,7 +14,7 @@ import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.repo.BabysitterRepo;
 
 @Component
-@Profile({ "default,prod" })
+@Profile({ "default" })
 public class BabysitterServiceImpl implements BabysitterService {
 
 	@Autowired
