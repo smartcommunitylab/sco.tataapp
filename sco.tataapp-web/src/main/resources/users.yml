@@ -1,0 +1,4 @@
+users:
+ - username: tataapp
+   password: tatapwd
+   role: ADMIN

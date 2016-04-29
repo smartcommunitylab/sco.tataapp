@@ -1,0 +1,63 @@
+<div class="row">
+	<div class="col-md-8">
+		<button type="button" class="btn btn-success btn-circle pull-right" data-ng-click="openAddDialog()">
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default" data-ng-repeat="l in locations">
+			<div class="panel-heading">
+				{{l}}
+				<button type="button" class="btn btn-success btn-circle pull-right">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+				<button type="button" class="btn btn-success btn-circle pull-right">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+
+			</div>
+			<div class="panel-body">
+				<strong>Date:</strong>
+				<p>20/07/2016 10:00 - 12/09/2016 18:00</p>
+				<strong>Luogo:</strong>
+				<p>Via sommarive 18, Trento</p>
+				<strong>Riferimento:</strong>
+				<div>
+					<ul>
+						<li>SocialStone</li>
+						<li>349-4390438985</li>
+						<li>contact@aa.it</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/ng-template" id="addTatapoint.html">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Aggiungi</h4>
+      </div>
+      
+      <div class="modal-body">
+        <div ng-show="error" class="alert alert-danger" role="alert">
+          {{errorMsg}}
+        </div>
+      <form name="form">
+          <div class="form-group">
+            <label for="name">Prodotto</label>
+            <input type="text" name="name" ng-model="tatapoint.name" required=""/>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="cancel()">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="add()">Crea</button>
+      </div>
+      
+   </script>
