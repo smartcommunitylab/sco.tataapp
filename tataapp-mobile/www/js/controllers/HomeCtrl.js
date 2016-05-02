@@ -23,6 +23,10 @@ angular.module('tataapp.controllers.home', [])
     };
 })
 
+.controller('PointsCtrl', function ($scope) {
+    // TODO
+})
+
 .controller('InfoCtrl', function ($scope, $filter) {
     $scope.swiperOptions = {};
 

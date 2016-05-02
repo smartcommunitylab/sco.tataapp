@@ -155,9 +155,9 @@ angular.module('tataapp.controllers.search', [])
         var request = form2request($scope.searchform);
         console.log(request);
 
-        /*$state.go('app.searchsummary', {}, {
+        $state.go('app.searchsummary', {}, {
             reload: true
-        });*/
+        });
     };
 
     /*

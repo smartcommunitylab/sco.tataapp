@@ -100,6 +100,16 @@ angular.module('tataapp', [
         }
     })
 
+    .state('app.points', {
+        url: '/points',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/points.html',
+                controller: 'PointsCtrl'
+            }
+        }
+    })
+
     .state('app.fee', {
         url: '/fee',
         views: {
