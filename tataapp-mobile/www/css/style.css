@@ -78,6 +78,35 @@
 .tataapp-theme a:visited {
     color: #ee7b40;
 }
+.tataapp-theme .bar.bar-subheader .button.button-text{
+    color: #FFFFFF;
+    background-color: #68615d;
+    font-size: 1.2em;
+}
+.tataapp-theme .bar.bar-subheader {
+    background-color: #68615d;
+    border-color: #68615d;
+    background-image: none;
+    text-align: center;
+}
+.tataapp-theme .bar.bar-subheader h5{
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-top: 3px !important;
+}
+.tataapp-theme .bar.bar-subheader .ion-arrow-left-b,
+.tataapp-theme .bar.bar-subheader .ion-arrow-right-b{
+    color: #FFFFFF;
+    border: none;
+    background-color: #68615d;
+}
+.tataapp-theme .bar.bar-subheader .ion-arrow-left-b{
+    float: left;
+}
+.tataapp-theme .bar.bar-subheader .ion-arrow-right-b{
+    float: right;
+}
 .tataapp-theme .bar.bar-energized {
     background-color: #ee7b40;
     border-color: #ee7b40;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Template for HTML email (simple)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+    <p>Nuova richiesta di colloquio da parte di:</p>
+    <ul>
+    	<li><strong>Nominativo</strong>: <span th:text="${representive.name} + ' ' + ${representive.surname}"></span></li>
+    	<li><strong>Comune</strong>: <span th:text="${representive.city}"></span></li>
+    	<li><strong>Telefono</strong>:<span th:text="${representive.phone}"></span></li>
+    	<li><strong>Email</strong>: <span th:text="${representive.email}"></span></li>
+    </ul>
+    
+    <p>Il servizio è richiesto per:</p>
+    <ul>
+    	<li th:each="c : ${children}">Minore nato il <span th:text="${#dates.format(c.birthDateObj,'dd/MM/YYYY')}"></span> <span th:if="${c.disability}">( DISABILITA')</span></li>
+    </ul>
+       
+    <p th:if="${tata} != null">E' stato evidenziato l'interesse per la tata <span th:text="${tata.name} + ' ' + ${tata.surname}"></span></p>
+    <p th:if="${tata} == null">La famiglia non ha segnalato l'interesse per nessuna tata in particolare</p>
+    </body>
+</html>

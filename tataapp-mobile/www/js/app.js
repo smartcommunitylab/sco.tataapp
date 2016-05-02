@@ -7,6 +7,7 @@ angular.module('tataapp', [
     'pascalprecht.translate',
     'tataapp.services.config',
     'tataapp.services.utils',
+    'tataapp.services.backend',
     'tataapp.controllers.home',
     'tataapp.controllers.search',
     'tataapp.controllers.meet',
