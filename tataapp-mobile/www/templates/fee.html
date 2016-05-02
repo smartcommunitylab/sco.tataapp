@@ -3,9 +3,7 @@
     </ion-nav-buttons>
 
     <ion-content class="padding">
-        <p>{{'text_fee1' | translate}}</p>
-        <p>{{'text_fee2' | translate}}</p>
-        <p>{{'text_fee3' | translate}}</p>
+        <div ng-bind-html="'text_fee' | translate"></div>
         <a class="button button-positive button-block" href="#/app/fee/estimate">
             {{'btn_estimate' | translate}}
         </a>

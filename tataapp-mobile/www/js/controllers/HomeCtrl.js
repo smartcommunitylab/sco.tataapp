@@ -23,20 +23,22 @@ angular.module('tataapp.controllers.home', [])
     };
 })
 
-.controller('HowCtrl', function ($scope, $filter) {
+.controller('PointsCtrl', function ($scope) {
+    // TODO
+})
+
+.controller('InfoCtrl', function ($scope, $filter) {
     $scope.swiperOptions = {};
 
-    $scope.howPages = [];
+    $scope.infoPages = [];
 
-    var howCounter = 1;
-    while ($filter('translate')('how_' + howCounter + '_t') != ('how_' + howCounter + '_t')) {
-        var t1 = $filter('translate')('how_' + howCounter + '_t');
-        var t2 = ('how_' + howCounter + '_t');
+    var infoCounter = 1;
+    while ($filter('translate')('info_' + infoCounter + '_t') != ('info_' + infoCounter + '_t')) {
         var entry = {
-            title: 'how_' + howCounter + '_t',
-            content: 'how_' + howCounter + '_c'
+            title: 'info_' + infoCounter + '_t',
+            content: 'info_' + infoCounter + '_c'
         };
-        $scope.howPages.push(entry);
-        howCounter++;
+        $scope.infoPages.push(entry);
+        infoCounter++;
     }
 });

@@ -1,9 +1,12 @@
 angular.module('tataapp', [
     'ionic',
     'ionic.wizard',
+    'ionic-datepicker',
     'ngCordova',
     'ngSanitize',
     'pascalprecht.translate',
+    'tataapp.services.config',
+    'tataapp.services.utils',
     'tataapp.controllers.home',
     'tataapp.controllers.search',
     'tataapp.controllers.meet',
@@ -25,6 +28,17 @@ angular.module('tataapp', [
             StatusBar.styleDefault();
         }
     });
+})
+
+.config(function ($translateProvider) {
+    /*$translateProvider.translations('it', {});*/
+    /*$translateProvider.preferredLanguage('it');*/
+    $translateProvider.preferredLanguage('it');
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'languages/',
+        suffix: '.json'
+    });
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -86,6 +100,16 @@ angular.module('tataapp', [
         }
     })
 
+    .state('app.points', {
+        url: '/points',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/points.html',
+                controller: 'PointsCtrl'
+            }
+        }
+    })
+
     .state('app.fee', {
         url: '/fee',
         views: {
@@ -105,12 +129,12 @@ angular.module('tataapp', [
         }
     })
 
-    .state('app.how', {
-        url: '/how',
+    .state('app.info', {
+        url: '/info',
         views: {
             'menuContent': {
-                templateUrl: 'templates/how.html',
-                controller: 'HowCtrl'
+                templateUrl: 'templates/info.html',
+                controller: 'InfoCtrl'
             }
         }
     })
@@ -136,15 +160,4 @@ angular.module('tataapp', [
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
-})
-
-.config(function ($translateProvider) {
-    /*$translateProvider.translations('it', {});*/
-    /*$translateProvider.preferredLanguage('it');*/
-    $translateProvider.preferredLanguage('it');
-    $translateProvider.useStaticFilesLoader({
-        prefix: '../languages/',
-        suffix: '.json'
-    });
-    $translateProvider.useSanitizeValueStrategy('sanitize');
 });

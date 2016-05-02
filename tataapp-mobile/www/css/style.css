@@ -1,9 +1,13 @@
 /*
+ *
  * TATA APP STRUCTURE AND STYLE
+ *
  */
 
 
-/* APP STRUCTURE */
+/*
+ * APP STRUCTURE
+ */
 
 .button.button-fab {
     position: absolute;
@@ -15,6 +19,17 @@
     left: auto;
     border-radius: 22px;
     /*box-shadow: 2px 2px 2px #c8c8c8;*/
+}
+.checkboxes-horizontal {
+    text-align: center;
+}
+.checkboxes-horizontal .item-checkbox {
+    display: inline-block;
+    padding: 0 16px 36px 16px;
+}
+.checkboxes-horizontal .item-checkbox .checkbox {
+    top: 44px;
+    padding: 0;
 }
 .list-accordion .list .item-accordion .item-accordion-header,
 .list-accordion .list .item-accordion .item-accordion-content,
@@ -41,19 +56,21 @@
 .swiper-container .swiper-pagination {
     display: none;
 }
-.swiper-container .how-pagination {
+.swiper-container .info-pagination {
     text-align: center;
     margin-bottom: 1em;
 }
-.swiper-container .how-pagination i {
+.swiper-container .info-pagination i {
     opacity: 0.3;
     margin: 0.5em;
 }
-.swiper-container .how-pagination i.saw {
+.swiper-container .info-pagination i.saw {
     opacity: 1;
 }
 
-/* APP STYLE OVVERRIDES */
+/*
+ * APP STYLE OVVERRIDES
+ */
 
 .tataapp-theme a,
 .tataapp-theme a:hover,
@@ -136,19 +153,83 @@
     box-shadow: none;
     color: #68615d;
 }
+.tataapp-theme .toggle input:checked + .track {
+    background-color: #68615d;
+    border-color: #68615d;
+}
+.tataapp-theme .toggle-small input:checked + .track {
+    background-color: rgba(104, 97, 93, 0.5);
+    border-color: rgba(104, 97, 93, 0.5);
+}
+.tataapp-theme .toggle-small input:checked + .track .handle {
+    background: #68615d;
+}
+.tataapp-theme .checkbox input:checked:before,
+.tataapp-theme .checkbox input:checked + .checkbox-icon:before {
+    border-color: #68615d;
+    background-color: #68615d;
+}
 .tataapp-theme .list-accordion .list .item-accordion .item-accordion-header.activated {
     /* orange */
     background-color: rgba(238, 123, 64, 0.3);
 }
-.tataapp-theme .swiper-container .how-pagination {
+.tataapp-theme .swiper-container .info-pagination {
     color: #68615d;
 }
 
-/* APP PAGES */
+/*
+ * APP PAGES
+ */
+
+
+/* Home */
+
 .home .slider-slides img {
     width: 100%;
 }
-.tataapp-theme .how .how-page::after {
+
+/* Search */
+
+.tataapp-theme .search .scroll-bar-indicator {
+    /*opacity: 1 !important;*/
+}
+.tataapp-theme .search .item-input {
+    padding-left: 0;
+}
+.tataapp-theme .search .item-input .input-label {
+    font-weight: bold;
+    width: inherit;
+}
+.tataapp-theme .search .item-input span.date {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    border-bottom: 1px solid #68615d;
+}
+.tataapp-theme .search .item-input.item-stacked-label > .input-label {
+    width: 100%;
+}
+.tataapp-theme .search .item-input.item-input-sub {
+    padding-left: 60px;
+}
+.tataapp-theme .search .item-input.item-input-sub .input-label {
+    font-weight: normal;
+    padding: 7px 10px 7px 0;
+}
+.tataapp-theme .search .item-input input {
+    border-bottom: 1px solid #68615d;
+    border-radius: 0;
+}
+.tataapp-theme .search .item-checkbox,
+.tataapp-theme .search .item-toggle {
+    border: 0;
+}
+.tataapp-theme .search .item-toggle > div > span {
+    white-space: normal;
+}
+
+/* info */
+
+.tataapp-theme .info .info-page::after {
     content: "";
     top: 0;
     left: 0;
@@ -160,25 +241,25 @@
     background: transparent no-repeat bottom right;
     background-size: 70%;
 }
-.tataapp-theme .how .how-page.how-page-1::after {
+.tataapp-theme .info .info-page.info-page-2::after {
     background-image: url('../img/wizard_01.png');
 }
-.tataapp-theme .how .how-page.how-page-2::after {
+.tataapp-theme .info .info-page.info-page-3::after {
     background-image: url('../img/wizard_02.png');
 }
-.tataapp-theme .how .how-page.how-page-3::after {
+.tataapp-theme .info .info-page.info-page-4::after {
     background-image: url('../img/wizard_03.png');
 }
-.tataapp-theme .how .how-page.how-page-4::after {
+.tataapp-theme .info .info-page.info-page-5::after {
     background-image: url('../img/wizard_04.png');
 }
-.tataapp-theme .how .how-page.how-page-5::after {
+.tataapp-theme .info .info-page.info-page-6::after {
     background-image: url('../img/wizard_05.png');
 }
-.tataapp-theme .how ion-content {
+.tataapp-theme .info ion-content {
     padding-top: 2em;
 }
-.tataapp-theme .how h1 {
+.tataapp-theme .info h1 {
     text-align: center;
     font-size: 1.2em;
     text-transform: uppercase;
