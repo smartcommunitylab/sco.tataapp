@@ -7,7 +7,7 @@ angular.module('tataapp.services.backend', [])
     backend.getAllTate = function (agencyId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/0/tata', ConfigSrv.getHTTPConfig())
+        $http.get(ConfigSrv.getServerURL() + '/api/agency/'+agencyId+'/tata', ConfigSrv.getHTTPConfig())
 
         .then(
             function (response) {
