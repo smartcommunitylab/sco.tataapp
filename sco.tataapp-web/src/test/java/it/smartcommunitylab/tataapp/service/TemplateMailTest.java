@@ -73,4 +73,16 @@ public class TemplateMailTest {
 
 		System.out.println(generator.generate(parameters, "meeting"));
 	}
+
+	@Test
+	public void testReminder() {
+		Map<String, Object> parameters = new HashMap<>();
+
+		Babysitter tata = new Babysitter();
+		tata.setId("1234567");
+		tata.setName("Julia");
+		tata.setSurname("Carpenter");
+		parameters.put("tata", tata);
+		System.out.println(generator.generate(parameters, "remind"));
+	}
 }
