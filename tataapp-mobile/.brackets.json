@@ -1,0 +1,6 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/home/linuxuser/sco.tataapp/tataapp-mobile/www/js/app.js",
+        "/home/linuxuser/sco.tataapp/tataapp-mobile/www/js/controllers/HomeCtrl.js"
+    ]
+}
