@@ -9,6 +9,7 @@ angular.module('tataapp', [
     'tataapp.services.utils',
     'tataapp.services.backend',
     'tataapp.controllers.home',
+    'tataapp.controllers.points',
     'tataapp.controllers.search',
     'tataapp.controllers.meet',
     'tataapp.controllers.fee',

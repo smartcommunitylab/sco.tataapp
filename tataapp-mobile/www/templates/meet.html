@@ -1,58 +1,61 @@
 <ion-view title="{{'menu_meet' | translate}}" class="form meet">
-    <ion-content class="has-header has-footer padding-horizontal">
-        <h5 class="padding-top">{{'form_applicant' | translate}}</h5>
-        <h6>{{'form_applicant_holder' | translate}}</h6>
-        <ion-list>
-            <item class="item item-input item-floating-label">
-                <span class="input-label" ng-bind-html="'form_surname' | translate"></span>
-                <input type="text" ng-model="meetform.surname" placeholder="{{'form_surname' | translate}}">
-            </item>
-            <item class="item item-input item-floating-label">
-                <span class="input-label" ng-bind-html="'form_name' | translate"></span>
-                <input type="text" ng-model="meetform.name" placeholder="{{'form_name' | translate}}">
-            </item>
-            <item class="item item-input item-floating-label">
-                <span class="input-label" ng-bind-html="'form_municipality' | translate"></span>
-                <input type="text" ng-model="meetform.municipality" placeholder="{{'form_municipality' | translate}}">
-            </item>
-            <item class="item item-input item-floating-label">
-                <span class="input-label" ng-bind-html="'form_phone' | translate"></span>
-                <input type="tel" ng-model="meetform.tel" placeholder="{{'form_phone' | translate}}">
-            </item>
-            <item class="item item-input item-floating-label">
-                <span class="input-label" ng-bind-html="'form_email' | translate"></span>
-                <input type="email" ng-model="meetform.email" placeholder="{{'form_email' | translate}}">
-            </item>
-        </ion-list>
+    <form name="form" novalidate>
+        <ion-content class="has-header has-footer padding-horizontal">
+            <h5 class="padding-top">{{'form_applicant' | translate}}</h5>
+            <h6>{{'form_applicant_holder' | translate}}</h6>
+            <ion-list>
+                <item class="item item-input item-floating-label">
+                    <span class="input-label" ng-bind-html="'form_surname' | translate"></span>
+                    <input type="text" ng-model="meetform.surname" placeholder="{{'form_surname' | translate}}" ng-required="true">
+                </item>
+                <item class="item item-input item-floating-label">
+                    <span class="input-label" ng-bind-html="'form_name' | translate"></span>
+                    <input type="text" ng-model="meetform.name" placeholder="{{'form_name' | translate}}" ng-required="true">
+                </item>
+                <item class="item item-input item-floating-label">
+                    <span class="input-label" ng-bind-html="'form_municipality' | translate"></span>
+                    <input type="text" ng-model="meetform.municipality" placeholder="{{'form_municipality' | translate}}" ng-required="true">
+                </item>
+                <item class="item item-input item-floating-label">
+                    <span class="input-label" ng-bind-html="'form_phone' | translate"></span>
+                    <input type="tel" ng-model="meetform.tel" placeholder="{{'form_phone' | translate}}" ng-required="true">
+                </item>
+                <item class="item item-input item-floating-label">
+                    <span class="input-label" ng-bind-html="'form_email' | translate"></span>
+                    <input type="email" ng-model="meetform.email" placeholder="{{'form_email' | translate}}" ng-required="true">
+                </item>
+            </ion-list>
 
-        <h5 class="padding-separator">{{'form_children' | translate}}</h5>
-        <ion-list>
-            <item class="item item-input">
-                <span class="input-label" ng-bind-html="'form_children_count' | translate"></span>
-                <!--<input type="text" ng-model="meetform.childrenCount">-->
-                <span class="count">{{meetform.children.length}}</span>
-                <div class="button-box switch">
-                    <button class="button button-positive button-clear button-icon icon ion-plus-circled" ng-click="addChild()"></button>
-                    <button class="button button-stable button-clear button-icon icon ion-minus-circled" ng-click="removeChild()" ng-disabled="meetform.children.length == 1"></button>
-                </div>
-            </item>
-            <div class="child" ng-repeat="child in meetform.children" ng-init="childPos = $index + 1">
+            <h5 class="padding-separator">{{'form_children' | translate}}</h5>
+            <ion-list>
                 <item class="item item-input">
-                    <span class="input-label" ng-bind-html="'form_children_age' | translate:'{number:' + childPos +'}'"></span>
-                    <span class="count">{{child.age}}</span>
+                    <span class="input-label" ng-bind-html="'form_children_count' | translate"></span>
+                    <!--<input type="text" ng-model="meetform.childrenCount">-->
+                    <span class="count">{{meetform.children.length}}</span>
                     <div class="button-box switch">
-                        <button class="button button-positive button-clear button-icon icon ion-plus-circled" ng-click="makeOlder(child)"></button>
-                        <button class="button button-stable button-clear button-icon icon ion-minus-circled" ng-click="makeYounger(child)" ng-disabled="child.age == 0"></button>
+                        <button class="button button-positive button-clear button-icon icon ion-plus-circled" ng-click="addChild()"></button>
+                        <button class="button button-stable button-clear button-icon icon ion-minus-circled" ng-click="removeChild()" ng-disabled="meetform.children.length == 1"></button>
                     </div>
                 </item>
-                <ion-checkbox ng-model="child.disability">{{'form_children_needs' | translate}}</ion-checkbox>
-            </div>
-        </ion-list>
-    </ion-content>
+                <div class="child" ng-repeat="child in meetform.children" ng-init="childPos = $index + 1">
+                    <item class="item item-input">
+                        <span class="input-label" ng-bind-html="'form_children_age' | translate:'{number:' + childPos +'}'"></span>
+                        <span class="count">{{child.age}}</span>
+                        <div class="button-box switch">
+                            <button class="button button-positive button-clear button-icon icon ion-plus-circled" ng-click="makeOlder(child)"></button>
+                            <button class="button button-stable button-clear button-icon icon ion-minus-circled" ng-click="makeYounger(child)" ng-disabled="child.age == 0"></button>
+                        </div>
+                    </item>
+                    <ion-checkbox ng-model="child.disability">{{'form_children_needs' | translate}}</ion-checkbox>
+                </div>
+            </ion-list>
 
-    <ion-footer-bar class="bar-energized">
-        <div class="button-bar">
-            <button class="button button-clear" ng-click="showPersonalDataPopup()">{{'send' | translate}}</button>
-        </div>
-    </ion-footer-bar>
+        </ion-content>
+
+        <ion-footer-bar class="bar-energized">
+            <div class="button-bar">
+                <button class="button button-clear" ng-disabled="form.$invalid" ng-click="send()">{{'send' | translate}}</button>
+            </div>
+        </ion-footer-bar>
+    </form>
 </ion-view>

@@ -1,6 +1,6 @@
 angular.module('tataapp.controllers.meet', [])
 
-.controller('MeetCtrl', function ($scope, $filter, $ionicPopup, $ionicScrollDelegate) {
+.controller('MeetCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, Config, BackendSrv) {
     var child = {
         age: 0,
         disability: false
@@ -35,39 +35,6 @@ angular.module('tataapp.controllers.meet', [])
         child.age--;
     };
 
-
-
-    $scope.showPersonalDataPopup = function () {
-        var popup = $ionicPopup.confirm({
-            title: $filter('translate')('popup_personaldata_title'), // String. The title of the popup.
-            cssClass: '',
-            template: $filter('translate')('popup_personaldata_content'),
-            cancelText: $filter('translate')('deny'),
-            cancelType: 'button-stable', // (default: 'button-default')
-            okText: $filter('translate')('allow'),
-            okType: 'button-positive' // (default: 'button-positive')
-        });
-
-        popup.then(function (ok) {
-            if (ok) {
-                console.log('Auth allowed');
-            } else {
-                console.log('Auth denied');
-            }
-        });
-    };
-
-    /*
-    $scope.meetform = {
-        surname: '',
-        name: '',
-        municipality: '',
-        phone: '',
-        email: '',
-        children: [angular.copy(child)]
-    };
-    */
-
     /*
     Representive familyRepresentive;
 		String email;
@@ -76,7 +43,7 @@ angular.module('tataapp.controllers.meet', [])
 		String surname;
 		String city;
 	List<Child> children;
-		long birthDate;
+		int age;
 		boolean disability;
 	String babysitterId;
 	long creationTs;
@@ -85,6 +52,7 @@ angular.module('tataapp.controllers.meet', [])
 
     var form2request = function (form) {
         var request = {
+            agencyId: Config.AGENCY_ID,
             familyRepresentive: {
                 email: form.email,
                 phone: form.phone,
@@ -92,17 +60,54 @@ angular.module('tataapp.controllers.meet', [])
                 surname: form.surname,
                 city: form.municipality
             },
-            children: []
+            children: form.children
         };
-
-        angular.forEach(form.children, function (child) {
-            // TODO
-        });
 
         return request;
     };
 
+    var showPersonalDataPopup = function () {
+        return $ionicPopup.confirm({
+            title: $filter('translate')('popup_personaldata_title'), // String. The title of the popup.
+            cssClass: '',
+            template: $filter('translate')('popup_personaldata_content'),
+            cancelText: $filter('translate')('deny'),
+            cancelType: 'button-stable', // (default: 'button-default')
+            okText: $filter('translate')('allow'),
+            okType: 'button-positive' // (default: 'button-positive')
+        });
+    };
+
+    var showSentPopup = function () {
+        return $ionicPopup.alert({
+            title: $filter('translate')('popup_requestsent_title'), // String. The title of the popup.
+            cssClass: '',
+            template: $filter('translate')('popup_requestsent_content'),
+            okText: $filter('translate')('back_home'),
+            okType: 'button-positive' // (default: 'button-positive')
+        });
+    };
+
     $scope.send = function () {
-        $scope.popupPersonalData();
+        showPersonalDataPopup().then(function (ok) {
+            if (ok) {
+                var request = form2request($scope.meetform);
+                console.log(JSON.stringify(request));
+                BackendSrv.requestMeeting(request).then(
+                    function (response) {
+                        showSentPopup().then(function () {
+                            $state.go('app.home', {}, {
+                                reload: true
+                            });
+                        });
+                    },
+                    function (reason) {
+                        // TODO handle error
+                    }
+                );
+            } else {
+                console.log('Auth denied');
+            }
+        });
     };
 });
