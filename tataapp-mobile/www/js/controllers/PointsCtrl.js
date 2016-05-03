@@ -6,8 +6,8 @@ angular.module('tataapp.controllers.points', [])
     $scope.dateFormatMonth = Config.dateFormatMonth
     $scope.tataPoints = [];
     $scope.month = now;
-    var getAllTatapoint = function (agencyId) {
-        BackendSrv.getAllTatapoint(agencyId).then(
+    var getAllTatapoint = function () {
+        BackendSrv.getAllTatapoint().then(
             function (data) {
                 $scope.tataPoints = data.content;
             },
