@@ -94,10 +94,10 @@ angular.module('tataapp.services.backend', [])
     };
 
     /* Richiesta colloquio */
-    backend.getPreventivo = function (colloquio) {
+    backend.requestMeeting = function (request) {
         var deferred = $q.defer();
 
-        $http.post(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/meeting', colloquio, Config.getHTTPConfig())
+        $http.post(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/meeting', request, Config.getHTTPConfig())
 
         .then(
             function (response) {
