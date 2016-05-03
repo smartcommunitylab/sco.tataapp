@@ -15,7 +15,7 @@
     
     <p>Il servizio è richiesto per:</p>
     <ul>
-    	<li th:each="c : ${children}">Minore nato il <span th:text="${#dates.format(c.birthDateObj,'dd/MM/YYYY')}"></span> <span th:if="${c.disability}">( DISABILITA')</span></li>
+    	<li th:each="c : ${children}">Minore di età <span th:text="${c.age}"></span> anni <span th:if="${c.disability}">( DISABILITA')</span></li>
     </ul>
        
     <p th:if="${tata} != null">E' stato evidenziato l'interesse per la tata <span th:text="${tata.name} + ' ' + ${tata.surname}"></span></p>

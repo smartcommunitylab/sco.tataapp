@@ -1,24 +1,24 @@
 package it.smartcommunitylab.tataapp.model;
 
 public class Child {
-	private long birthDate;
+	private int age;
 	private boolean disability;
 
 	public Child() {
 	}
 
-	public Child(long birthDate, boolean disability) {
+	public Child(int age, boolean disability) {
 		super();
-		this.birthDate = birthDate;
+		this.age = age;
 		this.disability = disability;
 	}
 
-	public long getBirthDate() {
-		return birthDate;
+	public long getAge() {
+		return age;
 	}
 
-	public void setBirthDate(long birthDate) {
-		this.birthDate = birthDate;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public boolean isDisability() {
