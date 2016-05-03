@@ -2,10 +2,20 @@
     <ion-header-bar class="bar bar-subheader day-change">
         <div class="button-box">
             <button class="button button-icon icon ion-arrow-left-b" ng-click=""></button>
-            <button class="button button-text">Mese</button>
+            <button class="button button-text">{{month | date: dateFormatMonth}}</button>
             <button class="button button-icon icon ion-arrow-right-b" ng-click=""></button>
         </div>
     </ion-header-bar>
     <ion-content class="has-header has-subheader padding-horizontal">
+        <ion-list>
+            <div class="card" ng-repeat="point in tataPoints">
+                <ion-item class="item-avatar">
+                    <img src="img/tata_point.png" />
+                    <h2>{{point.name}}</h2>
+                    <h3>{{'from' | translate}} {{point.startDate | date:dateFormat}} {{'to' | translate}} {{point.endDate | date : dateFormat}}</h3>
+                    <h3>{{point.address}}</h3>
+                </ion-item>
+            </div>
+        </ion-list>
     </ion-content>
 </ion-view>

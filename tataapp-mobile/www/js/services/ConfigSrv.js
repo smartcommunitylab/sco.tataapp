@@ -9,6 +9,9 @@ angular.module('tataapp.services.config', [])
 
     configService.dateFormat = 'dd MMMM yyyy';
 
+    configService.dateFormatNum = 'dd/MM/yyyy';
+    configService.dateFormatMonth = 'MMMM';
+
     configService.HTTP_CONFIG = {
         timeout: 5000
     };
