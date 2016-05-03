@@ -7,7 +7,7 @@ angular.module('tataapp.services.backend', [])
     backend.getAllTate = function (agencyId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/'+agencyId+'/tata', ConfigSrv.getHTTPConfig())
+        $http.get(Config.getServerURL() + '/api/agency/'+agencyId+'/tata', Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -25,7 +25,7 @@ angular.module('tataapp.services.backend', [])
     backend.getATata = function (agencyId, babysitterId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tata/' + babysitterId, ConfigSrv.getHTTPConfig())
+        $http.get(Config.getServerURL() + '/api/agency/' + agencyId + '/tata/' + babysitterId, Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -43,7 +43,7 @@ angular.module('tataapp.services.backend', [])
     backend.deleteTata = function (agencyId, tate) {
         var deferred = $q.defer();
 
-        $http.post(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tata/search', tate, ConfigSrv.getHTTPConfig())
+        $http.post(Config.getServerURL() + '/api/agency/' + agencyId + '/tata/search', tate, Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -61,7 +61,7 @@ angular.module('tataapp.services.backend', [])
     backend.getTariffario = function (agencyId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/pricelist', ConfigSrv.getHTTPConfig())
+        $http.get(Config.getServerURL() + '/api/agency/' + agencyId + '/pricelist', Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -79,7 +79,7 @@ angular.module('tataapp.services.backend', [])
     backend.getPreventivo = function (agencyId, preventivo) {
         var deferred = $q.defer();
 
-        $http.post(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/estimation', preventivo, ConfigSrv.getHTTPConfig())
+        $http.post(Config.getServerURL() + '/api/agency/' + agencyId + '/estimation', preventivo, Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -97,7 +97,7 @@ angular.module('tataapp.services.backend', [])
     backend.getPreventivo = function (agencyId, colloquio) {
         var deferred = $q.defer();
 
-        $http.post(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/meeting', colloquio, ConfigSrv.getHTTPConfig())
+        $http.post(Config.getServerURL() + '/api/agency/' + agencyId + '/meeting', colloquio, Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -115,7 +115,7 @@ angular.module('tataapp.services.backend', [])
     backend.getAllTatapoint = function (agencyId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tatapoint', ConfigSrv.getHTTPConfig())
+        $http.get(Config.getServerURL() + '/api/agency/' + agencyId + '/tatapoint', Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -133,7 +133,7 @@ angular.module('tataapp.services.backend', [])
     backend.getATatapoint = function (agencyId, tatapointId) {
         var deferred = $q.defer();
 
-        $http.get(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tatapoint/', tatapointId, ConfigSrv.getHTTPConfig())
+        $http.get(Config.getServerURL() + '/api/agency/' + agencyId + '/tatapoint/', tatapointId, Config.getHTTPConfig())
 
         .then(
             function (response) {

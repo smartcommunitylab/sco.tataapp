@@ -21,57 +21,6 @@ angular.module('tataapp.controllers.home', [])
         speed: 1000,
         loop: true
     };
-    /*$scope.getAllTate = function () {
-        BackendSrv.getAllTate().then(
-            function (data) {
-                console.log(data);
-            },
-            function (error) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-    };
-    $scope.getATata = function (agencyId, babysitterId) {
-        BackendSrv.getATata(agencyId, babysitterId).then(
-            function (data) {
-                console.log(data);
-            },
-            function (error) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-    };
-    $scope.getTariffario = function (agencyId) {
-        BackendSrv.getTariffario(agencyId).then(
-            function (data) {
-                console.log(data);
-            },
-            function (error) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-    };
-    $scope.getAllTatapoint = function (agencyId) {
-        BackendSrv.getAllTatapoint(agencyId).then(
-            function (data) {
-                console.log(data);
-            },
-            function (error) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-    };
-    $scope.getATatapoint = function (agencyId, tatapointId) {
-        BackendSrv.getATatapoint(agencyId, tatapointId).then(
-            function (data) {
-                console.log(data);
-            },
-            function (error) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-    };*/
-
 })
 
 .controller('PointsCtrl', function ($scope) {
