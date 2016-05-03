@@ -1,9 +1,9 @@
 <ion-view title="{{'app_name' | translate}}" class="points">
     <ion-header-bar class="bar bar-subheader day-change">
         <div class="button-box">
-            <button class="button button-icon icon ion-arrow-left-b" ng-click=""></button>
-            <button class="button button-text">{{month | date: dateFormatMonth}}</button>
-            <button class="button button-icon icon ion-arrow-right-b" ng-click=""></button>
+            <button class="button button-icon icon ion-arrow-left-b" ng-click="changeMonth(-1)"></button>
+            <button class="button button-text">{{now | date : dateFormatMonth}}</button>
+            <button class="button button-icon icon ion-arrow-right-b" ng-click="changeMonth(1)"></button>
         </div>
     </ion-header-bar>
     <ion-content class="has-header has-subheader padding-horizontal">
