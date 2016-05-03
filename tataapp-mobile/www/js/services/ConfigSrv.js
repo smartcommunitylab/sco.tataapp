@@ -3,7 +3,7 @@ angular.module('tataapp.services.config', [])
 .factory('Config', function ($http, $q) {
     var configService = {};
 
-    configService.AGENCY_ID = '0';
+    configService.AGENCY_ID = 'progetto92';
 
     configService.SERVER_URL = 'https://dev.smartcommunitylab.it/tataapp';
 

@@ -36,17 +36,6 @@ angular.module('tataapp.controllers.meet', [])
     };
 
     /*
-    $scope.meetform = {
-        surname: '',
-        name: '',
-        municipality: '',
-        phone: '',
-        email: '',
-        children: [angular.copy(child)]
-    };
-    */
-
-    /*
     Representive familyRepresentive;
 		String email;
 		String phone;
