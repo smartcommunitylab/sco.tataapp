@@ -1,7 +1,6 @@
 package it.smartcommunitylab.tataapp.service;
 
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import it.smartcommunitylab.tataapp.WebApplication;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Child;
 import it.smartcommunitylab.tataapp.model.Representive;
-import it.smartcommunitylab.tataapp.service.TemplateMailService.EmailChild;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(WebApplication.class)
@@ -24,6 +22,9 @@ public class TemplateMailTest {
 
 	@Autowired
 	private TemplateMailService generator;
+
+	@Autowired
+	MeetingService meeting;
 
 	@Test
 	public void testCompleteMeeting() {
@@ -36,9 +37,8 @@ public class TemplateMailTest {
 		r.setPhone("000-0000000");
 		parameters.put("representive", r);
 
-		List<EmailChild> children = Arrays.asList(
-				generator.new EmailChild(new Child(new GregorianCalendar(2006, 2, 12).getTimeInMillis(), false)),
-				generator.new EmailChild((new Child(new GregorianCalendar(2010, 2, 22).getTimeInMillis(), true))));
+		List<Child> children = Arrays.asList(new Child(3, false), new Child(8, true));
+		parameters.put("children", children);
 		parameters.put("children", children);
 
 		Babysitter tata = new Babysitter();
@@ -61,9 +61,7 @@ public class TemplateMailTest {
 		r.setPhone("000-0000000");
 		parameters.put("representive", r);
 
-		List<EmailChild> children = Arrays.asList(
-				generator.new EmailChild(new Child(new GregorianCalendar(2006, 2, 12).getTimeInMillis(), false)),
-				generator.new EmailChild((new Child(new GregorianCalendar(2010, 2, 22).getTimeInMillis(), true))));
+		List<Child> children = Arrays.asList(new Child(3, false), new Child(8, true));
 		parameters.put("children", children);
 
 		Babysitter tata = new Babysitter();

@@ -39,42 +39,6 @@ angular.module('tataapp.services.backend', [])
         return deferred.promise;
     };
 
-    /*Save a single tata*/
-    backend.saveTata = function (agencyId, tata) {
-        var deferred = $q.defer();
-
-        $http.post(ConfigSrv.getServerURL() + '/api/agency/' + agencyId, tata, ConfigSrv.getHTTPConfig())
-
-        .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function (responseError) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-
-        return deferred.promise;
-    };
-
-    /*Delete a single tata*/
-    backend.deleteTata = function (agencyId, tata) {
-        var deferred = $q.defer();
-
-        $http.delete(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tata/' + babysitterId, ConfigSrv.getHTTPConfig())
-
-        .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function (responseError) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-
-        return deferred.promise;
-    };
-
     /*Search tate*/
     backend.deleteTata = function (agencyId, tate) {
         var deferred = $q.defer();
@@ -170,42 +134,6 @@ angular.module('tataapp.services.backend', [])
         var deferred = $q.defer();
 
         $http.get(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tatapoint/', tatapointId, ConfigSrv.getHTTPConfig())
-
-        .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function (responseError) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-
-        return deferred.promise;
-    };
-
-    /*Crea un tatapoint*/
-    backend.createATatapoint = function (agencyId, tatapoint) {
-        var deferred = $q.defer();
-
-        $http.post(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tatapoint', tatapoint, ConfigSrv.getHTTPConfig())
-
-        .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function (responseError) {
-                deferred.reject(responseError.data ? responseError.data.errorMessage : responseError);
-            }
-        );
-
-        return deferred.promise;
-    };
-
-    /*Elimina un tatapoint*/
-    backend.deleteATatapoint = function (agencyId, tatapointId) {
-        var deferred = $q.defer();
-
-        $http.delete(ConfigSrv.getServerURL() + '/api/agency/' + agencyId + '/tatapoint/', tatapointId, ConfigSrv.getHTTPConfig())
 
         .then(
             function (response) {
