@@ -1,6 +1,6 @@
 angular.module('tataapp.controllers.points', [])
 
-.controller('PointsCtrl', function ($scope, $filter, BackendSrv, Config, $state) {
+.controller('PointsCtrl', function ($scope, $filter, BackendSrv, Config, $state, $ionicPlatform) {
     $scope.now = new Date();
     $scope.tataPoints = [];
     $scope.dateFormat = Config.dateFormatNum;

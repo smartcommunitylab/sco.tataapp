@@ -32,7 +32,7 @@ angular.module('tataapp', [
     });
 })
 
-.config(function ($translateProvider) {
+.config(function ($translateProvider, $ionicConfigProvider) {
     /*$translateProvider.translations('it', {});*/
     /*$translateProvider.preferredLanguage('it');*/
     $translateProvider.preferredLanguage('it');
@@ -41,6 +41,8 @@ angular.module('tataapp', [
         suffix: '.json'
     });
     $translateProvider.useSanitizeValueStrategy('sanitize');
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
+    $ionicConfigProvider.backButton.icon("ion-android-arrow-back");
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {

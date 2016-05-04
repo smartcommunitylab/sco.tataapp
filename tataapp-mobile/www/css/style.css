@@ -211,10 +211,6 @@
     color: #68615d;
 }
 
-.tataapp-theme .item-avatar img{
-    max-height: 60px;
-}
-
 .tataapp-theme .list-item{
     min-height: 50px;
     display: flex;
@@ -359,4 +355,19 @@
     font-size: 1.2em;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+/*Tata point*/
+
+.tataapp-theme .item-avatar img{
+    max-height: 70px;
+    max-width: 40px;
+}
+
+.tataapp-theme .item-avatar h2{
+    font-size: 1.3em;
+}
+
+.tataapp-theme .item-avatar h3{
+    padding-top: 5px;
 }
