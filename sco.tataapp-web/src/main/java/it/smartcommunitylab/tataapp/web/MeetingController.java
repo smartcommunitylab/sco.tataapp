@@ -1,6 +1,7 @@
 package it.smartcommunitylab.tataapp.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import it.smartcommunitylab.tataapp.model.Meeting;
 import it.smartcommunitylab.tataapp.service.MeetingService;
 
 @RestController
+@CrossOrigin()
 public class MeetingController {
 
 	@Autowired
