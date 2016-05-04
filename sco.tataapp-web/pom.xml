@@ -59,11 +59,12 @@
 			</dependency> -->
 
 		<!-- autorefresh of code and resources in dev mode -->
-		<dependency>
+		<!-- JUNIT seems to be very slower with devtools -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.yaml</groupId>
