@@ -1,0 +1,23 @@
+<ion-view title="{{'menu_points' | translate}}" class="points">>
+    <ion-content class="has-header padding">
+        <h4 class="padding">{{selectedPoint.name}}</h4>
+        <ion-list>
+            <div class="list-item">
+                <i class="icon ion-android-calendar"></i>
+                <span>{{'from' | translate}} {{selectedPoint.startDate | date:dateFormat}} {{'to' | translate}} {{selectedPoint.endDate | date : dateFormat}}</span>
+            </div>
+            <div class="list-item">
+                <i class="icon ion-android-time"></i>
+                <span>{{'fromTime' | translate}} {{selectedPoint.startTime | date:timeFormat}} {{'toTime' | translate}} {{selectedPoint.endTime | date:timeFormat}}</span>
+            </div>
+            <div class="list-item">
+                <i class="icon ion-android-pin"></i>
+                <span>{{selectedPoint.address}}</span>
+            </div>
+            <div class="list-item">
+                <i class="icon ion-android-call"></i>
+                <span>{{selectedPoint.contactDescription}}</span>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

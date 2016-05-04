@@ -1,4 +1,4 @@
-<ion-view title="{{'app_name' | translate}}" class="points">
+<ion-view title="{{'menu_points' | translate}}" class="points">
     <ion-header-bar class="bar bar-subheader day-change">
         <div class="button-box">
             <button class="button button-icon icon ion-arrow-left-b" ng-click="changeMonth(-1)"></button>
@@ -8,7 +8,7 @@
     </ion-header-bar>
     <ion-content class="has-header has-subheader padding-horizontal">
         <ion-list>
-            <div class="card" ng-repeat="point in tataPoints">
+            <div class="card" ng-repeat="point in tataPoints track by $index"  ng-click="seePoint($index)">
                 <ion-item class="item-avatar">
                     <img src="img/tata_point.png" />
                     <h2>{{point.name}}</h2>

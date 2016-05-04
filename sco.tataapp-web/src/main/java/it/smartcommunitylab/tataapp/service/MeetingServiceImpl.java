@@ -55,7 +55,8 @@ public class MeetingServiceImpl implements MeetingService {
 		parameters.put("children", meeting.getChildren());
 
 		try {
-			emailService.sendSimpleMail("to", "richiesta nuovo colloquio", parameters, TEMPLATE_MEETING);
+			emailService.sendSimpleMail(meeting.getFamilyRepresentive().getEmail(), "to@localhost.cc",
+					"richiesta nuovo colloquio", parameters, TEMPLATE_MEETING);
 		} catch (MessagingException e) {
 			logger.error("Exception sending email for meeting {}", meeting.getId());
 		}
