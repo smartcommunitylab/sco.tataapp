@@ -1,8 +1,29 @@
-<ion-view title="{{'title_fee' | translate}}">
+<ion-view title="{{'title_fee' | translate}}" class="form search">
     <ion-nav-buttons side="right">
         <button class="button button-clear">{{'btn_estimatefee' | translate}}</button>
     </ion-nav-buttons>
-
-    <ion-content class="padding">
+    <ion-content class="has-header padding-horizontal">
+        <ion-list>
+            <item class="item-input">
+                <span class="input-label" ng-bind-html="'form_datefrom' | translate"></span>
+                <span class="date" ng-click="pickDate('from')">{{searchform.dateFrom | date : dateFormat}}</span>
+            </item>
+            <item class="item-input">
+                <span class="input-label" ng-bind-html="'form_dateto' | translate"></span>
+                <span class="date" ng-click="pickDate('to')">{{searchform.dateTo | date : dateFormat}}</span>
+            </item>
+            <item class="item-input">
+                <span class="input-label" ng-bind-html="'form_work_hours' | translate"></span>
+                <input type="text" placeholder="{{'form_work_hours_num' | translate}}">
+            </item>
+            <item class="item-input">
+                <span class="input-label" ng-bind-html="'form_service_stamps' | translate"></span>
+                <ion-toggle ng-model="searchform.food_stamps"></ion-toggle>
+            </item>
+            <item class="item-input">
+                <span class="input-label" ng-bind-html="'form_service_type' | translate"></span>
+                <!--TODO: checkbox working as radiobtn-->
+            </item>
+        </ion-list>
     </ion-content>
 </ion-view>

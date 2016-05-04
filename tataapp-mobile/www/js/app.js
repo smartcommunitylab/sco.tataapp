@@ -32,7 +32,7 @@ angular.module('tataapp', [
     });
 })
 
-.config(function ($translateProvider) {
+.config(function ($translateProvider, $ionicConfigProvider) {
     /*$translateProvider.translations('it', {});*/
     /*$translateProvider.preferredLanguage('it');*/
     $translateProvider.preferredLanguage('it');
@@ -41,6 +41,7 @@ angular.module('tataapp', [
         suffix: '.json'
     });
     $translateProvider.useSanitizeValueStrategy('sanitize');
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -108,6 +109,19 @@ angular.module('tataapp', [
             'menuContent': {
                 templateUrl: 'templates/points.html',
                 controller: 'PointsCtrl'
+            }
+        }
+    })
+
+    .state('app.point', {
+        url: '/points/point',
+        params: {
+            'selectedPoint': {}
+        },
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/point.html',
+                controller: 'PointCtrl'
             }
         }
     })
