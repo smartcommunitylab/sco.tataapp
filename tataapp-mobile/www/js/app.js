@@ -112,6 +112,19 @@ angular.module('tataapp', [
         }
     })
 
+    .state('app.point', {
+        url: '/points/point',
+        params: {
+            'selectedPoint': {}
+        },
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/point.html',
+                controller: 'PointCtrl'
+            }
+        }
+    })
+
     .state('app.fee', {
         url: '/fee',
         views: {

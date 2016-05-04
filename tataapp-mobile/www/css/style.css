@@ -211,6 +211,27 @@
     color: #68615d;
 }
 
+.tataapp-theme .item-avatar img{
+    max-height: 60px;
+}
+
+.tataapp-theme .list-item{
+    min-height: 50px;
+    display: flex;
+    padding: 10px;
+}
+
+.tataapp-theme .list-item .icon {
+    color: #68615d;
+    font-size: 2em;
+}
+
+.tataapp-theme .list-item span{
+    padding-left: 15px;
+   padding-top: 5px;
+}
+
+
 /*
  * APP PAGES
  */
