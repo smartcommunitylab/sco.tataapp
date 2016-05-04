@@ -40,10 +40,10 @@ angular.module('tataapp.services.backend', [])
     };
 
     /* Search tate */
-    backend.deleteTata = function (tate) {
+    backend.searchTate = function (request) {
         var deferred = $q.defer();
 
-        $http.post(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/tata/search', tate, Config.getHTTPConfig())
+        $http.post(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/tata/search', request, Config.getHTTPConfig())
 
         .then(
             function (response) {
@@ -88,7 +88,7 @@ angular.module('tataapp.services.backend', [])
             function (reason) {
                 deferred.reject(reason.data ? reason.data.errorMessage : reason);
             }
-        );progetto92
+        );
 
         return deferred.promise;
     };

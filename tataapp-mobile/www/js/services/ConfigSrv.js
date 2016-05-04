@@ -14,7 +14,10 @@ angular.module('tataapp.services.config', [])
     configService.dateFormatMonth = 'MMMM';
 
     configService.HTTP_CONFIG = {
-        timeout: 5000
+        timeout: 5000,
+        headers: {
+            'Content-Type': 'application/json'
+        }
     };
 
     configService.getServerURL = function () {

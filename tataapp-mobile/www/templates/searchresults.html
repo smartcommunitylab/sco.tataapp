@@ -4,16 +4,10 @@
 
     <ion-content class="padding-horizontal">
         <ion-list>
-            <div class="card">
+            <div class="card" ng-repeat="nanny in nannies">
                 <ion-item class="item-avatar">
                     <img src="img/tataph.png" />
-                    <h2>Tata Uno</h2>
-                </ion-item>
-            </div>
-            <div class="card">
-                <ion-item class="item-avatar">
-                    <img src="img/tataph.png" />
-                    <h2>Tata Due</h2>
+                    <h2>{{nanny.name}} {{nanny.surname}}</h2>
                 </ion-item>
             </div>
         </ion-list>

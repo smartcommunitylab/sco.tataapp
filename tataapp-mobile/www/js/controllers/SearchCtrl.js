@@ -1,6 +1,6 @@
 angular.module('tataapp.controllers.search', [])
 
-.controller('SearchCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils) {
+.controller('SearchCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
 
@@ -155,9 +155,25 @@ angular.module('tataapp.controllers.search', [])
         var request = form2request($scope.searchform);
         console.log(request);
 
-        $state.go('app.searchsummary', {}, {
-            reload: true
-        });
+        /*BackendSrv.searchTate(request).then(*/
+        BackendSrv.getAllTate().then(
+            function (results) {
+                console.log(results);
+
+                /*
+                $state.go('app.searchsummary', {}, {
+                    reload: true
+                });
+                */
+
+                $state.go('app.searchresults', {
+                    'searchResults': results
+                });
+            },
+            function (reason) {
+                console.log(reason);
+            }
+        );
     };
 
     /*
@@ -169,20 +185,14 @@ angular.module('tataapp.controllers.search', [])
     */
 })
 
-.controller('SearchSummaryCtrl', function ($scope, $state) {
+.controller('SearchSummaryCtrl', function ($scope, $state, $stateParams) {
     $scope.seeSearchResultsList = function () {
-        $state.go('app.searchresults', {}, {
-            reload: true
+        $state.go('app.searchresults', {
+            'searchResults': $stateParams['searchResults']
         });
-    };
-
-    $scope.dummy = function (oh) {
-        console.log(oh);
     };
 })
 
-.controller('SearchResultsCtrl', function ($scope) {
-    $scope.dummy = function (oh) {
-        console.log(oh);
-    };
+.controller('SearchResultsCtrl', function ($scope, $stateParams) {
+    $scope.nannies = $stateParams['searchResults'].content;
 });
