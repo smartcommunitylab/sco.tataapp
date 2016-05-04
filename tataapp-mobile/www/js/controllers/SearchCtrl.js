@@ -193,6 +193,13 @@ angular.module('tataapp.controllers.search', [])
     };
 })
 
-.controller('SearchResultsCtrl', function ($scope, $stateParams) {
+.controller('SearchResultsCtrl', function ($scope, $state, $stateParams) {
     $scope.nannies = $stateParams['searchResults'].content;
+
+    $scope.seeSearchResult = function (nanny) {
+        $state.go('app.nanny', {
+            'nannyId': nanny.id,
+            'nanny': nanny
+        });
+    };
 });

@@ -1,8 +1,15 @@
-<ion-view title="{{'app_name' | translate}}">
+<ion-view title="{{nanny.name}} {{nanny.surname}}" class="nanny">
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
     <ion-content class="padding">
-
+        <ion-list>
+            <item class="item item-thumbnail-left" href="#">
+                <img src="img/tataph.png" />
+                <h3><span class="lbl">{{'form_name' | translate}}:</span> <span>{{nanny.name}}</span></h3>
+                <h3><span class="lbl">{{'form_surname' | translate}}:</span> <span>{{nanny.surname}}</span></h3>
+                <h3><span class="lbl" ng-bind-html="'form_age' | translate"></span> <span>{{getAge(nanny)}}</span></h3>
+            </item>
+        </ion-list>
     </ion-content>
 </ion-view>

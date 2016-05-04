@@ -4,7 +4,7 @@
 
     <ion-content class="padding-horizontal">
         <ion-list>
-            <div class="card" ng-repeat="nanny in nannies">
+            <div class="card" ng-repeat="nanny in nannies" ng-click="seeSearchResult(nanny)">
                 <ion-item class="item-avatar">
                     <img src="img/tataph.png" />
                     <h2>{{nanny.name}} {{nanny.surname}}</h2>

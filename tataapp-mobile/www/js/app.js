@@ -101,7 +101,10 @@ angular.module('tataapp', [
     })
 
     .state('app.nanny', {
-        url: '/search/results/{id}',
+        url: '/search/results/{nannyId}',
+        params: {
+            'nanny': {},
+        },
         views: {
             'menuContent': {
                 templateUrl: 'templates/nanny.html',

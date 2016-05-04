@@ -55,6 +55,7 @@
     "form_children_count": "Numero minori:",
     "form_children_age": "Età minore {{number}}:",
     "form_children_needs": "Patologie (se ex legge 104 certificato)",
+    "form_age": "Età:",
     "form_surname": "Cognome",
     "form_name": "Nome",
     "form_municipality": "Comune di residenza",
