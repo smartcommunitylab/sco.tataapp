@@ -34,8 +34,8 @@ public class EmailService {
 	/*
 	 * Send HTML mail (simple)
 	 */
-	public void sendSimpleMail(final String recipientEmail, String mailSubject, final Map<String, Object> parameters,
-			String templateName) throws MessagingException {
+	public void sendSimpleMail(String fromAddress, final String recipientEmail, String mailSubject,
+			final Map<String, Object> parameters, String templateName) throws MessagingException {
 
 		// Prepare message using a Spring helper
 		final MimeMessage mimeMessage = mailSender.createMimeMessage();
