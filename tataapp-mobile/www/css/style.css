@@ -294,6 +294,24 @@
 .tataapp-theme .form.search .item-toggle > div > span {
     white-space: normal;
 }
+.tataapp-theme .form.search .search-tata-dow {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.tataapp-theme .form.search .search-tata-dow label.item-checkbox {
+    display: inline-block;
+    text-align: center;
+}
+.tataapp-theme .form.search .search-tata-dow label.item-checkbox .checkbox {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: auto;
+    padding-bottom: 0;
+}
 
 /* Nanny */
 

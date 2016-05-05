@@ -3,6 +3,7 @@ angular.module('tataapp.controllers.search', [])
 .controller('SearchCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
+    $scope.allDays = false;
 
     var datePickerOptions = {
         setLabel: $filter('translate')('set'),
@@ -87,6 +88,26 @@ angular.module('tataapp.controllers.search', [])
         timeSlots: {
             morning: false,
             afternoon: false
+        }
+    };
+
+    $scope.changeDoW = function () {
+        for (var i in $scope.searchform.days) {
+            if (!$scope.searchform.days[i]) {
+                $scope.searchform.days.allDays = false;
+            }
+        }
+    };
+
+    $scope.selectAllDoW = function () {
+        if (!!$scope.searchform.days.allDays) {
+            for (var i in $scope.searchform.days) {
+                $scope.searchform.days[i] = true;
+            }
+        } else {
+            for (var i in $scope.searchform.days) {
+                $scope.searchform.days[i] = false;
+            }
         }
     };
 

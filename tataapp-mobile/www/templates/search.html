@@ -41,34 +41,17 @@
                         <span class="date" ng-click="pickDate('to')">{{searchform.dateTo | date : dateFormat}}</span>
                     </item>
                     <item class="item-input item-stacked-label">
-                        <span class="input-label" ng-bind-html="'form_days' | translate"></span>
-                        <ion-list class="list-inset checkboxes-horizontal">
-                            <div class="row">
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.mon">L</ion-checkbox>
-                                </div>
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.tue">M</ion-checkbox>
-                                </div>
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.wed">M</ion-checkbox>
-                                </div>
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.thu">G</ion-checkbox>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.fri">V</ion-checkbox>
-                                </div>
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.sat">S</ion-checkbox>
-                                </div>
-                                <div class="col">
-                                    <ion-checkbox ng-model="searchform.days.sun">D</ion-checkbox>
-                                </div>
-                            </div>
-                        </ion-list>
+                        <span class="input-label" ng-bind-html="'form_days' | translate" ></span>
+                        <div class="list-inset checkboxes-horizontal search-tata-dow">
+                                    <ion-checkbox ng-model="searchform.days.mon"  ng-change="changeDoW()">L</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.tue"  ng-change="changeDoW()">M</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.wed"  ng-change="changeDoW()">M</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.thu"  ng-change="changeDoW()">G</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.fri"  ng-change="changeDoW()">V</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.sat"  ng-change="changeDoW()">S</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.sun"  ng-change="changeDoW()">D</ion-checkbox>
+                                    <ion-checkbox ng-model="searchform.days.allDays" ng-change="selectAllDoW()">TUTTI</ion-checkbox>
+                        </div>
                     </item>
                     <item class="item-input item-stacked-label">
                         <span class="input-label" ng-bind-html="'form_timeslots' | translate"></span>
