@@ -45,7 +45,6 @@ angular.module('tataapp.controllers.fee', [])
     var showSentPopup = function () {
         return $ionicPopup.alert({
             title: $filter('translate')('popup_title_attention','uppercase'), // String. The title of the popup.
-            cssClass: 'attentionPopup',
             template: $filter('translate')('popup_fee_attention'),
             okText: $filter('translate')('popup_button_understand'),
             okType: 'button-positive' // (default: 'button-positive')
