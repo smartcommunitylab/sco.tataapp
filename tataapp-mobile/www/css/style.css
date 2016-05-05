@@ -227,6 +227,10 @@
    padding-top: 5px;
 }
 
+.tataapp-theme .attentionPopup .popup-title {
+    font-weight: bold;
+    font-size: 1.5em;
+}
 
 /*
  * APP PAGES
