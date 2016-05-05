@@ -11,6 +11,7 @@ angular.module('tataapp', [
     'tataapp.controllers.home',
     'tataapp.controllers.points',
     'tataapp.controllers.search',
+    'tataapp.controllers.nanny',
     'tataapp.controllers.meet',
     'tataapp.controllers.fee',
     'tataapp.controllers.faq'
@@ -75,6 +76,9 @@ angular.module('tataapp', [
 
     .state('app.searchsummary', {
         url: '/search/summary',
+        params: {
+            'searchResults': {},
+        },
         views: {
             'menuContent': {
                 templateUrl: 'templates/searchsummary.html',
@@ -85,10 +89,26 @@ angular.module('tataapp', [
 
     .state('app.searchresults', {
         url: '/search/results',
+        params: {
+            'searchResults': {},
+        },
         views: {
             'menuContent': {
                 templateUrl: 'templates/searchresults.html',
                 controller: 'SearchResultsCtrl'
+            }
+        }
+    })
+
+    .state('app.nanny', {
+        url: '/search/results/{nannyId}',
+        params: {
+            'nanny': {},
+        },
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/nanny.html',
+                controller: 'NannyCtrl'
             }
         }
     })

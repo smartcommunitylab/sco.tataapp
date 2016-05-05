@@ -92,7 +92,8 @@ angular.module('tataapp.controllers.meet', [])
         showPersonalDataPopup().then(function (ok) {
             if (ok) {
                 var request = form2request($scope.meetform);
-                console.log(JSON.stringify(request));
+                request = JSON.parse('{"agencyId":"progetto92","familyRepresentive":{"email":"oscar.zambotti@gmail.com","phone":"","name":"Oscar","surname":"Zambotti","city":"Lavis"},"children":[{"age":0,"disability":false}]}'),
+                    console.log(JSON.stringify(request));
                 BackendSrv.requestMeeting(request).then(
                     function (response) {
                         showSentPopup().then(function () {
