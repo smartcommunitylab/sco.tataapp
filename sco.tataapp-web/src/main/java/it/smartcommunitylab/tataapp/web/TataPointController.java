@@ -3,6 +3,7 @@ package it.smartcommunitylab.tataapp.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import it.smartcommunitylab.tataapp.model.TataPoint;
 import it.smartcommunitylab.tataapp.service.TataPointService;
 
 @RestController
+@CrossOrigin()
 public class TataPointController {
 
 	@Autowired

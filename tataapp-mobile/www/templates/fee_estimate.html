@@ -1,29 +1,39 @@
-<ion-view title="{{'title_fee' | translate}}" class="form search">
-    <ion-nav-buttons side="right">
-        <button class="button button-clear">{{'btn_estimatefee' | translate}}</button>
-    </ion-nav-buttons>
-    <ion-content class="has-header padding-horizontal">
-        <ion-list>
-            <item class="item-input">
-                <span class="input-label" ng-bind-html="'form_datefrom' | translate"></span>
-                <span class="date" ng-click="pickDate('from')">{{searchform.dateFrom | date : dateFormat}}</span>
-            </item>
-            <item class="item-input">
-                <span class="input-label" ng-bind-html="'form_dateto' | translate"></span>
-                <span class="date" ng-click="pickDate('to')">{{searchform.dateTo | date : dateFormat}}</span>
-            </item>
-            <item class="item-input">
-                <span class="input-label" ng-bind-html="'form_work_hours' | translate"></span>
-                <input type="text" placeholder="{{'form_work_hours_num' | translate}}">
-            </item>
-            <item class="item-input">
-                <span class="input-label" ng-bind-html="'form_service_stamps' | translate"></span>
-                <ion-toggle ng-model="searchform.food_stamps"></ion-toggle>
-            </item>
-            <item class="item-input">
-                <span class="input-label" ng-bind-html="'form_service_type' | translate"></span>
-                <!--TODO: checkbox working as radiobtn-->
-            </item>
-        </ion-list>
-    </ion-content>
+<ion-view title="{{'title_fee' | translate}}" class="form estimate">
+    <form name="form" novalidate>
+        <!--<ion-nav-buttons side="right">
+            <button class="button button-clear" ng-click="search()">{{'btn_estimatefee' | translate}}</button>
+        </ion-nav-buttons>-->
+        <ion-content class="has-header padding-horizontal">
+            <ion-list>
+                <item class="item-input">
+                    <span class="input-label" ng-bind-html="'form_datefrom' | translate"></span>
+                    <span class="date" ng-click="pickDate('from')">{{searchform.dateFrom | date : dateFormat}}</span>
+                </item>
+                <item class="item-input">
+                    <span class="input-label" ng-bind-html="'form_dateto' | translate"></span>
+                    <span class="date" ng-click="pickDate('to')">{{searchform.dateTo | date : dateFormat}}</span>
+                </item>
+                <item class="item-input">
+                    <span class="input-label" ng-bind-html="'form_work_hours' | translate"></span>
+                    <input type="number" min="0" placeholder="{{'form_work_hours_num' | translate}}" ng-model="searchform.weeklyHour">
+                </item>
+                <ion-toggle ng-model="searchform.food_stamps">{{'form_service_stamps' | translate}}</ion-toggle>
+                <item class="item-input" ng-if="!!searchform.food_stamps">
+
+                    <item class="item-input item-stacked-label">
+                        <span class="input-label" ng-bind-html="'form_service_type' | translate"></span>
+                        <ion-list class="list-inset">
+                            <ion-checkbox ng-repeat="(val,type) in searchform.types" ng-model="searchform.bonusType" ng-true-value="'{{val}}'" ng-false-value="">{{type}}</ion-checkbox>
+                        </ion-list>
+                    </item>
+                </item>
+            </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-energized">
+            <div class="button-bar">
+                <button class="button button-clear" ng-click="search()" ng-disabled="!searchform.weeklyHour">{{'btn_estimatefee' | translate}}</button>
+                <!-- ng-disabled="form.$invalid" -->
+            </div>
+        </ion-footer-bar>
+    </form>
 </ion-view>

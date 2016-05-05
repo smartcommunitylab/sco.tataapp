@@ -257,7 +257,8 @@
 .tataapp-theme .form .scroll-bar-indicator {
     /*opacity: 1 !important;*/
 }
-.tataapp-theme .form .item-input {
+.tataapp-theme .form .item-input,
+.tataapp-theme .form .item-toggle {
     padding-left: 0;
 }
 .tataapp-theme .form .item-input .input-label {
@@ -268,14 +269,14 @@
     border-bottom: 1px solid #68615d;
     border-radius: 0;
 }
-
-/* Search */
-
-.tataapp-theme .form.search .item-input span.date {
+.tataapp-theme .form .item-input span.date {
     padding-right: 0.5em;
     padding-left: 0.5em;
     border-bottom: 1px solid #68615d;
 }
+
+/* Search */
+
 .tataapp-theme .form.search .item-input.item-stacked-label > .input-label {
     width: 100%;
 }
@@ -327,6 +328,12 @@
 }
 .tataapp-theme .form.meet .child .item-checkbox {
     font-size: small;
+}
+
+/* Estimate */
+
+.tataapp-theme .form.estimate .item-toggle {
+    font-weight: bold;
 }
 
 /* info */
