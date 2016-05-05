@@ -14,5 +14,8 @@
                 <h3><span class="lbl" ng-bind-html="'nanny_origin' | translate"></span> <span>{{nanny.city}}</span></h3>
             </item>
         </ion-list>
+        <button class="button button-positive button-block" ng-click="meetNanny(nanny)">
+            {{'btn_meet_nanny' | translate}}
+        </button>
     </ion-content>
 </ion-view>

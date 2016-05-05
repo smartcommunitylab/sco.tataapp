@@ -1,6 +1,9 @@
-<ion-view title="{{'menu_meet' | translate}}" class="form meet">
+<ion-view view-title="{{!!meetform.babysitterId ? 'title_meetnanny' : 'menu_meet' | translate}}" class="form meet">
     <form name="form" novalidate>
-        <ion-content class="has-header has-footer padding-horizontal">
+        <ion-content class="has-header has-footer padding-top padding-horizontal">
+            <div ng-if="!!nanny">
+                <strong>{{'nanny' | translate}}:</strong> <span>{{nanny.name}} {{nanny.surname}}</span>
+            </div>
             <h5 class="padding-top">{{'form_applicant' | translate}}</h5>
             <h6>{{'form_applicant_holder' | translate}}</h6>
             <ion-list>
@@ -18,7 +21,7 @@
                 </item>
                 <item class="item item-input item-floating-label">
                     <span class="input-label" ng-bind-html="'form_phone' | translate"></span>
-                    <input type="tel" ng-model="meetform.tel" placeholder="{{'form_phone' | translate}}" ng-required="true">
+                    <input type="tel" ng-model="meetform.phone" placeholder="{{'form_phone' | translate}}" ng-required="true">
                 </item>
                 <item class="item item-input item-floating-label">
                     <span class="input-label" ng-bind-html="'form_email' | translate"></span>

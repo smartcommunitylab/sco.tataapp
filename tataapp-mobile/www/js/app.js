@@ -123,6 +123,19 @@ angular.module('tataapp', [
         }
     })
 
+    .state('app.meetnanny', {
+        url: '/meet/{nannyId}',
+        params: {
+            'nanny': {}
+        },
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/meet.html',
+                controller: 'MeetCtrl'
+            }
+        }
+    })
+
     .state('app.points', {
         url: '/points',
         views: {

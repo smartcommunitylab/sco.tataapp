@@ -1,7 +1,9 @@
 angular.module('tataapp.controllers.meet', [])
 
-.controller('MeetCtrl', function ($scope, $state, $ionicHistory, $filter, $ionicPopup, $ionicScrollDelegate, Config, Utils, BackendSrv) {
-    var meetFormLSkey = 'meetForm';
+.controller('MeetCtrl', function ($scope, $state, $stateParams, $ionicHistory, $filter, $ionicPopup, $ionicScrollDelegate, Config, Utils, BackendSrv) {
+    var meetFormLSkey = 'tataapp_meetform';
+
+    $scope.nanny = null;
 
     var child = {
         age: 0,
@@ -18,6 +20,12 @@ angular.module('tataapp.controllers.meet', [])
             email: '',
             children: [angular.copy(child)]
         };
+    }
+
+    delete $scope.meetform['babysitterId'];
+    if (!!$stateParams['nannyId']) {
+        $scope.meetform['babysitterId'] = $stateParams['nannyId'];
+        $scope.nanny = $stateParams['nanny'];
     }
 
     $scope.addChild = function () {

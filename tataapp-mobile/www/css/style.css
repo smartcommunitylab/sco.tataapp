@@ -77,6 +77,7 @@
 .tataapp-theme a:active,
 .tataapp-theme a:visited {
     color: #ee7b40;
+    text-decoration: none;
 }
 .tataapp-theme .bar.bar-subheader .button.button-text {
     color: #FFFFFF;
@@ -231,8 +232,28 @@
 
 /* Home */
 
+.home {
+    text-align: center;
+}
 .home .slider-slides img {
     width: 100%;
+}
+.home ul {
+    display: inline-block;
+    margin: auto;
+    padding: 1em 0;
+}
+.home ul li {
+    text-align: left;
+}
+.home ul li:before {
+    content: "\26ab";
+    /*content: "\2b24";*/
+    color: #ee7b40;
+    margin-right: 1em;
+}
+.home .icon.ion-social-facebook {
+    font-size: 2em;
 }
 
 /* Form */
@@ -348,6 +369,20 @@
     font-size: small;
 }
 
+/* Tata point */
+
+.tataapp-theme .points .item-thumbnail-left {
+    padding-left: 80px;
+}
+.tataapp-theme .points .item-thumbnail-left img {
+    width: auto;
+    height: auto;
+}
+.tataapp-theme .points .item h4 {
+    margin-top: 1em;
+    white-space: normal;
+}
+
 /* Estimate */
 
 .tataapp-theme .form.estimate .item-toggle {
@@ -357,7 +392,7 @@
     text-align: center;
 }
 
-/* info */
+/* Info */
 
 .tataapp-theme .info .info-page::after {
     content: "";
@@ -396,16 +431,10 @@
     font-weight: bold;
 }
 
-/*Tata point*/
-
-.tataapp-theme .points .item-thumbnail-left {
-    padding-left: 80px;
+/* Vouchers */
+.tataapp-theme .vouchers .image {
+    text-align: center;
 }
-.tataapp-theme .points .item-thumbnail-left img {
-    width: auto;
-    height: auto;
-}
-.tataapp-theme .points .item h4 {
-    margin-top: 1em;
-    white-space: normal;
+.tataapp-theme .vouchers .image img {
+    width: 50%;
 }
