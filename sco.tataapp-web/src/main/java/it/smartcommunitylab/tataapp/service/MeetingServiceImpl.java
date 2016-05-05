@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Meeting;
+import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.repo.MeetingRepo;
 
 @Component
@@ -20,6 +21,7 @@ import it.smartcommunitylab.tataapp.repo.MeetingRepo;
 public class MeetingServiceImpl implements MeetingService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MeetingServiceImpl.class);
+
 	@Autowired
 	private MeetingRepo repo;
 
@@ -28,6 +30,9 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Autowired
 	private BabysitterService babySitterSrv;
+
+	@Autowired
+	private SettingsService settingsSrv;
 
 	private static final String TEMPLATE_MEETING = "meeting";
 
@@ -55,8 +60,16 @@ public class MeetingServiceImpl implements MeetingService {
 		parameters.put("children", meeting.getChildren());
 
 		try {
-			emailService.sendSimpleMail(meeting.getFamilyRepresentive().getEmail(), "to@localhost.cc",
-					"richiesta nuovo colloquio", parameters, TEMPLATE_MEETING);
+			Settings s = settingsSrv.loadSettings(meeting.getAgencyId());
+			if (s == null) {
+				logger.error("Settings not found for agencyId {}, e-mail for meeting cannot be sended",
+						meeting.getAgencyId());
+			} else {
+				emailService.sendSimpleMail(meeting.getFamilyRepresentive().getEmail(), s.getEmail(),
+						"richiesta nuovo colloquio", parameters, TEMPLATE_MEETING);
+				logger.info("sended new meeting e-mail from {} to {}", meeting.getFamilyRepresentive().getEmail(),
+						s.getEmail());
+			}
 		} catch (MessagingException e) {
 			logger.error("Exception sending email for meeting {}", meeting.getId());
 		}
