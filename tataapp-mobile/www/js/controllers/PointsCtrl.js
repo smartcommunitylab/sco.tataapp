@@ -3,12 +3,13 @@ angular.module('tataapp.controllers.points', [])
 .controller('PointsCtrl', function ($scope, $filter, BackendSrv, Config, $state, $ionicPlatform) {
     $scope.now = new Date();
     $scope.tataPoints = [];
-    $scope.dateFormat = Config.dateFormatNum;
+    $scope.dateFormat = Config.dateFormat; // Config.dateFormatNum, Config.dateFormatMonth
     $scope.dateFormatMonth = Config.dateFormatMonth;
+
     var getAllTatapoint = function () {
         BackendSrv.getAllTatapoint().then(
             function (data) {
-                for (i = 0; i < data.content.length; i++) {
+                for (var i = 0; i < data.content.length; i++) {
                     if (data.content[i].startDate < $scope.now && data.content[i].endDate > $scope.now) {
                         $scope.tataPoints.push(angular.copy(data.content[i]));
                     }
@@ -20,11 +21,7 @@ angular.module('tataapp.controllers.points', [])
         );
     };
 
-    var init = function () {
-        getAllTatapoint();
-    };
-
-    init();
+    getAllTatapoint();
 
     $scope.changeMonth = function (num) {
         $scope.tataPoints = [];
@@ -42,5 +39,5 @@ angular.module('tataapp.controllers.points', [])
 .controller('PointCtrl', function ($scope, $filter, BackendSrv, Config, $stateParams) {
     $scope.timeFormat = Config.timeFormat;
     $scope.selectedPoint = $stateParams['selectedPoint'];
-    console.log($scope.selectedPoint);
+    //console.log($scope.selectedPoint);
 });

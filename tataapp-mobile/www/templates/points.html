@@ -8,12 +8,12 @@
     </ion-header-bar>
     <ion-content class="has-header has-subheader padding-horizontal">
         <ion-list>
-            <div class="card" ng-repeat="point in tataPoints track by $index"  ng-click="seePoint($index)">
-                <ion-item class="item-avatar">
+            <div class="card" ng-repeat="point in tataPoints track by $index" ng-click="seePoint($index)">
+                <ion-item class="item item-thumbnail-left">
                     <img src="img/tata_point.png" />
                     <h2>{{point.name}}</h2>
-                    <h3>{{'from' | translate}} {{point.startDate | date:dateFormat}} {{'to' | translate}} {{point.endDate | date : dateFormat}}</h3>
-                    <h3>{{point.address}}</h3>
+                    <h4>{{'from' | translate}} {{point.startDate | date:dateFormat}} {{'to' | translate}} {{point.endDate | date : dateFormat}}</h4>
+                    <h4>{{point.address}}</h4>
                 </ion-item>
             </div>
         </ion-list>

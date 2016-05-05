@@ -1,6 +1,6 @@
 angular.module('tataapp.controllers.meet', [])
 
-.controller('MeetCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, Config, BackendSrv) {
+.controller('MeetCtrl', function ($scope, $state, $ionicHistory, $filter, $ionicPopup, $ionicScrollDelegate, Config, BackendSrv) {
     var child = {
         age: 0,
         disability: false
@@ -97,6 +97,9 @@ angular.module('tataapp.controllers.meet', [])
                 BackendSrv.requestMeeting(request).then(
                     function (response) {
                         showSentPopup().then(function () {
+                            $ionicHistory.nextViewOptions({
+                                historyRoot: true
+                            });
                             $state.go('app.home', {}, {
                                 reload: true
                             });
