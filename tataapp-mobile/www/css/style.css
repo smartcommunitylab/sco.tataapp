@@ -313,8 +313,17 @@
     padding-bottom: 0;
 }
 
+/* Search results*/
+
+.tataapp-theme .searchresults .item h2 {
+    line-height: 40px;
+}
+
 /* Nanny */
 
+.tataapp-theme .nanny .item {
+    border: 0;
+}
 .tataapp-theme .nanny .lbl {
     font-weight: bold;
 }
@@ -386,13 +395,14 @@
 
 /*Tata point*/
 
-.tataapp-theme .item-avatar img {
-    max-height: 70px;
-    max-width: 40px;
+.tataapp-theme .points .item-thumbnail-left {
+    padding-left: 80px;
 }
-.tataapp-theme .item-avatar h2 {
-    font-size: 1.3em;
+.tataapp-theme .points .item-thumbnail-left img {
+    width: auto;
+    height: auto;
 }
-.tataapp-theme .item-avatar h3 {
-    padding-top: 5px;
+.tataapp-theme .points .item h4 {
+    margin-top: 1em;
+    white-space: normal;
 }

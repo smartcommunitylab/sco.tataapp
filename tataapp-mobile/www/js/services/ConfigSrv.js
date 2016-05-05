@@ -7,12 +7,9 @@ angular.module('tataapp.services.config', [])
 
     configService.SERVER_URL = 'https://dev.smartcommunitylab.it/tataapp';
 
-    configService.dateFormat = 'dd MMMM yyyy';
-
     configService.timeFormat = 'HH:mm';
-
+    configService.dateFormat = 'd MMMM yyyy';
     configService.dateFormatNum = 'dd/MM/yyyy';
-
     configService.dateFormatMonth = 'MMMM';
 
     configService.HTTP_CONFIG = {
