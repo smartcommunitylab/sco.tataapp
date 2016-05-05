@@ -335,6 +335,9 @@
 .tataapp-theme .form.estimate .item-toggle {
     font-weight: bold;
 }
+.tataapp-theme .form.estimate .card {
+    text-align: center;
+}
 
 /* info */
 

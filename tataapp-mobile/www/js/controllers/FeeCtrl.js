@@ -1,8 +1,21 @@
 angular.module('tataapp.controllers.fee', [])
 
-.controller('FeeCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils, BackendSrv) {
+.controller('FeeCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
+
+    $scope.searchform = {
+        dateFrom: now.getTime(),
+        dateTo: now.getTime(),
+        bonusAssignee: false,
+        bonusType: 'type1',
+        weeklyHour: null,
+        types: {
+            'type1': $filter('translate')('type1'),
+            'type2': $filter('translate')('type2'),
+            'type3': $filter('translate')('type3')
+        }
+    };
 
     var datePickerOptions = {
         setLabel: $filter('translate')('set'),
@@ -44,24 +57,11 @@ angular.module('tataapp.controllers.fee', [])
 
     var showSentPopup = function () {
         return $ionicPopup.alert({
-            title: $filter('translate')('popup_title_attention','uppercase'), // String. The title of the popup.
+            title: $filter('translate')('popup_title_attention', 'uppercase'), // String. The title of the popup.
             template: $filter('translate')('popup_fee_attention'),
             okText: $filter('translate')('popup_button_understand'),
             okType: 'button-positive' // (default: 'button-positive')
         });
-    };
-
-    $scope.searchform = {
-        dateFrom: now.getTime(),
-        dateTo: now.getTime(),
-        bonusAssignee: false,
-        bonusType: null,
-        weeklyHour: null,
-        types: {
-            'type1': $filter('translate')('type1'),
-            'type2': $filter('translate')('type2'),
-            'type3': $filter('translate')('type3')
-        }
     };
 
     var form2request = function (form) {
@@ -85,15 +85,22 @@ angular.module('tataapp.controllers.fee', [])
     };
 
     $scope.search = function () {
-        showSentPopup();
-        var request = form2request($scope.searchform);
-        console.log(request);
-        BackendSrv.getPreventivo(request).then(
-            function (results) {
-                console.log(results);
-            },
-            function (reason) {
-                console.log(reason);
+        $scope.estimation = 0;
+
+        showSentPopup().then(
+            function () {
+                var request = form2request($scope.searchform);
+
+                BackendSrv.getPreventivo(request).then(
+                    function (results) {
+                        $scope.estimation = results.estimation;
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom(true);
+                    },
+                    function (reason) {
+                        console.log(reason);
+                    }
+                );
             }
         );
     };
