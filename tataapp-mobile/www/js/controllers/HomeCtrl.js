@@ -1,6 +1,10 @@
 angular.module('tataapp.controllers.home', [])
 
 .controller('AppCtrl', function ($scope, $state, $ionicHistory) {
+    $scope.openLink = function (link) {
+        window.open(link, '_system');
+    };
+
     // alternative to <a href>
     $scope.goTo = function (state, refresh, root) {
         if (root) {
