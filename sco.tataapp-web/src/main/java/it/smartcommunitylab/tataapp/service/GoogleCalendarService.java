@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -50,13 +52,8 @@ public class GoogleCalendarService {
 	private static final java.io.File dataStoreDir = new java.io.File(System.getProperty("user.home"),
 			".tataapp-credentials/calendar-importer.json");
 
-	private static final String ID_TATAPOINT_CAL = "";
-
-	// 1 gen 2016 0:00
-	private static final GregorianCalendar startTimeWindow = new GregorianCalendar(2016, 0, 1, 0, 0);
-
-	// 31 dic 2016 23:59
-	private static final GregorianCalendar endTimeWindow = new GregorianCalendar(2016, 11, 31, 23, 59);
+	@Value("${google.calendar.tatapoint-cal-id}")
+	private String IdTatapointCal;
 
 	/**
 	 * Global instance of the scopes required by this quickstart.
@@ -114,42 +111,63 @@ public class GoogleCalendarService {
 	public List<TataPoint> importTataPoint(String agencyId) throws IOException {
 
 		Settings settings = settingsSrv.loadSettings(agencyId);
-		// Build a new authorized API client service.
-		// Note: Do not confuse this class with the
-		// com.google.api.services.calendar.model.Calendar class.
-		com.google.api.services.calendar.Calendar service = getCalendarService();
-
-		// List the next 10 events from the primary calendar.
-		// DateTime now = new DateTime(System.currentTimeMillis());
-		// Events events =
-		// service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
-		// .setSingleEvents(true).execute();
-
-		DateTime startWeek = new DateTime(startTimeWindow.getTime());
-		DateTime endWeek = new DateTime(endTimeWindow.getTime());
-
-		// timeMax -> tutti eventi che iniziano prima della data
-		// timeMin -> tutti eventi che finiscono dopo la data
-		Events e = service.events().list(ID_TATAPOINT_CAL).setTimeMax(endWeek).setTimeMin(startWeek)
-				.setSingleEvents(false).execute();
-
-		List<Event> items = e.getItems();
-		logger.info("Read {} events tatapoint", items.size());
-
 		List<TataPoint> result = new ArrayList<>();
-		for (Event event : items) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
-						event.getEnd().getDateTime());
-				logger.debug("id " + event.getId());
-				logger.debug("recurrence " + event.getRecurrence());
-				logger.debug("location " + event.getLocation());
-				logger.debug("desc " + event.getDescription());
-			}
-			result.add(new TataPoint(event));
-		}
 
+		if (settings != null) {
+			// Build a new authorized API client service.
+			// Note: Do not confuse this class with the
+			// com.google.api.services.calendar.model.Calendar class.
+			com.google.api.services.calendar.Calendar service = getCalendarService();
+
+			// List the next 10 events from the primary calendar.
+			// DateTime now = new DateTime(System.currentTimeMillis());
+			// Events events =
+			// service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
+			// .setSingleEvents(true).execute();
+
+			Date[] timeWindow = getActualYearWindow();
+			DateTime startWeek = new DateTime(timeWindow[0]);
+			DateTime endWeek = new DateTime(timeWindow[1]);
+
+			// timeMax -> tutti eventi che iniziano prima della data
+			// timeMin -> tutti eventi che finiscono dopo la data
+			Events e = service.events().list(IdTatapointCal).setTimeMax(endWeek).setTimeMin(startWeek)
+					.setSingleEvents(false).execute();
+
+			List<Event> items = e.getItems();
+			logger.info("Read {} events tatapoint", items.size());
+
+			for (Event event : items) {
+				if (logger.isDebugEnabled()) {
+					logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
+							event.getEnd().getDateTime());
+					logger.debug("id " + event.getId());
+					logger.debug("recurrence " + event.getRecurrence());
+					logger.debug("location " + event.getLocation());
+					logger.debug("desc " + event.getDescription());
+				}
+				result.add(new TataPoint(event));
+			}
+		} else {
+			logger.warn("ATTENTION no settings for agency {}", agencyId);
+		}
 		return result;
 	}
 
+	/**
+	 * Returns actual year window.
+	 * 
+	 * @return arrays of size 2 result[0] is lower bound (1 jan actual year
+	 *         0:00) result[1] is upper bound (31 dec actual year 23:59)
+	 */
+	private Date[] getActualYearWindow() {
+		Calendar cal = new GregorianCalendar();
+		int actualYear = cal.get(Calendar.YEAR);
+		Date[] range = new Date[2];
+		cal.set(actualYear, 0, 1, 0, 0);
+		range[0] = cal.getTime();
+		cal.set(actualYear, 11, 31, 23, 59);
+		range[1] = cal.getTime();
+		return range;
+	}
 }
