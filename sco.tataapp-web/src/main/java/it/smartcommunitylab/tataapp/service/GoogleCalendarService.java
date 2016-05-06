@@ -29,6 +29,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
@@ -51,9 +52,6 @@ public class GoogleCalendarService {
 
 	private static final java.io.File dataStoreDir = new java.io.File(System.getProperty("user.home"),
 			".tataapp-credentials/calendar-importer.json");
-
-	@Value("${google.calendar.tatapoint-cal-id}")
-	private String IdTatapointCal;
 
 	/**
 	 * Global instance of the scopes required by this quickstart.
@@ -119,34 +117,48 @@ public class GoogleCalendarService {
 			// com.google.api.services.calendar.model.Calendar class.
 			com.google.api.services.calendar.Calendar service = getCalendarService();
 
-			// List the next 10 events from the primary calendar.
-			// DateTime now = new DateTime(System.currentTimeMillis());
-			// Events events =
-			// service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
-			// .setSingleEvents(true).execute();
+			// search tatapoint cal id if it not present in settings of agency
+			if (settings.getTatapointCalId() == null) {
+				logger.info("Tatapoint cal id not present..start to search for name {}",
+						settings.getTatapointCalName());
+				for (CalendarListEntry entry : service.calendarList().list().execute().getItems()) {
+					if (entry.getSummary().equals(settings.getTatapointCalName())) {
+						settings.setTatapointCalId(entry.getId());
+						settingsSrv.save(settings);
+						logger.info("Found cal id for name {}..saved in settings", settings.getTatapointCalName());
+						logger.debug("tatapoint id calendar: {}", entry.getId());
+					}
 
-			Date[] timeWindow = getActualYearWindow();
-			DateTime startWeek = new DateTime(timeWindow[0]);
-			DateTime endWeek = new DateTime(timeWindow[1]);
-
-			// timeMax -> tutti eventi che iniziano prima della data
-			// timeMin -> tutti eventi che finiscono dopo la data
-			Events e = service.events().list(IdTatapointCal).setTimeMax(endWeek).setTimeMin(startWeek)
-					.setSingleEvents(false).execute();
-
-			List<Event> items = e.getItems();
-			logger.info("Read {} events tatapoint", items.size());
-
-			for (Event event : items) {
-				if (logger.isDebugEnabled()) {
-					logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
-							event.getEnd().getDateTime());
-					logger.debug("id " + event.getId());
-					logger.debug("recurrence " + event.getRecurrence());
-					logger.debug("location " + event.getLocation());
-					logger.debug("desc " + event.getDescription());
 				}
-				result.add(new TataPoint(event));
+			}
+
+			if (settings.getTatapointCalId() == null) {
+				logger.error("tatapoint cal id not found in settings of agency {}", agencyId);
+			} else {
+
+				Date[] timeWindow = getActualYearWindow();
+				DateTime startWeek = new DateTime(timeWindow[0]);
+				DateTime endWeek = new DateTime(timeWindow[1]);
+
+				// timeMax -> all events that start before datetime
+				// timeMin -> all events that end after datetime
+				Events e = service.events().list(settings.getTatapointCalId()).setTimeMax(endWeek).setTimeMin(startWeek)
+						.setSingleEvents(false).execute();
+
+				List<Event> items = e.getItems();
+				logger.info("Read {} events tatapoint", items.size());
+
+				for (Event event : items) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
+								event.getEnd().getDateTime());
+						logger.debug("id " + event.getId());
+						logger.debug("recurrence " + event.getRecurrence());
+						logger.debug("location " + event.getLocation());
+						logger.debug("desc " + event.getDescription());
+					}
+					result.add(new TataPoint(event));
+				}
 			}
 		} else {
 			logger.warn("ATTENTION no settings for agency {}", agencyId);

@@ -8,4 +8,6 @@ import it.smartcommunitylab.tataapp.model.Settings;
 public interface SettingsService {
 
 	public Settings loadSettings(String agencyId);
+
+	public Settings save(Settings s);
 }
