@@ -77,8 +77,9 @@
 .tataapp-theme a:active,
 .tataapp-theme a:visited {
     color: #ee7b40;
+    text-decoration: none;
 }
-.tataapp-theme .bar.bar-subheader .button.button-text{
+.tataapp-theme .bar.bar-subheader .button.button-text {
     color: #FFFFFF;
     background-color: #68615d;
     font-size: 1.2em;
@@ -89,22 +90,22 @@
     background-image: none;
     text-align: center;
 }
-.tataapp-theme .bar.bar-subheader h5{
+.tataapp-theme .bar.bar-subheader h5 {
     color: #FFFFFF;
     font-weight: bold;
     font-size: 1.3em;
     margin-top: 3px !important;
 }
 .tataapp-theme .bar.bar-subheader .ion-arrow-left-b,
-.tataapp-theme .bar.bar-subheader .ion-arrow-right-b{
+.tataapp-theme .bar.bar-subheader .ion-arrow-right-b {
     color: #FFFFFF;
     border: none;
     background-color: #68615d;
 }
-.tataapp-theme .bar.bar-subheader .ion-arrow-left-b{
+.tataapp-theme .bar.bar-subheader .ion-arrow-left-b {
     float: left;
 }
-.tataapp-theme .bar.bar-subheader .ion-arrow-right-b{
+.tataapp-theme .bar.bar-subheader .ion-arrow-right-b {
     float: right;
 }
 .tataapp-theme .bar.bar-energized {
@@ -210,23 +211,19 @@
 .tataapp-theme .swiper-container .info-pagination {
     color: #68615d;
 }
-
-.tataapp-theme .list-item{
+.tataapp-theme .list-item {
     min-height: 50px;
     display: flex;
     padding: 10px;
 }
-
 .tataapp-theme .list-item .icon {
     color: #68615d;
     font-size: 2em;
 }
-
-.tataapp-theme .list-item span{
+.tataapp-theme .list-item span {
     padding-left: 15px;
-   padding-top: 5px;
+    padding-top: 5px;
 }
-
 
 /*
  * APP PAGES
@@ -235,8 +232,28 @@
 
 /* Home */
 
+.home {
+    text-align: center;
+}
 .home .slider-slides img {
     width: 100%;
+}
+.home ul {
+    display: inline-block;
+    margin: auto;
+    padding: 1em 0;
+}
+.home ul li {
+    text-align: left;
+}
+.home ul li:before {
+    content: "\26ab";
+    /*content: "\2b24";*/
+    color: #ee7b40;
+    margin-right: 1em;
+}
+.home .icon.ion-social-facebook {
+    font-size: 2em;
 }
 
 /* Form */
@@ -261,7 +278,8 @@
 .tataapp-theme .form .scroll-bar-indicator {
     /*opacity: 1 !important;*/
 }
-.tataapp-theme .form .item-input {
+.tataapp-theme .form .item-input,
+.tataapp-theme .form .item-toggle {
     padding-left: 0;
 }
 .tataapp-theme .form .item-input .input-label {
@@ -272,14 +290,14 @@
     border-bottom: 1px solid #68615d;
     border-radius: 0;
 }
-
-/* Search */
-
-.tataapp-theme .form.search .item-input span.date {
+.tataapp-theme .form .item-input span.date {
     padding-right: 0.5em;
     padding-left: 0.5em;
     border-bottom: 1px solid #68615d;
 }
+
+/* Search */
+
 .tataapp-theme .form.search .item-input.item-stacked-label > .input-label {
     width: 100%;
 }
@@ -297,13 +315,42 @@
 .tataapp-theme .form.search .item-toggle > div > span {
     white-space: normal;
 }
+.tataapp-theme .form.search .search-tata-dow {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.tataapp-theme .form.search .search-tata-dow label.item-checkbox {
+    display: inline-block;
+    text-align: center;
+}
+.tataapp-theme .form.search .search-tata-dow label.item-checkbox .checkbox {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: auto;
+    padding-bottom: 0;
+}
+
+/* Search results*/
+
+.tataapp-theme .searchresults .item h2 {
+    line-height: 40px;
+}
 
 /* Nanny */
+
+.tataapp-theme .nanny .item {
+    border: 0;
+}
 .tataapp-theme .nanny .lbl {
     font-weight: bold;
 }
 
 /* Meet */
+
 .form.meet .button-box.switch {
     position: absolute;
     right: 0;
@@ -322,8 +369,30 @@
     font-size: small;
 }
 
+/* Tata point */
 
-/* info */
+.tataapp-theme .points .item-thumbnail-left {
+    padding-left: 80px;
+}
+.tataapp-theme .points .item-thumbnail-left img {
+    width: auto;
+    height: auto;
+}
+.tataapp-theme .points .item h4 {
+    margin-top: 1em;
+    white-space: normal;
+}
+
+/* Estimate */
+
+.tataapp-theme .form.estimate .item-toggle {
+    font-weight: bold;
+}
+.tataapp-theme .form.estimate .card {
+    text-align: center;
+}
+
+/* Info */
 
 .tataapp-theme .info .info-page::after {
     content: "";
@@ -362,17 +431,10 @@
     font-weight: bold;
 }
 
-/*Tata point*/
-
-.tataapp-theme .item-avatar img{
-    max-height: 70px;
-    max-width: 40px;
+/* Vouchers */
+.tataapp-theme .vouchers .image {
+    text-align: center;
 }
-
-.tataapp-theme .item-avatar h2{
-    font-size: 1.3em;
-}
-
-.tataapp-theme .item-avatar h3{
-    padding-top: 5px;
+.tataapp-theme .vouchers .image img {
+    width: 50%;
 }

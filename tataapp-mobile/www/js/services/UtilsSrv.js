@@ -3,6 +3,19 @@ angular.module('tataapp.services.utils', [])
 .factory('Utils', function ($http, $q, $filter) {
     var utilsService = {};
 
+    /* localStorage */
+    utilsService.saveToLocalStorage = function (key, value) {
+        localStorage[key] = JSON.stringify(value);
+        return localStorage[key];
+    };
+
+    utilsService.getFromLocalStorage = function (key) {
+        if (!!localStorage[key]) {
+            return JSON.parse(localStorage[key]);
+        }
+        return null;
+    };
+
     /*
      * Date utils
      */

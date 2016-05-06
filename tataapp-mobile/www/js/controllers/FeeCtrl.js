@@ -1,8 +1,21 @@
 angular.module('tataapp.controllers.fee', [])
 
-.controller('FeeCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils) {
+.controller('FeeCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
+
+    $scope.searchform = {
+        dateFrom: now.getTime(),
+        dateTo: now.getTime(),
+        bonusAssignee: false,
+        bonusType: 'type1',
+        weeklyHour: null,
+        types: {
+            'type1': $filter('translate')('type1'),
+            'type2': $filter('translate')('type2'),
+            'type3': $filter('translate')('type3')
+        }
+    };
 
     var datePickerOptions = {
         setLabel: $filter('translate')('set'),
@@ -42,11 +55,54 @@ angular.module('tataapp.controllers.fee', [])
         ionicDatePicker.openDatePicker(dpo);
     };
 
-    $scope.searchform = {
-        food_stamps: false,
-        dateFrom: now.getTime(),
-        dateTo: now.getTime()
+    var showSentPopup = function () {
+        return $ionicPopup.alert({
+            title: $filter('translate')('popup_title_attention', 'uppercase'), // String. The title of the popup.
+            template: $filter('translate')('popup_fee_attention'),
+            okText: $filter('translate')('popup_button_understand'),
+            okType: 'button-positive' // (default: 'button-positive')
+        });
     };
 
+    var form2request = function (form) {
+        // this is how to convert searchform to search request
+        /*
+        long startDate;
+        long endDate;
+        boolean bonusAssignee;
+        String bonusType;
+        double weeklyHour;
+        */
+        var request = {};
+
+        request.startDate = form.dateFrom;
+        request.endDate = form.dateTo;
+        request.bonusAssignee = form.bonusAssignee;
+        request.bonusType = form.bonusType;
+        request.weeklyHour = form.weeklyHour;
+
+        return request;
+    };
+
+    $scope.search = function () {
+        $scope.estimation = 0;
+
+        showSentPopup().then(
+            function () {
+                var request = form2request($scope.searchform);
+
+                BackendSrv.getPreventivo(request).then(
+                    function (results) {
+                        $scope.estimation = results.estimation;
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom(true);
+                    },
+                    function (reason) {
+                        console.log(reason);
+                    }
+                );
+            }
+        );
+    };
 
 });

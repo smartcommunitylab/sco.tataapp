@@ -15,12 +15,21 @@ angular.module('tataapp.controllers.home', [])
     };
 })
 
-.controller('HomeCtrl', function ($scope, BackendSrv) {
+.controller('HomeCtrl', function ($scope, $filter, Config, BackendSrv) {
     $scope.swiperOptions = {
         autoplay: 2000,
         speed: 1000,
         loop: true
     };
+
+    $scope.mailreceiver = Config.MAIL_RECEIVER;
+
+    $scope.entries = [];
+    var counter = 1;
+    while ($filter('translate')('info_' + counter + '_t') != ('info_' + counter + '_t')) {
+        $scope.entries.push('info_' + counter + '_t');
+        counter++;
+    }
 })
 
 .controller('PointsCtrl', function ($scope) {

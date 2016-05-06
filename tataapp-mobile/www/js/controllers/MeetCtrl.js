@@ -1,19 +1,32 @@
 angular.module('tataapp.controllers.meet', [])
 
-.controller('MeetCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, Config, BackendSrv) {
+.controller('MeetCtrl', function ($scope, $state, $stateParams, $ionicHistory, $filter, $ionicPopup, $ionicScrollDelegate, Config, Utils, BackendSrv) {
+    var meetFormLSkey = 'tataapp_meetform';
+
+    $scope.nanny = null;
+
     var child = {
         age: 0,
         disability: false
     };
 
-    $scope.meetform = {
-        surname: '',
-        name: '',
-        municipality: '',
-        phone: '',
-        email: '',
-        children: [angular.copy(child)]
-    };
+    $scope.meetform = Utils.getFromLocalStorage(meetFormLSkey);
+    if (!$scope.meetform) {
+        $scope.meetform = {
+            surname: '',
+            name: '',
+            municipality: '',
+            phone: '',
+            email: '',
+            children: [angular.copy(child)]
+        };
+    }
+
+    delete $scope.meetform['babysitterId'];
+    if (!!$stateParams['nannyId']) {
+        $scope.meetform['babysitterId'] = $stateParams['nannyId'];
+        $scope.nanny = $stateParams['nanny'];
+    }
 
     $scope.addChild = function () {
         $scope.meetform.children.push(angular.copy(child));
@@ -91,12 +104,16 @@ angular.module('tataapp.controllers.meet', [])
     $scope.send = function () {
         showPersonalDataPopup().then(function (ok) {
             if (ok) {
+                Utils.saveToLocalStorage(meetFormLSkey, $scope.meetform);
                 var request = form2request($scope.meetform);
-                request = JSON.parse('{"agencyId":"progetto92","familyRepresentive":{"email":"oscar.zambotti@gmail.com","phone":"","name":"Oscar","surname":"Zambotti","city":"Lavis"},"children":[{"age":0,"disability":false}]}'),
-                    console.log(JSON.stringify(request));
+                /*request = JSON.parse('{"agencyId":"progetto92","familyRepresentive":{"email":"oscar.zambotti@gmail.com","phone":"","name":"Oscar","surname":"Zambotti","city":"Lavis"},"children":[{"age":0,"disability":false}]}'),*/
+                console.log(JSON.stringify(request));
                 BackendSrv.requestMeeting(request).then(
                     function (response) {
                         showSentPopup().then(function () {
+                            $ionicHistory.nextViewOptions({
+                                historyRoot: true
+                            });
                             $state.go('app.home', {}, {
                                 reload: true
                             });

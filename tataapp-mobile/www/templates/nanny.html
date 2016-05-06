@@ -4,12 +4,18 @@
 
     <ion-content class="padding">
         <ion-list>
-            <item class="item item-thumbnail-left" href="#">
+            <item class="item item-thumbnail-left">
                 <img src="img/tataph.png" />
-                <h3><span class="lbl">{{'form_name' | translate}}:</span> <span>{{nanny.name}}</span></h3>
-                <h3><span class="lbl">{{'form_surname' | translate}}:</span> <span>{{nanny.surname}}</span></h3>
-                <h3><span class="lbl" ng-bind-html="'form_age' | translate"></span> <span>{{getAge(nanny)}}</span></h3>
+                <h3><span class="lbl" ng-bind-html="'nanny_name' | translate"></span> <span>{{nanny.name}}</span></h3>
+                <h3><span class="lbl" ng-bind-html="'nanny_surname' | translate"></span> <span>{{nanny.surname}}</span></h3>
+                <h3><span class="lbl" ng-bind-html="'nanny_age' | translate"></span> <span>{{getAge(nanny)}}</span></h3>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_origin' | translate"></span> <span>{{nanny.city}}</span></h3>
             </item>
         </ion-list>
+        <button class="button button-positive button-block" ng-click="meetNanny(nanny)">
+            {{'btn_meet_nanny' | translate}}
+        </button>
     </ion-content>
 </ion-view>

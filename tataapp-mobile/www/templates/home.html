@@ -5,17 +5,6 @@
         </button>
     </ion-nav-buttons>
 
-    <!--<ion-slides pager="false" options="swiperOptions" slider="swiper">
-        <ion-slide-page>
-            <img src="../img/homepage_01.png" />
-        </ion-slide-page>
-        <ion-slide-page>
-            <img src="../img/homepage_02.png" />
-        </ion-slide-page>
-        <ion-slide-page>
-            <img src="../img/homepage_03.png" />
-        </ion-slide-page>
-    </ion-slides>-->
     <ion-content class="has-header">
         <ion-slide-box auto-play="!!swiperOptions.autoplay" does-continue="{{!!swiperOptions.loop}}" slide-interval="{{swiperOptions.autoplay}}" show-pager="false">
             <ion-slide>
@@ -29,9 +18,18 @@
             </ion-slide>
         </ion-slide-box>
         <div class="padding-horizontal">
-            <a class="button button-positive button-block" href="mailto:o.zambotti@fbk.eu?subject={{'mail_ask4info1' | translate}}&body={{'mail_ask4info2' | translate}}">
+            <h4 ng-bind-html="'text_home_1' | translate"></h4>
+            <ul>
+                <li ng-repeat="entry in entries" ng-bind-html="entry | translate"></li>
+            </ul>
+            <h4 ng-bind-html="'text_home_2' | translate"></h4>
+            <a class="button button-positive button-block" ng-href="mailto:{{mailreceiver}}?subject={{'mail_ask4info1' | translate}}&body={{'mail_ask4info2' | translate}}">
                 {{'btn_info' | translate}}
             </a>
+            <p>
+                <span ng-bind-html="'text_home_3' | translate"></span>
+                <a href="https://www.facebook.com/tataapp/"><i class="icon ion-social-facebook"></i></a>
+            </p>
         </div>
     </ion-content>
 </ion-view>

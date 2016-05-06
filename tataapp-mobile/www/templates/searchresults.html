@@ -1,11 +1,11 @@
-<ion-view title="{{'title_nannies' | translate}}">
+<ion-view title="{{'title_nannies' | translate}}" class="searchresults">
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
     <ion-content class="padding-horizontal">
         <ion-list>
             <div class="card" ng-repeat="nanny in nannies" ng-click="seeSearchResult(nanny)">
-                <ion-item class="item-avatar">
+                <ion-item class="item item-avatar">
                     <img src="img/tataph.png" />
                     <h2>{{nanny.name}} {{nanny.surname}}</h2>
                 </ion-item>
