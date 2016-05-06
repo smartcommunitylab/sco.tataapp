@@ -1,9 +1,19 @@
 package it.smartcommunitylab.tataapp.model;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.google.api.services.calendar.model.Event;
+
 public class TataPoint {
+
+	@Transient
+	private static final Logger logger = LoggerFactory.getLogger(TataPoint.class);
 
 	@Id
 	private String id;
@@ -15,6 +25,71 @@ public class TataPoint {
 	private long startTime;
 	private long endTime;
 	private Recurrence recurrence;
+
+	@Field("description")
+	private String contactDescription;
+
+	private String agencyId;
+
+	public TataPoint() {
+
+	}
+
+	public TataPoint(Event event) {
+		if (event != null) {
+			address = event.getLocation();
+			// FIXME hard to extract the city from address
+
+			name = event.getSummary();
+			id = event.getId();
+
+			if (event.getStart().getDateTime() != null) {
+				startDate = event.getStart().getDateTime().getValue();
+				startTime = event.getStart().getDateTime().getValue();
+			} else {
+				startDate = event.getStart().getDate().getValue();
+				startTime = event.getStart().getDate().getValue();
+			}
+
+			if (event.getEnd().getDateTime() != null) {
+				endDate = event.getEnd().getDateTime().getValue();
+				endTime = event.getEnd().getDateTime().getValue();
+			} else {
+				endDate = event.getEnd().getDate().getValue();
+				endTime = event.getEnd().getDate().getValue();
+			}
+			recurrence = extractRecurrence(event.getRecurrence());
+			contactDescription = event.getDescription();
+		}
+
+	}
+
+	/**
+	 * Create a Recurrence object analyzing iCal spec. Actually supported RRULE
+	 * property, FREQ and BYDAY fields
+	 * 
+	 * @param recurrence
+	 * @return
+	 */
+	private Recurrence extractRecurrence(List<String> recurrence) {
+		Recurrence r = new Recurrence();
+		if (recurrence != null) {
+			for (String recDef : recurrence) {
+				if (recDef.startsWith("RRULE:")) {
+					recDef = recDef.substring("RRULE:".length());
+					String[] parts = recDef.split(";");
+					for (String part : parts) {
+						if (part.startsWith("FREQ=")) {
+							r.setFrequency(part.substring("FREQ=".length()));
+						} else if (part.startsWith("BYDAY=")) {
+							r.setDays(part.substring("BYDAY=".length()).split(","));
+						}
+					}
+				}
+			}
+		}
+		return r;
+	}
 
 	public Recurrence getRecurrence() {
 		return recurrence;
@@ -47,11 +122,6 @@ public class TataPoint {
 	public void setContactDescription(String contactDescription) {
 		this.contactDescription = contactDescription;
 	}
-
-	@Field("description")
-	private String contactDescription;
-
-	private String agencyId;
 
 	public long getStartTime() {
 		return startTime;
@@ -118,6 +188,9 @@ class Recurrence {
 	public Recurrence(String frequency, String[] days) {
 		this.frequency = frequency;
 		this.days = days;
+	}
+
+	public Recurrence() {
 	}
 
 	public String getFrequency() {
