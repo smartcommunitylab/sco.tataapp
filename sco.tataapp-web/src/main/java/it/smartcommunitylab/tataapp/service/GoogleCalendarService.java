@@ -1,10 +1,7 @@
 package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -13,85 +10,42 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
-import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
+import it.smartcommunitylab.tataapp.web.GoogleAuthHelper;
 
 @Service
 public class GoogleCalendarService {
 
 	private static final Logger logger = LoggerFactory.getLogger(GoogleCalendarService.class);
 
-	@Value("classpath:/client_secret.json")
-	private Resource apiKeys;
-
-	@Value("${google.calendar.appname}")
-	private String applicationName;
-
 	@Autowired
 	private SettingsService settingsSrv;
 
-	private static final java.io.File dataStoreDir = new java.io.File(System.getProperty("user.home"),
-			".tataapp-credentials/calendar-importer.json");
-
-	/**
-	 * Global instance of the scopes required by this quickstart.
-	 *
-	 * If modifying these scopes, delete your previously saved credentials at
-	 * ~/.credentials/calendar-java-quickstart.json
-	 */
-	private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
-
-	private static FileDataStoreFactory dataStoreFactory;
+	@Autowired
+	private GoogleAuthHelper googleAuthHelper;
 
 	private static final JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-
 	private static HttpTransport httpTransport;
 
 	static {
 		try {
 			httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-			dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
 		} catch (Throwable t) {
 			logger.error("Exception defining google api classes");
 		}
-	}
-
-	/**
-	 * Creates an authorized Credential object.
-	 * 
-	 * @return an authorized Credential object.
-	 * @throws IOException
-	 */
-	public Credential authorize() throws IOException {
-		// Load client secrets.
-		InputStream in = apiKeys.getInputStream();
-		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(in));
-
-		// Build flow and trigger user authorization request.
-		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory,
-				clientSecrets, SCOPES).setDataStoreFactory(dataStoreFactory).setAccessType("offline").build();
-		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-		return credential;
 	}
 
 	/**
@@ -100,10 +54,15 @@ public class GoogleCalendarService {
 	 * @return an authorized Calendar client service
 	 * @throws IOException
 	 */
-	public com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
-		Credential credential = authorize();
-		return new com.google.api.services.calendar.Calendar.Builder(httpTransport, jsonFactory, credential)
-				.setApplicationName(applicationName).build();
+	private com.google.api.services.calendar.Calendar getCalendarService(String agencyId) {
+		Credential credential = googleAuthHelper.getCredential(agencyId);
+		if (credential != null) {
+			return new com.google.api.services.calendar.Calendar.Builder(httpTransport, jsonFactory, credential)
+					.build();
+		} else {
+			logger.error("No google credential for agency {}", agencyId);
+			return null;
+		}
 	}
 
 	public List<TataPoint> importTataPoint(String agencyId) throws IOException {
@@ -112,53 +71,55 @@ public class GoogleCalendarService {
 		List<TataPoint> result = new ArrayList<>();
 
 		if (settings != null) {
-			// Build a new authorized API client service.
-			// Note: Do not confuse this class with the
-			// com.google.api.services.calendar.model.Calendar class.
-			com.google.api.services.calendar.Calendar service = getCalendarService();
+			com.google.api.services.calendar.Calendar service = getCalendarService(agencyId);
+			if (service != null) {
 
-			// search tatapoint cal id if it not present in settings of agency
-			if (settings.getTatapointCalId() == null) {
-				logger.info("Tatapoint cal id not present..start to search for name {}",
-						settings.getTatapointCalName());
-				for (CalendarListEntry entry : service.calendarList().list().execute().getItems()) {
-					if (entry.getSummary().equals(settings.getTatapointCalName())) {
-						settings.setTatapointCalId(entry.getId());
-						settingsSrv.save(settings);
-						logger.info("Found cal id for name {}..saved in settings", settings.getTatapointCalName());
-						logger.debug("tatapoint id calendar: {}", entry.getId());
+				// search tatapoint cal id if it not present in settings of
+				// agency
+				if (settings.getTatapointCalId() == null) {
+					logger.info("Tatapoint cal id not present..start to search for name {}",
+							settings.getTatapointCalName());
+					for (CalendarListEntry entry : service.calendarList().list().execute().getItems()) {
+						if (entry.getSummary().equals(settings.getTatapointCalName())) {
+							settings.setTatapointCalId(entry.getId());
+							settingsSrv.save(settings);
+							logger.info("Found cal id for name {}..saved in settings", settings.getTatapointCalName());
+							logger.debug("tatapoint id calendar: {}", entry.getId());
+						}
+
 					}
-
 				}
-			}
 
-			if (settings.getTatapointCalId() == null) {
-				logger.error("tatapoint cal id not found in settings of agency {}", agencyId);
+				if (settings.getTatapointCalId() == null) {
+					logger.error("tatapoint cal id not found in settings of agency {}", agencyId);
+				} else {
+
+					Date[] timeWindow = getActualYearWindow();
+					DateTime startWeek = new DateTime(timeWindow[0]);
+					DateTime endWeek = new DateTime(timeWindow[1]);
+
+					// timeMax -> all events that start before datetime
+					// timeMin -> all events that end after datetime
+					Events e = service.events().list(settings.getTatapointCalId()).setTimeMax(endWeek)
+							.setTimeMin(startWeek).setSingleEvents(false).execute();
+
+					List<Event> items = e.getItems();
+					logger.info("Read {} events tatapoint", items.size());
+
+					for (Event event : items) {
+						if (logger.isDebugEnabled()) {
+							logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
+									event.getEnd().getDateTime());
+							logger.debug("id " + event.getId());
+							logger.debug("recurrence " + event.getRecurrence());
+							logger.debug("location " + event.getLocation());
+							logger.debug("desc " + event.getDescription());
+						}
+						result.add(new TataPoint(event));
+					}
+				}
 			} else {
-
-				Date[] timeWindow = getActualYearWindow();
-				DateTime startWeek = new DateTime(timeWindow[0]);
-				DateTime endWeek = new DateTime(timeWindow[1]);
-
-				// timeMax -> all events that start before datetime
-				// timeMin -> all events that end after datetime
-				Events e = service.events().list(settings.getTatapointCalId()).setTimeMax(endWeek).setTimeMin(startWeek)
-						.setSingleEvents(false).execute();
-
-				List<Event> items = e.getItems();
-				logger.info("Read {} events tatapoint", items.size());
-
-				for (Event event : items) {
-					if (logger.isDebugEnabled()) {
-						logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
-								event.getEnd().getDateTime());
-						logger.debug("id " + event.getId());
-						logger.debug("recurrence " + event.getRecurrence());
-						logger.debug("location " + event.getLocation());
-						logger.debug("desc " + event.getDescription());
-					}
-					result.add(new TataPoint(event));
-				}
+				logger.error("Problem creating google calendar service api");
 			}
 		} else {
 			logger.warn("ATTENTION no settings for agency {}", agencyId);

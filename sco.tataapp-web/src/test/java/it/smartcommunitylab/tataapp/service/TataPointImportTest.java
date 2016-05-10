@@ -2,6 +2,7 @@ package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class TataPointImportTest {
 
 	@Test
 	public void importing() throws IOException {
-		gcalSrv.importTataPoint("tataApp");
+		Assert.assertFalse("No tatapoint returned", gcalSrv.importTataPoint("tataApp").isEmpty());
 	}
 
 }

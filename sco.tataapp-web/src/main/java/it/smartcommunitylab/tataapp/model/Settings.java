@@ -5,6 +5,15 @@ public class Settings {
 	private String email;
 	private String tatapointCalName;
 	private String tatapointCalId;
+	private boolean calendarAuthorization;
+
+	public boolean isCalendarAuthorization() {
+		return calendarAuthorization;
+	}
+
+	public void setCalendarAuthorization(boolean calendarAuthorization) {
+		this.calendarAuthorization = calendarAuthorization;
+	}
 
 	public String getTatapointCalName() {
 		return tatapointCalName;

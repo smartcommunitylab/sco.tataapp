@@ -3,3 +3,4 @@ settings:
    email: tataapp@localhost
    tatapointCalName: Tatapoint
    tatapointCalId: 
+   calendarAuthorization: false
