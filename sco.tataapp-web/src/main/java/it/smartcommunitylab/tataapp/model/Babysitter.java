@@ -22,6 +22,16 @@ public class Babysitter {
 	private List<String> languages;
 	private boolean carOwner;
 
+	private List<Availability> timeAvailability;
+
+	public List<Availability> getTimeAvailability() {
+		return timeAvailability;
+	}
+
+	public void setTimeAvailability(List<Availability> timeAvailability) {
+		this.timeAvailability = timeAvailability;
+	}
+
 	public List<String> getLanguages() {
 		return languages;
 	}
