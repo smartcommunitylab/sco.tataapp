@@ -1,10 +1,11 @@
 package it.smartcommunitylab.tataapp.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCriteria {
 
-	private List<String> langs;
+	private List<String> langs = new ArrayList<>();
 	private String rangeAge;
 	private boolean carOwner;
 
@@ -12,7 +13,7 @@ public class SearchCriteria {
 	private long toDate;
 	private long fromTime;
 	private long toTime;
-	private String[] days;
+	private String[] days = new String[0];
 	private String agencyId;
 
 	public String getAgencyId() {
