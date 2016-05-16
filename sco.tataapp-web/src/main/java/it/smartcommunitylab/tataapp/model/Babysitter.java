@@ -19,6 +19,25 @@ public class Babysitter {
 	private String address;
 	private String city;
 
+	private String description;
+	private String updates;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getUpdates() {
+		return updates;
+	}
+
+	public void setUpdates(String updates) {
+		this.updates = updates;
+	}
+
 	private List<String> languages;
 	private boolean carOwner;
 
