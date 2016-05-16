@@ -210,15 +210,13 @@ public class BabysitterServiceTest {
 
 		List<Availability> timeAvailable = new ArrayList<>();
 		Availability a = new Availability();
-		a.setFromDate(new LocalDate(2016, 5, 13).toDate().getTime());
-		a.setToDate(new LocalDate(2016, 5, 13).toDate().getTime());
+		a.setDate(new LocalDate(2016, 5, 13).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(8, 0)).getMillis());
 		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
 		timeAvailable.add(a);
 
 		a = new Availability();
-		a.setFromDate(new LocalDate(2016, 5, 16).toDate().getTime());
-		a.setToDate(new LocalDate(2016, 5, 16).toDate().getTime());
+		a.setDate(new LocalDate(2016, 5, 16).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(14, 0)).getMillis());
 		a.setToTime(epoch.toDateTime(new LocalTime(18, 30)).getMillis());
 		timeAvailable.add(a);
@@ -228,21 +226,18 @@ public class BabysitterServiceTest {
 
 		timeAvailable = new ArrayList<>();
 		a = new Availability();
-		a.setFromDate(new LocalDate(2016, 5, 13).toDate().getTime());
-		a.setToDate(new LocalDate(2016, 5, 13).toDate().getTime());
+		a.setDate(new LocalDate(2016, 5, 13).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(14, 0)).getMillis());
 		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
 		timeAvailable.add(a);
 
 		a = new Availability();
-		a.setFromDate(new LocalDate(2016, 6, 1).toDate().getTime());
-		a.setToDate(new LocalDate(2016, 6, 1).toDate().getTime());
+		a.setDate(new LocalDate(2016, 6, 1).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(8, 0)).getMillis());
 		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
 		timeAvailable.add(a);
 		a = new Availability();
-		a.setFromDate(new LocalDate(2016, 6, 2).toDate().getTime());
-		a.setToDate(new LocalDate(2016, 6, 2).toDate().getTime());
+		a.setDate(new LocalDate(2016, 6, 2).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(8, 0)).getMillis());
 		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
 		timeAvailable.add(a);

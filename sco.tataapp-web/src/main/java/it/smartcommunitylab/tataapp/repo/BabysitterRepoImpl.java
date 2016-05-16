@@ -56,7 +56,7 @@ public class BabysitterRepoImpl implements MatchingRepo {
 
 		// check time availability
 		if (crit.getFromDate() > 0 && crit.getDays().length > 0) {
-			mongoCrit = mongoCrit.and("timeAvailability.fromDate").in(calculateDatesFromRequest(crit));
+			mongoCrit = mongoCrit.and("timeAvailability.date").in(calculateDatesFromRequest(crit));
 		} else {
 			logger.warn("search matching criteria without dates criteria");
 		}

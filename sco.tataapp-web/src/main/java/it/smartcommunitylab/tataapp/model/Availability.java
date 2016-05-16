@@ -1,25 +1,16 @@
 package it.smartcommunitylab.tataapp.model;
 
 public class Availability {
-	private long fromDate;
-	private long toDate;
+	private long date;
 	private long fromTime;
 	private long toTime;
 
-	public long getFromDate() {
-		return fromDate;
+	public long getDate() {
+		return date;
 	}
 
-	public void setFromDate(long fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public long getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(long toDate) {
-		this.toDate = toDate;
+	public void setDate(long date) {
+		this.date = date;
 	}
 
 	public long getFromTime() {
