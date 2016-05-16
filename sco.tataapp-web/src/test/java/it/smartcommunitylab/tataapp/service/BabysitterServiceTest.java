@@ -226,6 +226,26 @@ public class BabysitterServiceTest {
 		b.setTimeAvailability(timeAvailable);
 		service.save(b);
 
+		timeAvailable = new ArrayList<>();
+		a = new Availability();
+		a.setFromDate(new LocalDate(2016, 5, 13).toDate().getTime());
+		a.setToDate(new LocalDate(2016, 5, 13).toDate().getTime());
+		a.setFromTime(epoch.toDateTime(new LocalTime(14, 0)).getMillis());
+		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
+		timeAvailable.add(a);
+
+		a = new Availability();
+		a.setFromDate(new LocalDate(2016, 6, 1).toDate().getTime());
+		a.setToDate(new LocalDate(2016, 6, 1).toDate().getTime());
+		a.setFromTime(epoch.toDateTime(new LocalTime(8, 0)).getMillis());
+		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
+		timeAvailable.add(a);
+		a = new Availability();
+		a.setFromDate(new LocalDate(2016, 6, 2).toDate().getTime());
+		a.setToDate(new LocalDate(2016, 6, 2).toDate().getTime());
+		a.setFromTime(epoch.toDateTime(new LocalTime(8, 0)).getMillis());
+		a.setToTime(epoch.toDateTime(new LocalTime(18, 0)).getMillis());
+		timeAvailable.add(a);
 		b = new Babysitter();
 		b.setName("Cindy");
 		b.setSurname("Moon");
@@ -235,6 +255,7 @@ public class BabysitterServiceTest {
 		b.setAgencyId(AGENCY_ID);
 		b.setBirthdate(new GregorianCalendar(1985, 1, 2).getTimeInMillis());
 		b.setLanguages(Arrays.asList("IT"));
+		b.setTimeAvailability(timeAvailable);
 		service.save(b);
 
 		b = new Babysitter();
@@ -254,6 +275,20 @@ public class BabysitterServiceTest {
 		sc.setToDate(new LocalDate(2016, 5, 20).toDate().getTime());
 		sc.setDays(new String[] { "MON", "TUE", "WED" });
 		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setFromDate(new LocalDate(2016, 4, 1).toDate().getTime());
+		sc.setToDate(new LocalDate(2016, 5, 30).toDate().getTime());
+		sc.setDays(new String[] { "MON", "TUE", "WED", "THU" });
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setFromDate(new LocalDate(2016, 4, 1).toDate().getTime());
+		sc.setToDate(new LocalDate(2016, 5, 30).toDate().getTime());
+		sc.setDays(new String[] { "FRI" });
+		Assert.assertEquals(2, service.search(sc, null).getContent().size());
 
 		sc = new SearchCriteria();
 		sc.setAgencyId(AGENCY_ID);
