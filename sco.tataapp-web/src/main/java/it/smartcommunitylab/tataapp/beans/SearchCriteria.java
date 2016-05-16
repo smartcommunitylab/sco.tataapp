@@ -13,11 +13,20 @@ public class SearchCriteria {
 	private long toDate;
 	private long fromTime;
 	private long toTime;
+	private List<String> timeSlots = new ArrayList<>();
 	private String[] days = new String[0];
 	private String agencyId;
 
 	public String getAgencyId() {
 		return agencyId;
+	}
+
+	public List<String> getTimeSlots() {
+		return timeSlots;
+	}
+
+	public void setTimeSlots(List<String> timeSlots) {
+		this.timeSlots = timeSlots;
 	}
 
 	public void setAgencyId(String agencyId) {
