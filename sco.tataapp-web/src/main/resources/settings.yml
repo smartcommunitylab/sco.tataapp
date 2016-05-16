@@ -4,3 +4,14 @@ settings:
    tatapointCalName: Tatapoint
    tatapointCalId: 
    calendarAuthorization: false
+   offices:
+    - vallagarina
+    - valsugana
+ - agencyId: progetto92
+   email: tataapp@localhost
+   tatapointCalName: Tatapoint
+   tatapointCalId: 
+   calendarAuthorization: false
+   offices:
+    - vallagarina
+    - valsugana

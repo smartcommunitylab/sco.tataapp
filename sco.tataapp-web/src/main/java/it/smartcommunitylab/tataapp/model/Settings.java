@@ -1,11 +1,22 @@
 package it.smartcommunitylab.tataapp.model;
 
+import java.util.List;
+
 public class Settings {
 	private String agencyId;
 	private String email;
 	private String tatapointCalName;
 	private String tatapointCalId;
 	private boolean calendarAuthorization;
+	private List<ServiceOffice> offices;
+
+	public List<ServiceOffice> getOffices() {
+		return offices;
+	}
+
+	public void setOffices(List<ServiceOffice> offices) {
+		this.offices = offices;
+	}
 
 	public boolean isCalendarAuthorization() {
 		return calendarAuthorization;
