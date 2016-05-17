@@ -1,0 +1,266 @@
+<div class="row">
+	<div class="col-md-12">
+		<form role="form" name="form">
+			<div class="panel panel-default" width="100%">
+				<div class="col-md-12">
+					<h3 class="panel-title"><strong>TARIFFA DIURNA </strong></h3>
+					<div class="edit-tata-rate">
+						<a type="button" class="btn btn-primary btn-xs right" href ng-click="editTataRate(1)"><i class="glyphicon glyphicon-pencil"></i></a>
+					</div>
+				</div>
+			  		<div class="panel-body" text-align="left">
+			  				<table class="ratetable" width="100%">
+			  					<tr>
+			  						<th class="left">ORARIO</th>
+			  						<th>TARIFFA BASE (€)</th>
+			  						<th>TARIFFA RAGAZZI CON <br/>SUPPORTO INDIVIDIALIZZATO (€)</th>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.min }}</label></td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.base.min | euroVal }}</td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.handicapped.min | euroVal }}</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateDailyMin" type="text" class="form-control" name="tRateDailyMin" ng-model="tataratelist.daily.base.min" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateHandicappedMin" type="text" class="form-control" name="tRateHandicappedMin" ng-model="tataratelist.daily.handicapped.min" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.medium }}</label></td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.base.medium | euroVal }}</td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.handicapped.medium | euroVal }}</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateDailyMedium" type="text" class="form-control" name="tRateDailyMedium" ng-model="tataratelist.daily.base.medium" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateHandicappedMedium" type="text" class="form-control" name="tRateHandicappedMedium" ng-model="tataratelist.daily.handicapped.medium" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max }}</label></td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.base.max | euroVal }}</td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.handicapped.max | euroVal }}</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateDailyMax" type="text" class="form-control" name="tRateDailyMax" ng-model="tataratelist.daily.base.max" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateHandicappedMax" type="text" class="form-control" name="tRateHandicappedMax" ng-model="tataratelist.daily.handicapped.max" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.base.max_no_food | euroVal }}</td>
+			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.handicapped.max_no_food | euroVal }}</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateDailyMaxNoFood" type="text" class="form-control" name="tRateDailyMaxNoFood" ng-model="tataratelist.daily.base.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateDailyEdit">
+			  							<input id="tataRateHandicappedMaxNoFood" type="text" class="form-control" name="tRateDailyMaxNoFood" ng-model="tataratelist.daily.handicapped.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateDailyMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  				</table>
+					</div>
+					<!-- <div class="field-error" ng-show="showUpdatingBPErrorMessage">{{ 'err_in_update_bikepoint' | i18n }}</div> -->
+					<div class="row" ng-show="showTataRateDailyEdit">
+						<div class="col-md-offset-9 col-md-3">
+							<button type="button" class="btn btn-default" ng-click="closeEditTataRateView()">ANNULLA</button>&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary" ng-click="updateTataRate(form, tataratelist)">SALVA</button>
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="col-md-12">
+		<form role="form" name="form">
+			<div class="panel panel-default" width="100%">
+				<div class="col-md-12">
+					<h3 class="panel-title"><strong>TARIFFA FESTIVA </strong></h3>
+					<div class="edit-tata-rate">
+						<a type="button" class="btn btn-primary btn-xs right" href ng-click="editTataRate(2)"><i class="glyphicon glyphicon-pencil"></i></a>
+					</div>
+				</div>
+			  		<div class="panel-body" text-align="left">
+			  				<table class="ratetable" width="100%">
+			  					<tr>
+			  						<th class="left">ORARIO</th>
+			  						<th>TARIFFA BASE (€)</th>
+			  						<th>TARIFFA RAGAZZI CON <br/>SUPPORTO INDIVIDIALIZZATO (€)</th>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.min }}</label></td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.base.min | euroVal }}</td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.handicapped.min | euroVal }}</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayMin" type="text" class="form-control" name="tRateHolidayMin" ng-model="tataratelist.holiday.base.min" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayHandicappedMin" type="text" class="form-control" name="tRateHolidayHandicappedMin" ng-model="tataratelist.holiday.handicapped.min" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.medium }}</label></td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.base.medium | euroVal }}</td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.handicapped.medium | euroVal }}</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayMedium" type="text" class="form-control" name="tRateHolidayMedium" ng-model="tataratelist.holiday.base.medium" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayHandicappedMedium" type="text" class="form-control" name="tRateHolidayHandicappedMedium" ng-model="tataratelist.holiday.handicapped.medium" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max }}</label></td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.base.max | euroVal }}</td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.handicapped.max | euroVal }}</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayMax" type="text" class="form-control" name="tRateHolidayMax" ng-model="tataratelist.holiday.base.max" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayHandicappedMax" type="text" class="form-control" name="tRateHolidayHandicappedMax" ng-model="tataratelist.holiday.handicapped.max" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.base.max_no_food | euroVal }}</td>
+			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.handicapped.max_no_food | euroVal }}</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayMaxNoFood" type="text" class="form-control" name="tRateHolidayMaxNoFood" ng-model="tataratelist.holiday.base.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateHolidayEdit">
+			  							<input id="tataRateHolidayHandicappedMaxNoFood" type="text" class="form-control" name="tRateHolidayHandicappedMaxNoFood" ng-model="tataratelist.holiday.handicapped.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  				</table>
+					</div>
+					<!-- <div class="field-error" ng-show="showUpdatingBPErrorMessage">{{ 'err_in_update_bikepoint' | i18n }}</div> -->
+					<div class="row" ng-show="showTataRateHolidayEdit">
+						<div class="col-md-offset-9 col-md-3">
+							<button type="button" class="btn btn-default" ng-click="closeEditTataRateView()">ANNULLA</button>&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary" ng-click="updateTataRate(form, tataratelist)">SALVA</button>
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="col-md-12">
+		<form role="form" name="form">
+			<div class="panel panel-default" width="100%">
+				<div class="col-md-12">
+					<h3 class="panel-title"><strong>TARIFFA NOTTURNA </strong></h3>
+					<div class="edit-tata-rate">
+						<a type="button" class="btn btn-primary btn-xs right" href ng-click="editTataRate(3)"><i class="glyphicon glyphicon-pencil"></i></a>
+					</div>
+				</div>
+			  		<div class="panel-body" text-align="left">
+			  				<table class="ratetable" width="100%">
+			  					<tr>
+			  						<th class="left">ORARIO</th>
+			  						<th>TARIFFA BASE (€)</th>
+			  						<th>TARIFFA RAGAZZI CON <br/>SUPPORTO INDIVIDIALIZZATO (€)</th>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.min }}</label></td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.base.min | euroVal }}</td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.handicapped.min | euroVal }}</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateNightMin" type="text" class="form-control" name="tRateNightMin" ng-model="tataratelist.night.base.min" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateNightMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateNightMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateNightHandicappedMin" type="text" class="form-control" name="tRateNightHandicappedMin" ng-model="tataratelist.night.handicapped.min" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateNightHandicappedMin.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateNightHandicappedMin.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.medium }}</label></td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.base.medium | euroVal }}</td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.handicapped.medium | euroVal }}</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayMedium" type="text" class="form-control" name="tRateHolidayMedium" ng-model="tataratelist.night.base.medium" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayHandicappedMedium" type="text" class="form-control" name="tRateHolidayHandicappedMedium" ng-model="tataratelist.night.handicapped.medium" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMedium.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMedium.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max }}</label></td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.base.max | euroVal }}</td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.handicapped.max | euroVal }}</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayMax" type="text" class="form-control" name="tRateHolidayMax" ng-model="tataratelist.night.base.max" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayHandicappedMax" type="text" class="form-control" name="tRateHolidayHandicappedMax" ng-model="tataratelist.night.handicapped.max" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  					<tr>
+			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.base.max_no_food | euroVal }}</td>
+			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.handicapped.max_no_food | euroVal }}</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayMaxNoFood" type="text" class="form-control" name="tRateHolidayMaxNoFood" ng-model="tataratelist.night.base.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa base (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  						<td ng-if="showTataRateNightEdit">
+			  							<input id="tataRateHolidayHandicappedMaxNoFood" type="text" class="form-control" name="tRateHolidayHandicappedMaxNoFood" ng-model="tataratelist.night.handicapped.max_no_food" ng-pattern="decimalNumbers" required placeholder="tariffa disabili (€)" >
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMaxNoFood.$error.required">Campo obbligatorio</div>
+			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMaxNoFood.$error.pattern">Campo non corretto, inserire un valore decimale</div>
+			  						</td>
+			  					</tr>
+			  				</table>
+					</div>
+					<!-- <div class="field-error" ng-show="showUpdatingBPErrorMessage">{{ 'err_in_update_bikepoint' | i18n }}</div> -->
+					<div class="row" ng-show="showTataRateNightEdit">
+						<div class="col-md-offset-9 col-md-3">
+							<button type="button" class="btn btn-default" ng-click="closeEditTataRateView()">ANNULLA</button>&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary" ng-click="updateTataRate(form, tataratelist)">SALVA</button>
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+</div>

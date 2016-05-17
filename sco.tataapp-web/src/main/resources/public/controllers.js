@@ -8,6 +8,7 @@ angular.module('app.ctrls', [])
 	var activeTata = "";
 	var activeFamily = "";
 	var activeTataPoint = "";
+	var activeTataRate = "";
 	
 	$scope.isActiveHome = function(){
 		return activeHome;
@@ -25,11 +26,16 @@ angular.module('app.ctrls', [])
 		return activeTataPoint;
 	};
 	
+	$scope.isActiveTataRate = function(){
+		return activeTataRate;
+	};
+	
 	$scope.showHome = function(){
 		activeHome = "active";
 		activeTata = "";
 		activeFamily = "";
 		activeTataPoint = "";
+		activeTataRate = "";
 	};
 
 	$scope.showTata = function(){
@@ -37,6 +43,7 @@ angular.module('app.ctrls', [])
 		activeTata = "active";
 		activeFamily = "";
 		activeTataPoint = "";
+		activeTataRate = "";
 	};
 	
 	$scope.showFamily = function(){
@@ -44,6 +51,7 @@ angular.module('app.ctrls', [])
 		activeTata = "";
 		activeFamily = "active";
 		activeTataPoint = "";
+		activeTataRate = "";
 	};
 	
 	$scope.showTataPoint = function(){
@@ -51,6 +59,15 @@ angular.module('app.ctrls', [])
 		activeTata = "";
 		activeFamily = "";
 		activeTataPoint = "active";
+		activeTataRate = "";
+	};
+	
+	$scope.showTataRate = function(){
+		activeHome = "";
+		activeTata = "";
+		activeFamily = "";
+		activeTataPoint = "";
+		activeTataRate = "active";
 	};
 	
 }]);

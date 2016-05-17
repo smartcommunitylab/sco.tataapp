@@ -93,6 +93,9 @@
 .add-tata-row a.right{
 	right: 10px;
 }
+.add-tata-row a.partialright{
+	right: 150px;
+}
 .add-tata-row a.left {
 	left: 10px;
 }
@@ -126,3 +129,106 @@
 	padding: 0 0 0 15px;
 }
 
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+
+html, body { height: 100%; }
+
+canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: 150px;
+    margin: 0 0 0 0;
+}
+
+.custom-file-input {
+  color: transparent;
+  width: 170px;
+  height: 40px;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Seleziona immagine';
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 5px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+  width: 140px;
+  height: 30px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
+.ratetable {
+  width: 100%;
+  align: center;
+}
+.ratetable td {
+  text-align: center;
+  vertical-align: middle;
+  width: 36%;
+}
+.ratetable th {
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  width: 36%;
+}
+
+.ratetable td.left {
+  text-align: left;
+  padding-left: 6%;
+  width: 28%;
+}
+.ratetable th.left {
+  text-align: left;
+  padding-left: 6%;
+  width: 28%;
+}
+
+.edit-tata-rate {
+	position: relative;
+	margin-bottom: 30px;
+}
+.edit-tata-rate a {
+	position: absolute;
+	bottom: 1px;
+	color: #fff;
+	background-color:#58acfa 
+}
+.edit-tata-rate a.right {
+	right: 10px;
+}
+.edit-tata-rate a.partialright {
+	right: 150px;
+}
+.edit-tata-rate a.left {
+	left: 10px;
+}
+.profileImage {
+	width: 100px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
