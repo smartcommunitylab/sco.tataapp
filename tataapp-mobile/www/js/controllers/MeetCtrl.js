@@ -18,6 +18,7 @@ angular.module('tataapp.controllers.meet', [])
             municipality: '',
             phone: '',
             email: '',
+            vouchers: '',
             children: [angular.copy(child)]
         };
     }
@@ -71,7 +72,8 @@ angular.module('tataapp.controllers.meet', [])
                 phone: form.phone,
                 name: form.name,
                 surname: form.surname,
-                city: form.municipality
+                city: form.municipality,
+                vouchers: form.vouchers
             },
             children: form.children
         };

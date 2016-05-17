@@ -18,6 +18,8 @@
                     <input type="number" min="0" placeholder="{{'form_work_hours_num' | translate}}" ng-model="searchform.weeklyHour">
                 </item>
 
+                <ion-toggle ng-model="searchform.disability">{{'form_disability' | translate}}</ion-toggle>
+
                 <ion-toggle ng-model="searchform.food_stamps">{{'form_service_stamps' | translate}}</ion-toggle>
 
                 <item class="item-input" ng-if="!!searchform.food_stamps">

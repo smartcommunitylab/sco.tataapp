@@ -41,7 +41,9 @@ angular.module('tataapp', [
         prefix: 'languages/',
         suffix: '.json'
     });
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    //$translateProvider.useSanitizeValueStrategy('sanitize');
+    //$translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
 })
 

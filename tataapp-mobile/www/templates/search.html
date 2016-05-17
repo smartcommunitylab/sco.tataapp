@@ -41,23 +41,25 @@
                         <span class="date" ng-click="pickDate('to')">{{searchform.dateTo | date : dateFormat}}</span>
                     </item>
                     <item class="item-input item-stacked-label">
-                        <span class="input-label" ng-bind-html="'form_days' | translate" ></span>
+                        <span class="input-label" ng-bind-html="'form_days' | translate"></span>
                         <div class="list-inset checkboxes-horizontal search-tata-dow">
-                                    <ion-checkbox ng-model="searchform.days.mon"  ng-change="changeDoW()">{{'date_weekslist_monday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.tue"  ng-change="changeDoW()">{{'date_weekslist_tuesday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.wed"  ng-change="changeDoW()">{{'date_weekslist_wednesday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.thu"  ng-change="changeDoW()">{{'date_weekslist_thursday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.fri"  ng-change="changeDoW()">{{'date_weekslist_friday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.sat"  ng-change="changeDoW()">{{'date_weekslist_saturday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.sun"  ng-change="changeDoW()">{{'date_weekslist_sunday' | translate}}</ion-checkbox>
-                                    <ion-checkbox ng-model="searchform.days.allDays" ng-change="selectAllDoW()">{{'date_weekslist_all' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.mon" ng-change="changeDoW()">{{'date_weekslist_monday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.tue" ng-change="changeDoW()">{{'date_weekslist_tuesday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.wed" ng-change="changeDoW()">{{'date_weekslist_wednesday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.thu" ng-change="changeDoW()">{{'date_weekslist_thursday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.fri" ng-change="changeDoW()">{{'date_weekslist_friday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.sat" ng-change="changeDoW()">{{'date_weekslist_saturday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.sun" ng-change="changeDoW()">{{'date_weekslist_sunday' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.days.allDays" ng-change="selectAllDoW()">{{'date_weekslist_all' | translate}}</ion-checkbox>
                         </div>
                     </item>
                     <item class="item-input item-stacked-label">
                         <span class="input-label" ng-bind-html="'form_timeslots' | translate"></span>
                         <ion-list class="list-inset">
-                            <ion-checkbox ng-model="searchform.timeSlots.morning">{{'form_timeslots_morning' | translate}}</ion-checkbox>
-                            <ion-checkbox ng-model="searchform.timeSlots.afternoon">{{'form_timeslots_afternoon' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.timeslots.morning">{{'form_timeslots_morning' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.timeslots.afternoon">{{'form_timeslots_afternoon' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.timeslots.evening">{{'form_timeslots_evening' | translate}}</ion-checkbox>
+                            <ion-checkbox ng-model="searchform.timeslots.night">{{'form_timeslots_night' | translate}}</ion-checkbox>
                         </ion-list>
                     </item>
                 </ion-list>

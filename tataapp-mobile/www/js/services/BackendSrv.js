@@ -147,5 +147,23 @@ angular.module('tataapp.services.backend', [])
         return deferred.promise;
     };
 
+    /* Get zones */
+    backend.getZones = function (tatapointId) {
+        var deferred = $q.defer();
+
+        $http.get(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/office', Config.getHTTPConfig())
+
+        .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (reason) {
+                deferred.reject(reason.data ? reason.data.errorMessage : reason);
+            }
+        );
+
+        return deferred.promise;
+    };
+
     return backend;
 });

@@ -9,7 +9,12 @@
                 <div class="info-pagination">
                     <i class="icon ion-record" ng-repeat="infoPage in infoPages" ng-class="{'saw': $index <= $parent.$index}"></i>
                 </div>
-                <div ng-bind-html="infoPage.content | translate"></div>
+                <div>
+                    <div ng-bind-html="infoPage.content | translate"></div>
+                    <ul ng-if="$index + 1 == 1">
+                        <li ng-repeat="zone in zones">{{zone.name}}</li>
+                    </ul>
+                </div>
             </ion-content>
         </ion-slide-page>
     </ion-slides>

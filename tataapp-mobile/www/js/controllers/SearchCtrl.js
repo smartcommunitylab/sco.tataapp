@@ -85,9 +85,11 @@ angular.module('tataapp.controllers.search', [])
             sat: false,
             sun: false
         },
-        timeSlots: {
+        timeslots: {
             morning: false,
-            afternoon: false
+            afternoon: false,
+            evening: false,
+            night: false
         }
     };
 
@@ -136,8 +138,7 @@ angular.module('tataapp.controllers.search', [])
         });
 
         request.carOwner = form.car;
-        request.fromDate = form.dateFrom;
-        request.toDate = form.dateTo;
+        request.timeslots = [];
 
         request.days = [];
         angular.forEach(Object.keys(form.days), function (day) {
@@ -146,6 +147,14 @@ angular.module('tataapp.controllers.search', [])
             }
         });
 
+        request.timeslots = [];
+        angular.forEach(Object.keys(form.timeslots), function (timeslot) {
+            if (form.timeslots[timeslot]) {
+                request.timeslots.push(timeslot);
+            }
+        });
+
+        /*
         request.fromTime = 0;
         request.toTime = 0;
         var tmpDate = new Date();
@@ -167,7 +176,18 @@ angular.module('tataapp.controllers.search', [])
             request.fromTime = tmpDate.getTime()
             tmpDate.setHours(18);
             request.toTime = tmpDate.getTime();
+        } else if (form.timeSlots.evening) {
+            tmpDate.setHours(12);
+            request.fromTime = tmpDate.getTime()
+            tmpDate.setHours(18);
+            request.toTime = tmpDate.getTime();
+        } else if (form.timeSlots.night) {
+            tmpDate.setHours(12);
+            request.fromTime = tmpDate.getTime()
+            tmpDate.setHours(18);
+            request.toTime = tmpDate.getTime();
         }
+        */
 
         return request;
     };
