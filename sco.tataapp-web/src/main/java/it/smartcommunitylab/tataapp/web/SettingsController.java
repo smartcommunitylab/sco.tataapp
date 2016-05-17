@@ -12,19 +12,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import it.smartcommunitylab.tataapp.model.Settings;
+import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.SettingsService;
 
 @RestController
 public class SettingsController {
 
 	@Autowired
-	SettingsService settingsSrv;
+	private SettingsService settingsSrv;
 
 	@Autowired
-	GoogleAuthHelper googleAuthHelper;
+	private GoogleAuthHelper googleAuthHelper;
+
+	@Autowired
+	private IdentityLookupService identityLookup;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/settings/permissions")
 	public PermissionBean calendarAuthorizationCheck(HttpServletRequest req, @PathVariable String agencyId) {
+		agencyId = identityLookup.getName();
 		Settings s = settingsSrv.loadSettings(agencyId);
 		PermissionBean permBean = new PermissionBean();
 		if (s != null) {

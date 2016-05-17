@@ -12,37 +12,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
+import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin
 public class BabysitterController {
 
 	@Autowired
 	private BabysitterService service;
 
+	@Autowired
+	private IdentityLookupService identityLookup;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/tata")
 	public Page<Babysitter> readAll(@PathVariable String agencyId, Pageable pageable) {
+		agencyId = identityLookup.getName();
 		return service.loadAll(agencyId, pageable);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/tata/{babysitterId}")
 	public Babysitter read(@PathVariable String agencyId, @PathVariable String babysitterId) {
+		agencyId = identityLookup.getName();
 		return service.load(agencyId, babysitterId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/tata")
 	public Babysitter save(@RequestBody Babysitter b, @PathVariable String agencyId) {
+		agencyId = identityLookup.getName();
+		b.setAgencyId(agencyId);
 		return service.save(b);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/api/agency/{agencyId}/tata/{babysitterId}")
 	public void delete(@PathVariable String agencyId, @PathVariable String babysitterId) {
+		agencyId = identityLookup.getName();
+		service.delete(agencyId, babysitterId);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/tata/search")
 	public Page<Babysitter> search(@RequestBody SearchCriteria criteria, @PathVariable String agencyId,
 			Pageable pageable) {
+		agencyId = identityLookup.getName();
 		return service.loadAll(agencyId, pageable);
 	}
 }

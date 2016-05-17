@@ -10,17 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.smartcommunitylab.tataapp.beans.EstimatationData;
 import it.smartcommunitylab.tataapp.beans.EstimatationResult;
+import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.EstimatationService;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin
 public class EstimationController {
 
 	@Autowired
 	private EstimatationService service;
 
+	@Autowired
+	private IdentityLookupService identityLookup;
+
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/estimation")
 	public EstimatationResult estimate(@RequestBody EstimatationData payload, @PathVariable String agencyId) {
+		agencyId = identityLookup.getName();
 		return service.estimate(payload);
 	}
 }
