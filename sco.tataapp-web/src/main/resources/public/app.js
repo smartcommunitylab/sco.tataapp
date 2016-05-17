@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('app', ['app.ctrls','app.home','app.tatapoint','app.tata',
+angular.module('app', ['app.ctrls','app.home','app.tatapoint','app.tata','app.rate',
   'ngRoute','ui.bootstrap'
 ]).
 config(['$routeProvider', function($routeProvider) {
