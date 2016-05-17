@@ -1,102 +1,56 @@
 package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
-import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
+import it.smartcommunitylab.tataapp.web.GoogleAuthHelper;
 
 @Service
 public class GoogleCalendarService {
 
 	private static final Logger logger = LoggerFactory.getLogger(GoogleCalendarService.class);
 
-	@Value("classpath:/client_secret.json")
-	private Resource apiKeys;
-
-	@Value("${google.calendar.appname}")
-	private String applicationName;
-
 	@Autowired
 	private SettingsService settingsSrv;
 
-	private static final java.io.File dataStoreDir = new java.io.File(System.getProperty("user.home"),
-			".tataapp-credentials/calendar-importer.json");
+	@Autowired
+	private BabysitterService babysitterSrv;
 
-	private static final String ID_TATAPOINT_CAL = "";
-
-	// 1 gen 2016 0:00
-	private static final GregorianCalendar startTimeWindow = new GregorianCalendar(2016, 0, 1, 0, 0);
-
-	// 31 dic 2016 23:59
-	private static final GregorianCalendar endTimeWindow = new GregorianCalendar(2016, 11, 31, 23, 59);
-
-	/**
-	 * Global instance of the scopes required by this quickstart.
-	 *
-	 * If modifying these scopes, delete your previously saved credentials at
-	 * ~/.credentials/calendar-java-quickstart.json
-	 */
-	private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
-
-	private static FileDataStoreFactory dataStoreFactory;
+	@Autowired
+	private GoogleAuthHelper googleAuthHelper;
 
 	private static final JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-
 	private static HttpTransport httpTransport;
 
 	static {
 		try {
 			httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-			dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
 		} catch (Throwable t) {
 			logger.error("Exception defining google api classes");
 		}
-	}
-
-	/**
-	 * Creates an authorized Credential object.
-	 * 
-	 * @return an authorized Credential object.
-	 * @throws IOException
-	 */
-	public Credential authorize() throws IOException {
-		// Load client secrets.
-		InputStream in = apiKeys.getInputStream();
-		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(in));
-
-		// Build flow and trigger user authorization request.
-		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory,
-				clientSecrets, SCOPES).setDataStoreFactory(dataStoreFactory).setAccessType("offline").build();
-		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-		return credential;
 	}
 
 	/**
@@ -105,51 +59,159 @@ public class GoogleCalendarService {
 	 * @return an authorized Calendar client service
 	 * @throws IOException
 	 */
-	public com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
-		Credential credential = authorize();
-		return new com.google.api.services.calendar.Calendar.Builder(httpTransport, jsonFactory, credential)
-				.setApplicationName(applicationName).build();
+	private com.google.api.services.calendar.Calendar getCalendarService(String agencyId) {
+		Credential credential = googleAuthHelper.getCredential(agencyId);
+		if (credential != null) {
+			// set empty string for application name to avoid log WARNING
+			return new com.google.api.services.calendar.Calendar.Builder(httpTransport, jsonFactory, credential)
+					.setApplicationName("").build();
+		} else {
+			logger.error("No google credential for agency {}", agencyId);
+			return null;
+		}
+	}
+
+	public void importTataAvailability(String agencyId) throws IOException {
+		com.google.api.services.calendar.Calendar service = getCalendarService(agencyId);
+
+		Date[] timeWindow = getTataAvailabilityWindow();
+		DateTime startWeek = new DateTime(timeWindow[0]);
+		DateTime endWeek = new DateTime(timeWindow[1]);
+
+		Set<Babysitter> babysitters = babysitterSrv.loadAll(agencyId);
+		for (Babysitter babysitter : babysitters) {
+			CalendarListEntry entry = searchCalendar(agencyId, babysitter.getName() + " " + babysitter.getSurname());
+			if (entry != null) {
+				Events e = service.events().list(entry.getId()).setTimeMax(endWeek).setTimeMin(startWeek)
+						.setSingleEvents(false).execute();
+				List<Event> items = e.getItems();
+				logger.info("Read {} events availability", items.size());
+
+				for (Event event : items) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
+								event.getEnd().getDateTime());
+						logger.debug("id " + event.getId());
+						logger.debug("recurrence " + event.getRecurrence());
+					}
+				}
+			}
+
+		}
+
 	}
 
 	public List<TataPoint> importTataPoint(String agencyId) throws IOException {
 
 		Settings settings = settingsSrv.loadSettings(agencyId);
-		// Build a new authorized API client service.
-		// Note: Do not confuse this class with the
-		// com.google.api.services.calendar.model.Calendar class.
-		com.google.api.services.calendar.Calendar service = getCalendarService();
-
-		// List the next 10 events from the primary calendar.
-		// DateTime now = new DateTime(System.currentTimeMillis());
-		// Events events =
-		// service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
-		// .setSingleEvents(true).execute();
-
-		DateTime startWeek = new DateTime(startTimeWindow.getTime());
-		DateTime endWeek = new DateTime(endTimeWindow.getTime());
-
-		// timeMax -> tutti eventi che iniziano prima della data
-		// timeMin -> tutti eventi che finiscono dopo la data
-		Events e = service.events().list(ID_TATAPOINT_CAL).setTimeMax(endWeek).setTimeMin(startWeek)
-				.setSingleEvents(false).execute();
-
-		List<Event> items = e.getItems();
-		logger.info("Read {} events tatapoint", items.size());
-
 		List<TataPoint> result = new ArrayList<>();
-		for (Event event : items) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
-						event.getEnd().getDateTime());
-				logger.debug("id " + event.getId());
-				logger.debug("recurrence " + event.getRecurrence());
-				logger.debug("location " + event.getLocation());
-				logger.debug("desc " + event.getDescription());
-			}
-			result.add(new TataPoint(event));
-		}
 
+		if (settings != null) {
+			com.google.api.services.calendar.Calendar service = getCalendarService(agencyId);
+			if (service != null) {
+
+				// search tatapoint cal id if it not present in settings of
+				// agency
+				if (settings.getTatapointCalId() == null) {
+					logger.info("Tatapoint cal id not present..start to search for name {}",
+							settings.getTatapointCalName());
+					CalendarListEntry tatapointCal = searchCalendar(agencyId, settings.getTatapointCalName());
+					if (tatapointCal != null) {
+						settings.setTatapointCalId(tatapointCal.getId());
+						settingsSrv.save(settings);
+						logger.info("Found cal id for name {}..saved in settings", settings.getTatapointCalName());
+						logger.debug("tatapoint id calendar: {}", tatapointCal.getId());
+					}
+				}
+
+				if (settings.getTatapointCalId() == null) {
+					logger.error("tatapoint cal id not found in settings of agency {}", agencyId);
+				} else {
+
+					Date[] timeWindow = getActualYearWindow();
+					DateTime startWeek = new DateTime(timeWindow[0]);
+					DateTime endWeek = new DateTime(timeWindow[1]);
+
+					// timeMax -> all events that start before datetime
+					// timeMin -> all events that end after datetime
+					Events e = service.events().list(settings.getTatapointCalId()).setTimeMax(endWeek)
+							.setTimeMin(startWeek).setSingleEvents(false).execute();
+
+					List<Event> items = e.getItems();
+					logger.info("Read {} events tatapoint", items.size());
+
+					for (Event event : items) {
+						if (logger.isDebugEnabled()) {
+							logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
+									event.getEnd().getDateTime());
+							logger.debug("id " + event.getId());
+							logger.debug("recurrence " + event.getRecurrence());
+							logger.debug("location " + event.getLocation());
+							logger.debug("desc " + event.getDescription());
+						}
+						result.add(new TataPoint(event));
+					}
+				}
+			} else {
+				logger.error("Problem creating google calendar service api");
+			}
+		} else {
+			logger.warn("ATTENTION no settings for agency {}", agencyId);
+		}
 		return result;
 	}
 
+	private CalendarListEntry searchCalendar(String agencyId, String pattern) {
+		com.google.api.services.calendar.Calendar service = getCalendarService(agencyId);
+
+		try {
+			for (CalendarListEntry entry : service.calendarList().list().execute().getItems()) {
+				if (entry.getSummary().toLowerCase().contains(pattern.toLowerCase())) {
+					logger.info("Found cal for name pattern", pattern);
+					return entry;
+				}
+			}
+		} catch (IOException e) {
+			logger.error("Exception getting calendar list for agency {}", agencyId);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns actual year window.
+	 * 
+	 * @return arrays of size 2 result[0] is lower bound (1 jan actual year
+	 *         0:00) result[1] is upper bound (31 dec actual year 23:59)
+	 */
+	private Date[] getActualYearWindow() {
+		Calendar cal = new GregorianCalendar();
+		int actualYear = cal.get(Calendar.YEAR);
+		Date[] range = new Date[2];
+		cal.set(actualYear, 0, 1, 0, 0);
+		range[0] = cal.getTime();
+		cal.set(actualYear, 11, 31, 23, 59);
+		range[1] = cal.getTime();
+		return range;
+	}
+
+	/*
+	 * Return date window used to get tata availability Actually it returns 3
+	 * months since today
+	 * 
+	 * @return arrays of size 2 result[0] is lower bound (today 0:00) result[1]
+	 * is upper bound (today +3months 0:00)
+	 */
+	private Date[] getTataAvailabilityWindow() {
+		Calendar cal = new GregorianCalendar();
+		Date[] range = new Date[2];
+		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		range[0] = cal.getTime();
+		cal.add(Calendar.MONTH, 3);
+		range[1] = cal.getTime();
+		return range;
+
+	}
 }

@@ -54,4 +54,12 @@ public class InMemorySettingsService implements SettingsService {
 		return res;
 	}
 
+	@Override
+	public Settings save(Settings s) {
+		if (s.getAgencyId() != null) {
+			mapping.put(s.getAgencyId(), s);
+		}
+		return s;
+	}
+
 }

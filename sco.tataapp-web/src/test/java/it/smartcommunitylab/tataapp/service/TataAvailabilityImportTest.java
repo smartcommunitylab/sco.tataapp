@@ -2,7 +2,6 @@ package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,14 @@ import it.smartcommunitylab.tataapp.WebApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(WebApplication.class)
-public class TataPointImportTest {
+public class TataAvailabilityImportTest {
 
 	@Autowired
 	private GoogleCalendarService gcalSrv;
 
 	@Test
 	public void importing() throws IOException {
-		Assert.assertFalse("No tatapoint returned", gcalSrv.importTataPoint("tataApp").isEmpty());
+		gcalSrv.importTataAvailability("tataApp");
 	}
 
 }

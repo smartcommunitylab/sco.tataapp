@@ -6,6 +6,15 @@ public class EstimatationData {
 	private boolean bonusAssignee;
 	private String bonusType;
 	private double weeklyHour;
+	private boolean disability;
+
+	public boolean isDisability() {
+		return disability;
+	}
+
+	public void setDisability(boolean disability) {
+		this.disability = disability;
+	}
 
 	public long getStartDate() {
 		return startDate;

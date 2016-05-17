@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import it.smartcommunitylab.tataapp.model.Babysitter;
 
-public interface BabysitterRepo extends MongoRepository<Babysitter, String> {
+public interface BabysitterRepo extends MongoRepository<Babysitter, String>, MatchingRepo {
 
 	public Page<Babysitter> findByAgencyId(String agencyId, Pageable pageable);
 

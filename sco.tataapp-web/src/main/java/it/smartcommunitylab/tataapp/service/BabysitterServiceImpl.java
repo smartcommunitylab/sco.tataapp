@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -51,8 +52,7 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	@Override
 	public Page<Babysitter> search(SearchCriteria criteria, Pageable p) {
-
-		return null;
+		return new PageImpl<Babysitter>(babysitterRepo.searchByMatching(criteria));
 	}
 
 }

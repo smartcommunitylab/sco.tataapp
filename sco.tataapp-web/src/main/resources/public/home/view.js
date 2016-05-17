@@ -11,4 +11,5 @@ angular.module('app.home', ['ngRoute'])
 
 .controller('HomeCtrl', ['$scope',function($scope) {
 	$scope.message = "HOME VIEW";
+	
 }]);
