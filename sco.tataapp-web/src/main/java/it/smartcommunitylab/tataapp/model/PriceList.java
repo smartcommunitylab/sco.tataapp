@@ -2,14 +2,37 @@ package it.smartcommunitylab.tataapp.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "dynamicData")
 public class PriceList {
 
+	@Id
+	private String id;
 	private List<PriceCell> daily;
 	private List<PriceCell> dailyDisability;
 	private List<PriceCell> festive;
 	private List<PriceCell> festiveDisability;
 	private List<PriceCell> nighttime;
 	private List<PriceCell> nighttimeDisability;
+	private String agencyId;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getAgencyId() {
+		return agencyId;
+	}
+
+	public void setAgencyId(String agencyId) {
+		this.agencyId = agencyId;
+	}
 
 	public List<PriceCell> getDaily() {
 		return daily;
