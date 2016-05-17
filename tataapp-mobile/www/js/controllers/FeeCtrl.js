@@ -7,6 +7,7 @@ angular.module('tataapp.controllers.fee', [])
     $scope.searchform = {
         dateFrom: now.getTime(),
         dateTo: now.getTime(),
+        disability: false,
         bonusAssignee: false,
         bonusType: 'type1',
         weeklyHour: null,
@@ -77,6 +78,7 @@ angular.module('tataapp.controllers.fee', [])
 
         request.startDate = form.dateFrom;
         request.endDate = form.dateTo;
+        request.disability = form.disability;
         request.bonusAssignee = form.bonusAssignee;
         request.bonusType = form.bonusType;
         request.weeklyHour = form.weeklyHour;

@@ -40,11 +40,10 @@ angular.module('tataapp.controllers.home', [])
     // TODO
 })
 
-.controller('InfoCtrl', function ($scope, $filter) {
+.controller('InfoCtrl', function ($scope, $filter, BackendSrv) {
     $scope.swiperOptions = {};
 
     $scope.infoPages = [];
-
     var infoCounter = 1;
     while ($filter('translate')('info_' + infoCounter + '_t') != ('info_' + infoCounter + '_t')) {
         var entry = {
@@ -54,4 +53,9 @@ angular.module('tataapp.controllers.home', [])
         $scope.infoPages.push(entry);
         infoCounter++;
     }
+
+    $scope.zones = [];
+    BackendSrv.getZones().then(function (response) {
+        $scope.zones = response.content;
+    });
 });

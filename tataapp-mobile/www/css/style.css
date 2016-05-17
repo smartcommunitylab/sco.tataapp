@@ -362,11 +362,11 @@
 .tataapp-theme .form.meet .item-input span.count {
     font-weight: bold;
 }
+.tataapp-theme .form.meet .item-checkbox {
+    font-size: small;
+}
 .tataapp-theme .form.meet .child > .item:first-child {
     border-top: 1px solid #ddd;
-}
-.tataapp-theme .form.meet .child .item-checkbox {
-    font-size: small;
 }
 
 /* Tata point */
