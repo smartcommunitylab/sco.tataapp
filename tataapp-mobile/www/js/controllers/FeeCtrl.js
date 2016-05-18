@@ -1,6 +1,16 @@
 angular.module('tataapp.controllers.fee', [])
 
-.controller('FeeCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, ionicDatePicker, Config, Utils, BackendSrv) {
+.controller('FeeCtrl', function ($scope, BackendSrv) {
+    $scope.pricelist = {};
+
+    BackendSrv.getPricelist().then(
+        function (pricelist) {
+            $scope.pricelist = pricelist;
+        }
+    );
+})
+
+.controller('FeeEstimateCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
 
@@ -93,7 +103,7 @@ angular.module('tataapp.controllers.fee', [])
             function () {
                 var request = form2request($scope.searchform);
 
-                BackendSrv.getPreventivo(request).then(
+                BackendSrv.getEstimation(request).then(
                     function (results) {
                         $scope.estimation = results.estimation;
                         $ionicScrollDelegate.resize();

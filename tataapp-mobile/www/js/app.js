@@ -165,7 +165,8 @@ angular.module('tataapp', [
         url: '/fee',
         views: {
             'menuContent': {
-                templateUrl: 'templates/fee.html'
+                templateUrl: 'templates/fee.html',
+                controller: 'FeeCtrl'
             }
         }
     })
@@ -175,7 +176,7 @@ angular.module('tataapp', [
         views: {
             'menuContent': {
                 templateUrl: 'templates/fee_estimate.html',
-                controller: 'FeeCtrl'
+                controller: 'FeeEstimateCtrl'
             }
         }
     })
