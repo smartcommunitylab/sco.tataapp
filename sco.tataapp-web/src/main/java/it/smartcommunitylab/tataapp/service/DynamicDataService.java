@@ -8,4 +8,6 @@ import it.smartcommunitylab.tataapp.model.PriceList;
 public interface DynamicDataService {
 
 	public PriceList getPriceList(String agencyId);
+
+	public PriceList savePriceList(String agencyId, PriceList priceList);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.smartcommunitylab.tataapp.model.ServiceOffice;
 import it.smartcommunitylab.tataapp.model.Settings;
+import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.SettingsService;
 
 @RestController
@@ -23,8 +24,12 @@ public class OfficeController {
 	@Autowired
 	private SettingsService settingsSrv;
 
+	@Autowired
+	private IdentityLookupService identityLookup;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/office")
 	public Page<ServiceOffice> readAll(@PathVariable String agencyId, Pageable pageable) {
+		agencyId = identityLookup.getName();
 		Settings s = settingsSrv.loadSettings(agencyId);
 		if (s != null) {
 			return new PageImpl<>(s.getOffices(), pageable, s.getOffices().size());

@@ -51,7 +51,15 @@ public class MockDynamicDataService implements DynamicDataService {
 		list.add(new PriceCell("16-24", 163d));
 		list.add(new PriceCell("25-40", 127.45d));
 		pl.setNighttimeDisability(list);
+		pl.setAgencyId(agencyId);
+		pl.setId("1");
 		return pl;
+	}
+
+	@Override
+	public PriceList savePriceList(String agencyId, PriceList priceList) {
+		priceList.setAgencyId(agencyId);
+		return priceList;
 	}
 
 }

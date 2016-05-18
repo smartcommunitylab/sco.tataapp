@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.smartcommunitylab.tataapp.model.Meeting;
+import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.MeetingService;
 
 @RestController
@@ -18,8 +19,12 @@ public class MeetingController {
 	@Autowired
 	private MeetingService service;
 
+	@Autowired
+	private IdentityLookupService identityLookup;
+
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/meeting")
 	public Meeting save(@RequestBody Meeting payload, @PathVariable String agencyId) {
+		agencyId = identityLookup.getName();
 		payload.setAgencyId(agencyId);
 		return service.save(payload);
 	}

@@ -269,6 +269,14 @@ public class BabysitterServiceTest {
 		sc.setFromDate(new LocalDate(2016, 5, 15).toDate().getTime());
 		sc.setToDate(new LocalDate(2016, 5, 20).toDate().getTime());
 		sc.setDays(new String[] { "MON", "TUE", "WED" });
+		sc.setTimeSlots(Arrays.asList("afternoon"));
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setFromDate(new LocalDate(2016, 4, 1).toDate().getTime());
+		sc.setToDate(new LocalDate(2016, 5, 30).toDate().getTime());
+		sc.setDays(new String[] { "MON", "TUE", "WED", "THU" });
 		Assert.assertEquals(1, service.search(sc, null).getContent().size());
 
 		sc = new SearchCriteria();
@@ -291,6 +299,48 @@ public class BabysitterServiceTest {
 		sc.setToDate(new LocalDate(2016, 4, 30).toDate().getTime());
 		sc.setDays(new String[] { "MON", "TUE", "WED", "THU", "FRI" });
 		Assert.assertEquals(0, service.search(sc, null).getContent().size());
+	}
 
+	@Test
+	public void workWithTime() {
+		Babysitter b = new Babysitter();
+		b.setName("Jessica");
+		b.setSurname("Drew");
+		b.setEmail("email@tataapp.eu");
+		b.setAddress("via sommarive 18");
+		b.setCity("Trento");
+		b.setAgencyId(AGENCY_ID);
+		b.setBirthdate(new LocalDate(1981, 10, 22).toDate().getTime());
+		b.setLanguages(Arrays.asList("IT"));
+		List<Availability> av = new ArrayList<>();
+		av.add(createAvailability(2016, 5, 13, "11:00", "20:00"));
+		b.setTimeAvailability(av);
+		service.save(b);
+
+		SearchCriteria sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setFromDate(new LocalDate(2016, 5, 10).toDate().getTime());
+		sc.setToDate(new LocalDate(2016, 5, 20).toDate().getTime());
+		sc.setDays(new String[] { "FRI" });
+		sc.setTimeSlots(Arrays.asList("afternoon", "evening", "night"));
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+	}
+
+	private Availability createAvailability(int year, int month, int day, String from, String to) {
+		LocalDate epoch = new LocalDate(1970, 1, 1);
+		Availability a = new Availability();
+		a.setDate(new LocalDate(year, month, day).toDate().getTime());
+		int[] fromTime = parseTime(from);
+		a.setFromTime(epoch.toDateTime(new LocalTime(fromTime[0], fromTime[1])).getMillis());
+		int[] toTime = parseTime(to);
+		a.setToTime(epoch.toDateTime(new LocalTime(toTime[0], toTime[1])).getMillis());
+
+		return a;
+	}
+
+	public int[] parseTime(String time) {
+		String[] p = time.split(":");
+		return new int[] { Integer.valueOf(p[0]), Integer.valueOf(p[1]) };
 	}
 }

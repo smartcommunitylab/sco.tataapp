@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.RangeAge;
+import it.smartcommunitylab.tataapp.model.TimeSlot;
 
 public class BabysitterRepoImpl implements MatchingRepo {
 
@@ -60,6 +61,20 @@ public class BabysitterRepoImpl implements MatchingRepo {
 		} else {
 			logger.warn("search matching criteria without dates criteria");
 		}
+
+		List<Criteria> timeCrit = new ArrayList<>();
+		for (String timeSlot : crit.getTimeSlots()) {
+			TimeSlot ts = TimeSlot.valueOf(timeSlot.toUpperCase());
+			if (ts != null) {
+				Criteria timeSlotCrit = Criteria.where("timeAvailability.fromTime");
+				timeSlotCrit = timeSlotCrit.lte(ts.getFromHour()).and("timeAvailability.toTime").gte(ts.getToHour());
+				timeCrit.add(timeSlotCrit);
+			}
+		}
+		if (timeCrit.size() > 0) {
+			mongoCrit = mongoCrit.orOperator(timeCrit.toArray(new Criteria[0]));
+		}
+
 		Query q = new Query(mongoCrit);
 		logger.debug("Search matching query {}", q.toString());
 		return mongo.find(q, Babysitter.class);
@@ -89,7 +104,7 @@ public class BabysitterRepoImpl implements MatchingRepo {
 	}
 
 	private int stringToDay(String day) {
-		switch (day) {
+		switch (day.toUpperCase()) {
 		case "MON":
 			return DateTimeConstants.MONDAY;
 		case "TUE":
