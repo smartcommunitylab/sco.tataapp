@@ -12,11 +12,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 .controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader',
           				function($rootScope, $scope, $uibModal, Tata, FileUploader) {
 	
-	$scope.tatalist = Tata.list();
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
 	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file
 	$scope.mailPattern=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
+	$scope.onErrorSrc = "images/empty_avatar.png";
 	
 	$scope.itaLang = "italiano";
 	$scope.engLang = "inglese";
@@ -160,7 +161,10 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 	
-	
+	// method used to retrieve the tata list
+	$scope.getTataList = function(){
+		$scope.tatalist = Tata.list();
+	}
 	
 	// method used to show the new tata input form
 	$scope.newTata = function(){
@@ -229,7 +233,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 				}
 				var canvas = angular.element(document).find('canvas');
 				var type = item.file.type;
-				pngUrl = canvas[0].toDataURL(type);	// ok i can retrieve the url from canvas;
+				pngUrl = canvas[0].toDataURL(type);	// I retrieve the data-url from canvas;
 				// correctLanguages form bool to string
 				for(var i = 0; i < tata.boollanguage.length; i++){
 					if(tata.boollanguage[i]){
@@ -361,7 +365,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	$scope.showTata = function(tata){
 		$scope.showTataDetails = true;
 		$scope.vtata = tata;
-		// for test
+		//TODO: for test to be removed in prod
 		$scope.vtata.profileImage = "data:image/png;base64," + imageBase64;
 	};
 	
@@ -431,7 +435,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 }])
 
 .factory('Tata', [ '$resource', function($resource) {
-	return $resource('api/agency/:id/tata/:tid', {
+	return $resource('console/api/agency/:id/tata/:tid', {
 		id : "tataApp",
 		tid: '@id'
 	}, {
@@ -448,6 +452,17 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	});
 } ])
 
+.directive('onErrorSrc', function() {
+    return {
+        link: function(scope, element, attrs) {
+          element.bind('error', function() {
+            if (attrs.src != attrs.onErrorSrc) {
+              attrs.$set('src', attrs.onErrorSrc);
+            }
+          });
+        }
+    }
+})
 .directive('ngThumb', ['$window', function($window) {
     var helper = {
         support: !!($window.FileReader && $window.CanvasRenderingContext2D),
