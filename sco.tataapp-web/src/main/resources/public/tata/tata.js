@@ -12,7 +12,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 .controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader',
           				function($rootScope, $scope, $uibModal, Tata, FileUploader) {
 	
-	$scope.tatalist = Tata.list();
+	
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
 	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file
@@ -160,7 +160,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 	
-	
+	$scope.findTata = function() {
+		$scope.tatalist = Tata.list();
+	};
 	
 	// method used to show the new tata input form
 	$scope.newTata = function(){
@@ -431,7 +433,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 }])
 
 .factory('Tata', [ '$resource', function($resource) {
-	return $resource('api/agency/:id/tata/:tid', {
+	return $resource('console/api/agency/:id/tata/:tid', {
 		id : "tataApp",
 		tid: '@id'
 	}, {

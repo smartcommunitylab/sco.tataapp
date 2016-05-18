@@ -39,7 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_ADMIN')").and().httpBasic();
+		http.authorizeRequests().antMatchers("/", "/console/api/**").authenticated().anyRequest().permitAll();
+
+		http.formLogin().loginPage("/login.html").permitAll().and().logout().permitAll();
 
 		// disable csrf permits POST http call to ConsoleController
 		// without using csrf token

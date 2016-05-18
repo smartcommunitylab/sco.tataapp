@@ -12,7 +12,7 @@ import it.smartcommunitylab.tataapp.model.TataPoint;
 import it.smartcommunitylab.tataapp.repo.TataPointRepo;
 
 @Component
-@Profile({ "default" })
+@Profile({ "default", "prod" })
 public class TataPointServiceImpl implements TataPointService {
 
 	@Autowired
