@@ -30,6 +30,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	$scope.trueVal = true;
 	$scope.falseVal = false;
 	$scope.tata = null;
+	$scope.q = null;
 	
 	$scope.uploader = new FileUploader({
 		queueLimit: 1,
