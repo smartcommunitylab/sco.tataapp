@@ -1,4 +1,4 @@
 users:
- - username: tataapp
+ - username: tataApp
    password: tatapwd
    role: ADMIN

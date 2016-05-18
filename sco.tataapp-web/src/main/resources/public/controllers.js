@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('app.ctrls', ['i18nmessages'])
-.controller('MainCtrl', ['$scope',function($scope) {
+angular.module('app.ctrls', ['ngResource','i18nmessages'])
+.controller('MainCtrl', ['$scope', '$window','SecurityCheck',
+                 function($scope, $window, SecurityCheck) {
 	$scope.message = "Angular ROCKSSS";
 	
 	var activeHome = "active";
@@ -9,6 +10,15 @@ angular.module('app.ctrls', ['i18nmessages'])
 	var activeFamily = "";
 	var activeTataPoint = "";
 	var activeTataRate = "";
+	
+	$scope.checkCalendarPermissions = function(){
+		SecurityCheck.get({agencyId:'progetto92'}, function(data) {
+			if(!data.calendarPermissionOk){
+				console.log("redirect url " + JSON.stringify(data.authorizationURL));
+				//$window.location.href = data.authorizationURL;
+			}
+		});
+	};
 	
 	$scope.isActiveHome = function(){
 		return activeHome;
@@ -70,6 +80,12 @@ angular.module('app.ctrls', ['i18nmessages'])
 		activeTataRate = "active";
 	};
 	
+}])
+
+.factory('SecurityCheck', [ '$resource', function($resource) {
+	return $resource('console/api/agency/:agencyId/settings/permissions', {
+		agencyId: '@id'
+	});
 }])
 
 .filter('i18n', function (i18nmessages) {
