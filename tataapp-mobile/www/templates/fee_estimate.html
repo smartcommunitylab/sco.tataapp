@@ -22,14 +22,13 @@
 
                 <ion-toggle ng-model="searchform.food_stamps">{{'form_service_stamps' | translate}}</ion-toggle>
 
-                <div class="note" ng-if="!!searchform.food_stamps" ng-bind-html="'form_service_stamps_info' | translate"></div>
-
                 <item class="item-input" ng-if="!!searchform.food_stamps">
                     <item class="item-input item-stacked-label">
                         <span class="input-label" ng-bind-html="'form_service_type' | translate"></span>
                         <ion-list class="list-inset">
                             <ion-checkbox ng-repeat="(val,type) in searchform.types" ng-model="searchform.bonusType" ng-true-value="'{{val}}'" ng-false-value="">{{type}}</ion-checkbox>
                         </ion-list>
+                        <div class="note" ng-if="!!searchform.food_stamps" ng-bind-html="'form_service_stamps_info' | translate"></div>
                     </item>
                 </item>
             </ion-list>

@@ -32,6 +32,7 @@
     "menu_fee": "Quanto costa",
     "menu_info": "Informazioni sul servizio",
     "menu_vouchers": "Buoni di servizio PAT",
+    "menu_who": "Chi siamo?",
     "menu_faq": "FAQ",
     "btn_info": "Richiedi informazioni",
     "btn_estimate": "Calcola un preventivo",
@@ -169,5 +170,6 @@
     "info_5_t": "Il contratto",
     "info_5_c": "<p>Stipuleremo un contratto di somministrazione di lavoro, regolato dal Dlg. 276/2003 (Legge Biagi), art. 20-28.</p><p>Il contratto prevede tre soggetti:</p><ul><li>il lavoratore</li><li>Cooperjob, Agenzia per il lavoro, autorizzata dal Ministero</li><li>la famiglia utilizzatrice</li></ul><p>Cooperjob stipula contemporaneamente due diversi contratti:</p><ul><li>un contratto di assunzione della TATA, che diventa così dipendente diretta dell'agenzia</li><li>un contratto di somministrazione di lavoro con la FAMIGLIA, che diventa l'utilizzatore</li></ul><p>La FAMIGLIA ha quindi a sua disposizione una professionista, assunta e regolarmente retribuita da un altro soggetto.</p>",
     "info_6_t": "Avvio del lavoro",
-    "info_6_c": "<p>Una volta stipulato il contratto la tua TATA è immediatamente disponibile per lavorare secondo gli orari di lavoro concordati.</p><p>Le mansioni della TATA sono quelle regolate dal CCNL Colf e badanti.</p>"
+    "info_6_c": "<p>Una volta stipulato il contratto la tua TATA è immediatamente disponibile per lavorare secondo gli orari di lavoro concordati.</p><p>Le mansioni della TATA sono quelle regolate dal CCNL Colf e badanti.</p>",
+    "who_1": "<p>La <strong>Cooperativa Progetto 92</strong> è impegnata da vent’anni in servizi socio-educativi a favore dell'infanzia, dei giovani e delle famiglie. Ha maturato in questo modo un’esperienza specifica nel lavoro con le famiglie e i bambini di età dai 0 ai 7 anni, in particolare con gli Spazi incontro genitori e bambini (Koinè e Famiglie al Centro); con le famiglie e bambini di età scolare nei Centri diurni aperti (Alisei, Epicentro, Muretto, Arichimede, Charlie Brown, La Rais, Peter Pan); nel lavoro a domicilio attraverso gli interventi individualizzati di educativa domiciliare e nelle situazioni complesse di conflittualità genitoriale con il servizio Spazio Neutro. La Cooperativa ha ottenuto la certificazione provinciale Family Audit ed la certificazione Family in Trentino.</p><p>Offre dal 2013 il servizio Tata App.</p>"
 }
