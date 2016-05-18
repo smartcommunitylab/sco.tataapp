@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.ctrls', [])
+angular.module('app.ctrls', ['i18nmessages'])
 .controller('MainCtrl', ['$scope',function($scope) {
 	$scope.message = "Angular ROCKSSS";
 	
@@ -70,4 +70,13 @@ angular.module('app.ctrls', [])
 		activeTataRate = "active";
 	};
 	
-}]);
+}])
+
+.filter('i18n', function (i18nmessages) {
+    return function (input) {
+        if (!angular.isString(input)) {
+            return input;
+        }
+        return i18nmessages[input] || '?'+input+'?';
+    };
+});

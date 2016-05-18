@@ -28,6 +28,10 @@
 	padding: 0;
 }
 
+.panel-body {
+	padding: 10px !important;
+}
+
 .navbar .navbar-nav {
 	display: inline-block;
 	float: none;
@@ -100,7 +104,7 @@
 	left: 10px;
 }
 .panel-default {
-	padding: 15px 5px 15px 5px;
+	padding: 5px 5px 5px 5px;
 	position: relative;
 }
 .panel-body {
@@ -118,6 +122,14 @@
 	padding: 0 30px 0 0;
 	color: #777;
 }
+.tata-image {
+	float:	left; 
+	/*padding: 0 20px 0 0;*/
+	margin: 0 20px 0 0;
+	width: 50px;
+	border-radius: 5px;
+	background-image: url("images/empty_avatar.png")
+}
 .tata-icon-profile {
 	font-size: 38px;
 	float:	left; 
@@ -127,6 +139,10 @@
 .tata-details {
 	font-size: 16px;
 	padding: 0 0 0 15px;
+}
+.tata-data {
+	vertical-align: middle;
+	line-height: 60px;
 }
 
 .my-drop-zone { border: dotted 3px lightgray; }
