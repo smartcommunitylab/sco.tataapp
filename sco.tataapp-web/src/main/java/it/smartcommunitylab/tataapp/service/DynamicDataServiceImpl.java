@@ -8,7 +8,7 @@ import it.smartcommunitylab.tataapp.model.PriceList;
 import it.smartcommunitylab.tataapp.repo.DynamicDataRepo;
 
 @Component
-@Profile({ "default" })
+@Profile({ "default", "prod" })
 public class DynamicDataServiceImpl implements DynamicDataService {
 
 	@Autowired

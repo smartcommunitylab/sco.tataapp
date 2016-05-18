@@ -1,11 +1,127 @@
-<ion-view title="{{'menu_fee' | translate}}">
+<ion-view title="{{'menu_fee' | translate}}" class="fee">
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
     <ion-content class="padding">
-        <div ng-bind-html="'text_fee' | translate"></div>
         <a class="button button-positive button-block" href="#/app/fee/estimate">
             {{'btn_estimate' | translate}}
         </a>
+        <div ng-bind-html="'text_fee' | translate"></div>
+
+        <div class="pricelist">
+            <h1>{{'title_fee_pricelist' | translate}}</h1>
+            <p>{{'title_fee_pricelist_special' | translate}}</p>
+
+            <h2>{{'title_fee_pricelist_daily' | translate}}</h2>
+            <div class="table">
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.daily[0].hourRange}} {{'hours' | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.daily[0].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.dailyDisability[0].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.daily[1].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.daily[1].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.dailyDisability[1].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.daily[2].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.daily[2].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.dailyDisability[2].rate}}
+                    </div>
+                </div>
+            </div>
+
+            <h2>{{'title_fee_pricelist_festive' | translate}}</h2>
+            <div class="table">
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.festive[0].hourRange}} {{'hours' | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festive[0].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festiveDisability[0].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.festive[1].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festive[1].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festiveDisability[1].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.festive[2].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festive[2].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.festiveDisability[2].rate}}
+                    </div>
+                </div>
+            </div>
+
+            <h2>{{'title_fee_pricelist_nighttime' | translate}}</h2>
+            <div class="table">
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.nighttime[0].hourRange}} {{'hours' | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttime[0].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttimeDisability[0].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.nighttime[1].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttime[1].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttimeDisability[1].rate}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-33">
+                        {{pricelist.nighttime[2].hourRange}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttime[2].rate}}
+                    </div>
+                    <div class="col col-33">
+                        {{pricelist.nighttimeDisability[2].rate}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

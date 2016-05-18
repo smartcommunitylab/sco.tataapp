@@ -17,7 +17,7 @@ import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.repo.MeetingRepo;
 
 @Component
-@Profile({ "default" })
+@Profile({ "default", "prod" })
 public class MeetingServiceImpl implements MeetingService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MeetingServiceImpl.class);

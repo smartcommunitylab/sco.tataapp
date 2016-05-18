@@ -27,7 +27,7 @@ public class SettingsController {
 	@Autowired
 	private IdentityLookupService identityLookup;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/settings/permissions")
+	@RequestMapping(method = RequestMethod.GET, value = "/console/api/agency/{agencyId}/settings/permissions")
 	public PermissionBean calendarAuthorizationCheck(HttpServletRequest req, @PathVariable String agencyId) {
 		agencyId = identityLookup.getName();
 		Settings s = settingsSrv.loadSettings(agencyId);

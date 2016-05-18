@@ -58,7 +58,7 @@ angular.module('tataapp.services.backend', [])
     };
 
     /* Get tariffario */
-    backend.getTariffario = function () {
+    backend.getPricelist = function () {
         var deferred = $q.defer();
 
         $http.get(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/pricelist', Config.getHTTPConfig())
@@ -76,7 +76,7 @@ angular.module('tataapp.services.backend', [])
     };
 
     /* Calcolo preventivo */
-    backend.getPreventivo = function (preventivo) {
+    backend.getEstimation = function (preventivo) {
         var deferred = $q.defer();
 
         $http.post(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/estimation', preventivo, Config.getHTTPConfig())

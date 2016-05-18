@@ -7,7 +7,7 @@ import it.smartcommunitylab.tataapp.beans.EstimatationData;
 import it.smartcommunitylab.tataapp.beans.EstimatationResult;
 
 @Component
-@Profile({ "default" })
+@Profile({ "default", "prod" })
 public class EstimatationServiceImpl implements EstimatationService {
 
 	@Override

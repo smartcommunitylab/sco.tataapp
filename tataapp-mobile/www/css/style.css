@@ -383,10 +383,50 @@
     white-space: normal;
 }
 
+/* Fee */
+
+.tataapp-theme .fee .pricelist {
+    margin-top: 30px;
+}
+.tataapp-theme .fee .pricelist h1,
+.tataapp-theme .fee .pricelist h2 {
+    text-align: center;
+}
+.tataapp-theme .fee .pricelist h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+.tataapp-theme .fee .pricelist h2 {
+    font-size: 1em;
+}
+.tataapp-theme .fee .pricelist p {
+    color: #b9272d;
+    font-size: small;
+}
+.tataapp-theme .fee .pricelist .table .tablerow {
+    border-bottom: 1px solid #ddd;
+    margin-top: 0;
+}
+.tataapp-theme .fee .pricelist .table .tablerow:last-child {
+    border-bottom: none;
+}
+.tataapp-theme .fee .pricelist .table .tablerow .col {
+    text-align: center;
+}
+.tataapp-theme .fee .pricelist .table .tablerow .col:not(:first-child):after {
+    content: '\20AC';
+}
+.tataapp-theme .fee .pricelist .table .tablerow .col:last-child {
+    color: #b9272d;
+}
+
 /* Estimate */
 
 .tataapp-theme .form.estimate .item-toggle {
     font-weight: bold;
+}
+.tataapp-theme .form.estimate .note {
+    font-size: small;
 }
 .tataapp-theme .form.estimate .card {
     text-align: center;
@@ -432,6 +472,7 @@
 }
 
 /* Vouchers */
+
 .tataapp-theme .vouchers .image {
     text-align: center;
 }
