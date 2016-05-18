@@ -200,6 +200,15 @@ angular.module('tataapp', [
         }
     })
 
+    .state('app.who', {
+        url: '/who',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/who.html'
+            }
+        }
+    })
+
     .state('app.faq', {
         url: '/faq',
         views: {

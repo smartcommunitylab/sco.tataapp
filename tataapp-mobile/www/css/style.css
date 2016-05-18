@@ -446,6 +446,9 @@
     background: transparent no-repeat bottom right;
     background-size: 70%;
 }
+.tataapp-theme .info .info-page.info-page-1::after {
+    background-image: url('../img/wizard_00.png');
+}
 .tataapp-theme .info .info-page.info-page-2::after {
     background-image: url('../img/wizard_01.png');
 }
@@ -478,4 +481,13 @@
 }
 .tataapp-theme .vouchers .image img {
     width: 50%;
+}
+
+/* Who */
+
+.tataapp-theme .who .image {
+    text-align: center;
+}
+.tataapp-theme .who .image img {
+    width: 90%;
 }
