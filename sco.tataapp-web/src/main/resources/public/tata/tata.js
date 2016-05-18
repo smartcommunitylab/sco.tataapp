@@ -12,16 +12,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 .controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader',
           				function($rootScope, $scope, $uibModal, Tata, FileUploader) {
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/smartcommunitylab/sco.tataapp.git
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
 	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file
 	$scope.mailPattern=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
-	$scope.onErrorSrc = "../images/empty_avatar.png";
+	$scope.onErrorSrc = "images/empty_avatar.png";
 	
 	$scope.itaLang = "italiano";
 	$scope.engLang = "inglese";
