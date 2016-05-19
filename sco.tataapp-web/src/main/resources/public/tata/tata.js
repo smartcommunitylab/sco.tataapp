@@ -18,7 +18,6 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	$scope.mailPattern=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
 	$scope.onErrorSrc = "images/empty_avatar.png";
-	
 	$scope.itaLang = "it";
 	$scope.engLang = "en";
 	$scope.gerLang = "de";
@@ -31,7 +30,6 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	$scope.trueVal = true;
 	$scope.falseVal = false;
 	$scope.tata = null;
-	$scope.q = null;
 	
 	$scope.uploader = new FileUploader({
 		queueLimit: 1,
@@ -163,9 +161,34 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	// ---------------------------------------------------------------------------------------------------------------------------------------------
 	
+	// Functions for modal -------------------------------------------------------------------------------------------------------------------------
+	$scope.open = function (size, tata) {
+	    var modalInstance = $uibModal.open({
+	      animation: $scope.animationsEnabled,
+	      templateUrl: 'tataDeleteConfirm.html',
+	      controller: 'ModalInstanceCtrl',
+	      size: size,
+	      resolve: {
+	        data: function () {
+	          return tata;
+	        }
+	      }
+	    });
+
+	    modalInstance.result.then(function (tata) {
+	      $scope.selected = selectedItem;
+	   }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	   });
+	};
+	
+	
+	// ---------------------------------------------------------------------------------------------------------------------------------------------
+	
 	// method used to retrieve the tata list
 	$scope.getTataList = function(){
-		$scope.tatalist = Tata.list({id: $scope.agencyId});
+		$scope.q = {};
+		$scope.tatalist = Tata.list({aid: $scope.agencyId});
 	}
 	
 	// method used to show the new tata input form
@@ -278,9 +301,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 				$scope.corrtata = new Tata(correctedtata);
 				
 				console.log(JSON.stringify($scope.corrtata));
-			    $scope.corrtata.$save({id: $scope.agencyId}, function() {
+			    $scope.corrtata.$save({aid: $scope.agencyId}, function() {
 			       	console.log('Saved tata');
-			       	$scope.tatalist = Tata.list();
+			       	$scope.tatalist = Tata.list({aid: $scope.agencyId, noCache: new Date().getTime()});
 			    });
 			        
 				$scope.showNewTataForm = false;
@@ -292,6 +315,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		$scope.isInit = false;
 		if(form.$valid){
 			// correctLanguages form bool to string
+			tata.languages = [];	// here I clear the array
 			for(var i = 0; i < tata.boollanguage.length; i++){
 				if(tata.boollanguage[i]){
 					switch(i){
@@ -339,13 +363,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 				description: tata.description,
 				updates: tata.updates
 			};
-			
 			$scope.corrtata = new Tata(correctedtata);
 			
 			console.log(JSON.stringify($scope.corrtata));
-	        $scope.corrtata.$save({id: $scope.agencyId}, function() {
+	        $scope.corrtata.$save({aid: $scope.agencyId}, function() {
 	        	console.log('Updated tata');
-	        	$scope.tatalist = Tata.list();
+	        	$scope.tatalist = Tata.list({aid: $scope.agencyId, noCache: new Date().getTime()});
 	        });
 			
 			$scope.showEditTataForm = false;
@@ -353,11 +376,30 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		}
 	};
 	
-	$scope.deleteTata = function(tata){
-		Tata.deleteTata({id: $scope.agencyId, tid: tata.id});
-		console.log("Tata " + tata.name + " successfully delected");
-    	$scope.tatalist = Tata.list();
-    	$scope.showTataDetails = false;
+	$scope.deleteTata = function(tata, size){
+		var modalInstance = $uibModal.open({
+		    animation: $scope.animationsEnabled,
+		    templateUrl: 'tataDeleteConfirm.html',
+		    controller: 'ModalInstanceCtrl',
+		    size: size,
+		    resolve: {
+		        data: function () {
+		            return tata;
+		        }
+		    }
+		});
+		modalInstance.result.then(function (tata) {
+			Tata.deleteTata({aid: $scope.agencyId, tid: tata.id});
+			console.log("Tata " + tata.name + " successfully delected");
+			$scope.tatalist = Tata.list({aid: $scope.agencyId, noCache: new Date().getTime()});
+	    	$scope.showTataDetails = false;
+		}, function () {
+			// not deleted - canceled operation
+			//$scope.tatalist = Tata.list({aid: $scope.agencyId});
+	    	//$scope.showTataDetails = false;
+		}); 
+		
+    	
 	};
 	
 	$scope.listContains = function(list, item){
@@ -412,7 +454,11 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	// method castDateToMillis: used to cast a string date in a millisecond value (millis from 1-1-1970)
 	$scope.castDateToMillis = function(date){
 		//var date = new Date(date + " 00:00:00");
-		return date.getTime();
+		if(date instanceof Date){
+			return date.getTime();
+		} else {
+			return date;
+		}
 	};
 	
 	/**
@@ -435,6 +481,19 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	
 }])
+
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, data) {
+	$scope.tataName = data.name;
+	$scope.tataSurname = data.surname;
+	
+	$scope.ok = function () {
+		$uibModalInstance.close(data);
+	};
+	
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+})
 
 .filter('toLanguageString', function (i18nmessages) {
     return function (input) {
@@ -476,9 +535,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 })
 
 .factory('Tata', [ '$resource', function($resource) {
-	return $resource('console/api/agency/:id/tata/:tid', {
-		id : '@id',
-		tid: '@id'
+	return $resource('console/api/agency/:aid/tata/:tid', {
+		aid : '@aid',
+		tid: '@tid'
 	}, {
 		list : {
 			isArray : true,

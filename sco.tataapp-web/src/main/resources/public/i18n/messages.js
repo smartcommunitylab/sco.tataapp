@@ -70,6 +70,13 @@ angular.module('i18nmessages', [])
 		'tatapage.view.languagevalue.fra': "francese",
 		'tatapage.view.languagevalue.spa': "spagnolo",
 		'tatapage.view.languagevalue.rus': "russo",
+		'tatapage.delete.modal.title': "Cancellazione tata",
+		'tatapage.delete.modal.text': "Confermi la cancellazione della tata",
+		'tatapage.delete.modal.ok': "OK",
+		'tatapage.delete.modal.cancel': "ANNULLA",
+		'ratepage.daily.title': "TARIFFA DIURNA",
+		'ratepage.holiday.title': "TARIFFA FESTIVA",
+		'ratepage.night.title': "TARIFFA NOTTURNA",
 		
 	}
 );

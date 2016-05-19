@@ -205,6 +205,6 @@ public class GoogleAuthHelper {
 				logger.error("Exception storing  google credential");
 			}
 		}
-		return "redirect:/?jump-google=true";
+		return "redirect:/?jump_google=true";
 	}
 }
