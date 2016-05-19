@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.ctrls', ['ngResource','i18nmessages'])
-.controller('MainCtrl', ['$scope', '$window','SecurityCheck',
-                 function($scope, $window, SecurityCheck) {
+.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck',
+                 function($scope, $window, $location, SecurityCheck) {
 	$scope.message = "Angular ROCKSSS";
 	
 	var activeHome = "active";
@@ -12,12 +12,16 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 	var activeTataRate = "";
 	
 	$scope.checkCalendarPermissions = function(){
-		SecurityCheck.get({agencyId:'progetto92'}, function(data) {
-			if(!data.calendarPermissionOk){
-				console.log("redirect url " + JSON.stringify(data.authorizationURL));
-				//$window.location.href = data.authorizationURL;
-			}
-		});
+		//var skip = ($location.search()).jump_google;
+		var skip = ($window.location.search.indexOf("jump_google=true") > -1) ? true : false;
+		if(!skip){
+			SecurityCheck.get({agencyId:'progetto92'}, function(data) {
+				if(!data.calendarPermissionOk){
+					console.log("redirect url " + JSON.stringify(data.authorizationURL));
+					$window.location.href = data.authorizationURL;
+				}
+			});
+		}
 	};
 	
 	$scope.isActiveHome = function(){

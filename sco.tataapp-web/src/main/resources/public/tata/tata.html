@@ -1,8 +1,9 @@
+<div ng-init="getTataList()">
 <div class="row">
 	<div class="col-md-12" ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
 		<div class="right-inner-addon">
     		<i class="glyphicon glyphicon-search"></i>
-    		<input type="search" ng-model="q" class="form-control" placeholder="{{ 'tatapage.search.placeholder' | i18n }}" />
+    		<input type="search" ng-model="q.name" class="form-control" placeholder="{{ 'tatapage.search.placeholder' | i18n }}" />
 		</div>
 	</div>
 	<div class="col-md-12" ng-if="!showNewTataForm && !showTataDetails">
@@ -14,14 +15,15 @@
 		<h4><strong>{{ 'tatapage.profile.title1' | i18n }} {{ vtata.name | uppercase }} {{ 'tatapage.profile.title2' | i18n }}</strong></h4>
 		<div class="add-tata-row">
 			<a class="left" href ng-click="hideTata()"><i class="glyphicon glyphicon-arrow-left"></i></a>
+			<!-- <a class="right" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a> -->
     		<a class="partialright" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a>
     		<a class="right" href ng-click="deleteTata(vtata)">{{ 'tatapage.deletetatalink' | i18n }}</a>
 		</div>
 	</div>
 </div>
 <div class="row" ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
-	<div class="col-md-12" ng-init="getTataList()">
-		<div ng-repeat="t in tatalist | filter:q | orderBy: 'name'">
+	<div class="col-md-12">
+		<div ng-repeat="t in tatalist | filter:q | orderBy:'name'">
 			<div class="panel panel-default">
 				<div class="tata-link-view">
 					<a href ng-click="showTata(t)">{{ 'tatapage.profileviewlink' | i18n }}</a>
@@ -263,7 +265,8 @@
 			<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
 		</div>
 		<div class="col-md-12">
-			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }}
+			<!-- <label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }} -->
+			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ vtata.languages | toLanguageString }}
 		</div>
 		<div class="col-md-12">
 			<label>{{ 'tatapage.view.description' | i18n }}: </label> {{ vtata.description }}
@@ -275,4 +278,5 @@
 			<label>{{ 'tatapage.view.carOwner' | i18n }}: </label><span ng-show="vtata.carOwner"> {{ 'tatapage.view.carOwner.yes' | i18n }}</span><span ng-show="!vtata.carOwner"> {{ 'tatapage.view.carOwner.no' | i18n }}</span>
 		</div>
 	</div>
+</div>
 </div>

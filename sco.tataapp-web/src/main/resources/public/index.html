@@ -55,8 +55,8 @@
 	            </li>  -->
 	            <li class="{{ isActiveHome() }}"><a href="#" ng-click="showHome()" ><i class="glyphicon glyphicon-home"></i></a></li>
 	            <li class="{{ isActiveTata() }}"><a href="#/tata" ng-click="showTata()" >TATE</a></li>
-	            <li class="{{ isActiveFamily() }}"><a href="#/family" ng-click="showFamily()" >FAMIGLIE</a></li>
-	            <li class="{{ isActiveTataPoint() }}"><a href="#/tatapoint" ng-click="showTataPoint()" >TATA POINT</a></li>
+	            <!-- <li class="{{ isActiveFamily() }}"><a href="#/family" ng-click="showFamily()" >FAMIGLIE</a></li>
+	            <li class="{{ isActiveTataPoint() }}"><a href="#/tatapoint" ng-click="showTataPoint()" >TATA POINT</a></li> -->
 	            <li class="{{ isActiveTataRate() }}"><a href="#/tatarate" ng-click="showTataRate()" >TARIFFARIO</a></li>
 	          	<!-- </ul>
 	          	<ul class="nav navbar-nav navbar-right" > -->
@@ -100,4 +100,18 @@
 	</div>
 	
 </body>
+
+<script type="text/ng-template" id="tataDeleteConfirm.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{ 'tatapage.delete.modal.title' | i18n }}</h3>
+    </div>
+    <div class="modal-body">
+    	{{ 'tatapage.delete.modal.text' | i18n }} {{tataName}} {{tataSurname}} ?        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">{{ 'tatapage.delete.modal.cancel' | i18n }}</button>
+   		<button class="btn btn-primary" type="button" ng-click="ok()">{{ 'tatapage.delete.modal.ok' | i18n }}</button>
+	</div>
+</script>
+
 </html>
