@@ -14,8 +14,9 @@
 		<h4><strong>{{ 'tatapage.profile.title1' | i18n }} {{ vtata.name | uppercase }} {{ 'tatapage.profile.title2' | i18n }}</strong></h4>
 		<div class="add-tata-row">
 			<a class="left" href ng-click="hideTata()"><i class="glyphicon glyphicon-arrow-left"></i></a>
-    		<a class="partialright" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a>
-    		<a class="right" href ng-click="deleteTata(vtata)">{{ 'tatapage.deletetatalink' | i18n }}</a>
+			<a class="right" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a>
+    		<!-- <a class="partialright" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a> -->
+    		<!-- <a class="right" href ng-click="deleteTata(vtata)">{{ 'tatapage.deletetatalink' | i18n }}</a> -->
 		</div>
 	</div>
 </div>
@@ -263,7 +264,7 @@
 			<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
 		</div>
 		<div class="col-md-12">
-			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }}
+			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) | toLanguageString }}
 		</div>
 		<div class="col-md-12">
 			<label>{{ 'tatapage.view.description' | i18n }}: </label> {{ vtata.description }}

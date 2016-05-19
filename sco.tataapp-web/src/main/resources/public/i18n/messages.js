@@ -63,7 +63,13 @@ angular.module('i18nmessages', [])
 		'tatapage.view.updates': "Aggiornamenti professionali",
 		'tatapage.view.carOwner': "Automunita",
 		'tatapage.view.carOwner.yes': "Sì",
-		'tatapage.view.carOwner.no': "No"
+		'tatapage.view.carOwner.no': "No",
+		'tatapage.view.languagevalue.ita': "italiano",
+		'tatapage.view.languagevalue.eng': "inglese",
+		'tatapage.view.languagevalue.ger': "tedesco",
+		'tatapage.view.languagevalue.fra': "francese",
+		'tatapage.view.languagevalue.spa': "spagnolo",
+		'tatapage.view.languagevalue.rus': "russo",
 		
 	}
 );
