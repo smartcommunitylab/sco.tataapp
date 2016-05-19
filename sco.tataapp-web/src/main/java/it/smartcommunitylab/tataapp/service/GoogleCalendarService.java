@@ -8,6 +8,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+import it.smartcommunitylab.tataapp.model.Availability;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
@@ -32,6 +36,12 @@ import it.smartcommunitylab.tataapp.web.GoogleAuthHelper;
 public class GoogleCalendarService {
 
 	private static final Logger logger = LoggerFactory.getLogger(GoogleCalendarService.class);
+
+	private static final int START_WORKDAY_HOUR = 8;
+	private static final int START_WORKDAY_MINUTE = 0;
+
+	private static final int END_WORKDAY_HOUR = 18;
+	private static final int END_WORKDAY_MINUTE = 0;
 
 	@Autowired
 	private SettingsService settingsSrv;
@@ -80,25 +90,90 @@ public class GoogleCalendarService {
 
 		Set<Babysitter> babysitters = babysitterSrv.loadAll(agencyId);
 		for (Babysitter babysitter : babysitters) {
-			CalendarListEntry entry = searchCalendar(agencyId, babysitter.getName() + " " + babysitter.getSurname());
+			String calendarName = babysitter.getName() + " " + babysitter.getSurname();
+			CalendarListEntry entry = searchCalendar(agencyId, calendarName);
+			List<Availability> newAvailability = new ArrayList<>();
 			if (entry != null) {
 				Events e = service.events().list(entry.getId()).setTimeMax(endWeek).setTimeMin(startWeek)
-						.setSingleEvents(false).execute();
+						.setSingleEvents(true).execute();
 				List<Event> items = e.getItems();
-				logger.info("Read {} events availability", items.size());
-
+				logger.info("Read {} events availability of calendar {}", items.size(), calendarName);
 				for (Event event : items) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("{} ({} - {})", event.getSummary(), event.getStart().getDateTime(),
-								event.getEnd().getDateTime());
-						logger.debug("id " + event.getId());
-						logger.debug("recurrence " + event.getRecurrence());
+						logger.debug("calendarName {}", calendarName);
+						logger.debug("{} ({} - {})", event.getSummary(),
+								event.getStart().getDateTime() != null ? event.getStart().getDateTime()
+										: event.getStart().getDate(),
+								event.getEnd().getDateTime() != null ? event.getEnd().getDateTime()
+										: event.getEnd().getDate());
 					}
+					List<Availability> availabilityList = extractFromEvent(event);
+					if (logger.isDebugEnabled()) {
+						for (Availability a : availabilityList) {
+							logger.debug(a.toString());
+						}
+					}
+					newAvailability.addAll(availabilityList);
+				}
+
+				babysitter.setTimeAvailability(newAvailability);
+				logger.info("Extracted total {} availability objects of calendar {}",
+						babysitter.getTimeAvailability().size(), calendarName);
+				babysitterSrv.save(babysitter);
+			}
+		}
+	}
+
+	private List<Availability> extractFromEvent(Event event) {
+		List<Availability> result = new ArrayList<>();
+		if (event != null) {
+			Availability availability = new Availability();
+
+			LocalDate epoch = new LocalDate(1970, 1, 1);
+			DateTime start = event.getStart().getDateTime();
+			LocalDate dayStart = start != null ? new LocalDate(start.getValue())
+					: new LocalDate(event.getStart().getDate().getValue());
+			availability.setDate(dayStart.toDate().getTime());
+
+			int h = START_WORKDAY_HOUR;
+			int m = START_WORKDAY_MINUTE;
+			if (start != null) {
+				org.joda.time.DateTime timeExtracter = new org.joda.time.DateTime(start.getValue());
+				h = timeExtracter.getHourOfDay();
+				m = timeExtracter.getMinuteOfHour();
+			}
+			LocalTime time = new LocalTime(h, m);
+			availability.setFromTime(epoch.toDateTime(time).getMillis());
+
+			DateTime end = event.getEnd().getDateTime();
+			LocalDate dayEnd = end != null ? new LocalDate(end.getValue())
+					: new LocalDate(event.getStart().getDate().getValue());
+
+			h = END_WORKDAY_HOUR;
+			m = END_WORKDAY_MINUTE;
+			if (end != null) {
+				org.joda.time.DateTime timeExtracter = new org.joda.time.DateTime(end.getValue());
+				h = timeExtracter.getHourOfDay();
+				m = timeExtracter.getMinuteOfHour();
+			}
+			time = new LocalTime(h, m);
+			availability.setToTime(epoch.toDateTime(time).getMillis());
+
+			result.add(availability);
+
+			// check if startDay != endDate create an Availability obj for every
+			// day in range [startDay,endDay]
+			if (!dayStart.isEqual(dayEnd)) {
+
+				for (int i = 1; i <= Days.daysBetween(dayStart, dayEnd).getDays(); i++) {
+					Availability newDay = new Availability(availability);
+					newDay.setDate(dayStart.plusDays(i).toDate().getTime());
+					result.add(newDay);
 				}
 			}
-
 		}
 
+		return result;
 	}
 
 	public List<TataPoint> importTataPoint(String agencyId) throws IOException {
