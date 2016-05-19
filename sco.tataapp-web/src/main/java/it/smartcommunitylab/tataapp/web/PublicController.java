@@ -18,10 +18,12 @@ import it.smartcommunitylab.tataapp.beans.EstimatationResult;
 import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Meeting;
+import it.smartcommunitylab.tataapp.model.PriceList;
 import it.smartcommunitylab.tataapp.model.ServiceOffice;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
+import it.smartcommunitylab.tataapp.service.DynamicDataService;
 import it.smartcommunitylab.tataapp.service.EstimatationService;
 import it.smartcommunitylab.tataapp.service.MeetingService;
 import it.smartcommunitylab.tataapp.service.SettingsService;
@@ -46,6 +48,9 @@ public class PublicController {
 
 	@Autowired
 	private SettingsService settingsSrv;
+
+	@Autowired
+	private DynamicDataService dynamicSrv;
 
 	/*
 	 * BABYSITTER APIs
@@ -113,4 +118,12 @@ public class PublicController {
 		return new PageImpl<>(new ArrayList<ServiceOffice>(), pageable, 0);
 	}
 
+	/*
+	 * DYNAMIC DATA APIs
+	 */
+
+	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/pricelist")
+	public PriceList getPriceList(@PathVariable String agencyId) {
+		return dynamicSrv.getPriceList(agencyId);
+	}
 }
