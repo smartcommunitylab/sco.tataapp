@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Babysitter {
 
 	@Id
@@ -22,6 +24,12 @@ public class Babysitter {
 	private String description;
 	private String updates;
 
+	private List<String> languages;
+	private boolean carOwner;
+
+	@JsonIgnore
+	private List<Availability> timeAvailability;
+
 	public String getDescription() {
 		return description;
 	}
@@ -37,11 +45,6 @@ public class Babysitter {
 	public void setUpdates(String updates) {
 		this.updates = updates;
 	}
-
-	private List<String> languages;
-	private boolean carOwner;
-
-	private List<Availability> timeAvailability;
 
 	public List<Availability> getTimeAvailability() {
 		return timeAvailability;
