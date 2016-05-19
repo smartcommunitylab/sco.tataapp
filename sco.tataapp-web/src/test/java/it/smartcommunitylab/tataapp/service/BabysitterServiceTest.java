@@ -218,7 +218,7 @@ public class BabysitterServiceTest {
 		a = new Availability();
 		a.setDate(new LocalDate(2016, 5, 16).toDate().getTime());
 		a.setFromTime(epoch.toDateTime(new LocalTime(14, 0)).getMillis());
-		a.setToTime(epoch.toDateTime(new LocalTime(18, 30)).getMillis());
+		a.setToTime(epoch.toDateTime(new LocalTime(19, 30)).getMillis());
 		timeAvailable.add(a);
 
 		b.setTimeAvailability(timeAvailable);
