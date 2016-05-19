@@ -227,6 +227,7 @@ canvas {
 .edit-tata-rate {
 	position: relative;
 	margin-bottom: 30px;
+	margin-top: 10px;
 }
 .edit-tata-rate a {
 	position: absolute;
@@ -247,4 +248,9 @@ canvas {
 	width: 100px;
 	margin-bottom: 20px;
 	border-radius: 5px;
+}
+
+.footer-img {
+	vertical-align:middle;
+	width: 100px;
 }
