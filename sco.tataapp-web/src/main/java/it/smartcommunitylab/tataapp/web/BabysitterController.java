@@ -57,4 +57,29 @@ public class BabysitterController {
 	// agencyId = identityLookup.getName();
 	// return service.loadAll(agencyId, pageable);
 	// }
+
+	// @RequestMapping(value = "/api/image/upload/png/{ownerId}/{objectId}",
+	// method = RequestMethod.POST)
+	// public @ResponseBody String uploadImage(@RequestParam("file")
+	// MultipartFile file,
+	// @PathVariable String ownerId, @PathVariable String objectId,
+	// HttpServletRequest request) throws Exception {
+	// if(!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
+	// throw new UnauthorizedException("Unauthorized Exception: token not
+	// valid");
+	// }
+	// String name = objectId + ".png";
+	// if(logger.isInfoEnabled()) {
+	// logger.info("uploadImage:" + name);
+	// }
+	// if (!file.isEmpty()) {
+	// BufferedOutputStream stream = new BufferedOutputStream(new
+	// FileOutputStream(
+	// new File(imageUploadDir + "/" + name)));
+	// FileCopyUtils.copy(file.getInputStream(), stream);
+	// stream.close();
+	// }
+	// return "{\"status\":\"OK\"}";
+	// }
+
 }
