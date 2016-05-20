@@ -77,6 +77,17 @@ angular.module('i18nmessages', [])
 		'ratepage.daily.title': "TARIFFA DIURNA",
 		'ratepage.holiday.title': "TARIFFA FESTIVA",
 		'ratepage.night.title': "TARIFFA NOTTURNA",
+		'ratepage.hour.label': "ORARIO",
+		'ratepage.baserate.label': "TARIFFA BASE (€)",
+		'ratepage.handicappedrate.label1': "TARIFFA RAGAZZI CON",
+		'ratepage.handicappedrate.label2': "SUPPORTO INDIVIDIALIZZATO (€)",
+		'ratepage.field.error.required': "Campo obbligatorio",
+		'ratepage.field.error.pattern': "Campo non corretto, inserire un valore decimale",
+		'ratepage.field.base.placeholder': "tariffa base (€)",
+		'ratepage.field.handicapped.placeholder': "tariffa disabili (€)",
+		'ratepage.button.delete': "ANNULLA",
+		'ratepage.button.save':"SALVA",
+		
 		
 	}
 );

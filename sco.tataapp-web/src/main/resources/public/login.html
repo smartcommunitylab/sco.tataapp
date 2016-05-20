@@ -15,6 +15,19 @@
       <!-- <script src="lib/angular/angular.min.js"></script>
       <script src="lib/angular/angular-route.min.js"></script>
       <script src="lib/ui-bootstrap-tpls-0.11.0.js"></script> -->
+      
+    <script type="text/javascript">
+ 		function get(name){
+ 	   		//if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+ 	   		//if(name=(new RegExp('[?&]'+encodeURIComponent(name))).exec(location.search))
+ 	      	//return decodeURIComponent(name);
+ 	   		var pageUrl = (window.location.search.indexOf('?error') > -1) ? true : false;
+ 	   		if(pageUrl){
+ 	   			return name;
+ 	   		}
+ 	   		return null;
+ 		}
+ 	</script>
 
     </head>
     <body>
@@ -24,6 +37,17 @@
             <div class="panel panel-default">
             <form action="login.html" method="post">
                 <div>&nbsp;</div>
+                <div id="#err_login_cel" class="col-md-12 form-group">
+                	<script>
+						if(get('error') == 'true' || get('error') != null){
+							var err_div = document.createElement('div');
+							err_div.className = 'alert alert-danger';
+						 	err_div.id = 'err_log_text';
+						 	err_div.innerHTML = 'Errore Autenticazione: username o password non corretti';
+						 	document.getElementById("#err_login_cel").appendChild(err_div);
+						}
+					</script>					
+				</div>
                 <div class="col-md-12 form-group"><label> Username: </label><input class="form-control" type="text" name="username"/></div>
                 <div class="col-md-12 form-group"><label> Password: </label><input class="form-control" type="password" name="password"/></div>
                 <div class="col-md-12 form-group"><button class="btn btn-primary"/>Login</button></div>
