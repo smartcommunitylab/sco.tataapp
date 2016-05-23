@@ -1,5 +1,6 @@
 package it.smartcommunitylab.tataapp.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +38,9 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	@Autowired
 	private SettingsService settingsSrv;
+
+	@Autowired
+	private GoogleCalendarService calendarSrv;
 
 	public Babysitter save(Babysitter babysitter) {
 		babysitter.verify();
@@ -94,6 +98,18 @@ public class BabysitterServiceImpl implements BabysitterService {
 		}
 
 		logger.info("Task remind email concluded");
+	}
+
+	@Scheduled(cron = "${task.calendar.availability}")
+	public void importBabysitterAvailability() {
+		for (Settings s : settingsSrv.loadSettings()) {
+			try {
+				calendarSrv.importTataAvailability(s.getAgencyId());
+			} catch (IOException e) {
+				logger.error("Exception updating babysitter availailability for agency {}", s.getAgencyId());
+			}
+			logger.info("Updated babysitter availability for agency {}", s.getAgencyId());
+		}
 	}
 
 }
