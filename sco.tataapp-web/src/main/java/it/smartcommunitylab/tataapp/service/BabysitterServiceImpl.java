@@ -3,7 +3,6 @@ package it.smartcommunitylab.tataapp.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -78,26 +77,24 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	@Scheduled(cron = "${task.reminder}")
 	public void reminderTask() {
-		List<Babysitter> babysitters = babysitterRepo.findAll();
-		for (Babysitter b : babysitters) {
-			Settings settings = settingsSrv.loadSettings(b.getAgencyId());
-			if (settings != null) {
+		for (Settings s : settingsSrv.loadSettings()) {
+			Set<Babysitter> babysitters = loadAll(s.getAgencyId());
+			for (Babysitter b : babysitters) {
 				Map<String, Object> params = new HashMap<>();
 				params.put("tata", b);
 				try {
-					emailSrv.sendSimpleMail(settings.getEmail(), b.getEmail(), "[tataApp] promemoria disponibilità",
-							params, "remind");
-					logger.debug("Sended remind email to email {} of agency {}", b.getEmail(), b.getAgencyId());
+					emailSrv.sendSimpleMail(s.getEmail(), b.getEmail(), "[tataApp] promemoria disponibilità", params,
+							"remind");
+					logger.debug("Sended remind email to email {} of agency {}", b.getEmail(), s.getAgencyId());
 				} catch (MessagingException e) {
 					logger.error("Exception sending remind email for email {} of agency {}", b.getEmail(),
-							b.getAgencyId());
+							s.getAgencyId());
 				}
-			} else {
-				logger.error("Settings not found for agency {}", b.getAgencyId());
 			}
+			logger.info("Task remind email concluded for agency {}", s.getAgencyId());
+
 		}
 
-		logger.info("Task remind email concluded");
 	}
 
 	@Scheduled(cron = "${task.calendar.availability}")
