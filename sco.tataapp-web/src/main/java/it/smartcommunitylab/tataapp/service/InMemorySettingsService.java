@@ -1,6 +1,7 @@
 package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,11 @@ public class InMemorySettingsService implements SettingsService {
 			mapping.put(s.getAgencyId(), s);
 		}
 		return s;
+	}
+
+	@Override
+	public List<Settings> loadSettings() {
+		return new ArrayList<>(mapping.values());
 	}
 
 }
