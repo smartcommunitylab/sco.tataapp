@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ImageService {
-	public void store(byte[] content, String filename);
+	public void store(byte[] content, String babysitterId) throws IOException;
 
-	public byte[] retrieve(String filename) throws IOException;
+	public byte[] retrieve(String babysitterId) throws IOException;
 
-	public void store(InputStream in, String filename);
+	public void store(InputStream in, String babysitterId) throws IOException;
 
-	public InputStream retrieveInputStream(String filename) throws IOException;
+	public InputStream retrieveInputStream(String babysitterId) throws IOException;
 }

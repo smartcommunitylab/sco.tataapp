@@ -19,13 +19,13 @@ public class MockImageService implements ImageService {
 	private Resource avatar;
 
 	@Override
-	public void store(byte[] content, String filename) {
+	public void store(byte[] content, String babysitterId) {
 		throw new MethodNotFoundException("method not implemented");
 
 	}
 
 	@Override
-	public byte[] retrieve(String filename) throws IOException {
+	public byte[] retrieve(String babysitterId) throws IOException {
 		ByteArrayOutputStream o = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
 		int c = 0;
@@ -37,12 +37,12 @@ public class MockImageService implements ImageService {
 	}
 
 	@Override
-	public void store(InputStream in, String filename) {
+	public void store(InputStream in, String babysitterId) {
 		// do nothing
 	}
 
 	@Override
-	public InputStream retrieveInputStream(String filename) throws IOException {
+	public InputStream retrieveInputStream(String babysitterId) throws IOException {
 		return avatar.getInputStream();
 	}
 
