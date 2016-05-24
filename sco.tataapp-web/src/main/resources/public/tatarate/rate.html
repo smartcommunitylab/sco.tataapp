@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-init="getTataRate()">
 	<div class="col-md-12">
 		<form role="form" name="form">
 			<div class="panel panel-default" width="100%">
@@ -60,7 +60,7 @@
 			  							<div class="alert alert-danger" ng-show="form.tRateHandicappedMax.$error.pattern">{{ 'ratepage.field.error.pattern' | i18n }}</div>
 			  						</td>
 			  					</tr>
-			  					<tr>
+			  					<tr ng-if="tataratelist.hours.max_no_food">
 			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
 			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.base.max_no_food | euroVal }}</td>
 			  						<td ng-if="!showTataRateDailyEdit">{{ tataratelist.daily.handicapped.max_no_food | euroVal }}</td>
@@ -148,7 +148,7 @@
 			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.pattern">{{ 'ratepage.field.error.pattern' | i18n }}</div>
 			  						</td>
 			  					</tr>
-			  					<tr>
+			  					<tr ng-if="tataratelist.hours.max_no_food">
 			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
 			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.base.max_no_food | euroVal }}</td>
 			  						<td ng-if="!showTataRateHolidayEdit">{{ tataratelist.holiday.handicapped.max_no_food | euroVal }}</td>
@@ -236,7 +236,7 @@
 			  							<div class="alert alert-danger" ng-show="form.tRateHolidayHandicappedMax.$error.pattern">{{ 'ratepage.field.error.pattern' | i18n }}</div>
 			  						</td>
 			  					</tr>
-			  					<tr>
+			  					<tr ng-if="tataratelist.hours.max_no_food">
 			  						<td class="left"><label>{{ tataratelist.hours.max_no_food }}</label></td>
 			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.base.max_no_food | euroVal }}</td>
 			  						<td ng-if="!showTataRateNightEdit">{{ tataratelist.night.handicapped.max_no_food | euroVal }}</td>

@@ -77,7 +77,7 @@ angular.module('i18nmessages', [])
 		'ratepage.daily.title': "TARIFFA DIURNA",
 		'ratepage.holiday.title': "TARIFFA FESTIVA",
 		'ratepage.night.title': "TARIFFA NOTTURNA",
-		'ratepage.hour.label': "ORARIO",
+		'ratepage.hour.label': "ORE",
 		'ratepage.baserate.label': "TARIFFA BASE (€)",
 		'ratepage.handicappedrate.label1': "TARIFFA RAGAZZI CON",
 		'ratepage.handicappedrate.label2': "SUPPORTO INDIVIDIALIZZATO (€)",

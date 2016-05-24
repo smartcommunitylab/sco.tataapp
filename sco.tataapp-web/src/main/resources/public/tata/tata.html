@@ -29,8 +29,7 @@
 					<a href ng-click="showTata(t)">{{ 'tatapage.profileviewlink' | i18n }}</a>
 				</div>
 				<div class="panel-body tata-data">
-					<img ng-if="!t.profileImage" class="tata-image" ng-src="{{ onErrorSrc }}"/>
-					<img ng-if="t.profileImage" class="tata-image" data-ng-src="{{ t.profileImage }}" on-error-src="{{ onErrorSrc }}"/>
+					<img class="tata-image" ng-src="{{ composeTataImageUrl(t.id) }}" on-error-src="{{ onErrorSrc }}"/><!-- data-ng-src="{{ t.profileImage }}" -->
 			    	{{ t.name }} {{ t.surname }}
 				</div>
 			</div>
@@ -244,7 +243,7 @@
 <div class="row" ng-if="showTataDetails && !showNewTataForm">
 	<div class="col-md-12 tata-details" align="left">
 		<div class="col-md-12">
-			<img class="profileImage" data-ng-src="{{ vtata.profileImage }}" on-error-src="{{ onErrorSrc }}"/>
+			<img class="profileImage" ng-src="{{ vtata.profileImage }}" on-error-src="{{ onErrorSrc }}"/>
 		</div>
 		<div class="col-md-12">
 			<label>{{ 'tatapage.view.name' | i18n }}: </label> {{ vtata.name }}

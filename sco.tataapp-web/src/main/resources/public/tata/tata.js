@@ -9,8 +9,8 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
   });
 }])
 
-.controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader',
-          				function($rootScope, $scope, $uibModal, Tata, FileUploader) {
+.controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', //'imgUtils',
+          				function($rootScope, $scope, $uibModal, Tata, FileUploader, Avatar) {	//,imgUtils
 	
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
@@ -33,7 +33,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	$scope.uploader = new FileUploader({
 		queueLimit: 1,
-		removeAfterUpload: true
+		//autoUpload: true,
+		removeAfterUpload: true,
+		//url: "console/api/agency/tataApp/tata/5742aa3ee4b0a799856b63b9/avatar"
 	});	// file upload element
 	
 	$scope.tataconf = {
@@ -206,15 +208,29 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		$scope.isInit = true;
 		$scope.tata = tata;	//here I have to correct some data
 		$scope.tata.boollanguage = $scope.fromLanguagesToCheck($scope.tata.languages);
-		//var blob = new Blob([imageBase64], {type: 'text/html'});
-		//var file = new File([blob], 'img/imageFileName.png', {type: 'image/png'});
-		var completeBase64 = "data: image/png;base64," + imageBase64;
-		var file = $scope.dataURItoBlob(completeBase64);
-		$scope.uploader.addToQueue(file);
-		
+		var completeBase64 = $scope.getBase64Image($scope.composeTataImageUrl(tata.id));
 		$scope.showTataDetails = false;
 		$scope.showEditTataForm = true;
-	}
+	};
+	
+	// Method getBase64Image: from an image url the method retrieve the base64 encoded string value
+	$scope.getBase64Image = function(url) {
+	    // Create an empty canvas element   
+	    var img = new Image();
+	    img.setAttribute('crossOrigin', 'anonymous');
+	    img.onload = function () {
+	        var canvas = document.createElement("canvas");
+	        canvas.width =this.width;
+	        canvas.height =this.height;
+
+	        var ctx = canvas.getContext("2d");
+	        ctx.drawImage(this, 0, 0);
+	        var dataURL = canvas.toDataURL("image/png");
+	        var file = $scope.dataURItoBlob(dataURL);
+	        $scope.uploader.addToQueue(file);
+	    };
+	    img.src = url;
+	};
 	
 	// method used to get the check languages value from the language string list
 	$scope.fromLanguagesToCheck = function(languageStrings){
@@ -250,15 +266,6 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 				$scope.showNoProfileError = true;
 			} else {
 				$scope.showNoProfileError = false;
-				// here I load the image
-				var item = null;
-				var pngUrl = null;
-				for(var i = 0; i < $scope.uploader.queue.length; i++){
-					item = $scope.uploader.queue[i];
-				}
-				var canvas = angular.element(document).find('canvas');
-				var type = item.file.type;
-				pngUrl = canvas[0].toDataURL(type);	// I retrieve the data-url from canvas;
 				// correctLanguages form bool to string
 				for(var i = 0; i < tata.boollanguage.length; i++){
 					if(tata.boollanguage[i]){
@@ -301,9 +308,20 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 				$scope.corrtata = new Tata(correctedtata);
 				
 				console.log(JSON.stringify($scope.corrtata));
-			    $scope.corrtata.$save({aid: $scope.agencyId}, function() {
+			    $scope.corrtata.$save({aid: $scope.agencyId}, function(data) {
 			       	console.log('Saved tata');
 			       	$scope.tatalist = Tata.list({aid: $scope.agencyId, noCache: new Date().getTime()});
+			       	// here I load the image
+					var item = null;
+					var pngUrl = null;
+					for(var i = 0; i < $scope.uploader.queue.length; i++){
+						item = $scope.uploader.queue[i];
+						item.url = "console/api/agency/tataApp/tata/5742aa3ee4b0a799856b63b9/avatar";
+					}
+					//var canvas = angular.element(document).find('canvas');
+					//var type = item.file.type;
+					//pngUrl = canvas[0].toDataURL(type);	// I retrieve the data-url from canvas;
+					$scope.uploader.uploadAll();	// here I force the uploading of the image;
 			    });
 			        
 				$scope.showNewTataForm = false;
@@ -409,9 +427,22 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	$scope.showTata = function(tata){
 		$scope.showTataDetails = true;
 		$scope.vtata = tata;
-		//TODO: for test to be removed in prod
-		$scope.vtata.profileImage = "data:image/png;base64," + imageBase64;
+		$scope.vtata.profileImage = $scope.composeTataImageUrl(tata.id);
 	};
+	
+	$scope.composeTataImageUrl = function(tataId){
+		return "console/api/agency/" + $scope.agencyId + "/tata/" + tataId + "/avatar";
+	};
+	
+	$scope.correctAvatarData = function(data){
+		var avatarString = "";
+		for (var key in data){
+			if(!isNaN(key)){
+				avatarString += data[key];
+			}
+		}
+		return avatarString;
+	}
 	
 	$scope.hideTata = function(){
 		$scope.showTataDetails = false;
@@ -476,7 +507,8 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	        array.push(binary.charCodeAt(i));
 	    }
 	    //return new Blob([new Uint8Array(array)], {type: mimeString});
-	    return new File([new Blob([new Uint8Array(array)], {type: mimeString})], 'profileAvatar.png', {type: mimeString})
+	    return new File([new Blob([new Uint8Array(array)], {type: mimeString})], 'profileAvatar.png', {type: mimeString});
+	    //return new File([new Blob([btoa(arrString)], {type: mimeString})], 'profileAvatar.png', {type: mimeString});
 	};
 	
 	
@@ -551,6 +583,44 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		}
 	});
 } ])
+
+.factory('Avatar', [ '$resource', function($resource) {
+	return $resource('console/api/agency/:aid/tata/:tid/avatar', {
+		aid : '@aid',
+		tid: '@tid',
+		responseType: ''
+	}, {
+		list : {
+			isArray : true,
+			method : 'get',
+			transformResponse : function(data, headers) {
+				return JSON.parse(data).content;
+			}
+		}/*,
+		getAvatar : {
+			isArray : false,
+			method : "get",
+			headers : {'Content-Type':'image/png;charset=UTF-8'},
+			transformResponse : function(data, headers) {
+				return data;
+			}
+		}*/
+	});
+} ])
+
+/*.factory('imgUtils', function($q) {
+    return {
+        createImage: function(src) {
+            var deferred = $q.defer(),
+                image = new Image();
+            image.onload = function() {
+                deferred.resolve(image);
+            };
+            image.src = src;
+            return deferred.promise;
+        }
+    }
+})*/
 
 .directive('onErrorSrc', function() {
     return {
