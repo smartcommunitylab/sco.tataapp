@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
@@ -62,12 +64,30 @@ public class BabysitterController {
 		service.delete(agencyId, babysitterId);
 	}
 
+	// @RequestMapping(method = RequestMethod.POST, value =
+	// "/console/api/agency/{agencyId}/tata/{babysitterId}/avatar")
+	// public void updloadProfilePicture(@PathVariable String agencyId,
+	// @PathVariable String babysitterId,
+	// HttpServletRequest request, HttpServletResponse response) {
+	// agencyId = identityLookup.getName();
+	// try {
+	// imageSrv.store(request.getInputStream(), babysitterId);
+	// } catch (IOException e) {
+	// try {
+	// response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Problem
+	// storing avatar");
+	// } catch (IOException e1) {
+	// logger.error("IOException sending HTTP error uploading avatar");
+	// }
+	// }
+	// }
+
 	@RequestMapping(method = RequestMethod.POST, value = "/console/api/agency/{agencyId}/tata/{babysitterId}/avatar")
 	public void updloadProfilePicture(@PathVariable String agencyId, @PathVariable String babysitterId,
-			HttpServletRequest request, HttpServletResponse response) {
+			@RequestParam("tImage") MultipartFile picture, HttpServletRequest request, HttpServletResponse response) {
 		agencyId = identityLookup.getName();
 		try {
-			imageSrv.store(request.getInputStream(), babysitterId);
+			imageSrv.store(picture.getInputStream(), babysitterId);
 		} catch (IOException e) {
 			try {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Problem storing avatar");
