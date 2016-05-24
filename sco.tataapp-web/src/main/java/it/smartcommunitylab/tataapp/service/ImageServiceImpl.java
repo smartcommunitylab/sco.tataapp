@@ -119,7 +119,7 @@ public class ImageServiceImpl implements ImageService {
 				return new FileInputStream(generatePicturePath(agencyFolder, babysitterId));
 			}
 		} else {
-			logger.error("Babysitter {} not exist..profile image not exist!");
+			logger.error("Babysitter {} not exist..profile image not exist!", babysitterId);
 		}
 		return null;
 	}

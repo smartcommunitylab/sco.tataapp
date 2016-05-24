@@ -1,6 +1,7 @@
 package it.smartcommunitylab.tataapp.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -54,6 +55,11 @@ public class SettingsServiceImpl implements SettingsService {
 	@Override
 	public Settings save(Settings s) {
 		return settingsRepo.save(s);
+	}
+
+	@Override
+	public List<Settings> loadSettings() {
+		return settingsRepo.findAll();
 	}
 
 }

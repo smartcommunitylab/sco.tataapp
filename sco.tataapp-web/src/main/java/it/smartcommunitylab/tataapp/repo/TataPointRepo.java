@@ -18,4 +18,6 @@ public interface TataPointRepo extends MongoRepository<TataPoint, String> {
 
 	public void deleteByAgencyIdAndId(String agencyId, String id);
 
+	public void deleteByAgencyId(String agencyId);
+
 }
