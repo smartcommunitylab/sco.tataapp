@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.ctrls', ['ngResource','i18nmessages'])
-.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck',
-                 function($scope, $window, $location, SecurityCheck) {
+.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck', //'AppId',
+                 function($scope, $window, $location, SecurityCheck) {	//, AppId
 	$scope.message = "Angular ROCKSSS";
 	
 	var activeHome = "active";
@@ -15,6 +15,9 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 		//var skip = ($location.search()).jump_google;
 		var skip = ($window.location.search.indexOf("jump_google=true") > -1) ? true : false;
 		if(!skip){
+			//var ret = AppId.get(function(){
+			//	$scope.agencyId = ret;
+			//});
 			SecurityCheck.get({agencyId:'progetto92'}, function(data) {
 				if(!data.calendarPermissionOk){
 					console.log("redirect url " + JSON.stringify(data.authorizationURL));
@@ -91,6 +94,10 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 		agencyId: '@id'
 	});
 }])
+
+/*.factory('AppId', [ '$resource', function($resource) {
+	return $resource('console/api/agency', null);
+}])*/
 
 .filter('i18n', function (i18nmessages) {
     return function (input) {

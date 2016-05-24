@@ -13,6 +13,7 @@ angular.module('i18nmessages', [])
 		'tatapage.create.profileImage.placeholder': "Seleziona un' immagine profilo",
 		'tatapage.create.profileImage.deletebtn': "Cancella",
 		'tatapage.create.profileImage.error.required': "Campo immagine tata obbligatorio",
+		'tatapage.create.profileImage.error.maxsize': "L'immagine selezionata è troppo grande (superiore a 1MB). Seleziona un immagine più piccola",
 		'tatapage.create.name': "Nome",
 		'tatapage.create.name.placeholder': "nome tata",
 		'tatapage.create.name.error.required': "Campo nome tata obbligatorio",

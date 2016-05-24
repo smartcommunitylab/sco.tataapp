@@ -9,17 +9,18 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
   });
 }])
 
-.controller('TataRateCtrl', [ '$rootScope', '$scope','$uibModal', 'TataRate',
+.controller('TataRateCtrl', [ '$rootScope', '$scope','$uibModal', 'TataRate', 
           				function($rootScope, $scope, $uibModal, TataRate) {
 	
 	$scope.decimalNumbers = /^([0-9]+)[\.]{0,1}[0-9]{0,2}$/;
-	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file
+	$scope.agencyId = "tataApp";
 	
 	$scope.rateMinKey = "<15";
 	$scope.rateMediumKey = "16-24";
 	$scope.rateMaxKey = "25-40";
 	$scope.rateMaxNoFoodKey = "25-40 no pasto";
 	
+	// default tataratelist values (empty object)
 	$scope.tataratelist = {
 		hours: [],
 		daily: {
@@ -70,13 +71,17 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 	$scope.showTataRateNightEdit = false;
 	$scope.showTataRateHolidayEdit = false;
 	$scope.showDetails = false;
-	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file
 	
 	$scope.trueVal = true;
 	$scope.falseVal = false;
 	$scope.tata = null;
 	
+	// method getTataRate: used to get the tata rate list values from the db
 	$scope.getTataRate = function(){
+		//AppId.get(function(data){
+		//	$scope.agencyId = data;
+		//});
+		
 		var tataratelistDB = TataRate.get({aid: $scope.agencyId}, function(){
 			$scope.tataratelist.hours = {
 				min: $scope.rateMinKey,
@@ -110,18 +115,6 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 						$scope.tataratelist.daily.handicapped.max_no_food = tataratelistDB.dailyDisability[i].rate;
 					}
 				}
-				/*$scope.tataratelist.daily.base = {
-					min: 14.64,
-					medium: 13.95,
-					max: 13.42,
-					max_no_food: 13.43
-				};
-				$scope.tataratelist.daily.handicapped = {
-					min: 18.00,
-					medium: 18.00,
-					max: 18.00,
-					max_no_food: 18.00
-				};*/
 				
 				// holiday daily rate
 				for(var i = 0; i < tataratelistDB.festive.length; i++){
@@ -146,18 +139,6 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 						$scope.tataratelist.holiday.handicapped.max_no_food = tataratelistDB.festiveeDisability[i].rate;
 					}
 				}
-				/*$scope.tataratelist.holiday.base = {
-					min: 20.59,
-					medium: 19.62,
-					max: 19.10,
-					max_no_food: 19.10
-				};
-				$scope.tataratelist.holiday.handicapped = {
-					min: 25.31,
-					medium: 25.31,
-					max: 25.31,
-					max_no_food: 25.31
-				};*/
 				
 				// holiday night rate
 				for(var i = 0; i < tataratelistDB.nighttime.length; i++){
@@ -182,18 +163,6 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 						$scope.tataratelist.night.handicapped.max_no_food = tataratelistDB.nighttimeDisability[i].rate;
 					}
 				}
-				/*$scope.tataratelist.night.base = {
-					min: 16.63,
-					medium: 15.85,
-					max: 15.32,
-					max_no_food: 15.33
-				};
-				$scope.tataratelist.night.handicapped = {
-					min: 20.45,
-					medium: 20.45,
-					max: 20.45,
-					max_no_food: 20.45
-				};*/
 				
 				//Check to show or hide the the 'max_no_food' part
 				if(!$scope.tataratelist.daily.base.max_no_food){
@@ -203,7 +172,7 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 		});
 	}
 	
-	// method used to show the new tata input form
+	// method editTataRate: used to show the tata rate editing form
 	$scope.editTataRate = function(id){
 		switch (id){
 			case 1:
@@ -226,7 +195,7 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 		}
 	};
 	
-	// method used to create a new tata with the data passed in new tata form
+	// method updateTataRate: used to update the tata rate list values with the data passed in the editing form
 	$scope.updateTataRate = function(form, tataRate){
 		$scope.isInit = false;
 		if(form.$valid){
@@ -252,6 +221,7 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 		}
 	};
 	
+	// method correctRateObjectToDbObject: used to transform the javascript rate object in the db object to be correctly stored
 	$scope.correctRateObjectToDbObject = function(rateObject){
 		var corrDbObjList = [];
 		var corrDbObjRateMin = {
@@ -278,17 +248,17 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 		}
 		if(rateObject.medium){
 			corrDbObjRateMedium.hourRange = $scope.rateMediumKey;
-			corrDbObjRateMedium.rate = rateObject.medium
+			corrDbObjRateMedium.rate = (typeof rateObject.medium == "string") ? parseFloat(rateObject.medium) : rateObject.medium;
 			corrDbObjList.push(corrDbObjRateMedium);
 		}
 		if(rateObject.max){
 			corrDbObjRateMax.hourRange = $scope.rateMaxKey;
-			corrDbObjRateMax.rate = rateObject.max
+			corrDbObjRateMax.rate = (typeof rateObject.max == "string") ? parseFloat(rateObject.max) : rateObject.max;
 			corrDbObjList.push(corrDbObjRateMax);
 		}
 		if(rateObject.max_no_food){
 			corrDbObjRateMaxNoFood.hourRange = $scope.rateMaxNoFoodKey;
-			corrDbObjRateMaxNoFood.rate = rateObject.max_no_food
+			corrDbObjRateMaxNoFood.rate = (typeof rateObject.max_no_food == "string") ? parseFloat(rateObject.max_no_food) : rateObject.max_no_food;
 			corrDbObjList.push(corrDbObjRateMaxNoFood);
 		}
 		return corrDbObjList;
