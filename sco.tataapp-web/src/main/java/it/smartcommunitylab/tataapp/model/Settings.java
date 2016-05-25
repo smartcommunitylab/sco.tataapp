@@ -2,13 +2,27 @@ package it.smartcommunitylab.tataapp.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
 public class Settings {
+
+	@Id
+	private String id;
+
 	private String agencyId;
 	private String email;
 	private String tatapointCalName;
 	private String tatapointCalId;
 	private boolean calendarAuthorization;
 	private List<ServiceOffice> offices;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public List<ServiceOffice> getOffices() {
 		return offices;

@@ -4,6 +4,10 @@ public class PriceCell {
 	private String hourRange;
 	private Double rate;
 
+	public PriceCell() {
+		super();
+	}
+	
 	public PriceCell(String hourRange, Double rate) {
 		super();
 		this.hourRange = hourRange;

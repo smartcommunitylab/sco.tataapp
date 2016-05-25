@@ -1,6 +1,10 @@
 package it.smartcommunitylab.tataapp.web;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,11 +22,14 @@ import it.smartcommunitylab.tataapp.beans.EstimatationResult;
 import it.smartcommunitylab.tataapp.beans.SearchCriteria;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Meeting;
+import it.smartcommunitylab.tataapp.model.PriceList;
 import it.smartcommunitylab.tataapp.model.ServiceOffice;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
+import it.smartcommunitylab.tataapp.service.DynamicDataService;
 import it.smartcommunitylab.tataapp.service.EstimatationService;
+import it.smartcommunitylab.tataapp.service.ImageService;
 import it.smartcommunitylab.tataapp.service.MeetingService;
 import it.smartcommunitylab.tataapp.service.SettingsService;
 import it.smartcommunitylab.tataapp.service.TataPointService;
@@ -47,6 +54,12 @@ public class PublicController {
 	@Autowired
 	private SettingsService settingsSrv;
 
+	@Autowired
+	private DynamicDataService dynamicSrv;
+
+	@Autowired
+	private ImageService imageSrv;
+
 	/*
 	 * BABYSITTER APIs
 	 * 
@@ -65,6 +78,18 @@ public class PublicController {
 	public Page<Babysitter> searchBabysitter(@RequestBody SearchCriteria criteria, @PathVariable String agencyId,
 			Pageable pageable) {
 		return babysitterSrv.loadAll(agencyId, pageable);
+	}
+
+	@RequestMapping(value = "/api/agency/{agencyId}/tata/{babysitterId}/avatar", method = RequestMethod.GET)
+	public void downloadImage(@PathVariable String babysitterId, HttpServletResponse resp) throws Exception {
+		InputStream in = imageSrv.retrieveInputStream(babysitterId);
+		OutputStream o = resp.getOutputStream();
+		resp.setContentType("image/png");
+		byte[] buffer = new byte[1024];
+		int c = 0;
+		while ((c = in.read(buffer)) != -1) {
+			o.write(buffer, 0, c);
+		}
 	}
 
 	/*
@@ -111,6 +136,15 @@ public class PublicController {
 			return new PageImpl<>(s.getOffices(), pageable, s.getOffices().size());
 		}
 		return new PageImpl<>(new ArrayList<ServiceOffice>(), pageable, 0);
+	}
+
+	/*
+	 * DYNAMIC DATA APIs
+	 */
+
+	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/pricelist")
+	public PriceList getPriceList(@PathVariable String agencyId) {
+		return dynamicSrv.getPriceList(agencyId);
 	}
 
 }

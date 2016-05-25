@@ -176,29 +176,36 @@ public class GoogleAuthHelper {
 	@RequestMapping(value = "/google-auth", method = RequestMethod.GET)
 	public String confirmStateToken(HttpServletRequest request, HttpServletResponse response) {
 
-		String code = request.getParameter("code");
-		String userId = (String) request.getSession().getAttribute(GOOGLE_OAUTH_USER_ID_SESSION_ATTR);
-		String state = request.getParameter("state");
+		String errorCode = request.getParameter("error");
 
-		String sessionState = (String) request.getSession().getAttribute(GOOGLE_OAUTH_STATE_SESSION_ATTR);
-		if (code == null || state == null && !state.equals(sessionState)) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		}
-		try {
-			Credential cred = storeCredential(code, userId);
+		// if access denied redirect to home
+		if (!"access_denied".equals(errorCode)) {
 
-			// application dependent CODE
-			if (cred != null) {
-				Settings s = settingsSrv.loadSettings(userId);
-				if (s != null) {
-					s.setCalendarAuthorization(true);
-					settingsSrv.save(s);
-				}
+			String code = request.getParameter("code");
+			String userId = (String) request.getSession().getAttribute(GOOGLE_OAUTH_USER_ID_SESSION_ATTR);
+			String state = request.getParameter("state");
+
+			String sessionState = (String) request.getSession().getAttribute(GOOGLE_OAUTH_STATE_SESSION_ATTR);
+			if (code == null || state == null && !state.equals(sessionState)) {
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			}
+			try {
+				Credential cred = storeCredential(code, userId);
 
-		} catch (IOException e) {
-			logger.error("Exception storing  google credential");
+				// application dependent CODE
+				if (cred != null) {
+					Settings s = settingsSrv.loadSettings(userId);
+					if (s != null) {
+						s.setCalendarAuthorization(true);
+						settingsSrv.save(s);
+					}
+				}
+
+			} catch (IOException e) {
+				logger.error("Exception storing  google credential");
+			}
+			return "redirect:/";
 		}
-		return "redirect:/";
+		return "redirect:/?jump_google=true";
 	}
 }

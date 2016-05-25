@@ -4,7 +4,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 public enum TimeSlot {
-	MORNING(8, 12), AFTERNOON(12, 18), EVENING(18, 22), NIGHT(22, 8);
+	MORNING(6, 12), AFTERNOON(12, 19), EVENING(19, 22), NIGHT(22, 6);
 
 	private final long fromHour;
 	private final long toHour;

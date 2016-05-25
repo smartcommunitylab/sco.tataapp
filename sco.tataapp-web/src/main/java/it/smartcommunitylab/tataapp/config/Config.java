@@ -15,10 +15,13 @@ public class Config {
 	@Value("classpath:/client_secret.json")
 	private Resource googleKeys;
 
+	@Value("${google.callback.url}")
+	private String googleCallbackUrl;
+
 	@Bean
 	public GoogleAuthHelper googleAuthHelper() {
 		try {
-			return new GoogleAuthHelper(googleKeys.getInputStream(), "http://localhost:8080/tataapp/google-auth");
+			return new GoogleAuthHelper(googleKeys.getInputStream(), googleCallbackUrl);
 		} catch (IOException e) {
 			return null;
 		}

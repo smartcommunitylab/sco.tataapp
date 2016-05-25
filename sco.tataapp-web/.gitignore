@@ -3,3 +3,4 @@
 .settings/
 .classpath
 src/main/resources/client_secret.json
+src/main/resources/public/bower_components/

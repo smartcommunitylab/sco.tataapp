@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.ctrls', ['ngResource','i18nmessages'])
-.controller('MainCtrl', ['$scope', '$window','SecurityCheck',
-                 function($scope, $window, SecurityCheck) {
+.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck', 'AppId', 'SharedData',
+                 function($scope, $window, $location, SecurityCheck, AppId, SharedData) {
 	$scope.message = "Angular ROCKSSS";
 	
 	var activeHome = "active";
@@ -12,12 +12,25 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 	var activeTataRate = "";
 	
 	$scope.checkCalendarPermissions = function(){
-		SecurityCheck.get({agencyId:'progetto92'}, function(data) {
-			if(!data.calendarPermissionOk){
-				console.log("redirect url " + JSON.stringify(data.authorizationURL));
-				//$window.location.href = data.authorizationURL;
+		var agencyId = "";
+		AppId.getId(function(data){
+			if(data && data.id){
+				agencyId = data.id;
+				SharedData.setAppId(agencyId);
+			} else {
+				agencyId = SharedData.setAppId();
 			}
-		});
+			//var skip = ($location.search()).jump_google;
+			var skip = ($window.location.search.indexOf("jump_google=true") > -1) ? true : false;
+			if(!skip){
+				SecurityCheck.get({ agencyId:agencyId }, function(data) {
+					if(!data.calendarPermissionOk){
+						console.log("redirect url " + JSON.stringify(data.authorizationURL));
+						$window.location.href = data.authorizationURL;
+					}
+				});
+			}
+		})
 	};
 	
 	$scope.isActiveHome = function(){
@@ -87,6 +100,31 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 		agencyId: '@id'
 	});
 }])
+
+.factory('AppId', [ '$resource', function($resource) {
+	return $resource('console/api/agencyid', null, {
+		getId : {
+			isArray : false,
+			method : 'get',
+			transformResponse : function(data) {
+				return { id: data };
+			}
+		}
+	});
+}])
+
+.service('SharedData', function(){
+	this.appId = 'progetto92';
+		
+	this.getAppId = function(){
+		return this.appId;
+	};
+	
+	this.setAppId = function(appId){
+		this.appId = appId;
+	};
+		
+})
 
 .filter('i18n', function (i18nmessages) {
     return function (input) {
