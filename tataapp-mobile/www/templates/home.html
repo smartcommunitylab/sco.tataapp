@@ -5,19 +5,18 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="has-header">
-        <ion-slide-box auto-play="!!swiperOptions.autoplay" does-continue="{{!!swiperOptions.loop}}" slide-interval="{{swiperOptions.autoplay}}" show-pager="false">
-            <ion-slide>
-                <img src="img/homepage_01.png" />
-            </ion-slide>
-            <ion-slide>
-                <img src="img/homepage_02.png" />
-            </ion-slide>
-            <ion-slide>
-                <img src="img/homepage_03.png" />
+    <ion-content class="has-header" scroll="false">
+        <ion-slide-box does-continue="{{!!swiperOptions.loop}}" show-pager="false">
+            <ion-slide ng-repeat="homePage in homePages">
+                <img ng-src="{{homePage.image}}" />
+                <h1 ng-bind-html="homePage.title | translate"></h1>
+                <div class="home-pagination">
+                    <i class="icon ion-record" ng-repeat="homePage in homePages" ng-class="{'saw': $index <= $parent.$index}"></i>
+                </div>
+                <div class="padding-horizontal" ng-bind-html="homePage.content | translate"></div>
             </ion-slide>
         </ion-slide-box>
-        <div class="padding-horizontal">
+        <!--<div class="padding-horizontal">
             <h4 ng-bind-html="'text_home_1' | translate"></h4>
             <ul>
                 <li ng-repeat="entry in entries" ng-bind-html="entry | translate"></li>
@@ -32,6 +31,10 @@
                 <span ng-bind-html="'text_home_5' | translate"></span>
                 <a href=""><i class="icon ion-social-facebook" ng-click="openLink('https://www.facebook.com/tataapp/')"></i></a>
             </p>
-        </div>
+        </div>-->
     </ion-content>
+
+    <ion-footer-bar>
+
+    </ion-footer-bar>
 </ion-view>

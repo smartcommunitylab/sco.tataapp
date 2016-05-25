@@ -4,7 +4,7 @@ angular.module('tataapp.services.config', [])
     var configService = {};
 
     configService.AGENCY_ID = 'progetto92';
-    configService.SERVER_URL = 'https://dev.smartcommunitylab.it/tataapp';
+    configService.SERVER_URL = 'https://dev.smartcommunitylab.it/tataapp/public';
     configService.MAIL_RECEIVER = 'o.zambotti@fbk.eu';
 
     configService.timeFormat = 'HH:mm';
