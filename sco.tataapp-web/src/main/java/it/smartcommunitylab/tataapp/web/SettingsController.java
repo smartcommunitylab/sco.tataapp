@@ -3,7 +3,6 @@ package it.smartcommunitylab.tataapp.web;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,10 +17,6 @@ import it.smartcommunitylab.tataapp.service.SettingsService;
 
 @RestController
 public class SettingsController {
-	
-	 @Autowired
-	@Value("${it.smartcommunitylab.tataapp.id}")
-	private String appId;
 
 	@Autowired
 	private SettingsService settingsSrv;
@@ -31,11 +26,6 @@ public class SettingsController {
 
 	@Autowired
 	private IdentityLookupService identityLookup;
-
-	@RequestMapping(method = RequestMethod.GET, value = "/console/api/agencyid")
-	public String getAgencyId(HttpServletRequest req) {
-		return appId;
-	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/console/api/agency/{agencyId}/settings/permissions")
 	public PermissionBean calendarAuthorizationCheck(HttpServletRequest req, @PathVariable String agencyId) {
