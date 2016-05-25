@@ -9,11 +9,11 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
   });
 }])
 
-.controller('TataRateCtrl', [ '$rootScope', '$scope','$uibModal', 'TataRate', 
-          				function($rootScope, $scope, $uibModal, TataRate) {
+.controller('TataRateCtrl', [ '$rootScope', '$scope','$uibModal', 'TataRate', 'SharedData',
+          				function($rootScope, $scope, $uibModal, TataRate, SharedData) {
 	
 	$scope.decimalNumbers = /^([0-9]+)[\.]{0,1}[0-9]{0,2}$/;
-	$scope.agencyId = "tataApp";
+	$scope.agencyId = "";
 	
 	$scope.rateMinKey = "<15";
 	$scope.rateMediumKey = "16-24";
@@ -78,9 +78,7 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 	
 	// method getTataRate: used to get the tata rate list values from the db
 	$scope.getTataRate = function(){
-		//AppId.get(function(data){
-		//	$scope.agencyId = data;
-		//});
+		$scope.agencyId = SharedData.getAppId();
 		
 		var tataratelistDB = TataRate.get({aid: $scope.agencyId}, function(){
 			$scope.tataratelist.hours = {

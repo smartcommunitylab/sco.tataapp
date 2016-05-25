@@ -9,13 +9,13 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
   });
 }])
 
-.controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar',
-          				function($rootScope, $scope, $uibModal, Tata, FileUploader, Avatar) {
+.controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', 'SharedData',
+          				function($rootScope, $scope, $uibModal, Tata, FileUploader, Avatar, SharedData) {
 	
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
 	$scope.showMaxImageSizeError = false;
-	$scope.agencyId = "tataApp"; 	// TODO: pass the parameter from configuration file	
+	$scope.agencyId = "";
 	$scope.mailPattern=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
 	$scope.onErrorSrc = "images/empty_avatar.png";
@@ -193,8 +193,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	// method getTataList: used to retrieve the tata list
 	$scope.getTataList = function(){
-		//TataAppId.get(function(data){
-		//	$scope.agencyId = data;
+		$scope.agencyId = SharedData.getAppId();	// here I init the agencyId readed from conf file
 			$scope.q = {};
 			Tata.list({aid: $scope.agencyId}, function(data){
 				$scope.tatalist = data;
@@ -619,10 +618,6 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		}
 	});
 } ])
-
-.factory('TataAppId', [ '$resource', function($resource) {
-	return $resource('console/api/agency');
-}])
 
 
 .directive('onErrorSrc', function() {
