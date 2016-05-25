@@ -114,12 +114,14 @@
 						</div>
 						<div class="form-group">
 					    	<label for="description">{{ 'tatapage.create.description' | i18n }}</label>
-					    	<input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" >						   		
+					    	<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->						   		
+					    	<textarea id="description" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" ></textarea>
 					    	<div class="alert alert-danger" ng-show="!isInit && form.tDescription.$error.required">{{ 'tatapage.create.description.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
 					    	<label for="professionalUpdates">{{ 'tatapage.create.updates' | i18n }}</label>
-					    	<input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" >						   		
+					    	<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" >						   		 -->
+					    	<textarea id="professionalUpdates" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" ></textarea>
 					    	<div class="alert alert-danger" ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{ 'tatapage.create.updates.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
@@ -217,12 +219,14 @@
 						</div>
 						<div class="form-group">
 					    	<label for="description">{{ 'tatapage.create.description' | i18n }}</label>
-					    	<input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" >						   		
+					    	<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->
+					    	<textarea id="description" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" ></textarea>						   		
 					    	<div class="alert alert-danger" ng-show="!isInit && form.tDescription.$error.required">{{ 'tatapage.create.description.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
 					    	<label for="professionalUpdates">{{ 'tatapage.create.updates' | i18n }}</label>
-					    	<input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" >						   		
+					    	<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" > -->						   		
+					    	<textarea id="professionalUpdates" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" ></textarea>
 					    	<div class="alert alert-danger" ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{ 'tatapage.create.updates.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
@@ -270,13 +274,19 @@
 			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ vtata.languages | toLanguageString }}
 		</div>
 		<div class="col-md-12">
-			<label>{{ 'tatapage.view.description' | i18n }}: </label> {{ vtata.description }}
+			<label class="margins">{{ 'tatapage.view.description' | i18n }}: </label>
+			<div ng-repeat="d in correctTextFormatting(vtata.description)">
+				<span>{{ d }}</span><br/>
+			</div >
 		</div>
 		<div class="col-md-12">
-			<label>{{ 'tatapage.view.updates' | i18n }}: </label> {{ vtata.updates }}
+			<label class="margins">{{ 'tatapage.view.updates' | i18n }}: </label>
+			<div ng-repeat="u in correctTextFormatting(vtata.updates)">
+				<span>{{ u }}</span><br/>
+			</div >
 		</div>
 		<div class="col-md-12">
-			<label>{{ 'tatapage.view.carOwner' | i18n }}: </label><span ng-show="vtata.carOwner"> {{ 'tatapage.view.carOwner.yes' | i18n }}</span><span ng-show="!vtata.carOwner"> {{ 'tatapage.view.carOwner.no' | i18n }}</span>
+			<label class="margins">{{ 'tatapage.view.carOwner' | i18n }}: </label><span ng-show="vtata.carOwner"> {{ 'tatapage.view.carOwner.yes' | i18n }}</span><span ng-show="!vtata.carOwner"> {{ 'tatapage.view.carOwner.no' | i18n }}</span>
 		</div>
 	</div>
 </div>

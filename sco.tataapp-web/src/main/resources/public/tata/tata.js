@@ -512,6 +512,18 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		}
 	};
 	
+	$scope.correctTextFormatting = function(text){
+		var corr = [];
+		if(text){
+			//= text.replace(new RegExp('\n|\r', 'g'), '<br />');
+			corr = text.split('\n');
+			return corr;
+		} else {
+			corr.push("Dato non iserito");
+			return corr;
+		}
+	}
+	
 	/**
 	 * Converts data uri to Blob. Necessary for uploading.
 	 * @see
