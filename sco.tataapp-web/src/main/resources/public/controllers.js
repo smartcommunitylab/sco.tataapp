@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.ctrls', ['ngResource','i18nmessages'])
-.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck', 'AppId', 'SharedData',
-                 function($scope, $window, $location, SecurityCheck, AppId, SharedData) {
+.controller('MainCtrl', ['$scope', '$window','$location','SecurityCheck', 'SharedData',
+                 function($scope, $window, $location, SecurityCheck, SharedData) {
 	$scope.message = "Angular ROCKSSS";
 	
 	var activeHome = "active";
@@ -12,25 +12,17 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 	var activeTataRate = "";
 	
 	$scope.checkCalendarPermissions = function(){
-		var agencyId = "";
-		AppId.getId(function(data){
-			if(data && data.id){
-				agencyId = data.id;
-				SharedData.setAppId(agencyId);
-			} else {
-				agencyId = SharedData.setAppId();
-			}
-			//var skip = ($location.search()).jump_google;
-			var skip = ($window.location.search.indexOf("jump_google=true") > -1) ? true : false;
-			if(!skip){
-				SecurityCheck.get({ agencyId:agencyId }, function(data) {
-					if(!data.calendarPermissionOk){
-						console.log("redirect url " + JSON.stringify(data.authorizationURL));
-						$window.location.href = data.authorizationURL;
-					}
-				});
-			}
-		})
+		var agencyId = SharedData.getAppId();
+		//var skip = ($location.search()).jump_google;
+		var skip = ($window.location.search.indexOf("jump_google=true") > -1) ? true : false;
+		if(!skip){
+			SecurityCheck.get({ agencyId:agencyId }, function(data) {
+				if(!data.calendarPermissionOk){
+					console.log("redirect url " + JSON.stringify(data.authorizationURL));
+					$window.location.href = data.authorizationURL;
+				}
+			});
+		}
 	};
 	
 	$scope.isActiveHome = function(){
@@ -101,7 +93,7 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 	});
 }])
 
-.factory('AppId', [ '$resource', function($resource) {
+/*.factory('AppId', [ '$resource', function($resource) {
 	return $resource('console/api/agencyid', null, {
 		getId : {
 			isArray : false,
@@ -111,10 +103,11 @@ angular.module('app.ctrls', ['ngResource','i18nmessages'])
 			}
 		}
 	});
-}])
+}])*/
 
 .service('SharedData', function(){
-	this.appId = 'progetto92';
+	// shared variables between controllers
+	this.appId = 'progetto92';	// appId value; Change only here!
 		
 	this.getAppId = function(){
 		return this.appId;
