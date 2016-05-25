@@ -2,7 +2,7 @@
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
-    <ion-slides options="swiperOptions" slider="swiper" ion-wizard>
+    <!--<ion-slides options="swiperOptions" slider="swiper" ion-wizard>
         <ion-slide-page ion-wizard-step ng-repeat="infoPage in infoPages">
             <ion-content class="has-header padding-top padding-horizontal info-page" ng-class="'info-page-' + ($index + 1)">
                 <h1 ng-bind-html="infoPage.title | translate"></h1>
@@ -17,5 +17,22 @@
                 </div>
             </ion-content>
         </ion-slide-page>
-    </ion-slides>
+    </ion-slides>-->
+
+    <ion-content class="has-header">
+        <ion-slide-box does-continue="false" show-pager="false">
+            <ion-slide ng-repeat="infoPage in infoPages" class="padding-horizontal info-page" ng-class="'info-page-' + ($index + 1)">
+                <h1 ng-bind-html="infoPage.title | translate"></h1>
+                <div class="info-pagination">
+                    <i class="icon ion-record" ng-repeat="infoPage in infoPages" ng-class="{'saw': $index <= $parent.$index}"></i>
+                </div>
+                <div>
+                    <div ng-bind-html="infoPage.content | translate"></div>
+                    <ul ng-if="$index + 1 == 1">
+                        <li ng-repeat="zone in zones">{{zone.name}}</li>
+                    </ul>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
 </ion-view>

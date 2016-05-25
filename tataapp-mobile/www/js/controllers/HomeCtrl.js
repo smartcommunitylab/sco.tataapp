@@ -28,11 +28,23 @@ angular.module('tataapp.controllers.home', [])
 
     $scope.mailreceiver = Config.MAIL_RECEIVER;
 
-    $scope.entries = [];
+    /*$scope.entries = [];
     var counter = 1;
     while ($filter('translate')('info_' + counter + '_t') != ('info_' + counter + '_t')) {
         $scope.entries.push('info_' + counter + '_t');
         counter++;
+    }*/
+
+    $scope.homePages = [];
+    var homeCounter = 1;
+    while ($filter('translate')('home_' + homeCounter + '_t') != ('home_' + homeCounter + '_t')) {
+        var entry = {
+            title: 'home_' + homeCounter + '_t',
+            content: 'home_' + homeCounter + '_c',
+            image: 'img/homepage_0' + homeCounter + '.png'
+        };
+        $scope.homePages.push(entry);
+        homeCounter++;
     }
 })
 

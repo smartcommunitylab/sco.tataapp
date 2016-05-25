@@ -12,7 +12,6 @@ import it.smartcommunitylab.tataapp.sec.IdentityLookupService;
 import it.smartcommunitylab.tataapp.service.DynamicDataService;
 
 @RestController
-// @CrossOrigin
 public class DynamicDataController {
 
 	@Autowired
