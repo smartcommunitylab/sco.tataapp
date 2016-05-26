@@ -77,7 +77,8 @@ public class PublicController {
 	@RequestMapping(method = RequestMethod.POST, value = "/api/agency/{agencyId}/tata/search")
 	public Page<Babysitter> searchBabysitter(@RequestBody SearchCriteria criteria, @PathVariable String agencyId,
 			Pageable pageable) {
-		return babysitterSrv.loadAll(agencyId, pageable);
+		criteria.setAgencyId(agencyId);
+		return babysitterSrv.search(criteria, pageable);
 	}
 
 	@RequestMapping(value = "/api/agency/{agencyId}/tata/{babysitterId}/avatar", method = RequestMethod.GET)
