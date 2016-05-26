@@ -3,6 +3,7 @@ package it.smartcommunitylab.tataapp.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,7 +73,8 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	@Override
 	public Page<Babysitter> search(SearchCriteria criteria, Pageable p) {
-		return new PageImpl<Babysitter>(babysitterRepo.searchByMatching(criteria));
+		List<Babysitter> result = babysitterRepo.searchByMatching(criteria);
+		return new PageImpl<Babysitter>(result, p, result.size());
 	}
 
 	@Scheduled(cron = "${task.reminder}")
