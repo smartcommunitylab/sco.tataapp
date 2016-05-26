@@ -55,7 +55,7 @@ public class BabysitterServiceImpl implements BabysitterService {
 	}
 
 	public Set<Babysitter> loadAll(String agencyId) {
-		return new HashSet<>(babysitterRepo.findAll());
+		return new HashSet<>(babysitterRepo.findByAgencyId(agencyId));
 	}
 
 	public Page<Babysitter> loadAll(String agencyId, Pageable p) {
