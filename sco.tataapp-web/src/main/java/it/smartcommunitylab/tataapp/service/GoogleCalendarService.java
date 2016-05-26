@@ -224,7 +224,7 @@ public class GoogleCalendarService {
 							logger.debug("location " + event.getLocation());
 							logger.debug("desc " + event.getDescription());
 						}
-						result.add(new TataPoint(event));
+						result.add(new TataPoint(agencyId, event));
 					}
 				}
 			} else {

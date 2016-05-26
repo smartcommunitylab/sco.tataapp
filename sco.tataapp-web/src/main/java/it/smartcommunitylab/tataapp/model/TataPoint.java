@@ -35,7 +35,7 @@ public class TataPoint {
 
 	}
 
-	public TataPoint(Event event) {
+	public TataPoint(String agencyId, Event event) {
 		if (event != null) {
 			address = event.getLocation();
 			// FIXME hard to extract the city from address
@@ -61,7 +61,7 @@ public class TataPoint {
 			recurrence = extractRecurrence(event.getRecurrence());
 			contactDescription = event.getDescription();
 		}
-
+		this.agencyId = agencyId;
 	}
 
 	/**
