@@ -83,7 +83,8 @@ angular.module('tataapp.controllers.search', [])
             thu: false,
             fri: false,
             sat: false,
-            sun: false
+            sun: false,
+            allDays: false
         },
         timeslots: {
             morning: false,
@@ -113,6 +114,8 @@ angular.module('tataapp.controllers.search', [])
         }
     };
 
+//    $scope.selectAllDoW();
+
     var form2request = function (form) {
         // TODO this is how to convert searchform to search request
         /*
@@ -133,26 +136,29 @@ angular.module('tataapp.controllers.search', [])
         request.langs = [];
         angular.forEach(Object.keys(form.languages), function (lang) {
             if (form.languages[lang]) {
-                request.langs.push(lang);
+                request.langs.push(lang.toUpperCase());
             }
         });
 
         request.carOwner = form.car;
-        request.timeslots = [];
 
         request.days = [];
         angular.forEach(Object.keys(form.days), function (day) {
-            if (form.days[day]) {
+            if (form.days[day] && 'allDays' != day) {
                 request.days.push(day);
             }
         });
 
-        request.timeslots = [];
+        request.timeSlots = [];
         angular.forEach(Object.keys(form.timeslots), function (timeslot) {
             if (form.timeslots[timeslot]) {
-                request.timeslots.push(timeslot);
+                request.timeSlots.push(timeslot);
             }
         });
+
+      request.fromDate = moment($scope.searchform.dateFrom).startOf('date').valueOf();
+      request.toDate =   moment($scope.searchform.dateTo).endOf('date').valueOf();
+
 
         /*
         request.fromTime = 0;
@@ -196,8 +202,8 @@ angular.module('tataapp.controllers.search', [])
         var request = form2request($scope.searchform);
         console.log(request);
 
-        /*BackendSrv.searchTate(request).then(*/
-        BackendSrv.getAllTate().then(
+        BackendSrv.searchTate(request).then(
+//        BackendSrv.getAllTate().then(
             function (results) {
                 console.log(results);
 
@@ -206,6 +212,10 @@ angular.module('tataapp.controllers.search', [])
                     reload: true
                 });
                 */
+                if (results.content == null) results.content = [];
+                results.content.forEach(function(tata) {
+                  tata.avatar = Config.getServerURL()+'/api/agency/'+Config.AGENCY_ID+'/tata/'+tata.id+'/avatar';
+                });
 
                 $state.go('app.searchresults', {
                     'searchResults': results

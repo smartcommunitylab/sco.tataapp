@@ -2,7 +2,7 @@
     <ion-header-bar class="bar bar-subheader day-change">
         <div class="button-box">
             <button class="button button-icon icon ion-arrow-left-b" ng-click="changeMonth(-1)"></button>
-            <button class="button button-text">{{now | date : dateFormatMonth}}</button>
+            <button class="button button-text">{{now.valueOf() | date : dateFormatMonth}}</button>
             <button class="button button-icon icon ion-arrow-right-b" ng-click="changeMonth(1)"></button>
         </div>
     </ion-header-bar>
@@ -17,5 +17,9 @@
                 </ion-item>
             </div>
         </ion-list>
+        <div ng-if="tataPoints != null && tataPoints.length == 0">
+          <h4 class="text-center">{{'title_nopoints' | translate}}</h4>
+        </div>
+
     </ion-content>
 </ion-view>
