@@ -69,8 +69,14 @@ public class BabysitterRepoImpl implements MatchingRepo {
 		for (String timeSlot : crit.getTimeSlots()) {
 			TimeSlot ts = TimeSlot.valueOf(timeSlot.toUpperCase());
 			if (ts != null) {
-				Criteria timeSlotCrit = Criteria.where("timeAvailability.fromTime");
-				timeSlotCrit = timeSlotCrit.lte(ts.getFromHour()).and("timeAvailability.toTime").gte(ts.getToHour());
+				// Criteria timeSlotCrit =
+				// Criteria.where("timeAvailability.fromTime");
+				Criteria timeSlotCrit = new Criteria().orOperator(
+						Criteria.where("timeAvailability.fromTime").gte(ts.getFromHour()).lte(ts.getToHour()),
+						Criteria.where("timeAvailability.fromTime").lt(ts.getFromHour()).and("timeAvailability.toTime")
+								.gt(ts.getFromHour()));
+				// timeSlotCrit =
+				// timeSlotCrit.lte(ts.getFromHour()).and("timeAvailability.toTime").gte(ts.getToHour());
 				timeCrit.add(timeSlotCrit);
 			}
 		}
