@@ -91,74 +91,86 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 			if(tataratelistDB){
 				$scope.tataratelist.id = tataratelistDB.id;
 				// working daily rate
-				for(var i = 0; i < tataratelistDB.daily.length; i++){
-					if(tataratelistDB.daily[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.daily.base.min = tataratelistDB.daily[i].rate;
-					} else if(tataratelistDB.daily[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.daily.base.medium = tataratelistDB.daily[i].rate;
-					} else if(tataratelistDB.daily[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.daily.base.max = tataratelistDB.daily[i].rate;
-					} else if(tataratelistDB.daily[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.daily.base.max_no_food = tataratelistDB.daily[i].rate;
+				if(tataratelistDB.daily){
+					for(var i = 0; i < tataratelistDB.daily.length; i++){
+						if(tataratelistDB.daily[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.daily.base.min = tataratelistDB.daily[i].rate;
+						} else if(tataratelistDB.daily[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.daily.base.medium = tataratelistDB.daily[i].rate;
+						} else if(tataratelistDB.daily[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.daily.base.max = tataratelistDB.daily[i].rate;
+						} else if(tataratelistDB.daily[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.daily.base.max_no_food = tataratelistDB.daily[i].rate;
+						}
 					}
 				}
-				for(var i = 0; i < tataratelistDB.dailyDisability.length; i++){
-					if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.daily.handicapped.min = tataratelistDB.dailyDisability[i].rate;
-					} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.daily.handicapped.medium = tataratelistDB.dailyDisability[i].rate;
-					} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.daily.handicapped.max = tataratelistDB.dailyDisability[i].rate;
-					} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.daily.handicapped.max_no_food = tataratelistDB.dailyDisability[i].rate;
+				if(tataratelistDB.dailyDisability){
+					for(var i = 0; i < tataratelistDB.dailyDisability.length; i++){
+						if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.daily.handicapped.min = tataratelistDB.dailyDisability[i].rate;
+						} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.daily.handicapped.medium = tataratelistDB.dailyDisability[i].rate;
+						} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.daily.handicapped.max = tataratelistDB.dailyDisability[i].rate;
+						} else if(tataratelistDB.dailyDisability[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.daily.handicapped.max_no_food = tataratelistDB.dailyDisability[i].rate;
+						}
 					}
 				}
 				
 				// holiday daily rate
-				for(var i = 0; i < tataratelistDB.festive.length; i++){
-					if(tataratelistDB.festive[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.holiday.base.min = tataratelistDB.festive[i].rate;
-					} else if(tataratelistDB.festive[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.holiday.base.medium = tataratelistDB.festive[i].rate;
-					} else if(tataratelistDB.festive[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.holiday.base.max = tataratelistDB.festive[i].rate;
-					} else if(tataratelistDB.festive[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.holiday.base.max_no_food = tataratelistDB.festive[i].rate;
+				if(tataratelistDB.festive){
+					for(var i = 0; i < tataratelistDB.festive.length; i++){
+						if(tataratelistDB.festive[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.holiday.base.min = tataratelistDB.festive[i].rate;
+						} else if(tataratelistDB.festive[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.holiday.base.medium = tataratelistDB.festive[i].rate;
+						} else if(tataratelistDB.festive[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.holiday.base.max = tataratelistDB.festive[i].rate;
+						} else if(tataratelistDB.festive[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.holiday.base.max_no_food = tataratelistDB.festive[i].rate;
+						}
 					}
 				}
-				for(var i = 0; i < tataratelistDB.festiveDisability.length; i++){
-					if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.holiday.handicapped.min = tataratelistDB.festiveDisability[i].rate;
-					} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.holiday.handicapped.medium = tataratelistDB.festiveDisability[i].rate;
-					} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.holiday.handicapped.max = tataratelistDB.festiveDisability[i].rate;
-					} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.holiday.handicapped.max_no_food = tataratelistDB.festiveeDisability[i].rate;
+				if(tataratelistDB.festiveDisability){
+					for(var i = 0; i < tataratelistDB.festiveDisability.length; i++){
+						if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.holiday.handicapped.min = tataratelistDB.festiveDisability[i].rate;
+						} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.holiday.handicapped.medium = tataratelistDB.festiveDisability[i].rate;
+						} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.holiday.handicapped.max = tataratelistDB.festiveDisability[i].rate;
+						} else if(tataratelistDB.festiveDisability[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.holiday.handicapped.max_no_food = tataratelistDB.festiveeDisability[i].rate;
+						}
 					}
 				}
 				
 				// holiday night rate
-				for(var i = 0; i < tataratelistDB.nighttime.length; i++){
-					if(tataratelistDB.nighttime[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.night.base.min = tataratelistDB.nighttime[i].rate;
-					} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.night.base.medium = tataratelistDB.nighttime[i].rate;
-					} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.night.base.max = tataratelistDB.nighttime[i].rate;
-					} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.night.base.max_no_food = tataratelistDB.nighttime[i].rate;
+				if(tataratelistDB.nighttime){
+					for(var i = 0; i < tataratelistDB.nighttime.length; i++){
+						if(tataratelistDB.nighttime[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.night.base.min = tataratelistDB.nighttime[i].rate;
+						} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.night.base.medium = tataratelistDB.nighttime[i].rate;
+						} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.night.base.max = tataratelistDB.nighttime[i].rate;
+						} else if(tataratelistDB.nighttime[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.night.base.max_no_food = tataratelistDB.nighttime[i].rate;
+						}
 					}
 				}
-				for(var i = 0; i < tataratelistDB.nighttimeDisability.length; i++){
-					if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMinKey){
-						$scope.tataratelist.night.handicapped.min = tataratelistDB.nighttimeDisability[i].rate;
-					} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMediumKey){
-						$scope.tataratelist.night.handicapped.medium = tataratelistDB.nighttimeDisability[i].rate;
-					} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMaxKey){
-						$scope.tataratelist.night.handicapped.max = tataratelistDB.nighttimeDisability[i].rate;
-					} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMaxNoFoodKey){
-						$scope.tataratelist.night.handicapped.max_no_food = tataratelistDB.nighttimeDisability[i].rate;
+				if(tataratelistDB.nighttimeDisability){
+					for(var i = 0; i < tataratelistDB.nighttimeDisability.length; i++){
+						if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMinKey){
+							$scope.tataratelist.night.handicapped.min = tataratelistDB.nighttimeDisability[i].rate;
+						} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMediumKey){
+							$scope.tataratelist.night.handicapped.medium = tataratelistDB.nighttimeDisability[i].rate;
+						} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMaxKey){
+							$scope.tataratelist.night.handicapped.max = tataratelistDB.nighttimeDisability[i].rate;
+						} else if(tataratelistDB.nighttimeDisability[i].hourRange == $scope.rateMaxNoFoodKey){
+							$scope.tataratelist.night.handicapped.max_no_food = tataratelistDB.nighttimeDisability[i].rate;
+						}
 					}
 				}
 				
@@ -172,6 +184,7 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 	
 	// method editTataRate: used to show the tata rate editing form
 	$scope.editTataRate = function(id){
+		$scope.isInit = true;
 		switch (id){
 			case 1:
 				$scope.showTataRateDailyEdit = true;
@@ -197,24 +210,37 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 	$scope.updateTataRate = function(form, tataRate){
 		$scope.isInit = false;
 		if(form.$valid){
+			$scope.tatarate = TataRate.get({aid:$scope.agencyId}, function(data){
+				if(data.id){
+					$scope.tatarate.id = data.id;
+					$scope.tatarate.daily = $scope.correctRateObjectToDbObject(tataRate.daily.base);
+					$scope.tatarate.dailyDisability = $scope.correctRateObjectToDbObject(tataRate.daily.handicapped);
+					$scope.tatarate.festive = $scope.correctRateObjectToDbObject(tataRate.holiday.base);
+					$scope.tatarate.festiveDisability = $scope.correctRateObjectToDbObject(tataRate.holiday.handicapped);
+					$scope.tatarate.nighttime = $scope.correctRateObjectToDbObject(tataRate.night.base);
+					$scope.tatarate.nighttimeDisability = $scope.correctRateObjectToDbObject(tataRate.night.handicapped);
+					$scope.tatarate.agencyId = $scope.agencyId
+				} else {
+					var corrTataRate = {
+						id: tataRate.id,
+						daily: $scope.correctRateObjectToDbObject(tataRate.daily.base),
+						dailyDisability: $scope.correctRateObjectToDbObject(tataRate.daily.handicapped),
+						festive: $scope.correctRateObjectToDbObject(tataRate.holiday.base),
+						festiveDisability: $scope.correctRateObjectToDbObject(tataRate.holiday.handicapped),
+						nighttime: $scope.correctRateObjectToDbObject(tataRate.night.base),
+						nighttimeDisability: $scope.correctRateObjectToDbObject(tataRate.night.handicapped),
+						agencyId: $scope.agencyId
+					};
+					$scope.tatarate = new TataRate(corrTataRate);
+				}
 				
-			var corrTataRate = {
-				id: tataRate.id,
-				daily: $scope.correctRateObjectToDbObject(tataRate.daily.base),
-				dailyDisability: $scope.correctRateObjectToDbObject(tataRate.daily.handicapped),
-				festive: $scope.correctRateObjectToDbObject(tataRate.holiday.base),
-				festiveDisability: $scope.correctRateObjectToDbObject(tataRate.holiday.handicapped),
-				nighttime: $scope.correctRateObjectToDbObject(tataRate.night.base),
-				nighttimeDisability: $scope.correctRateObjectToDbObject(tataRate.night.handicapped),
-				agencyId: $scope.agencyId
-			};
-			$scope.tatarate = new TataRate(corrTataRate);
-			console.log(JSON.stringify($scope.tatarate));
-		    $scope.tatarate.$save({aid: $scope.agencyId}, function() {
-		    	console.log('Saved tatarate');
-		    	$scope.tataratelist = tataRate;
-		    });
-		    
+				console.log(JSON.stringify($scope.tatarate));
+			    $scope.tatarate.$save({aid: $scope.agencyId}, function() {
+			    	console.log('Saved tatarate');
+			    	$scope.tataratelist = tataRate;
+			    });
+				
+			});
 		    $scope.closeEditTataRateView();
 		}
 	};
@@ -306,6 +332,10 @@ angular.module('app.rate',[ 'ngRoute', 'ngResource'])
 			/*if(input.indexOf(".") > -1){
 				input = input.replace(".", ",");
 			}*/
+		} else {
+			if(input == null){
+				return "n.p.";
+			}
 		}
 		input = parseFloat(input);
 		return "" + parseFloat(Math.round(input * 100) / 100).toFixed(2);
