@@ -102,7 +102,7 @@ public class BabysitterRepoImpl implements MatchingRepo {
 					dateCursor = dayDate;
 				}
 
-				while (dateCursor.isBefore(end)) {
+				while (!dateCursor.isAfter(end)) {
 					dates.add(dateCursor.getMillis());
 					dateCursor = dateCursor.plusWeeks(1);
 				}
