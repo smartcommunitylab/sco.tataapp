@@ -95,7 +95,7 @@ public class BabysitterController {
 			}
 		} catch (IOException e) {
 			try {
-				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Problem getting avatar for download");
+				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Picture not found");
 			} catch (IOException e1) {
 				logger.error("IOException sending HTTP error getting avatar for download");
 			}
