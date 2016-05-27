@@ -20,12 +20,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 	
 	$scope.onErrorSrc = "images/empty_avatar.png";
 	$scope.maxImgSize = 1048576; // bytes
-	$scope.itaLang = "it";
-	$scope.engLang = "en";
-	$scope.gerLang = "de";
-	$scope.fraLang = "fr";
-	$scope.spaLang = "es";
-	$scope.rusLang = "ru";	// to be added in form language list
+	$scope.itaLang = "IT";
+	$scope.engLang = "EN";
+	$scope.gerLang = "DE";
+	$scope.fraLang = "FR";
+	$scope.spaLang = "ES";
+	$scope.rusLang = "RU";	// to be added in form language list
 		
 	$scope.trueVal = true;
 	$scope.falseVal = false;
@@ -565,24 +565,30 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
     	if (!input) {
             return "nessuna lingua";
         } else {
+        	var itaLang = "IT";
+        	var engLang = "EN";
+        	var gerLang = "DE";
+        	var fraLang = "FR";
+        	var spaLang = "ES";
+        	var rusLang = "RU";
         	for(var i = 0; i < input.length; i++){
         		switch (input[i]){
-        			case "it":
+        			case itaLang:
         				langList += i18nmessages[defaultLangMessage+"ita"] + ",";
         				break;
-        			case "en":
+        			case engLang:
         				langList += i18nmessages[defaultLangMessage+"eng"] + ",";
         				break;
-        			case "de":
+        			case gerLang:
         				langList += i18nmessages[defaultLangMessage+"ger"] + ",";
         				break;
-        			case "fr":
+        			case fraLang:
         				langList += i18nmessages[defaultLangMessage+"fra"] + ",";
         				break;
-        			case "es":
+        			case spaLang:
         				langList += i18nmessages[defaultLangMessage+"spa"] + ",";
         				break;
-        			case "ru":
+        			case rusLang:
         				langList += i18nmessages[defaultLangMessage+"rus"] + ",";
         				break;	
         			default:
