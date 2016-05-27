@@ -11,8 +11,6 @@ public class SearchCriteria {
 
 	private long fromDate;
 	private long toDate;
-	private long fromTime;
-	private long toTime;
 	private List<String> timeSlots = new ArrayList<>();
 	private String[] days = new String[0];
 	private String agencyId;
@@ -71,22 +69,6 @@ public class SearchCriteria {
 
 	public void setToDate(long toDate) {
 		this.toDate = toDate;
-	}
-
-	public long getFromTime() {
-		return fromTime;
-	}
-
-	public void setFromTime(long fromTime) {
-		this.fromTime = fromTime;
-	}
-
-	public long getToTime() {
-		return toTime;
-	}
-
-	public void setToTime(long toTime) {
-		this.toTime = toTime;
 	}
 
 	public String[] getDays() {
