@@ -44,6 +44,13 @@ public class BabysitterServiceImpl implements BabysitterService {
 
 	public Babysitter save(Babysitter babysitter) {
 		babysitter.verify();
+		// if edit maintain timeAvailability
+		if (babysitter.getId() != null) {
+			Babysitter b = load(babysitter.getId());
+			if (b != null) {
+				babysitter.setTimeAvailability(b.getTimeAvailability());
+			}
+		}
 		return babysitterRepo.save(babysitter);
 	}
 
