@@ -89,6 +89,8 @@
     "popup_title_attention": "ATTENZIONE",
     "popup_button_understand": "HO CAPITO",
     "title_searchresults": "Risultati ricerca",
+    "title_noresults": "Nessun risultato per i parametri specificati.",
+    "title_nopoints": "Nessun evento previsto in questo periodo.",
     "title_nannies": "Lista Tate",
     "title_fee": "Calcola preventivo",
     "title_fee_pricelist": "Tariffario",

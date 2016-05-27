@@ -6,10 +6,14 @@
         <ion-list>
             <div class="card" ng-repeat="nanny in nannies" ng-click="seeSearchResult(nanny)">
                 <ion-item class="item item-avatar">
-                    <img src="img/tataph.png" />
+                    <img ng-src="{{nanny.avatar}}" />
                     <h2>{{nanny.name}} {{nanny.surname}}</h2>
                 </ion-item>
             </div>
         </ion-list>
+
+        <div ng-if="nannies != null && nannies.length == 0">
+          <h4 class="text-center">{{'title_noresults' | translate}}</h4>
+        </div>
     </ion-content>
 </ion-view>
