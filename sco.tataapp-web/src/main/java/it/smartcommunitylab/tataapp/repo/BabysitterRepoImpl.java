@@ -53,7 +53,9 @@ public class BabysitterRepoImpl implements MatchingRepo {
 			logger.warn("search matching criteria field {} empty or null", "rangeAge");
 		}
 		// check carOwner
-		mongoCrit = mongoCrit.and("carOwner").is(crit.isCarOwner());
+		if (crit.isCarOwner()) {
+			mongoCrit = mongoCrit.and("carOwner").is(crit.isCarOwner());
+		}
 
 		// check time availability
 		if (crit.getFromDate() > 0 && crit.getDays().length > 0) {
@@ -77,7 +79,9 @@ public class BabysitterRepoImpl implements MatchingRepo {
 
 		Query q = new Query(mongoCrit);
 		logger.debug("Search matching query {}", q.toString());
-		return mongo.find(q, Babysitter.class);
+		List<Babysitter> result = mongo.find(q, Babysitter.class);
+		logger.debug("Found {} babysitters matching the request", result.size());
+		return result;
 	}
 
 	private List<Long> calculateDatesFromRequest(SearchCriteria crit) {
