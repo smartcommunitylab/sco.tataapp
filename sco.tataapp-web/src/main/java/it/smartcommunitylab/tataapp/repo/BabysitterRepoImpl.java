@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +88,11 @@ public class BabysitterRepoImpl implements MatchingRepo {
 	private List<Long> calculateDatesFromRequest(SearchCriteria crit) {
 		List<Long> dates = new ArrayList<>();
 		if (crit != null) {
+			LocalTime midnight = new LocalTime(0, 0);
 			DateTime start = new DateTime(crit.getFromDate());
+			start = start.withTime(midnight);
 			DateTime end = new DateTime(crit.getToDate());
+			end = end.withTime(midnight);
 			for (String day : crit.getDays()) {
 				DateTime dayDate = start.withDayOfWeek(stringToDay(day));
 				DateTime dateCursor = new DateTime(start);
