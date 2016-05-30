@@ -19,7 +19,7 @@ angular.module('tataapp.controllers.home', [])
     };
 })
 
-.controller('HomeCtrl', function ($scope, $filter, Config, BackendSrv) {
+.controller('HomeCtrl', function ($scope, $state, $filter, Config, BackendSrv) {
     $scope.swiperOptions = {
         autoplay: 2000,
         speed: 1000,
@@ -41,6 +41,7 @@ angular.module('tataapp.controllers.home', [])
         var entry = {
             title: 'home_' + homeCounter + '_t',
             content: 'home_' + homeCounter + '_c',
+            state: $filter('translate')('home_' + homeCounter + '_p'),
             image: 'img/homepage_0' + homeCounter + '.png'
         };
         $scope.homePages.push(entry);
@@ -52,7 +53,7 @@ angular.module('tataapp.controllers.home', [])
     // TODO
 })
 
-.controller('InfoCtrl', function ($scope, $filter, BackendSrv) {
+.controller('InfoCtrl', function ($scope, $stateParams, $filter, $ionicSlideBoxDelegate, BackendSrv) {
     $scope.swiperOptions = {};
 
     $scope.infoPages = [];
@@ -70,4 +71,8 @@ angular.module('tataapp.controllers.home', [])
     BackendSrv.getZones().then(function (response) {
         $scope.zones = response.content;
     });
+
+    if (!!$stateParams && !!$stateParams['page']) {
+        $ionicSlideBoxDelegate.slide($stateParams['page']);
+    }
 });

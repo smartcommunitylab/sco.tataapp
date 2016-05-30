@@ -260,6 +260,9 @@
 .home .home-pagination i.saw {
     opacity: 1;
 }
+.home .more-info::before {
+    content: '\2026';
+}
 .home .bar-footer {
     background-image: url('../img/progetto92.png');
     background-size: auto 100%;

@@ -18,7 +18,7 @@ angular.module('tataapp.controllers.meet', [])
             municipality: '',
             phone: '',
             email: '',
-            vouchers: '',
+            vouchers: false,
             children: [angular.copy(child)]
         };
     }

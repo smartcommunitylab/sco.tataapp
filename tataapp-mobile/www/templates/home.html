@@ -14,6 +14,7 @@
                     <i class="icon ion-record" ng-repeat="homePage in homePages" ng-class="{'saw': $index <= $parent.$index}"></i>
                 </div>
                 <div class="padding-horizontal" ng-bind-html="homePage.content | translate"></div>
+                <div class="padding"><a href="" class="more-info" ng-click="goTo('app.' + homePage.state, true, true)">{{'more_info' | translate}}</a></div>
             </ion-slide>
         </ion-slide-box>
         <!--<div class="padding-horizontal">
