@@ -361,6 +361,14 @@
 .tataapp-theme .nanny .lbl {
     font-weight: bold;
 }
+.tataapp-theme .nanny p, .tataapp-theme .nanny ul li {
+    color: #000;
+    overflow: auto;
+    white-space: normal;
+}
+.tataapp-theme .nanny ul li {
+    font-size: 14px;
+}
 
 /* Meet */
 

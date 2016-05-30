@@ -8,6 +8,7 @@ angular.module('tataapp', [
     'tataapp.services.config',
     'tataapp.services.utils',
     'tataapp.services.backend',
+    'tataapp.directives',
     'tataapp.controllers.home',
     'tataapp.controllers.points',
     'tataapp.controllers.search',

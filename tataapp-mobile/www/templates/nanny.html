@@ -5,13 +5,30 @@
     <ion-content class="padding">
         <ion-list>
             <item class="item item-thumbnail-left">
-                <img ng-src="{{nanny.avatar}}" />
+                <img ng-src="{{nanny.avatar}}" err-src="img/tataph.png" />
                 <h3><span class="lbl" ng-bind-html="'nanny_name' | translate"></span> <span>{{nanny.name}}</span></h3>
                 <h3><span class="lbl" ng-bind-html="'nanny_surname' | translate"></span> <span>{{nanny.surname}}</span></h3>
                 <h3><span class="lbl" ng-bind-html="'nanny_age' | translate"></span> <span>{{getAge(nanny)}}</span></h3>
             </item>
             <item class="item">
                 <h3><span class="lbl" ng-bind-html="'nanny_origin' | translate"></span> <span>{{nanny.city}}</span></h3>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_description' | translate"></span></h3>
+                <p>{{nanny.description}}</p>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_updates' | translate"></span></h3>
+                <p>{{nanny.updates}}</p>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_languages' | translate"></span></h3>
+                <ul>
+                    <li ng-repeat="lang in nanny.languages" ng-bind-html="('LG_' + lang) | translate"></li>
+                </ul>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_carowner' | translate"></span> <span>{{(!!nanny.carOwner ? 'yes' : 'no') | translate}}</span></h3>
             </item>
         </ion-list>
         <button class="button button-positive button-block" ng-click="meetNanny(nanny)">

@@ -114,7 +114,7 @@ angular.module('tataapp.controllers.search', [])
         }
     };
 
-//    $scope.selectAllDoW();
+    //    $scope.selectAllDoW();
 
     var form2request = function (form) {
         // TODO this is how to convert searchform to search request
@@ -156,8 +156,8 @@ angular.module('tataapp.controllers.search', [])
             }
         });
 
-      request.fromDate = moment($scope.searchform.dateFrom).startOf('date').valueOf();
-      request.toDate =   moment($scope.searchform.dateTo).endOf('date').valueOf();
+        request.fromDate = moment($scope.searchform.dateFrom).startOf('date').valueOf();
+        request.toDate = moment($scope.searchform.dateTo).endOf('date').valueOf();
 
 
         /*
@@ -203,7 +203,6 @@ angular.module('tataapp.controllers.search', [])
         console.log(request);
 
         BackendSrv.searchTate(request).then(
-//        BackendSrv.getAllTate().then(
             function (results) {
                 console.log(results);
 
@@ -213,8 +212,8 @@ angular.module('tataapp.controllers.search', [])
                 });
                 */
                 if (results.content == null) results.content = [];
-                results.content.forEach(function(tata) {
-                  tata.avatar = Config.getServerURL()+'/api/agency/'+Config.AGENCY_ID+'/tata/'+tata.id+'/avatar';
+                results.content.forEach(function (tata) {
+                    tata.avatar = Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/tata/' + tata.id + '/avatar';
                 });
 
                 $state.go('app.searchresults', {
