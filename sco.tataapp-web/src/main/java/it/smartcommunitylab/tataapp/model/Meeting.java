@@ -17,6 +17,16 @@ public class Meeting {
 
 	private long creationTs;
 
+	private boolean vouchers;
+
+	public boolean isVouchers() {
+		return vouchers;
+	}
+
+	public void setVouchers(boolean vouchers) {
+		this.vouchers = vouchers;
+	}
+
 	private String agencyId;
 
 	public String getAgencyId() {
