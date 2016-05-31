@@ -9,8 +9,8 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
   });
 }])
 
-.controller('TataCtrl', [ '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', 'SharedData',
-          				function($rootScope, $scope, $uibModal, Tata, FileUploader, Avatar, SharedData) {
+.controller('TataCtrl', [ '$sce', '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', 'SharedData',
+          				function($sce, $rootScope, $scope, $uibModal, Tata, FileUploader, Avatar, SharedData) {
 	
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
@@ -57,6 +57,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 			required: true
 		},
 		city: {
+			required: true
+		},
+		qualification: {
 			required: true
 		},
 		languages: {
@@ -206,6 +209,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		$scope.showTataDetails = true;
 		$scope.vtata = tata;
 		$scope.vtata.profileImage = $scope.composeTataImageUrl(tata.id);
+		if(tata.calendarURL) {
+			$scope.vtata.absCalendarURL = $sce.trustAsResourceUrl("https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=it&amp;bgcolor=%23FFFFFF&src=" + tata.calendarURL + "&amp;color=%230F4B38&amp;ctz=Europe%2FRome");
+		}
 	};
 	
 	// method newTata: used to show the new tata input form
@@ -321,11 +327,13 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 						email: tata.email,
 						address: tata.address,
 						city: tata.city,
+						qualification: tata.qualification,
 						languages: tata.languages,
 						carOwner: tata.carOwner,
 						agencyId: $scope.agencyId,
 						description: tata.description,
-						updates: tata.updates
+						updates: tata.updates,
+						calendarURL : tata.calendarURL
 					};
 					
 					$scope.corrtata = new Tata(correctedtata);
@@ -413,11 +421,13 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 					email: tata.email,
 					address: tata.address,
 					city: tata.city,
+					qualification: tata.qualification,
 					languages: tata.languages,
 					carOwner: tata.carOwner,
 					agencyId: $scope.agencyId,
 					description: tata.description,
-					updates: tata.updates
+					updates: tata.updates,
+					calendarURL : tata.calendarURL
 				};
 				$scope.corrtata = new Tata(correctedtata);
 				

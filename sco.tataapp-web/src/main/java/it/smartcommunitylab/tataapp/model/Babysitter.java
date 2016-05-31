@@ -16,6 +16,8 @@ public class Babysitter {
 	private String name;
 	private String surname;
 
+	private String qualification;
+
 	private long birthdate;
 	private String email;
 	private String address;
@@ -27,8 +29,39 @@ public class Babysitter {
 	private List<String> languages;
 	private boolean carOwner;
 
+	private String calendarURL;
+
+	/*
+	 * actually unused
+	 */
+	private boolean available;
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
 	@JsonIgnore
 	private List<Availability> timeAvailability;
+
+	public String getCalendarURL() {
+		return calendarURL;
+	}
+
+	public void setCalendarURL(String calendarURL) {
+		this.calendarURL = calendarURL;
+	}
 
 	public String getDescription() {
 		return description;

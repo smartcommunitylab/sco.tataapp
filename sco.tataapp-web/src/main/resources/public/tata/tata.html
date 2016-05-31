@@ -1,293 +1,542 @@
 <div ng-init="getTataList()">
-<div class="row">
-	<div class="col-md-12" ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
-		<div class="right-inner-addon">
-    		<i class="glyphicon glyphicon-search"></i>
-    		<input type="search" ng-model="q.name" class="form-control" placeholder="{{ 'tatapage.search.placeholder' | i18n }}" />
+	<div class="row">
+		<div class="col-md-12"
+			ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
+			<div class="right-inner-addon">
+				<i class="glyphicon glyphicon-search"></i> <input type="search"
+					ng-model="q.name" class="form-control"
+					placeholder="{{ 'tatapage.search.placeholder' | i18n }}" />
+			</div>
+		</div>
+		<div class="col-md-12" ng-if="!showNewTataForm && !showTataDetails">
+			<div class="add-tata-row">
+				<a class="right" href ng-click="newTata()">{{
+					'tatapage.addtatalink' | i18n }}</a>
+			</div>
+		</div>
+		<div class="col-md-12" ng-if="!showNewTataForm && showTataDetails">
+			<h4>
+				<strong>{{ 'tatapage.profile.title1' | i18n }} {{
+					vtata.name | uppercase }} {{ 'tatapage.profile.title2' | i18n }}</strong>
+			</h4>
+			<div class="add-tata-row">
+				<a class="left" href ng-click="hideTata()"><i
+					class="glyphicon glyphicon-arrow-left"></i></a>
+				<!-- <a class="right" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a> -->
+				<a class="partialright" href ng-click="editTata(vtata)">{{
+					'tatapage.edittatalink' | i18n }}</a> <a class="right" href
+					ng-click="deleteTata(vtata)">{{ 'tatapage.deletetatalink' |
+					i18n }}</a>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-12" ng-if="!showNewTataForm && !showTataDetails">
-		<div class="add-tata-row">
-    		<a class="right" href ng-click="newTata()">{{ 'tatapage.addtatalink' | i18n }}</a>
-		</div>
-	</div>
-	<div class="col-md-12" ng-if="!showNewTataForm && showTataDetails">
-		<h4><strong>{{ 'tatapage.profile.title1' | i18n }} {{ vtata.name | uppercase }} {{ 'tatapage.profile.title2' | i18n }}</strong></h4>
-		<div class="add-tata-row">
-			<a class="left" href ng-click="hideTata()"><i class="glyphicon glyphicon-arrow-left"></i></a>
-			<!-- <a class="right" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a> -->
-    		<a class="partialright" href ng-click="editTata(vtata)">{{ 'tatapage.edittatalink' | i18n }}</a>
-    		<a class="right" href ng-click="deleteTata(vtata)">{{ 'tatapage.deletetatalink' | i18n }}</a>
-		</div>
-	</div>
-</div>
-<div class="row" ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
-	<div class="col-md-12">
-		<div ng-repeat="t in tatalist | filter:q | orderBy:'name'">
-			<div class="panel panel-default">
-				<div class="tata-link-view">
-					<a href ng-click="showTata(t)">{{ 'tatapage.profileviewlink' | i18n }}</a>
-				</div>
-				<div class="panel-body tata-data">
-					<img class="tata-image" ng-src="{{ composeTataImageUrl(t.id) }}" on-error-src="{{ onErrorSrc }}"/><!-- data-ng-src="{{ t.profileImage }}" -->
-			    	{{ t.name }} {{ t.surname }}
+	<div class="row"
+		ng-if="!showNewTataForm && !showTataDetails && !showEditTataForm">
+		<div class="col-md-12">
+			<div ng-repeat="t in tatalist | filter:q | orderBy:'name'">
+				<div class="panel panel-default">
+					<div class="tata-link-view">
+						<a href ng-click="showTata(t)">{{ 'tatapage.profileviewlink' |
+							i18n }}</a>
+					</div>
+					<div class="panel-body tata-data">
+						<img class="tata-image" ng-src="{{ composeTataImageUrl(t.id) }}"
+							on-error-src="{{ onErrorSrc }}" />
+						<!-- data-ng-src="{{ t.profileImage }}" -->
+						{{ t.name }} {{ t.surname }}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="row" ng-if="showNewTataForm && !showTataDetails">
-	<div class="col-md-12">
-		<form role="form" name="form">
-			<div class="panel panel-default" width="100%">
-				<h3 class="panel-title"><strong>{{ 'tatapage.create.title' | i18n }}</strong></h3>
-			  		<div class="panel-body" text-align="left">	
-					   	<div class="form-group">
-					    	<label for="image">{{ 'tatapage.create.profileImage' | i18n }}</label>
-					    	<input type="file" class="custom-file-input" name="tImage" title="{{ 'tatapage.create.profileImage.placeholder' | i18n }}" nv-file-select uploader="uploader"/>
-					        <div ng-repeat="item in uploader.queue">
-					            <!-- Name: <span ng-bind="item.file.name"></span><br/> -->
-					            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 150 }"></div>
-					            <button type="button" class="btn btn-default" ng-click="item.remove();clearSizeError()">{{ 'tatapage.create.profileImage.deletebtn' | i18n }}</button>
-					        </div>				   		
-					    	<div class="alert alert-danger" ng-show="!isInit && showNoProfileError">{{ 'tatapage.create.profileImage.error.required' | i18n }}</div>
-							<div class="alert alert-danger" ng-show="showMaxImageSizeError">{{ 'tatapage.create.profileImage.error.maxsize' | i18n }}</div>
-						</div>
-					   	<div class="form-group">
-					    	<label for="name">{{ 'tatapage.create.name' | i18n }}</label>
-					    	<input id="name" type="text" class="form-control" name="tName" ng-model="tata.name" ng-required="tataconf.name.required" placeholder="{{ 'tatapage.create.name.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tName.$error.required">{{ 'tatapage.create.name.error.required' | i18n }}</div>
-						</div>
+	<div class="row" ng-if="showNewTataForm && !showTataDetails">
+		<div class="col-md-12">
+			<form role="form" name="form">
+				<div class="panel panel-default" width="100%">
+					<h3 class="panel-title">
+						<strong>{{ 'tatapage.create.title' | i18n }}</strong>
+					</h3>
+					<div class="panel-body" text-align="left">
 						<div class="form-group">
-					    	<label for="surname">{{ 'tatapage.create.surname' | i18n }}</label>
-					    	<input id="surname" type="text" class="form-control" name="tSurname" ng-model="tata.surname" ng-required="tataconf.surname.required" placeholder="{{ 'tatapage.create.surname.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tSurname.$error.required">{{ 'tatapage.create.surname.error.required' | i18n }}</div>
-						</div>
-						<div class="form-group">
-							<label for="datetimepicker1">{{ 'tatapage.create.birthdate' | i18n }}</label>
-					        <p class="input-group" id="datetimepicker1">
-					          <input type="text" class="form-control" name="tBirthdate" uib-datepicker-popup="{{format}}" ng-model="tata.birthdate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" current-text="Oggi" clear-text="Annulla" close-text="Chiudi" ng-required="tataconf.birthdate.required" alt-input-formats="altInputFormats" placeholder="{{ 'tatapage.create.birthdate.placeholder' | i18n }}" />
-					          <span class="input-group-btn">
-					            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-					          </span>
-					        </p>
-					        <div class="alert alert-danger" ng-show="!isInit && form.tBirthdate.$error.required">{{ 'tatapage.create.birthdate.error.required' | i18n }}</div>
-					    </div>
-						<div class="form-group">
-					    	<label for="mail">{{ 'tatapage.create.mail' | i18n }}</label>
-					    	<input id="mail" type="text" class="form-control" name="tMail" ng-model="tata.email" ng-required="tataconf.email.required" ng-pattern="mailPattern" placeholder="{{ 'tatapage.create.mail.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tMail.$error.required">{{ 'tatapage.create.mail.error.required' | i18n }}</div>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tMail.$error.pattern">{{ 'tatapage.create.mail.error.pattern' | i18n }}</div>
+							<label for="image">{{ 'tatapage.create.profileImage' |
+								i18n }}</label> <input type="file" class="custom-file-input"
+								name="tImage"
+								title="{{ 'tatapage.create.profileImage.placeholder' | i18n }}"
+								nv-file-select uploader="uploader" />
+							<div ng-repeat="item in uploader.queue">
+								<!-- Name: <span ng-bind="item.file.name"></span><br/> -->
+								<div ng-show="uploader.isHTML5"
+									ng-thumb="{ file: item._file, height: 150 }"></div>
+								<button type="button" class="btn btn-default"
+									ng-click="item.remove();clearSizeError()">{{
+									'tatapage.create.profileImage.deletebtn' | i18n }}</button>
+							</div>
+							<div class="alert alert-danger"
+								ng-show="!isInit && showNoProfileError">{{
+								'tatapage.create.profileImage.error.required' | i18n }}</div>
+							<div class="alert alert-danger" ng-show="showMaxImageSizeError">{{
+								'tatapage.create.profileImage.error.maxsize' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="address">{{ 'tatapage.create.address' | i18n }}</label>
-					    	<input id="address" type="text" class="form-control" name="tAddress" ng-model="tata.address" ng-required="tataconf.address.required" placeholder="{{ 'tatapage.create.address.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tAddress.$error.required">{{ 'tatapage.create.address.error.required' | i18n }}</div>
+							<label for="name">{{ 'tatapage.create.name' | i18n }}</label> <input
+								id="name" type="text" class="form-control" name="tName"
+								ng-model="tata.name" ng-required="tataconf.name.required"
+								placeholder="{{ 'tatapage.create.name.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tName.$error.required">{{
+								'tatapage.create.name.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="city">{{ 'tatapage.create.city' | i18n }}</label>
-					    	<input id="city" type="text" class="form-control" name="tCity" ng-model="tata.city" ng-required="tataconf.city.required" placeholder="{{ 'tatapage.create.city.placeholder' | i18n }}" >
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tCity.$error.required">{{ 'tatapage.create.city.error.required' | i18n }}</div>
+							<label for="surname">{{ 'tatapage.create.surname' | i18n
+								}}</label> <input id="surname" type="text" class="form-control"
+								name="tSurname" ng-model="tata.surname"
+								ng-required="tataconf.surname.required"
+								placeholder="{{ 'tatapage.create.surname.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tSurname.$error.required">{{
+								'tatapage.create.surname.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="languages">{{ 'tatapage.create.languages' | i18n }}: </label>
+							<label for="datetimepicker1">{{
+								'tatapage.create.birthdate' | i18n }}</label>
+							<p class="input-group" id="datetimepicker1">
+								<input type="text" class="form-control" name="tBirthdate"
+									uib-datepicker-popup="{{format}}" ng-model="tata.birthdate"
+									is-open="popup1.opened" datepicker-options="dateOptions"
+									ng-required="true" current-text="Oggi" clear-text="Annulla"
+									close-text="Chiudi" ng-required="tataconf.birthdate.required"
+									alt-input-formats="altInputFormats"
+									placeholder="{{ 'tatapage.create.birthdate.placeholder' | i18n }}" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open1()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tBirthdate.$error.required">{{
+								'tatapage.create.birthdate.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="mail">{{ 'tatapage.create.mail' | i18n }}</label> <input
+								id="mail" type="text" class="form-control" name="tMail"
+								ng-model="tata.email" ng-required="tataconf.email.required"
+								ng-pattern="mailPattern"
+								placeholder="{{ 'tatapage.create.mail.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tMail.$error.required">{{
+								'tatapage.create.mail.error.required' | i18n }}</div>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tMail.$error.pattern">{{
+								'tatapage.create.mail.error.pattern' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="address">{{ 'tatapage.create.address' | i18n
+								}}</label> <input id="address" type="text" class="form-control"
+								name="tAddress" ng-model="tata.address"
+								ng-required="tataconf.address.required"
+								placeholder="{{ 'tatapage.create.address.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tAddress.$error.required">{{
+								'tatapage.create.address.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="city">{{ 'tatapage.create.city' | i18n }}</label> <input
+								id="city" type="text" class="form-control" name="tCity"
+								ng-model="tata.city" ng-required="tataconf.city.required"
+								placeholder="{{ 'tatapage.create.city.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tCity.$error.required">{{
+								'tatapage.create.city.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="city">{{ 'tatapage.create.qualification' | i18n }}</label> <input
+								id="qualification" type="text" class="form-control" name="tQualification"
+								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tQualification.$error.required">{{
+								'tatapage.create.qualification.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="languages">{{
+								'tatapage.create.languages' | i18n }}: </label>
 							<table width="100%">
 								<tr>
-									<td><label><input type="checkbox" value="italiano" name="tLanguage" ng-model="tata.boollanguage[0]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.ita' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="italiano"
+											name="tLanguage" ng-model="tata.boollanguage[0]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.ita' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="inglese" name="tLanguage" ng-model="tata.boollanguage[1]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.eng' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="inglese"
+											name="tLanguage" ng-model="tata.boollanguage[1]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.eng' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="tedesco" name="tLanguage" ng-model="tata.boollanguage[2]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.ger' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="tedesco"
+											name="tLanguage" ng-model="tata.boollanguage[2]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.ger' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="francese" name="tLanguage" ng-model="tata.boollanguage[3]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.fra' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="francese"
+											name="tLanguage" ng-model="tata.boollanguage[3]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.fra' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="spagnolo" name="tLanguage" ng-model="tata.boollanguage[4]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.spa' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="spagnolo"
+											name="tLanguage" ng-model="tata.boollanguage[4]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.spa' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><div ng-show="!isInit && form.tLanguage.$error.required" class="alert alert-danger" role="alert">{{ 'tatapage.create.languages.error.required' | i18n }}</div></td>
+									<td><div
+											ng-show="!isInit && form.tLanguage.$error.required"
+											class="alert alert-danger" role="alert">{{
+											'tatapage.create.languages.error.required' | i18n }}</div></td>
 								</tr>
 							</table>
 						</div>
 						<div class="form-group">
-					    	<label for="description">{{ 'tatapage.create.description' | i18n }}</label>
-					    	<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->						   		
-					    	<textarea id="description" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" ></textarea>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tDescription.$error.required">{{ 'tatapage.create.description.error.required' | i18n }}</div>
+							<label for="description">{{ 'tatapage.create.description'
+								| i18n }}</label>
+							<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->
+							<textarea id="description" class="form-control"
+								name="tDescription" ng-model="tata.description"
+								ng-required="tataconf.description.required"
+								placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}"></textarea>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tDescription.$error.required">{{
+								'tatapage.create.description.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="professionalUpdates">{{ 'tatapage.create.updates' | i18n }}</label>
-					    	<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" >						   		 -->
-					    	<textarea id="professionalUpdates" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" ></textarea>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{ 'tatapage.create.updates.error.required' | i18n }}</div>
+							<label for="professionalUpdates">{{
+								'tatapage.create.updates' | i18n }}</label>
+							<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" >						   		 -->
+							<textarea id="professionalUpdates" class="form-control"
+								name="tProfessionalUpdates" ng-model="tata.updates"
+								ng-required="tataconf.updates.required"
+								placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}"></textarea>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{
+								'tatapage.create.updates.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="carowner">{{ 'tatapage.create.carOwner' | i18n }}</label>
-					    	<label><input type="radio" ng-value="trueVal" name="tRadio" ng-model="tata.carOwner" ng-required="tata.carowner"> {{ 'tatapage.create.carOwner.yes' | i18n }}</label>
-					    	<label><input type="radio" ng-value="falseVal" name="tRadio" ng-model="tata.carOwner" ng-required="tata.carowner"> {{ 'tatapage.create.carOwner.no' | i18n }}</label>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tCarOwner.$error.required">{{ 'tatapage.create.carOwner.error.required' | i18n }}</div>
-						</div>	
+							<label for="carowner">{{ 'tatapage.create.carOwner' |
+								i18n }}</label> <label><input type="radio" ng-value="trueVal"
+								name="tRadio" ng-model="tata.carOwner"
+								ng-required="tata.carowner"> {{
+								'tatapage.create.carOwner.yes' | i18n }}</label> <label><input
+								type="radio" ng-value="falseVal" name="tRadio"
+								ng-model="tata.carOwner" ng-required="tata.carowner"> {{
+								'tatapage.create.carOwner.no' | i18n }}</label>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tCarOwner.$error.required">{{
+								'tatapage.create.carOwner.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="calendarURL">{{ 'tatapage.create.calendarURL'
+								| i18n }}</label> <input id="calendarURL" type="text"
+								class="form-control" name="tcalendarURL"
+								ng-model="tata.calendarURL">
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-offset-9 col-md-3">
-							<button type="button" class="btn btn-default" ng-click="closeNewTataView()">{{ 'tatapage.create.cancbtn' | i18n }}</button>&nbsp;&nbsp;
-							<button type="button" class="btn btn-primary" ng-click="createTata(form, tata)">{{ 'tatapage.create.savebtn' | i18n }}</button>
+							<button type="button" class="btn btn-default"
+								ng-click="closeNewTataView()">{{
+								'tatapage.create.cancbtn' | i18n }}</button>
+							&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary"
+								ng-click="createTata(form, tata)">{{
+								'tatapage.create.savebtn' | i18n }}</button>
 						</div>
 					</div>
 				</div>
-		</form>
+			</form>
+		</div>
 	</div>
-</div>
-<div class="row" ng-if="showEditTataForm && !showTataDetails">
-	<div class="col-md-12">
-		<form role="form" name="form">
-			<div class="panel panel-default" width="100%">
-				<h3 class="panel-title"><strong>{{ 'tatapage.edit.title' | i18n }}</strong></h3>
-			  		<div class="panel-body" text-align="left">
-			  			<div class="form-group">
-					    	<label for="image">{{ 'tatapage.create.profileImage' | i18n }}</label>
-					    	<input type="file" class="custom-file-input" name="tImage" title="{{ 'tatapage.create.profileImage.placeholder' | i18n }}" nv-file-select uploader="uploader"/>
-					        <div ng-repeat="item in uploader.queue">
-					            <!-- Name: <span ng-bind="item.file.name"></span><br/> -->
-					            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 150 }"></div>
-					            <button type="button" class="btn btn-default" ng-click="item.remove();clearSizeError()">{{ 'tatapage.create.profileImage.deletebtn' | i18n }}</button>
-					        </div>				   		
-					    	<div class="alert alert-danger" ng-show="!isInit && showNoProfileError">{{ 'tatapage.create.profileImage.error.required' | i18n }}</div>
-							<div class="alert alert-danger" ng-show="showMaxImageSizeError">{{ 'tatapage.create.profileImage.error.maxsize' | i18n }}</div>
-						</div>
-					   	<div class="form-group">
-					    	<label for="name">{{ 'tatapage.create.name' | i18n }}</label>
-					    	<input id="name" type="text" class="form-control" name="tName" ng-model="tata.name" ng-required="tataconf.name.required" placeholder="{{ 'tatapage.create.name.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tName.$error.required">{{ 'tatapage.create.name.error.required' | i18n }}</div>
-						</div>
+	<div class="row" ng-if="showEditTataForm && !showTataDetails">
+		<div class="col-md-12">
+			<form role="form" name="form">
+				<div class="panel panel-default" width="100%">
+					<h3 class="panel-title">
+						<strong>{{ 'tatapage.edit.title' | i18n }}</strong>
+					</h3>
+					<div class="panel-body" text-align="left">
 						<div class="form-group">
-					    	<label for="surname">{{ 'tatapage.create.surname' | i18n }}</label>
-					    	<input id="surname" type="text" class="form-control" name="tSurname" ng-model="tata.surname" ng-required="tataconf.surname.required" placeholder="{{ 'tatapage.create.surname.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tSurname.$error.required">{{ 'tatapage.create.surname.error.required' | i18n }}</div>
-						</div>
-						<div class="form-group">
-							<label for="datetimepicker1">{{ 'tatapage.create.birthdate' | i18n }}</label>
-					        <p class="input-group" id="datetimepicker1">
-					          <input type="text" class="form-control" name="tBirthdate" uib-datepicker-popup="{{format}}" ng-model="tata.birthdate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" current-text="Oggi" clear-text="Annulla" close-text="Chiudi" ng-required="tataconf.birthdate.required" alt-input-formats="altInputFormats" placeholder="{{ 'tatapage.create.birthdate.placeholder' | i18n }}" />
-					          <span class="input-group-btn">
-					            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-					          </span>
-					        </p>
-					        <div class="alert alert-danger" ng-show="!isInit && form.tBirthdate.$error.required">{{ 'tatapage.create.birthdate.error.required' | i18n }}</div>
-					    </div>
-						<div class="form-group">
-					    	<label for="mail">{{ 'tatapage.create.mail' | i18n }}</label>
-					    	<input id="mail" type="text" class="form-control" name="tMail" ng-model="tata.email" ng-required="tataconf.email.required" ng-pattern="mailPattern" placeholder="{{ 'tatapage.create.mail.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tMail.$error.required">{{ 'tatapage.create.mail.error.required' | i18n }}</div>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tMail.$error.pattern">{{ 'tatapage.create.mail.error.pattern' | i18n }}</div>
+							<label for="image">{{ 'tatapage.create.profileImage' |
+								i18n }}</label> <input type="file" class="custom-file-input"
+								name="tImage"
+								title="{{ 'tatapage.create.profileImage.placeholder' | i18n }}"
+								nv-file-select uploader="uploader" />
+							<div ng-repeat="item in uploader.queue">
+								<!-- Name: <span ng-bind="item.file.name"></span><br/> -->
+								<div ng-show="uploader.isHTML5"
+									ng-thumb="{ file: item._file, height: 150 }"></div>
+								<button type="button" class="btn btn-default"
+									ng-click="item.remove();clearSizeError()">{{
+									'tatapage.create.profileImage.deletebtn' | i18n }}</button>
+							</div>
+							<div class="alert alert-danger"
+								ng-show="!isInit && showNoProfileError">{{
+								'tatapage.create.profileImage.error.required' | i18n }}</div>
+							<div class="alert alert-danger" ng-show="showMaxImageSizeError">{{
+								'tatapage.create.profileImage.error.maxsize' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="address">{{ 'tatapage.create.address' | i18n }}</label>
-					    	<input id="address" type="text" class="form-control" name="tAddress" ng-model="tata.address" ng-required="tataconf.address.required" placeholder="{{ 'tatapage.create.address.placeholder' | i18n }}" >						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tAddress.$error.required">{{ 'tatapage.create.address.error.required' | i18n }}</div>
+							<label for="name">{{ 'tatapage.create.name' | i18n }}</label> <input
+								id="name" type="text" class="form-control" name="tName"
+								ng-model="tata.name" ng-required="tataconf.name.required"
+								placeholder="{{ 'tatapage.create.name.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tName.$error.required">{{
+								'tatapage.create.name.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="city">{{ 'tatapage.create.city' | i18n }}</label>
-					    	<input id="city" type="text" class="form-control" name="tCity" ng-model="tata.city" ng-required="tataconf.city.required" placeholder="{{ 'tatapage.create.city.placeholder' | i18n }}" >
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tCity.$error.required">{{ 'tatapage.create.city.error.required' | i18n }}</div>
+							<label for="surname">{{ 'tatapage.create.surname' | i18n
+								}}</label> <input id="surname" type="text" class="form-control"
+								name="tSurname" ng-model="tata.surname"
+								ng-required="tataconf.surname.required"
+								placeholder="{{ 'tatapage.create.surname.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tSurname.$error.required">{{
+								'tatapage.create.surname.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="languages">{{ 'tatapage.create.languages' | i18n }}: </label>
+							<label for="datetimepicker1">{{
+								'tatapage.create.birthdate' | i18n }}</label>
+							<p class="input-group" id="datetimepicker1">
+								<input type="text" class="form-control" name="tBirthdate"
+									uib-datepicker-popup="{{format}}" ng-model="tata.birthdate"
+									is-open="popup1.opened" datepicker-options="dateOptions"
+									ng-required="true" current-text="Oggi" clear-text="Annulla"
+									close-text="Chiudi" ng-required="tataconf.birthdate.required"
+									alt-input-formats="altInputFormats"
+									placeholder="{{ 'tatapage.create.birthdate.placeholder' | i18n }}" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open1()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tBirthdate.$error.required">{{
+								'tatapage.create.birthdate.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="mail">{{ 'tatapage.create.mail' | i18n }}</label> <input
+								id="mail" type="text" class="form-control" name="tMail"
+								ng-model="tata.email" ng-required="tataconf.email.required"
+								ng-pattern="mailPattern"
+								placeholder="{{ 'tatapage.create.mail.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tMail.$error.required">{{
+								'tatapage.create.mail.error.required' | i18n }}</div>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tMail.$error.pattern">{{
+								'tatapage.create.mail.error.pattern' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="address">{{ 'tatapage.create.address' | i18n
+								}}</label> <input id="address" type="text" class="form-control"
+								name="tAddress" ng-model="tata.address"
+								ng-required="tataconf.address.required"
+								placeholder="{{ 'tatapage.create.address.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tAddress.$error.required">{{
+								'tatapage.create.address.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="city">{{ 'tatapage.create.city' | i18n }}</label> <input
+								id="city" type="text" class="form-control" name="tCity"
+								ng-model="tata.city" ng-required="tataconf.city.required"
+								placeholder="{{ 'tatapage.create.city.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tCity.$error.required">{{
+								'tatapage.create.city.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="qualification">{{ 'tatapage.create.qualification' | i18n }}</label> <input
+								id="qualification" type="text" class="form-control" name="tQualification"
+								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tQualification.$error.required">{{
+								'tatapage.create.qualification.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="languages">{{
+								'tatapage.create.languages' | i18n }}: </label>
 							<table width="100%">
 								<tr>
-									<td><label><input type="checkbox" value="italiano" name="tLanguage" ng-model="tata.boollanguage[0]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.ita' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="italiano"
+											name="tLanguage" ng-model="tata.boollanguage[0]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.ita' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="inglese" name="tLanguage" ng-model="tata.boollanguage[1]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.eng' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="inglese"
+											name="tLanguage" ng-model="tata.boollanguage[1]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.eng' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="tedesco" name="tLanguage" ng-model="tata.boollanguage[2]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.ger' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="tedesco"
+											name="tLanguage" ng-model="tata.boollanguage[2]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.ger' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="francese" name="tLanguage" ng-model="tata.boollanguage[3]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.fra' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="francese"
+											name="tLanguage" ng-model="tata.boollanguage[3]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.fra' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="checkbox" value="spagnolo" name="tLanguage" ng-model="tata.boollanguage[4]" ng-required="!someSelectedLang(tata.boollanguage)"> {{ 'tatapage.create.language.spa' | i18n }}</label></td>
+									<td><label><input type="checkbox" value="spagnolo"
+											name="tLanguage" ng-model="tata.boollanguage[4]"
+											ng-required="!someSelectedLang(tata.boollanguage)">
+											{{ 'tatapage.create.language.spa' | i18n }}</label></td>
 								</tr>
 								<tr>
-									<td><div ng-show="!isInit && form.tLanguage.$error.required" class="alert alert-danger" role="alert">{{ 'tatapage.create.languages.error.required' | i18n }}</div></td>
+									<td><div
+											ng-show="!isInit && form.tLanguage.$error.required"
+											class="alert alert-danger" role="alert">{{
+											'tatapage.create.languages.error.required' | i18n }}</div></td>
 								</tr>
 							</table>
 						</div>
 						<div class="form-group">
-					    	<label for="description">{{ 'tatapage.create.description' | i18n }}</label>
-					    	<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->
-					    	<textarea id="description" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" ></textarea>						   		
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tDescription.$error.required">{{ 'tatapage.create.description.error.required' | i18n }}</div>
+							<label for="description">{{ 'tatapage.create.description'
+								| i18n }}</label>
+							<!-- <input id="description" type="text" class="form-control" name="tDescription" ng-model="tata.description" ng-required="tataconf.description.required" placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}" > -->
+							<textarea id="description" class="form-control"
+								name="tDescription" ng-model="tata.description"
+								ng-required="tataconf.description.required"
+								placeholder="{{ 'tatapage.create.description.placeholder' | i18n }}"></textarea>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tDescription.$error.required">{{
+								'tatapage.create.description.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="professionalUpdates">{{ 'tatapage.create.updates' | i18n }}</label>
-					    	<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" > -->						   		
-					    	<textarea id="professionalUpdates" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" ></textarea>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{ 'tatapage.create.updates.error.required' | i18n }}</div>
+							<label for="professionalUpdates">{{
+								'tatapage.create.updates' | i18n }}</label>
+							<!-- <input id="professionalUpdates" type="text" class="form-control" name="tProfessionalUpdates" ng-model="tata.updates" ng-required="tataconf.updates.required" placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}" > -->
+							<textarea id="professionalUpdates" class="form-control"
+								name="tProfessionalUpdates" ng-model="tata.updates"
+								ng-required="tataconf.updates.required"
+								placeholder="{{ 'tatapage.create.updates.placeholder' | i18n }}"></textarea>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tProfessionalUpdates.$error.required">{{
+								'tatapage.create.updates.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-					    	<label for="carowner">{{ 'tatapage.create.carOwner' | i18n }}</label>
-					    	<label><input type="radio" ng-value="trueVal" name="tRadio" ng-model="tata.carOwner" ng-required="tata.carowner"> {{ 'tatapage.create.carOwner.yes' | i18n }}</label>
-					    	<label><input type="radio" ng-value="falseVal" name="tRadio" ng-model="tata.carOwner" ng-required="tata.carowner"> {{ 'tatapage.create.carOwner.no' | i18n }}</label>
-					    	<div class="alert alert-danger" ng-show="!isInit && form.tCarOwner.$error.required">{{ 'tatapage.create.carOwner.error.required' | i18n }}</div>
-						</div>	
+							<label for="carowner">{{ 'tatapage.create.carOwner' |
+								i18n }}</label> <label><input type="radio" ng-value="trueVal"
+								name="tRadio" ng-model="tata.carOwner"
+								ng-required="tata.carowner"> {{
+								'tatapage.create.carOwner.yes' | i18n }}</label> <label><input
+								type="radio" ng-value="falseVal" name="tRadio"
+								ng-model="tata.carOwner" ng-required="tata.carowner"> {{
+								'tatapage.create.carOwner.no' | i18n }}</label>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tCarOwner.$error.required">{{
+								'tatapage.create.carOwner.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
+							<label for="calendarURL">{{ 'tatapage.create.calendarURL'
+								| i18n }}</label> <input id="calendarURL" type="text"
+								class="form-control" name="tcalendarURL"
+								ng-model="tata.calendarURL">
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-offset-9 col-md-3">
-							<button type="button" class="btn btn-default" ng-click="closeEditTataView()">{{ 'tatapage.create.cancbtn' | i18n }}</button>&nbsp;&nbsp;
-							<button type="button" class="btn btn-primary" ng-click="updateTata(form, tata)">{{ 'tatapage.create.savebtn' | i18n }}</button>
+							<button type="button" class="btn btn-default"
+								ng-click="closeEditTataView()">{{
+								'tatapage.create.cancbtn' | i18n }}</button>
+							&nbsp;&nbsp;
+							<button type="button" class="btn btn-primary"
+								ng-click="updateTata(form, tata)">{{
+								'tatapage.create.savebtn' | i18n }}</button>
 						</div>
 					</div>
 				</div>
-		</form>
-	</div>
-</div>
-<div class="row" ng-if="showTataDetails && !showNewTataForm">
-	<div class="col-md-12 tata-details" align="left">
-		<div class="col-md-12">
-			<img class="profileImage" ng-src="{{ vtata.profileImage }}" on-error-src="{{ onErrorSrc }}"/>
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.name' | i18n }}: </label> {{ vtata.name }}
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.surname' | i18n }}: </label> {{ vtata.surname }}
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.birthdate' | i18n }}: </label> {{ vtata.birthdate | date:'dd/MM/yyyy' }}
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.mail' | i18n }}: </label> {{ vtata.email }}
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.address' | i18n }}: </label> {{ vtata.address }}
-		</div>
-		<div class="col-md-12">
-			<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
-		</div>
-		<div class="col-md-12">
-			<!-- <label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }} -->
-			<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ vtata.languages | toLanguageString }}
-		</div>
-		<div class="col-md-12">
-			<label class="margins">{{ 'tatapage.view.description' | i18n }}: </label>
-			<div ng-repeat="d in correctTextFormatting(vtata.description)">
-				<span>{{ d }}</span><br/>
-			</div >
-		</div>
-		<div class="col-md-12">
-			<label class="margins">{{ 'tatapage.view.updates' | i18n }}: </label>
-			<div ng-repeat="u in correctTextFormatting(vtata.updates)">
-				<span>{{ u }}</span><br/>
-			</div >
-		</div>
-		<div class="col-md-12">
-			<label class="margins">{{ 'tatapage.view.carOwner' | i18n }}: </label><span ng-show="vtata.carOwner"> {{ 'tatapage.view.carOwner.yes' | i18n }}</span><span ng-show="!vtata.carOwner"> {{ 'tatapage.view.carOwner.no' | i18n }}</span>
+			</form>
 		</div>
 	</div>
-</div>
+	<div class="row" ng-if="showTataDetails && !showNewTataForm">
+		<div class="col-md-12 tata-details" align="left">
+			<div class="col-md-12">
+				<img class="profileImage" ng-src="{{ vtata.profileImage }}"
+					on-error-src="{{ onErrorSrc }}" />
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.name' | i18n }}: </label> {{ vtata.name }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.surname' | i18n }}: </label> {{
+				vtata.surname }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.birthdate' | i18n }}: </label> {{
+				vtata.birthdate | date:'dd/MM/yyyy' }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.mail' | i18n }}: </label> {{ vtata.email }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.address' | i18n }}: </label> {{
+				vtata.address }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.qualification' | i18n }}: </label> {{ vtata.qualification }}
+			</div>
+			<div class="col-md-12">
+				<!-- <label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }} -->
+				<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{
+				vtata.languages | toLanguageString }}
+			</div>
+			<div class="col-md-12">
+				<label class="margins">{{ 'tatapage.view.description' | i18n
+					}}: </label>
+				<div ng-repeat="d in correctTextFormatting(vtata.description)">
+					<span>{{ d }}</span><br />
+				</div>
+			</div>
+			<div class="col-md-12">
+				<label class="margins">{{ 'tatapage.view.updates' | i18n }}:
+				</label>
+				<div ng-repeat="u in correctTextFormatting(vtata.updates)">
+					<span>{{ u }}</span><br />
+				</div>
+			</div>
+			<div class="col-md-12">
+				<label class="margins">{{ 'tatapage.view.carOwner' | i18n
+					}}: </label><span ng-show="vtata.carOwner"> {{
+					'tatapage.view.carOwner.yes' | i18n }}</span><span
+					ng-show="!vtata.carOwner"> {{ 'tatapage.view.carOwner.no' |
+					i18n }}</span>
+			</div>
+			<div class="col-md-12">
+				<label class="margins">{{ 'tatapage.view.calendarURL' | i18n
+					}}: </label> {{vtata.calendarURL}}
+			</div>
+		</div>
+		<div >
+		<iframe ng-if="vtata.absCalendarURL !== undefined && vtata.absCalendarURL.length !== 0"
+			ng-src="{{vtata.absCalendarURL}}"
+			style="border-width: 0" width="800" height="600" frameborder="0"
+			scrolling="no"></iframe>
+	    </div>
+	</div>
 </div>
