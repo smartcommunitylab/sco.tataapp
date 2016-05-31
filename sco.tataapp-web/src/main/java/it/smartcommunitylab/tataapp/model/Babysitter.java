@@ -27,8 +27,18 @@ public class Babysitter {
 	private List<String> languages;
 	private boolean carOwner;
 
+	private String calendarURL;
+
 	@JsonIgnore
 	private List<Availability> timeAvailability;
+
+	public String getCalendarURL() {
+		return calendarURL;
+	}
+
+	public void setCalendarURL(String calendarURL) {
+		this.calendarURL = calendarURL;
+	}
 
 	public String getDescription() {
 		return description;
