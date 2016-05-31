@@ -151,6 +151,15 @@
 								'tatapage.create.city.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
+							<label for="city">{{ 'tatapage.create.qualification' | i18n }}</label> <input
+								id="qualification" type="text" class="form-control" name="tQualification"
+								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tQualification.$error.required">{{
+								'tatapage.create.qualification.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
 							<label class="control-label" for="languages">{{
 								'tatapage.create.languages' | i18n }}: </label>
 							<table width="100%">
@@ -353,6 +362,15 @@
 								'tatapage.create.city.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
+							<label for="qualification">{{ 'tatapage.create.qualification' | i18n }}</label> <input
+								id="qualification" type="text" class="form-control" name="tQualification"
+								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tQualification.$error.required">{{
+								'tatapage.create.qualification.error.required' | i18n }}</div>
+						</div>
+						<div class="form-group">
 							<label class="control-label" for="languages">{{
 								'tatapage.create.languages' | i18n }}: </label>
 							<table width="100%">
@@ -479,6 +497,9 @@
 			</div>
 			<div class="col-md-12">
 				<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.qualification' | i18n }}: </label> {{ vtata.qualification }}
 			</div>
 			<div class="col-md-12">
 				<!-- <label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }} -->

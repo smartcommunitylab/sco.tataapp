@@ -59,6 +59,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		city: {
 			required: true
 		},
+		qualification: {
+			required: true
+		},
 		languages: {
 			required: true
 		},
@@ -324,6 +327,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 						email: tata.email,
 						address: tata.address,
 						city: tata.city,
+						qualification: tata.qualification,
 						languages: tata.languages,
 						carOwner: tata.carOwner,
 						agencyId: $scope.agencyId,
@@ -417,6 +421,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 					email: tata.email,
 					address: tata.address,
 					city: tata.city,
+					qualification: tata.qualification,
 					languages: tata.languages,
 					carOwner: tata.carOwner,
 					agencyId: $scope.agencyId,
