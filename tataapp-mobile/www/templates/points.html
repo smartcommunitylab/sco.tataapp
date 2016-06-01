@@ -12,13 +12,18 @@
                 <ion-item class="item item-thumbnail-left">
                     <img src="img/tata_point.png" />
                     <h2>{{point.name}}</h2>
-                    <h4>{{'from' | translate}} {{point.startDate | date:dateFormat}} {{'to' | translate}} {{point.endDate | date : dateFormat}}</h4>
+                    <div ng-if="!!point.recurrence">
+                        <h4><span ng-if="point.recurrence.days.length > 0">{{'every' | translate}} {{point.days}} </span>{{'from' | translate}} {{point.startDate | date:dateFormat}}<span ng-if="!!point.recurrence.untilDate"> {{'to' | translate}} {{point.recurrence.untilDate | date : dateFormat}}</span></h4>
+                    </div>
+                    <div ng-if="!point.recurrence">
+                        <h4>{{point.startDate | date:dateFormat}}</h4>
+                    </div>
                     <h4>{{point.address}}</h4>
                 </ion-item>
             </div>
         </ion-list>
         <div ng-if="tataPoints != null && tataPoints.length == 0">
-          <h4 class="text-center">{{'title_nopoints' | translate}}</h4>
+            <h4 class="text-center">{{'title_nopoints' | translate}}</h4>
         </div>
 
     </ion-content>

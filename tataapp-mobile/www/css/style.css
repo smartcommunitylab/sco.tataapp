@@ -404,7 +404,9 @@
     margin-top: 1em;
     white-space: normal;
 }
-
+.tataapp-theme .point .list-item span > span {
+    padding: 0;
+}
 /* Fee */
 
 .tataapp-theme .fee .pricelist {

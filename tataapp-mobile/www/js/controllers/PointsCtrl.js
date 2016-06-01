@@ -6,13 +6,27 @@ angular.module('tataapp.controllers.points', [])
     $scope.dateFormat = Config.dateFormat; // Config.dateFormatNum
     $scope.dateFormatMonth = Config.dateFormatMonth;
 
+    var days2text = function (tatapoint) {
+        if (!!tatapoint.recurrence && tatapoint.recurrence.frequency == 'WEEKLY' && tatapoint.recurrence.days.length > 0) {
+            tatapoint.days = '';
+            for (var i = 0; i < tatapoint.recurrence.days.length; i++) {
+                tatapoint.days += $filter('translate')('date_weekslist_' + tatapoint.recurrence.days[i]);
+                if ((i + 1) < tatapoint.recurrence.days.length) {
+                    tatapoint.days += ', ';
+                }
+            };
+        }
+    };
+
     var getAllTatapoint = function () {
         BackendSrv.getAllTatapoint().then(
             function (data) {
                 for (var i = 0; i < data.content.length; i++) {
-                    if (moment(data.content[i].startDate).startOf('month').isSameOrBefore($scope.now) &&
-                        moment(data.content[i].endDate).startOf('month').isSameOrAfter($scope.now)) {
-                        $scope.tataPoints.push(angular.copy(data.content[i]));
+                    var tatapoint = data.content[i];
+                    if (moment(tatapoint.startDate).startOf('month').isSameOrBefore($scope.now) &&
+                        moment(tatapoint.endDate).startOf('month').isSameOrAfter($scope.now)) {
+                        days2text(tatapoint);
+                        $scope.tataPoints.push(angular.copy(tatapoint));
                     }
                 }
             },

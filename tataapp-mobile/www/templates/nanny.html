@@ -13,6 +13,10 @@
             <item class="item">
                 <h3><span class="lbl" ng-bind-html="'nanny_origin' | translate"></span> <span>{{nanny.city}}</span></h3>
             </item>
+            <item class="item" ng-if="!!nanny.qualification">
+                <h3><span class="lbl" ng-bind-html="'nanny_qualification' | translate"></span></h3>
+                <p>{{nanny.qualification}}</p>
+            </item>
             <item class="item">
                 <h3><span class="lbl" ng-bind-html="'nanny_description' | translate"></span></h3>
                 <p>{{nanny.description}}</p>
@@ -29,6 +33,9 @@
             </item>
             <item class="item">
                 <h3><span class="lbl" ng-bind-html="'nanny_carowner' | translate"></span> <span>{{(!!nanny.carOwner ? 'yes' : 'no') | translate}}</span></h3>
+            </item>
+            <item class="item">
+                <h3><span class="lbl" ng-bind-html="'nanny_availability' | translate"></span> <span>{{(!!nanny.available ? 'yes' : 'no') | translate}}</span></h3>
             </item>
         </ion-list>
         <button class="button button-positive button-block" ng-click="meetNanny(nanny)">

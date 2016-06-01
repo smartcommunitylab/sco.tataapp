@@ -1,16 +1,21 @@
-<ion-view title="{{'menu_points' | translate}}" class="points">>
+<ion-view title="{{'menu_points' | translate}}" class="point">>
     <ion-content class="has-header padding">
         <h4 class="padding">{{selectedPoint.name}}</h4>
         <ion-list>
             <div class="list-item">
                 <i class="icon ion-android-calendar"></i>
-                <span>{{'from' | translate}} {{selectedPoint.startDate | date:dateFormat}} {{'to' | translate}} {{selectedPoint.endDate | date : dateFormat}}</span>
+                <span ng-if="!!selectedPoint.recurrence">
+                        <span ng-if="selectedPoint.recurrence.days.length > 0">{{'every' | translate}} {{selectedPoint.days}} </span>{{'from' | translate}} {{selectedPoint.startDate | date:dateFormat}}<span ng-if="!!selectedPoint.recurrence.untilDate"> {{'to' | translate}} {{selectedPoint.recurrence.untilDate | date : dateFormat}}</span>
+                </span>
+                <span ng-if="!selectedPoint.recurrence">
+                        {{'from' | translate}} {{selectedPoint.startDate | date:dateFormat}}
+                </span>
             </div>
             <div class="list-item">
                 <i class="icon ion-android-time"></i>
                 <span>{{'fromTime' | translate}} {{selectedPoint.startTime | date:timeFormat}} {{'toTime' | translate}} {{selectedPoint.endTime | date:timeFormat}}</span>
             </div>
-            <div class="list-item">
+            <div class="list-item" ng-if="!!selectedPoint.address">
                 <i class="icon ion-android-pin"></i>
                 <span>{{selectedPoint.address}}</span>
             </div>
