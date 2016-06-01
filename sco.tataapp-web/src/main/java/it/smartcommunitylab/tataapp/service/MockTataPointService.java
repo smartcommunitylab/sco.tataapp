@@ -56,7 +56,7 @@ public class MockTataPointService implements TataPointService {
 		t.setAddress("Via Sommarive, 18, 38123 Povo TN, Italy");
 		t.setAgencyId("tataApp");
 		t.setContactDescription("Riferimento Associazione TataApp tel. 333-21234344 e-mail: ass@uu.ii");
-		t.setRecurrence("WEEKLY", new String[] { "MON", "SUN" });
+		t.setRecurrence("WEEKLY", new String[] { "MON", "SUN" }, -1);
 		t.setStartDate(new GregorianCalendar(2016, 0, 7).getTimeInMillis());
 		t.setEndDate(new GregorianCalendar(2016, 2, 7).getTimeInMillis());
 		GregorianCalendar gc = new GregorianCalendar();
@@ -76,7 +76,7 @@ public class MockTataPointService implements TataPointService {
 		t.setAddress("Via Aeroporto, Trento, Province of Trento, Italy");
 		t.setAgencyId("tataapp");
 		t.setContactDescription("Gino Strada tel 0000/111111 gstrada@gg.rr");
-		t.setRecurrence("MONTHLY", null);
+		t.setRecurrence("MONTHLY", null, -1);
 		t.setStartDate(new GregorianCalendar(2016, 3, 1, 0, 0).getTimeInMillis());
 		t.setEndDate(new GregorianCalendar(2016, 6, 31, 0, 0).getTimeInMillis());
 		gc = new GregorianCalendar();
