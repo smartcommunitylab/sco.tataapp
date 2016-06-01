@@ -361,7 +361,8 @@
 .tataapp-theme .nanny .lbl {
     font-weight: bold;
 }
-.tataapp-theme .nanny p, .tataapp-theme .nanny ul li {
+.tataapp-theme .nanny p,
+.tataapp-theme .nanny ul li {
     color: #000;
     overflow: auto;
     white-space: normal;
@@ -454,6 +455,7 @@
 }
 
 /* Info */
+
 .info .slider {
     height: 100vh;
 }
