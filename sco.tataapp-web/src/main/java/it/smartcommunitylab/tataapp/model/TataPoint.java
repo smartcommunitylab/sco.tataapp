@@ -2,6 +2,7 @@ package it.smartcommunitylab.tataapp.model;
 
 import java.util.List;
 
+import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
@@ -83,6 +84,9 @@ public class TataPoint {
 							r.setFrequency(part.substring("FREQ=".length()));
 						} else if (part.startsWith("BYDAY=")) {
 							r.setDays(part.substring("BYDAY=".length()).split(","));
+						} else if (part.startsWith("UNTIL=")) {
+							String day = part.substring("UNTIL=".length(), part.indexOf("T", "UNTIL=".length()));
+							r.setUntilDate(DateTimeFormat.forPattern("yyyyMMdd").parseDateTime(day).getMillis());
 						}
 					}
 				}
@@ -95,8 +99,8 @@ public class TataPoint {
 		return recurrence;
 	}
 
-	public void setRecurrence(String frequency, String[] days) {
-		this.recurrence = new Recurrence(frequency, days);
+	public void setRecurrence(String frequency, String[] days, long untilDate) {
+		this.recurrence = new Recurrence(frequency, days, untilDate);
 	}
 
 	public long getStartDate() {
@@ -184,10 +188,20 @@ public class TataPoint {
 class Recurrence {
 	private String frequency;
 	private String[] days;
+	private long untilDate;
 
-	public Recurrence(String frequency, String[] days) {
+	public Recurrence(String frequency, String[] days, long untilDate) {
 		this.frequency = frequency;
 		this.days = days;
+		this.untilDate = untilDate;
+	}
+
+	public long getUntilDate() {
+		return untilDate;
+	}
+
+	public void setUntilDate(long untilDate) {
+		this.untilDate = untilDate;
 	}
 
 	public Recurrence() {
