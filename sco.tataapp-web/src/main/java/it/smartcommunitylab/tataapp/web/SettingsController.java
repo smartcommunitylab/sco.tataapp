@@ -26,7 +26,7 @@ public class SettingsController {
 
 	@Autowired
 	private IdentityLookupService identityLookup;
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/console/api/agency/{agencyId}/settings/permissions")
 	public PermissionBean calendarAuthorizationCheck(HttpServletRequest req, @PathVariable String agencyId) {
 		agencyId = identityLookup.getName();
@@ -39,6 +39,13 @@ public class SettingsController {
 			}
 		}
 		return permBean;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/console/api/agency/{agencyId}/settings")
+	public Settings readSettings(HttpServletRequest req, @PathVariable String agencyId) {
+		agencyId = identityLookup.getName();
+		Settings s = settingsSrv.loadSettings(agencyId);
+		return s;
 	}
 }
 
