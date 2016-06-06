@@ -183,7 +183,8 @@ angular.module('tataapp', [
     })
 
     .state('app.info', {
-        url: '/info/{page}',
+        url: '/info',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/info.html',

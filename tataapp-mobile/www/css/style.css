@@ -457,9 +457,9 @@
 }
 
 /* Info */
-
+.info .scroll,
 .info .slider {
-    height: 100vh;
+    height: 100%;
 }
 .info .info-pagination {
     text-align: center;
@@ -473,13 +473,22 @@
     opacity: 1;
 }
 .tataapp-theme .info .info-page {
-    margin-bottom: 44px;
+    /*margin-bottom: 44px;*/
+    height: 100%;
+}
+.tataapp-theme .info .info-page p {
+    margin: 10px 0 0 0;
+}
+.tataapp-theme .info .info-page ul {
+    list-style: disc;
+    padding: 0 0 0 40px;
 }
 .tataapp-theme .info .info-page::after {
     content: "";
     top: 0;
     left: 0;
-    bottom: 44px;
+    /*bottom: 44px;*/
+    bottom: 0;
     right: 0;
     /*opacity: 0.9;*/
     position: absolute;
@@ -511,6 +520,9 @@
     font-size: 1.2em;
     text-transform: uppercase;
     font-weight: bold;
+}
+.tataapp-theme .info .zone {
+    text-transform: capitalize;
 }
 
 /* Vouchers */

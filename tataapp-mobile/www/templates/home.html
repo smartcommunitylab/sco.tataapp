@@ -7,14 +7,16 @@
 
     <ion-content class="has-header" scroll="false">
         <ion-slide-box does-continue="{{!!swiperOptions.loop}}" show-pager="false">
-            <ion-slide ng-repeat="homePage in homePages">
+            <ion-slide disable-scroll="false" ng-repeat="homePage in homePages">
                 <img ng-src="{{homePage.image}}" />
                 <h1 ng-bind-html="homePage.title | translate"></h1>
                 <div class="home-pagination">
                     <i class="icon ion-record" ng-repeat="homePage in homePages" ng-class="{'saw': $index <= $parent.$index}"></i>
                 </div>
-                <div class="padding-horizontal" ng-bind-html="homePage.content | translate"></div>
-                <div class="padding"><a href="" class="more-info" ng-click="goTo('app.' + homePage.state, true, true)">{{'more_info' | translate}}</a></div>
+                <ion-scroll>
+                    <div class="padding-horizontal" ng-bind-html="homePage.content | translate"></div>
+                    <div class="padding"><a href="" class="more-info" ng-click="goTo('app.' + homePage.state, true, true)">{{'more_info' | translate}}</a></div>
+                </ion-scroll>
             </ion-slide>
         </ion-slide-box>
         <!--<div class="padding-horizontal">
