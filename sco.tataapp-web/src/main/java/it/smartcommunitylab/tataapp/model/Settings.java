@@ -11,10 +11,20 @@ public class Settings {
 
 	private String agencyId;
 	private String email;
+	private String googleAccount;
+
 	private String tatapointCalName;
 	private String tatapointCalId;
 	private boolean calendarAuthorization;
 	private List<ServiceOffice> offices;
+
+	public String getGoogleAccount() {
+		return googleAccount;
+	}
+
+	public void setGoogleAccount(String googleAccount) {
+		this.googleAccount = googleAccount;
+	}
 
 	public String getId() {
 		return id;

@@ -67,14 +67,15 @@ public class TataPoint {
 
 	/**
 	 * Create a Recurrence object analyzing iCal spec. Actually supported RRULE
-	 * property, FREQ and BYDAY fields
+	 * property, FREQ, BYDAY and UNTIL fields
 	 * 
 	 * @param recurrence
 	 * @return
 	 */
 	private Recurrence extractRecurrence(List<String> recurrence) {
-		Recurrence r = new Recurrence();
+		Recurrence r = null;
 		if (recurrence != null) {
+			r = new Recurrence();
 			for (String recDef : recurrence) {
 				if (recDef.startsWith("RRULE:")) {
 					recDef = recDef.substring("RRULE:".length());

@@ -533,10 +533,6 @@
 			</div>
 		</div>
 		<div >
-		<iframe ng-if="vtata.absCalendarURL !== undefined && vtata.absCalendarURL.length !== 0"
-			ng-src="{{vtata.absCalendarURL}}"
-			style="border-width: 0" width="800" height="600" frameborder="0"
-			scrolling="no"></iframe>
-	    </div>
+		<div ng-bind-html="calEmbed"></div>
 	</div>
 </div>
