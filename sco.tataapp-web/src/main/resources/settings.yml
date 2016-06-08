@@ -1,6 +1,7 @@
 settings:
  - agencyId: tataApp
    email: tataapp@localhost
+   googleAccount: tataapp@localhost
    tatapointCalName: Tatapoint
    tatapointCalId: 
    calendarAuthorization: false
@@ -9,6 +10,7 @@ settings:
     - valsugana
  - agencyId: progetto92
    email: tataapp@localhost
+   googleAccount: tataapp@localhost
    tatapointCalName: Tatapoint
    tatapointCalId: 
    calendarAuthorization: false

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
+angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSanitize'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/tata', {
@@ -210,7 +210,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload'])
 		$scope.vtata = tata;
 		$scope.vtata.profileImage = $scope.composeTataImageUrl(tata.id);
 		if(tata.calendarURL) {
-			$scope.vtata.absCalendarURL = $sce.trustAsResourceUrl("https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=it&amp;bgcolor=%23FFFFFF&src=" + tata.calendarURL + "&amp;color=%230F4B38&amp;ctz=Europe%2FRome");
+			var calendarId = tata.calendarURL;
+			var htmlCode = '<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=it&amp;bgcolor=%23FFFFFF&src='+calendarId+'&amp;ctz=Europe%2FRome" style="border-width: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+			$scope.calEmbed = $sce.trustAsHtml(htmlCode);
+			
+			//$scope.vtata.absCalendarURL = $sce.trustAsResourceUrl("https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=it&amp;bgcolor=%23FFFFFF&src=" + tata.calendarURL + "&amp;color=%230F4B38&amp;ctz=Europe%2FRome");
+			//console.log($scope.vtata.absCalendarURL);
 		}
 	};
 	
