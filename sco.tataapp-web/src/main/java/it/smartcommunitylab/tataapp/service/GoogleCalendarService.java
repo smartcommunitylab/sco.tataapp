@@ -247,7 +247,7 @@ public class GoogleCalendarService {
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Exception getting calendar list for agency {}", agencyId);
+			logger.error("Exception getting calendar list for agency {}", agencyId, e);
 		}
 
 		return null;

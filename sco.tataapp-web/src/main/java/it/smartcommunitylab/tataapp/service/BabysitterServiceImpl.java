@@ -112,7 +112,7 @@ public class BabysitterServiceImpl implements BabysitterService {
 			try {
 				calendarSrv.importTataAvailability(s.getAgencyId());
 			} catch (IOException e) {
-				logger.error("Exception updating babysitter availailability for agency {}", s.getAgencyId());
+				logger.error("Exception updating babysitter availailability for agency {}", s.getAgencyId(), e);
 			}
 			logger.info("Updated babysitter availability for agency {}", s.getAgencyId());
 		}
