@@ -20,6 +20,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import it.smartcommunitylab.tataapp.beans.SearchCriteria;
+import it.smartcommunitylab.tataapp.model.Availability;
 import it.smartcommunitylab.tataapp.model.Babysitter;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.repo.BabysitterRepo;
@@ -116,6 +117,16 @@ public class BabysitterServiceImpl implements BabysitterService {
 			}
 			logger.info("Updated babysitter availability for agency {}", s.getAgencyId());
 		}
+	}
+
+	@Override
+	public Babysitter updateAvailability(String babysitterId, List<Availability> availability) {
+		Babysitter b = load(babysitterId);
+		if (b != null) {
+			b.setTimeAvailability(availability);
+			babysitterRepo.save(b);
+		}
+		return b;
 	}
 
 }
