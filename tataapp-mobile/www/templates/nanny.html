@@ -34,7 +34,7 @@
             <item class="item">
                 <h3><span class="lbl" ng-bind-html="'nanny_carowner' | translate"></span> <span>{{(!!nanny.carOwner ? 'yes' : 'no') | translate}}</span></h3>
             </item>
-            <item class="item">
+            <item class="item" ng-if="!!nanny.available">
                 <h3><span class="lbl" ng-bind-html="'nanny_availability' | translate"></span> <span>{{(!!nanny.available ? 'yes' : 'no') | translate}}</span></h3>
             </item>
         </ion-list>
