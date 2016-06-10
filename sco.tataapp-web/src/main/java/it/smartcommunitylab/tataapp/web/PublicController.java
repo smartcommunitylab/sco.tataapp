@@ -1,11 +1,14 @@
 package it.smartcommunitylab.tataapp.web;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,6 +41,8 @@ import it.smartcommunitylab.tataapp.service.TataPointService;
 @CrossOrigin
 @RequestMapping(value = "/public")
 public class PublicController {
+
+	private static final Logger logger = LoggerFactory.getLogger(PublicController.class);
 
 	@Autowired
 	private BabysitterService babysitterSrv;
@@ -83,13 +88,21 @@ public class PublicController {
 
 	@RequestMapping(value = "/api/agency/{agencyId}/tata/{babysitterId}/avatar", method = RequestMethod.GET)
 	public void downloadImage(@PathVariable String babysitterId, HttpServletResponse resp) throws Exception {
-		InputStream in = imageSrv.retrieveInputStream(babysitterId);
-		OutputStream o = resp.getOutputStream();
-		resp.setContentType("image/png");
-		byte[] buffer = new byte[1024];
-		int c = 0;
-		while ((c = in.read(buffer)) != -1) {
-			o.write(buffer, 0, c);
+		try {
+			InputStream in = imageSrv.retrieveInputStream(babysitterId);
+			OutputStream o = resp.getOutputStream();
+			resp.setContentType("image/png");
+			byte[] buffer = new byte[1024];
+			int c = 0;
+			while ((c = in.read(buffer)) != -1) {
+				o.write(buffer, 0, c);
+			}
+		} catch (IOException e) {
+			try {
+				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Picture not found");
+			} catch (IOException e1) {
+				logger.error("IOException sending HTTP error getting avatar for download");
+			}
 		}
 	}
 
