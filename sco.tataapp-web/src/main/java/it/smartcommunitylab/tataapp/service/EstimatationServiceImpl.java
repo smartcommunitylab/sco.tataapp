@@ -1,5 +1,6 @@
 package it.smartcommunitylab.tataapp.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -40,21 +41,21 @@ public class EstimatationServiceImpl implements EstimatationService {
 			estimationRate = baseRate * data.getWeeklyHour();
 
 			Double bonusRateHour = 0d;
-			// if (data.isBonusAssignee()) {
-			switch (data.getBonusType()) {
-			case "type1":
-				bonusRateHour = 5.50d;
-				break;
-			case "type2":
-				bonusRateHour = 4.50d;
-				break;
-			case "type3":
-				bonusRateHour = 3d;
-				break;
-			default:
-				break;
+			if (!StringUtils.isBlank(data.getBonusType())) {
+				switch (data.getBonusType()) {
+				case "type1":
+					bonusRateHour = 5.50d;
+					break;
+				case "type2":
+					bonusRateHour = 4.50d;
+					break;
+				case "type3":
+					bonusRateHour = 3d;
+					break;
+				default:
+					break;
+				}
 			}
-			// }
 
 			totalRate = estimationRate;
 			bonusRate = bonusRateHour * data.getWeeklyHour();
