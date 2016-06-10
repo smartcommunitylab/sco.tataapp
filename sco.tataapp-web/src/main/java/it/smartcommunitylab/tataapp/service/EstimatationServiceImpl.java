@@ -22,7 +22,7 @@ public class EstimatationServiceImpl implements EstimatationService {
 
 	@Override
 	public EstimatationResult estimate(EstimatationData data) {
-		Double estimationRate = 0d;
+		Double estimationRate = 0d, totalRate = 0d, bonusRate = 0d;
 		if (data != null) {
 			Double baseRate = 0d;
 			if (data.isDisability()) {
@@ -40,26 +40,28 @@ public class EstimatationServiceImpl implements EstimatationService {
 			estimationRate = baseRate * data.getWeeklyHour();
 
 			Double bonusRateHour = 0d;
-			if (data.isBonusAssignee()) {
-				switch (data.getBonusType()) {
-				case "type1":
-					bonusRateHour = 5.50d;
-					break;
-				case "type2":
-					bonusRateHour = 4.50d;
-					break;
-				case "type3":
-					bonusRateHour = 3d;
-					break;
-				default:
-					break;
-				}
+			// if (data.isBonusAssignee()) {
+			switch (data.getBonusType()) {
+			case "type1":
+				bonusRateHour = 5.50d;
+				break;
+			case "type2":
+				bonusRateHour = 4.50d;
+				break;
+			case "type3":
+				bonusRateHour = 3d;
+				break;
+			default:
+				break;
 			}
+			// }
 
-			estimationRate -= bonusRateHour * data.getWeeklyHour();
+			totalRate = estimationRate;
+			bonusRate = bonusRateHour * data.getWeeklyHour();
+			estimationRate -= bonusRate;
 		}
 
-		return new EstimatationResult(data, estimationRate);
+		return new EstimatationResult(data, estimationRate, totalRate, bonusRate);
 	}
 
 }
