@@ -36,6 +36,9 @@ public class Babysitter {
 	 */
 	private boolean available;
 
+	@JsonIgnore
+	private List<Availability> timeAvailability;
+
 	public String getQualification() {
 		return qualification;
 	}
@@ -51,9 +54,6 @@ public class Babysitter {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-
-	@JsonIgnore
-	private List<Availability> timeAvailability;
 
 	public String getCalendarURL() {
 		return calendarURL;

@@ -1,12 +1,32 @@
 package it.smartcommunitylab.tataapp.beans;
 
 public class EstimatationResult {
-	EstimatationData estimateData;
-	Double estimation;
+	private EstimatationData estimateData;
+	private Double estimation;
+	private Double bonusRate;
+	private Double totalRate;
 
-	public EstimatationResult(EstimatationData data, Double estimation) {
+	public Double getBonusRate() {
+		return bonusRate;
+	}
+
+	public void setBonusRate(Double bonusRate) {
+		this.bonusRate = bonusRate;
+	}
+
+	public Double getTotalRate() {
+		return totalRate;
+	}
+
+	public void setTotalRate(Double totalRate) {
+		this.totalRate = totalRate;
+	}
+
+	public EstimatationResult(EstimatationData data, Double estimation, Double totalRate, Double bonusRate) {
 		this.estimateData = data;
 		this.estimation = estimation;
+		this.bonusRate = bonusRate;
+		this.totalRate = totalRate;
 	}
 
 	public EstimatationData getEstimateData() {

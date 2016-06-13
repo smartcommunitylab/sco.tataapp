@@ -61,7 +61,7 @@ public class TataPointServiceImpl implements TataPointService {
 				repo.save(tatapoints);
 				logger.info("Imported tatapoint for agency {}", s.getAgencyId());
 			} catch (IOException e) {
-				logger.error("Exception importing tatapoint for agency {}", s.getAgencyId());
+				logger.error("Exception importing tatapoint for agency {}", s.getAgencyId(), e);
 			}
 		}
 	}

@@ -4,7 +4,7 @@ Service backend, REST APIs and administration web console.
 
 # Usage
 
-## Requiriments
+## Requirements
 To compile server stuff you need:
 * Apache Maven 3.x
 * Bower

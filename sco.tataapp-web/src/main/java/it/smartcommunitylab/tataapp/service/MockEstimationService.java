@@ -12,7 +12,7 @@ public class MockEstimationService implements EstimatationService {
 
 	@Override
 	public EstimatationResult estimate(EstimatationData data) {
-		return new EstimatationResult(data, 400d);
+		return new EstimatationResult(data, 400d, 500d, 100d);
 	}
 
 }

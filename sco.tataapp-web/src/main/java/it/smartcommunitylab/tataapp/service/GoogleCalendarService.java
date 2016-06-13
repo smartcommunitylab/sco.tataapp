@@ -116,10 +116,9 @@ public class GoogleCalendarService {
 					newAvailability.addAll(availabilityList);
 				}
 
-				babysitter.setTimeAvailability(newAvailability);
+				babysitter = babysitterSrv.updateAvailability(babysitter.getId(), newAvailability);
 				logger.info("Extracted total {} availability objects of calendar {}",
 						babysitter.getTimeAvailability().size(), calendarName);
-				babysitterSrv.save(babysitter);
 			}
 		}
 	}
@@ -247,7 +246,7 @@ public class GoogleCalendarService {
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Exception getting calendar list for agency {}", agencyId);
+			logger.error("Exception getting calendar list for agency {}", agencyId, e);
 		}
 
 		return null;
