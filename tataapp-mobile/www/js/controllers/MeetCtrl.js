@@ -109,7 +109,6 @@ angular.module('tataapp.controllers.meet', [])
             if (ok) {
                 Utils.saveToLocalStorage(meetFormLSkey, $scope.meetform);
                 var request = form2request($scope.meetform);
-                /*request = JSON.parse('{"agencyId":"progetto92","familyRepresentive":{"email":"oscar.zambotti@gmail.com","phone":"","name":"Oscar","surname":"Zambotti","city":"Lavis"},"children":[{"age":0,"disability":false}]}'),*/
                 console.log(JSON.stringify(request));
                 BackendSrv.requestMeeting(request).then(
                     function (response) {

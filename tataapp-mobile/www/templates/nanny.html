@@ -1,4 +1,4 @@
-<ion-view title="{{nanny.name}} {{nanny.surname}}" class="nanny">
+<ion-view title="{{nanny.name}}" class="nanny">
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
@@ -7,7 +7,7 @@
             <item class="item item-thumbnail-left">
                 <img ng-src="{{nanny.avatar}}" err-src="img/tataph.png" />
                 <h3><span class="lbl" ng-bind-html="'nanny_name' | translate"></span> <span>{{nanny.name}}</span></h3>
-                <h3><span class="lbl" ng-bind-html="'nanny_surname' | translate"></span> <span>{{nanny.surname}}</span></h3>
+                <!--<h3><span class="lbl" ng-bind-html="'nanny_surname' | translate"></span> <span>{{nanny.surname}}</span></h3>-->
                 <h3><span class="lbl" ng-bind-html="'nanny_age' | translate"></span> <span>{{getAge(nanny)}}</span></h3>
             </item>
             <item class="item">
