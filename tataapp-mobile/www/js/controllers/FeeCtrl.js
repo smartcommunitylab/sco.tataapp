@@ -11,12 +11,15 @@ angular.module('tataapp.controllers.fee', [])
 })
 
 .controller('FeeEstimateCtrl', function ($scope, $state, $filter, $ionicPopup, $ionicScrollDelegate, ionicDatePicker, Config, Utils, BackendSrv) {
+    var minDurationMonths = 3;
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
+    var nowMinTo = angular.copy(now);
+    nowMinTo.setMonth(nowMinTo.getMonth() + minDurationMonths);
 
     $scope.searchform = {
         dateFrom: now.getTime(),
-        dateTo: now.getTime(),
+        dateTo: nowMinTo.getTime(),
         disability: false,
         bonusAssignee: false,
         bonusType: 'type1',
@@ -49,16 +52,34 @@ angular.module('tataapp.controllers.fee', [])
             dpo.inputDate = new Date($scope.searchform.dateFrom);
             dpo.callback = function (val) {
                 $scope.searchform.dateFrom = val;
-                if ($scope.searchform.dateTo < val) {
-                    $scope.searchform.dateTo = val;
+                var minDateTo = new Date($scope.searchform.dateFrom);
+                minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
+                if ($scope.searchform.dateTo < minDateTo.getTime()) {
+                    $scope.searchform.dateTo = minDateTo.getTime();
                 }
             };
         } else if (field === 'to') {
             dpo.inputDate = new Date($scope.searchform.dateTo);
             dpo.callback = function (val) {
                 $scope.searchform.dateTo = val;
-                if ($scope.searchform.dateTo < $scope.searchform.dateFrom) {
-                    $scope.searchform.dateFrom = val;
+                var minDateTo = new Date();
+                minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
+                if ($scope.searchform.dateTo < minDateTo.getTime()) {
+                    /*
+                    $scope.searchform.dateFrom = now;
+                    $scope.searchform.dateTo = minDateTo.getTime();
+                    */
+
+                    $ionicPopup.alert({
+                        title: $filter('translate')('popup_title_attention', 'uppercase'), // String. The title of the popup.
+                        template: $filter('translate')('popup_fee_minduration'),
+                        okText: $filter('translate')('ok'),
+                        okType: 'button-positive' // (default: 'button-positive')
+                    }).then(function () {
+                        var minDateTo = new Date($scope.searchform.dateFrom);
+                        minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
+                        $scope.searchform.dateTo = minDateTo.getTime();
+                    });
                 }
             };
         }

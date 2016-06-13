@@ -99,6 +99,7 @@
     "popup_search_when_reset_title": "Elimina selezione",
     "popup_search_when_reset_content": "Desideri eliminare i giorni selezionati e le eventuali impostazioni di orario definite?",
     "popup_fee_attention": "Il preventivo calcolato è indicativo e stimato sulla tariffa standard (non calcola ad esempio il caso di tariffa notturna). Per informazioni precise richiedere un colloquio.",
+    "popup_fee_minduration": "La durata minima del servizio è minimo 3 mesi",
     "popup_title_attention": "ATTENZIONE",
     "popup_button_understand": "HO CAPITO",
     "title_searchresults": "Risultati ricerca",
