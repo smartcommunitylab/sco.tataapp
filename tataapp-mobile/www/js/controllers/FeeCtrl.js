@@ -126,7 +126,7 @@ angular.module('tataapp.controllers.fee', [])
 
                 BackendSrv.getEstimation(request).then(
                     function (results) {
-                        $scope.estimation = results.estimation;
+                        $scope.estimation = Math.round(results.estimation * 100) / 100;
                         $ionicScrollDelegate.resize();
                         $ionicScrollDelegate.scrollBottom(true);
                     },
