@@ -1,6 +1,6 @@
 <ion-view title="{{'app_name' | translate}}" class="home">
     <ion-nav-buttons side="right">
-        <button class="button button-positive button-fab" ng-click="goTo('app.search', true, true)">
+        <button class="button button-positive button-fab" ng-click="goTo('app.search', null, true, true)">
             <i class="icon ion-search"></i>
         </button>
     </ion-nav-buttons>
@@ -15,7 +15,7 @@
                 </div>
                 <ion-scroll>
                     <div class="padding-horizontal" ng-bind-html="homePage.content | translate"></div>
-                    <div class="padding"><a href="" class="more-info" ng-click="goTo('app.' + homePage.state, true, true)">{{'more_info' | translate}}</a></div>
+                    <div class="padding"><a href="" class="more-info" ng-click="goTo('app.' + homePage.state, null, true, true)">{{'more_info' | translate}}</a></div>
                 </ion-scroll>
             </ion-slide>
         </ion-slide-box>

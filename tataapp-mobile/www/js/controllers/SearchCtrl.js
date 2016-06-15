@@ -1,6 +1,6 @@
 angular.module('tataapp.controllers.search', [])
 
-.controller('SearchCtrl', function ($scope, $filter, $ionicPopup, $state, ionicDatePicker, Config, Utils, BackendSrv) {
+.controller('SearchCtrl', function ($scope, $filter, $ionicPopup, $state, $stateParams, ionicDatePicker, Config, Utils, BackendSrv) {
     $scope.dateFormat = Config.dateFormat;
     var now = new Date();
     $scope.allDays = false;
@@ -62,7 +62,7 @@ angular.module('tataapp.controllers.search', [])
         ionicDatePicker.openDatePicker(dpo);
     };
 
-    $scope.searchform = {
+    var defaultSearchform = {
         agerange: '',
         languages: {
             it: false,
@@ -93,6 +93,8 @@ angular.module('tataapp.controllers.search', [])
             night: false
         }
     };
+
+    $scope.searchform = angular.copy(defaultSearchform);
 
     $scope.changeDoW = function () {
         for (var i in $scope.searchform.days) {
@@ -225,14 +227,6 @@ angular.module('tataapp.controllers.search', [])
             }
         );
     };
-
-    /*
-    $scope.$watch(function () {
-        return $scope.searchform;
-    }, function (newValue, oldValue) {
-        console.log(newValue);
-    }, true);
-    */
 })
 
 .controller('SearchSummaryCtrl', function ($scope, $state, $stateParams) {

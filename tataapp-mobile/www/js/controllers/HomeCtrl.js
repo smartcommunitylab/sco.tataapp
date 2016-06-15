@@ -6,16 +6,20 @@ angular.module('tataapp.controllers.home', [])
     };
 
     // alternative to <a href>
-    $scope.goTo = function (state, refresh, root) {
-        if (root) {
+    $scope.goTo = function (state, params, reload, root) {
+        if (!!root) {
             $ionicHistory.nextViewOptions({
                 historyRoot: true
             });
         }
 
-        $state.go(state, {}, {
-            refresh: !!refresh
-        });
+        if (!!reload) {
+            $ionicHistory.clearCache().then(function () {
+                $state.go(state, params);
+            });
+        } else {
+            $state.go(state, params);
+        }
     };
 })
 
