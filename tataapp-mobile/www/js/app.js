@@ -80,6 +80,7 @@ angular.module('tataapp', [
         url: '/search/summary',
         params: {
             'searchResults': {},
+            'searchRequest': {}
         },
         views: {
             'menuContent': {
@@ -93,6 +94,7 @@ angular.module('tataapp', [
         url: '/search/results',
         params: {
             'searchResults': {},
+            'searchRequest': {}
         },
         views: {
             'menuContent': {
@@ -106,6 +108,7 @@ angular.module('tataapp', [
         url: '/search/results/{nannyId}',
         params: {
             'nanny': {},
+            'searchRequest': {}
         },
         views: {
             'menuContent': {
@@ -128,7 +131,8 @@ angular.module('tataapp', [
     .state('app.meetnanny', {
         url: '/meet/{nannyId}',
         params: {
-            'nanny': {}
+            'nanny': {},
+            'searchRequest': {}
         },
         views: {
             'menuContent': {

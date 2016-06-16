@@ -17,7 +17,7 @@ angular.module('tataapp.controllers.fee', [])
     var nowMinTo = angular.copy(now);
     nowMinTo.setMonth(nowMinTo.getMonth() + minDurationMonths);
 
-    $scope.searchform = {
+    $scope.estimateform = {
         dateFrom: now.getTime(),
         dateTo: nowMinTo.getTime(),
         disability: false,
@@ -49,25 +49,25 @@ angular.module('tataapp.controllers.fee', [])
         var dpo = angular.copy(datePickerOptions);
 
         if (field === 'from') {
-            dpo.inputDate = new Date($scope.searchform.dateFrom);
+            dpo.inputDate = new Date($scope.estimateform.dateFrom);
             dpo.callback = function (val) {
-                $scope.searchform.dateFrom = val;
-                var minDateTo = new Date($scope.searchform.dateFrom);
+                $scope.estimateform.dateFrom = val;
+                var minDateTo = new Date($scope.estimateform.dateFrom);
                 minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
-                if ($scope.searchform.dateTo < minDateTo.getTime()) {
-                    $scope.searchform.dateTo = minDateTo.getTime();
+                if ($scope.estimateform.dateTo < minDateTo.getTime()) {
+                    $scope.estimateform.dateTo = minDateTo.getTime();
                 }
             };
         } else if (field === 'to') {
-            dpo.inputDate = new Date($scope.searchform.dateTo);
+            dpo.inputDate = new Date($scope.estimateform.dateTo);
             dpo.callback = function (val) {
-                $scope.searchform.dateTo = val;
+                $scope.estimateform.dateTo = val;
                 var minDateTo = new Date();
                 minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
-                if ($scope.searchform.dateTo < minDateTo.getTime()) {
+                if ($scope.estimateform.dateTo < minDateTo.getTime()) {
                     /*
-                    $scope.searchform.dateFrom = now;
-                    $scope.searchform.dateTo = minDateTo.getTime();
+                    $scope.estimateform.dateFrom = now;
+                    $scope.estimateform.dateTo = minDateTo.getTime();
                     */
 
                     $ionicPopup.alert({
@@ -76,9 +76,9 @@ angular.module('tataapp.controllers.fee', [])
                         okText: $filter('translate')('ok'),
                         okType: 'button-positive' // (default: 'button-positive')
                     }).then(function () {
-                        var minDateTo = new Date($scope.searchform.dateFrom);
+                        var minDateTo = new Date($scope.estimateform.dateFrom);
                         minDateTo.setMonth(minDateTo.getMonth() + minDurationMonths);
-                        $scope.searchform.dateTo = minDateTo.getTime();
+                        $scope.estimateform.dateTo = minDateTo.getTime();
                     });
                 }
             };
@@ -97,7 +97,7 @@ angular.module('tataapp.controllers.fee', [])
     };
 
     var form2request = function (form) {
-        // this is how to convert searchform to search request
+        // this is how to convert estimateform to search request
         /*
         long startDate;
         long endDate;
@@ -117,16 +117,20 @@ angular.module('tataapp.controllers.fee', [])
         return request;
     };
 
-    $scope.search = function () {
+    $scope.estimate = function () {
         $scope.estimation = 0;
 
         showSentPopup().then(
             function () {
-                var request = form2request($scope.searchform);
+                var request = form2request($scope.estimateform);
 
                 BackendSrv.getEstimation(request).then(
                     function (results) {
-                        $scope.estimation = Math.round(results.estimation * 100) / 100;
+                        $scope.estimation = {
+                            bonusRate: Math.round(results.bonusRate * 100) / 100,
+                            estimation: Math.round(results.estimation * 100) / 100,
+                            totalRate: Math.round(results.totalRate * 100) / 100
+                        };
                         $ionicScrollDelegate.resize();
                         $ionicScrollDelegate.scrollBottom(true);
                     },

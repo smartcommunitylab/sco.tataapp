@@ -1,13 +1,21 @@
 <ion-view title="{{'menu_search' | translate}}" class="form search">
     <ion-slides slider="swiper" ion-wizard>
         <!--class="dapp-wizard" options="swiperOptions" slider="swiper"-->
-        <ion-slide-page class="swiper-no-swiping" ion-wizard-step>
+        <ion-slide-page class="swiper-no-swiping" ion-wizard-step next-condition="searchform.servicezone.length > 0">
             <!--next-condition="!!wizard.school && !!wizard.route"-->
             <ion-content class="has-header padding-horizontal">
                 <ion-list>
                     <item class="item-input item-select">
+                        <span class="input-label" ng-bind-html="'form_servicezone' | translate"></span>
+                        <select ng-model="searchform.servicezone" ng-options="zone.value as zone.label for zone in zones">
+                            <option value="">{{'form_servicezone_choose' | translate}}</option>
+                        </select>
+                    </item>
+                    <item class="item-input item-select">
                         <span class="input-label" ng-bind-html="'form_agerange' | translate"></span>
-                        <select ng-model="searchform.agerange" ng-options="agerange.value as agerange.label for agerange in ageranges"></select>
+                        <select ng-model="searchform.agerange" ng-options="agerange.value as agerange.label for agerange in ageranges">
+                            <option value="">{{'form_agerange_whatever' | translate}}</option>
+                        </select>
                     </item>
                     <item class="item-input item-stacked-label">
                         <span class="input-label" ng-bind-html="'form_languages' | translate"></span>

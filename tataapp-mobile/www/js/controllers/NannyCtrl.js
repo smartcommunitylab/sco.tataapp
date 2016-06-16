@@ -10,7 +10,8 @@ angular.module('tataapp.controllers.nanny', [])
     $scope.meetNanny = function (nanny) {
         $state.go('app.meetnanny', {
             'nannyId': nanny.id,
-            'nanny': nanny
+            'nanny': nanny,
+            'searchRequest': !!$stateParams['searchRequest'] ? $stateParams['searchRequest'] : null
         });
         /*, {
             reload: true

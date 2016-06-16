@@ -19,11 +19,20 @@ angular.module('tataapp.controllers.search', [])
         closeOnSelect: false
     };
 
+    $scope.zones = null;
+
+    BackendSrv.getZones().then(function (response) {
+        $scope.zones = [];
+
+        angular.forEach(response.content, function (zone) {
+            $scope.zones.push({
+                label: zone.name.charAt(0).toUpperCase() + zone.name.substr(1),
+                value: zone.name
+            });
+        });
+    });
+
     $scope.ageranges = [
-        {
-            label: $filter('translate')('form_agerange_whatever'),
-            value: ''
-        },
         {
             label: '20-30',
             value: '20-30'
@@ -63,6 +72,7 @@ angular.module('tataapp.controllers.search', [])
     };
 
     var defaultSearchform = {
+        servicezone: '',
         agerange: '',
         languages: {
             it: false,
@@ -132,6 +142,8 @@ angular.module('tataapp.controllers.search', [])
         String agencyId;
         */
         var request = {};
+
+        request.serviceZone = form.servicezone;
 
         request.rangeAge = form.agerange;
 
@@ -219,7 +231,8 @@ angular.module('tataapp.controllers.search', [])
                 });
 
                 $state.go('app.searchresults', {
-                    'searchResults': results
+                    'searchResults': results,
+                    'searchRequest': request
                 });
             },
             function (reason) {
@@ -232,7 +245,8 @@ angular.module('tataapp.controllers.search', [])
 .controller('SearchSummaryCtrl', function ($scope, $state, $stateParams) {
     $scope.seeSearchResultsList = function () {
         $state.go('app.searchresults', {
-            'searchResults': $stateParams['searchResults']
+            'searchResults': $stateParams['searchResults'],
+            'searchRequest': !!$stateParams['searchRequest'] ? $stateParams['searchRequest'] : null
         });
     };
 })
@@ -243,7 +257,8 @@ angular.module('tataapp.controllers.search', [])
     $scope.seeSearchResult = function (nanny) {
         $state.go('app.nanny', {
             'nannyId': nanny.id,
-            'nanny': nanny
+            'nanny': nanny,
+            'searchRequest': !!$stateParams['searchRequest'] ? $stateParams['searchRequest'] : null
         });
     };
 });

@@ -79,6 +79,10 @@ angular.module('tataapp.controllers.meet', [])
             children: form.children
         };
 
+        if (!!$stateParams['searchRequest']) {
+            request.searchRequest = $stateParams['searchRequest'];
+        }
+
         return request;
     };
 
@@ -109,7 +113,7 @@ angular.module('tataapp.controllers.meet', [])
             if (ok) {
                 Utils.saveToLocalStorage(meetFormLSkey, $scope.meetform);
                 var request = form2request($scope.meetform);
-                console.log(JSON.stringify(request));
+                //console.log(JSON.stringify(request));
                 BackendSrv.requestMeeting(request).then(
                     function (response) {
                         showSentPopup().then(function () {
