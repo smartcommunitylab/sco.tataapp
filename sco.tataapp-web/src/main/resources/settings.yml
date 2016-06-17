@@ -8,7 +8,7 @@ settings:
    offices:
     - vallagarina
     - valsugana
-   vauchers:
+   vouchers:
     - type: type1
       value: 5.50
     - type: type2

@@ -1,6 +1,6 @@
 package it.smartcommunitylab.tataapp.model;
 
-public class Vaucher {
+public class Voucher {
 	private String type;
 	private Double value;
 

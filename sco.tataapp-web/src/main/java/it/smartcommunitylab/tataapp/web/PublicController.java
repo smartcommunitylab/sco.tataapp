@@ -30,7 +30,7 @@ import it.smartcommunitylab.tataapp.model.PriceList;
 import it.smartcommunitylab.tataapp.model.ServiceOffice;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
-import it.smartcommunitylab.tataapp.model.Vaucher;
+import it.smartcommunitylab.tataapp.model.Voucher;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
 import it.smartcommunitylab.tataapp.service.DynamicDataService;
 import it.smartcommunitylab.tataapp.service.EstimatationService;
@@ -163,11 +163,11 @@ public class PublicController {
 		return dynamicSrv.getPriceList(agencyId);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/vauchers")
-	public List<Vaucher> getVaucherTable(@PathVariable String agencyId) {
+	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/vouchers")
+	public List<Voucher> getVaucherTable(@PathVariable String agencyId) {
 		Settings s = settingsSrv.loadSettings(agencyId);
 		if (s != null) {
-			return s.getVauchers();
+			return s.getVouchers();
 		}
 		return new ArrayList<>();
 	}

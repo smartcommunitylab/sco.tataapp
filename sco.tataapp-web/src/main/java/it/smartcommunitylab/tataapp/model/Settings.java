@@ -17,7 +17,7 @@ public class Settings {
 	private String tatapointCalId;
 	private boolean calendarAuthorization;
 	private List<ServiceOffice> offices;
-	private List<Vaucher> vauchers;
+	private List<Voucher> vouchers;
 
 	public String getGoogleAccount() {
 		return googleAccount;
@@ -83,12 +83,12 @@ public class Settings {
 		this.email = email;
 	}
 
-	public List<Vaucher> getVauchers() {
-		return vauchers;
+	public List<Voucher> getVouchers() {
+		return vouchers;
 	}
 
-	public void setVauchers(List<Vaucher> vauchers) {
-		this.vauchers = vauchers;
+	public void setVouchers(List<Voucher> vouchers) {
+		this.vouchers = vouchers;
 	}
 
 }
