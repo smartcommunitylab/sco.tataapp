@@ -8,12 +8,10 @@ settings:
    offices:
     - vallagarina
     - valsugana
- - agencyId: progetto92
-   email: tataapp@localhost
-   googleAccount: tataapp@localhost
-   tatapointCalName: Tatapoint
-   tatapointCalId: 
-   calendarAuthorization: false
-   offices:
-    - vallagarina
-    - valsugana
+   vouchers:
+    - type: type1
+      value: 5.50
+    - type: type2
+      value: 4.50
+    - type: type3
+      value: 3.0
