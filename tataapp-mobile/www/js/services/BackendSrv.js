@@ -93,6 +93,24 @@ angular.module('tataapp.services.backend', [])
         return deferred.promise;
     };
 
+    /* Get vouchers values */
+    backend.getVouchersList = function () {
+        var deferred = $q.defer();
+
+        $http.get(Config.getServerURL() + '/api/agency/' + Config.AGENCY_ID + '/vouchers', Config.getHTTPConfig())
+
+        .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (reason) {
+                deferred.reject(reason.data ? reason.data.errorMessage : reason);
+            }
+        );
+
+        return deferred.promise;
+    };
+
     /* Calcolo preventivo */
     backend.getEstimation = function (preventivo) {
         var deferred = $q.defer();
