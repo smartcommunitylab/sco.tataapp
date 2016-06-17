@@ -18,6 +18,18 @@
     	<li th:each="c : ${children}">Minore di età <span th:text="${c.age}"></span> anni <span th:if="${c.disability}">( DISABILITA')</span></li>
     </ul>
        
+    <p th:if="${searchRequest} != null">Parameteri di ricerca:</p>
+    <ul th:if="${searchRequest} != null">
+    	<li><strong>Periodo da</strong>: <span th:text="${searchRequest.fromDateFormatted}"></span></li>
+    	<li><strong>Periodo a</strong>: <span th:text="${searchRequest.toDateFormatted}"></span></li>
+    	<li><strong>Giorni</strong>:<span th:each="d : ${searchRequest.daysFormatted}" th:text="${d + ' '}"></span></li>
+    	<li><strong>Fascia oraria</strong>: <span th:each="ts : ${searchRequest.timeSlotsFormatted}" th:text="${ts + ' '}"></span></li>
+    	<li><strong>Lingue conosciute</strong>: <span th:each="l : ${searchRequest.langsFormatted}" th:text="${l + ' '}"></span></li>
+    	<li><strong>Eta'</strong>: <span th:text="${searchRequest.rangeAge}"></span></li>
+    	<li><strong>Automunita</strong>: <span th:if="${searchRequest.carOwner}">si</span><span th:if="${!searchRequest.carOwner}">no</span></li>
+    </ul>   
+       
+       
     <p th:if="${tata} != null">E' stato evidenziato l'interesse per la tata <span th:text="${tata.name} + ' ' + ${tata.surname}"></span></p>
     <p th:if="${tata} == null">La famiglia non ha segnalato l'interesse per nessuna tata in particolare</p>
     </body>

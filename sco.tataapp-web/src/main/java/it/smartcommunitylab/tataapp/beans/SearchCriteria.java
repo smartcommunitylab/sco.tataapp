@@ -15,6 +15,21 @@ public class SearchCriteria {
 	private String[] days = new String[0];
 	private String agencyId;
 
+	public SearchCriteria() {
+
+	}
+
+	public SearchCriteria(SearchCriteria c) {
+		langs = c.getLangs();
+		rangeAge = c.getRangeAge();
+		carOwner = c.isCarOwner();
+		fromDate = c.getFromDate();
+		toDate = c.getFromDate();
+		timeSlots = c.getTimeSlots();
+		days = c.getDays();
+		agencyId = c.getAgencyId();
+	}
+
 	public String getAgencyId() {
 		return agencyId;
 	}

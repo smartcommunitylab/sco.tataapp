@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import it.smartcommunitylab.tataapp.beans.SearchCriteria;
+
 public class Meeting {
 
 	@Id
@@ -19,6 +21,10 @@ public class Meeting {
 
 	private boolean vouchers;
 
+	private String agencyId;
+
+	private SearchCriteria searchRequest;
+
 	public boolean isVouchers() {
 		return vouchers;
 	}
@@ -26,8 +32,6 @@ public class Meeting {
 	public void setVouchers(boolean vouchers) {
 		this.vouchers = vouchers;
 	}
-
-	private String agencyId;
 
 	public String getAgencyId() {
 		return agencyId;
@@ -75,6 +79,14 @@ public class Meeting {
 
 	public void setCreationTs(long creationTs) {
 		this.creationTs = creationTs;
+	}
+
+	public SearchCriteria getSearchRequest() {
+		return searchRequest;
+	}
+
+	public void setSearchRequest(SearchCriteria searchRequest) {
+		this.searchRequest = searchRequest;
 	}
 
 }
