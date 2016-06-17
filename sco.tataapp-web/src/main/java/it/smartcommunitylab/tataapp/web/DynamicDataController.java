@@ -32,4 +32,5 @@ public class DynamicDataController {
 		priceList.setAgencyId(agencyId);
 		return service.savePriceList(agencyId, priceList);
 	}
+
 }
