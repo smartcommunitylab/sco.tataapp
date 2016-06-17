@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +30,7 @@ import it.smartcommunitylab.tataapp.model.PriceList;
 import it.smartcommunitylab.tataapp.model.ServiceOffice;
 import it.smartcommunitylab.tataapp.model.Settings;
 import it.smartcommunitylab.tataapp.model.TataPoint;
+import it.smartcommunitylab.tataapp.model.Vaucher;
 import it.smartcommunitylab.tataapp.service.BabysitterService;
 import it.smartcommunitylab.tataapp.service.DynamicDataService;
 import it.smartcommunitylab.tataapp.service.EstimatationService;
@@ -159,6 +161,15 @@ public class PublicController {
 	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/pricelist")
 	public PriceList getPriceList(@PathVariable String agencyId) {
 		return dynamicSrv.getPriceList(agencyId);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/api/agency/{agencyId}/vauchers")
+	public List<Vaucher> getVaucherTable(@PathVariable String agencyId) {
+		Settings s = settingsSrv.loadSettings(agencyId);
+		if (s != null) {
+			return s.getVauchers();
+		}
+		return new ArrayList<>();
 	}
 
 }
