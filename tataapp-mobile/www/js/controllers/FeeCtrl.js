@@ -3,9 +3,19 @@ angular.module('tataapp.controllers.fee', [])
 .controller('FeeCtrl', function ($scope, BackendSrv) {
     $scope.pricelist = {};
 
+    $scope.d2d = function (num) {
+        return parseFloat(Math.round(num * 100) / 100).toFixed(2);
+    };
+
     BackendSrv.getPricelist().then(
         function (pricelist) {
             $scope.pricelist = pricelist;
+        }
+    );
+
+    BackendSrv.getVouchersList().then(
+        function (vouchersList) {
+            $scope.vouchersList = vouchersList;
         }
     );
 })
@@ -27,7 +37,7 @@ angular.module('tataapp.controllers.fee', [])
         types: {
             'type1': $filter('translate')('type1'),
             'type2': $filter('translate')('type2'),
-            'type3': $filter('translate')('type3')
+            'type3': $filter('translate')('type3') + ' *'
         }
     };
 

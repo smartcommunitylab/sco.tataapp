@@ -19,10 +19,10 @@
                         {{pricelist.daily[0].hourRange}} {{'hours' | translate}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.daily[0].rate}}
+                        {{d2d(pricelist.daily[0].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.dailyDisability[0].rate}}
+                        {{d2d(pricelist.dailyDisability[0].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -30,10 +30,10 @@
                         {{pricelist.daily[1].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.daily[1].rate}}
+                        {{d2d(pricelist.daily[1].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.dailyDisability[1].rate}}
+                        {{d2d(pricelist.dailyDisability[1].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -41,10 +41,10 @@
                         {{pricelist.daily[2].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.daily[2].rate}}
+                        {{d2d(pricelist.daily[2].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.dailyDisability[2].rate}}
+                        {{d2d(pricelist.dailyDisability[2].rate)}}
                     </div>
                 </div>
             </div>
@@ -56,10 +56,10 @@
                         {{pricelist.festive[0].hourRange}} {{'hours' | translate}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festive[0].rate}}
+                        {{d2d(pricelist.festive[0].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festiveDisability[0].rate}}
+                        {{d2d(pricelist.festiveDisability[0].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -67,10 +67,10 @@
                         {{pricelist.festive[1].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festive[1].rate}}
+                        {{d2d(pricelist.festive[1].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festiveDisability[1].rate}}
+                        {{d2d(pricelist.festiveDisability[1].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -78,10 +78,10 @@
                         {{pricelist.festive[2].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festive[2].rate}}
+                        {{d2d(pricelist.festive[2].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.festiveDisability[2].rate}}
+                        {{d2d(pricelist.festiveDisability[2].rate)}}
                     </div>
                 </div>
             </div>
@@ -93,10 +93,10 @@
                         {{pricelist.nighttime[0].hourRange}} {{'hours' | translate}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttime[0].rate}}
+                        {{d2d(pricelist.nighttime[0].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttimeDisability[0].rate}}
+                        {{d2d(pricelist.nighttimeDisability[0].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -104,10 +104,10 @@
                         {{pricelist.nighttime[1].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttime[1].rate}}
+                        {{d2d(pricelist.nighttime[1].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttimeDisability[1].rate}}
+                        {{d2d(pricelist.nighttimeDisability[1].rate)}}
                     </div>
                 </div>
                 <div class="row tablerow">
@@ -115,10 +115,38 @@
                         {{pricelist.nighttime[2].hourRange}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttime[2].rate}}
+                        {{d2d(pricelist.nighttime[2].rate)}}
                     </div>
                     <div class="col col-33">
-                        {{pricelist.nighttimeDisability[2].rate}}
+                        {{d2d(pricelist.nighttimeDisability[2].rate)}}
+                    </div>
+                </div>
+            </div>
+
+            <h1>{{'title_fee_vouchers' | translate}}</h1>
+            <div class="table">
+                <div class="row tablerow">
+                    <div class="col col-67">
+                        {{vouchersList[0].type | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{d2d(vouchersList[0].value)}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-67">
+                        {{vouchersList[1].type | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{d2d(vouchersList[1].value)}}
+                    </div>
+                </div>
+                <div class="row tablerow">
+                    <div class="col col-67">
+                        {{vouchersList[2].type | translate}}
+                    </div>
+                    <div class="col col-33">
+                        {{d2d(vouchersList[2].value)}}
                     </div>
                 </div>
             </div>
