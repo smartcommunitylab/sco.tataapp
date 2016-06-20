@@ -208,9 +208,9 @@
 								'tatapage.create.workingZones' | i18n }}:</label>
 							<table width="100%">
 								<tr ng-repeat="zone in zones">
-									<td><label><input type="checkbox"
+									<td><label><input type="checkbox" name="tWorkingZones"
 											checklist-model="tata.workingZones"
-											checklist-value="zone.name"> {{zone.name}}</label></td>
+											checklist-value="zone.name" ng-required="!tata.workingZones || tata.workingZones.length == 0"> {{zone.name}}</label></td>
 								</tr>
 							</table>
 							<div class="alert alert-danger"
@@ -438,7 +438,7 @@
 								<tr ng-repeat="zone in zones">
 									<td><label><input type="checkbox" name="tWorkingZones"
 											checklist-model="tata.workingZones"
-											checklist-value="zone.name"> {{zone.name}}</label></td>
+											checklist-value="zone.name" ng-required="!tata.workingZones || tata.workingZones.length == 0"> {{zone.name}}</label></td>
 								</tr>
 							</table>
 
