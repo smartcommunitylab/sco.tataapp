@@ -151,9 +151,11 @@
 								'tatapage.create.city.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-							<label for="city">{{ 'tatapage.create.qualification' | i18n }}</label> <input
-								id="qualification" type="text" class="form-control" name="tQualification"
-								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+							<label for="city">{{ 'tatapage.create.qualification' |
+								i18n }}</label> <input id="qualification" type="text"
+								class="form-control" name="tQualification"
+								ng-model="tata.qualification"
+								ng-required="tataconf.qualification.required"
 								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
 							<div class="alert alert-danger"
 								ng-show="!isInit && form.tQualification.$error.required">{{
@@ -200,6 +202,20 @@
 											'tatapage.create.languages.error.required' | i18n }}</div></td>
 								</tr>
 							</table>
+						</div>
+						<div class="form-group">
+							<label for="workingZones">{{
+								'tatapage.create.workingZones' | i18n }}:</label>
+							<table width="100%">
+								<tr ng-repeat="zone in zones">
+									<td><label><input type="checkbox"
+											checklist-model="tata.workingZones"
+											checklist-value="zone.name"> {{zone.name}}</label></td>
+								</tr>
+							</table>
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tWorkingZones.$error.required">{{
+								'tatapage.create.workingZones.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
 							<label for="description">{{ 'tatapage.create.description'
@@ -362,9 +378,11 @@
 								'tatapage.create.city.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
-							<label for="qualification">{{ 'tatapage.create.qualification' | i18n }}</label> <input
-								id="qualification" type="text" class="form-control" name="tQualification"
-								ng-model="tata.qualification" ng-required="tataconf.qualification.required"
+							<label for="qualification">{{
+								'tatapage.create.qualification' | i18n }}</label> <input
+								id="qualification" type="text" class="form-control"
+								name="tQualification" ng-model="tata.qualification"
+								ng-required="tataconf.qualification.required"
 								placeholder="{{ 'tatapage.create.qualification.placeholder' | i18n }}">
 							<div class="alert alert-danger"
 								ng-show="!isInit && form.tQualification.$error.required">{{
@@ -411,6 +429,22 @@
 											'tatapage.create.languages.error.required' | i18n }}</div></td>
 								</tr>
 							</table>
+						</div>
+						<div class="form-group">
+							<label for="workingZones">{{
+								'tatapage.create.workingZones' | i18n }}</label>
+
+							<table width="100%">
+								<tr ng-repeat="zone in zones">
+									<td><label><input type="checkbox" name="tWorkingZones"
+											checklist-model="tata.workingZones"
+											checklist-value="zone.name"> {{zone.name}}</label></td>
+								</tr>
+							</table>
+
+							<div class="alert alert-danger"
+								ng-show="!isInit && form.tWorkingZones.$error.required">{{
+								'tatapage.create.workingZones.error.required' | i18n }}</div>
 						</div>
 						<div class="form-group">
 							<label for="description">{{ 'tatapage.create.description'
@@ -499,12 +533,18 @@
 				<label>{{ 'tatapage.view.city' | i18n }}: </label> {{ vtata.city }}
 			</div>
 			<div class="col-md-12">
-				<label>{{ 'tatapage.view.qualification' | i18n }}: </label> {{ vtata.qualification }}
+				<label>{{ 'tatapage.view.qualification' | i18n }}: </label> {{
+				vtata.qualification }}
 			</div>
 			<div class="col-md-12">
 				<!-- <label>{{ 'tatapage.view.languages' | i18n }}: </label> {{ getStrings(vtata.languages) }} -->
 				<label>{{ 'tatapage.view.languages' | i18n }}: </label> {{
 				vtata.languages | toLanguageString }}
+			</div>
+			<div class="col-md-12">
+				<label>{{ 'tatapage.view.workingZones' | i18n }}: </label> <span
+					ng-repeat="zone in vtata.workingZones">{{zone + " "}}</span>
+
 			</div>
 			<div class="col-md-12">
 				<label class="margins">{{ 'tatapage.view.description' | i18n
@@ -532,7 +572,9 @@
 					}}: </label> {{vtata.calendarURL}}
 			</div>
 		</div>
-		<div >
-		<div ng-if="vtata.calendarURL !== null && vtata.calendarURL.length > 0" ng-bind-html="calEmbed"></div>
+		<div>
+			<div
+				ng-if="vtata.calendarURL !== null && vtata.calendarURL.length > 0"
+				ng-bind-html="calEmbed"></div>
+		</div>
 	</div>
-</div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSanitize'])
+angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSanitize', 'checklist-model'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/tata', {
@@ -9,8 +9,8 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
   });
 }])
 
-.controller('TataCtrl', [ '$sce', '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', 'SharedData',
-          				function($sce, $rootScope, $scope, $uibModal, Tata, FileUploader, Avatar, SharedData) {
+.controller('TataCtrl', [ '$sce', '$rootScope', '$scope','$uibModal', 'Tata', 'FileUploader', 'Avatar', 'SharedData', 'Settings',
+          				function($sce, $rootScope, $scope, $uibModal, Tata, FileUploader, Avatar, SharedData, Settings) {
 	
 	$scope.showNewTataForm = false;
 	$scope.showTataDetails = false;
@@ -65,6 +65,9 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 		languages: {
 			required: true
 		},
+		workingZones: {
+			required: true
+		},
 		description: {
 			required: false
 		},
@@ -75,6 +78,12 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 			required: true
 		}
 	};
+	
+	var agencyId = SharedData.getAppId();
+	Settings.read({aid : agencyId},function(data) {
+		$scope.zones = data.offices;
+	});
+	
 	
 	// Date picker functions -------------------------------------------------------------------------------------------------------------------------
 	
@@ -334,6 +343,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 						city: tata.city,
 						qualification: tata.qualification,
 						languages: tata.languages,
+						workingZones: tata.workingZones,
 						carOwner: tata.carOwner,
 						agencyId: $scope.agencyId,
 						description: tata.description,
@@ -427,6 +437,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 					address: tata.address,
 					city: tata.city,
 					qualification: tata.qualification,
+					workingZones: tata.workingZones,
 					languages: tata.languages,
 					carOwner: tata.carOwner,
 					agencyId: $scope.agencyId,

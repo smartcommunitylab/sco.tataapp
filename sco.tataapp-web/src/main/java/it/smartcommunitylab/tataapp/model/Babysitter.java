@@ -29,6 +29,8 @@ public class Babysitter {
 	private List<String> languages;
 	private boolean carOwner;
 
+	private List<String> workingZones;
+
 	private String calendarURL;
 
 	/*
@@ -178,6 +180,14 @@ public class Babysitter {
 		if (StringUtils.isBlank(agencyId)) {
 			throw new IllegalArgumentException("agency cannot be empty");
 		}
+	}
+
+	public List<String> getWorkingZones() {
+		return workingZones;
+	}
+
+	public void setWorkingZones(List<String> workingZones) {
+		this.workingZones = workingZones;
 	}
 
 }
