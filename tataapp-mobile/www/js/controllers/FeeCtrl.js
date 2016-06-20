@@ -37,9 +37,10 @@ angular.module('tataapp.controllers.fee', [])
         types: {
             'type1': $filter('translate')('type1'),
             'type2': $filter('translate')('type2'),
-            'type3': $filter('translate')('type3') + ' *'
+            'type3': $filter('translate')('type3')
         }
     };
+    //'type3': $filter('translate')('type3') + ' *'
 
     var datePickerOptions = {
         setLabel: $filter('translate')('set'),

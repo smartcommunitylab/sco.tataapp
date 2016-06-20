@@ -19,7 +19,7 @@
 
                 <ion-toggle ng-model="estimateform.bonusAssignee">{{'form_service_stamps' | translate}}</ion-toggle>
 
-                <item class="item-input" ng-if="!!estimateform.bonusAssignee">
+                <item class="item-input" ng-if="!estimateform.disability && !!estimateform.bonusAssignee">
                     <item class="item-input item-stacked-label">
                         <span class="input-label" ng-bind-html="'form_service_type' | translate"></span>
                         <ion-list class="list-inset">
