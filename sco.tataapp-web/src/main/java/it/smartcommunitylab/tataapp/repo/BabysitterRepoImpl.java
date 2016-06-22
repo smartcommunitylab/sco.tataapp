@@ -31,6 +31,11 @@ public class BabysitterRepoImpl implements MatchingRepo {
 		// check agencyId
 		Criteria mongoCrit = Criteria.where("agencyId").is(crit.getAgencyId());
 
+		// check workingZones
+		if (!StringUtils.isBlank(crit.getServiceZone())) {
+			mongoCrit = mongoCrit.and("workingZones").in(crit.getServiceZone());
+		}
+
 		// check langs
 		if (!crit.getLangs().isEmpty()) {
 			mongoCrit = mongoCrit.and("languages").all(crit.getLangs());

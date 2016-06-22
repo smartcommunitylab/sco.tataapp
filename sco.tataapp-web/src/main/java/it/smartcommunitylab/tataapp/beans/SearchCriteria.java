@@ -13,6 +13,7 @@ public class SearchCriteria {
 	private long toDate;
 	private List<String> timeSlots = new ArrayList<>();
 	private String[] days = new String[0];
+	private String serviceZone;
 	private String agencyId;
 
 	public SearchCriteria() {
@@ -28,6 +29,7 @@ public class SearchCriteria {
 		timeSlots = c.getTimeSlots();
 		days = c.getDays();
 		agencyId = c.getAgencyId();
+		serviceZone = c.getServiceZone();
 	}
 
 	public String getAgencyId() {
@@ -92,6 +94,14 @@ public class SearchCriteria {
 
 	public void setDays(String[] days) {
 		this.days = days;
+	}
+
+	public String getServiceZone() {
+		return serviceZone;
+	}
+
+	public void setServiceZone(String serviceZone) {
+		this.serviceZone = serviceZone;
 	}
 
 }
