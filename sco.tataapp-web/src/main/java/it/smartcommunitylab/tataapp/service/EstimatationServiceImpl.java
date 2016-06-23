@@ -11,8 +11,8 @@ import it.smartcommunitylab.tataapp.beans.EstimatationResult;
 public class EstimatationServiceImpl implements EstimatationService {
 
 	/*
-	 * Method calculates estimatation for WEEKLY use of service. Input doesn't
-	 * contain data about range of daily hour of usage..so ipotize DAILY HOUR
+	 * Method calculates estimation for WEEKLY use of service. Input doesn't
+	 * contain data about range of daily hour of usage..so suppose DAILY HOUR
 	 * for estimation (non-Javadoc)
 	 * 
 	 * @see
@@ -40,7 +40,9 @@ public class EstimatationServiceImpl implements EstimatationService {
 			estimationRate = baseRate * data.getWeeklyHour();
 
 			Double bonusRateHour = 0d;
-			if (data.isBonusAssignee()) {
+			if (data.isDisability() && data.isBonusAssignee()) {
+				bonusRateHour = 15d;
+			} else if (data.isBonusAssignee()) {
 				switch (data.getBonusType()) {
 				case "type1":
 					bonusRateHour = 5.50d;

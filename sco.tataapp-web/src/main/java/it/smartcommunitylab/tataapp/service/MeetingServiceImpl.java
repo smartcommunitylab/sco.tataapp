@@ -51,7 +51,9 @@ public class MeetingServiceImpl implements MeetingService {
 
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("representive", meeting.getFamilyRepresentive());
-		parameters.put("searchRequest", new TemplateMailSearchCriteria(meeting.getSearchRequest()));
+		if (meeting.getSearchRequest() != null) {
+			parameters.put("searchRequest", new TemplateMailSearchCriteria(meeting.getSearchRequest()));
+		}
 		if (meeting.getBabysitterId() != null) {
 			Babysitter b = babySitterSrv.load(meeting.getAgencyId(), meeting.getBabysitterId());
 			if (b != null) {

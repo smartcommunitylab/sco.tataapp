@@ -142,6 +142,73 @@ public class BabysitterServiceTest {
 	}
 
 	@Test
+	public void searchMatchingServiceZone() {
+		Babysitter b = new Babysitter();
+		b.setName("Jessica");
+		b.setSurname("Drew");
+		b.setEmail("email@tataapp.eu");
+		b.setAddress("via sommarive 18");
+		b.setCity("Trento");
+		b.setAgencyId(AGENCY_ID);
+		b.setBirthdate(new GregorianCalendar(1981, 9, 22).getTimeInMillis());
+		b.setLanguages(Arrays.asList("IT", "EN"));
+		b.setWorkingZones(Arrays.asList("Territorio Val d'Adige", "Vallagarina"));
+		service.save(b);
+
+		b = new Babysitter();
+		b.setName("Mary Jane");
+		b.setSurname("Watson");
+		b.setEmail("mjw@localhost");
+		b.setAddress("via sommarive 18");
+		b.setCity("Trento");
+		b.setAgencyId(AGENCY_ID);
+		b.setBirthdate(new GregorianCalendar(1990, 9, 22).getTimeInMillis());
+		b.setLanguages(Arrays.asList("EN"));
+		b.setWorkingZones(Arrays.asList("Valsugana"));
+		service.save(b);
+
+		b = new Babysitter();
+		b.setName("Cindy");
+		b.setSurname("moon");
+		b.setEmail("cm@localhost");
+		b.setAddress("via sommarive 18");
+		b.setCity("Trento");
+		b.setAgencyId(AGENCY_ID);
+		b.setBirthdate(new GregorianCalendar(1990, 11, 22).getTimeInMillis());
+		b.setLanguages(Arrays.asList("EN"));
+		b.setWorkingZones(Arrays.asList("Valsugana", "Zona3"));
+		service.save(b);
+
+		SearchCriteria sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setLangs(Arrays.asList("IT"));
+		sc.setRangeAge(RangeAge.RANGE2.getRange());
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setLangs(Arrays.asList("IT", "EN"));
+		sc.setRangeAge(RangeAge.RANGE2.getRange());
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setServiceZone("Territorio Val d'Adige");
+		Assert.assertEquals(1, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setServiceZone("Valsugana");
+		Assert.assertEquals(2, service.search(sc, null).getContent().size());
+
+		sc = new SearchCriteria();
+		sc.setAgencyId(AGENCY_ID);
+		sc.setServiceZone("Zona4");
+		Assert.assertEquals(0, service.search(sc, null).getContent().size());
+
+	}
+
+	@Test
 	public void searchMatchingRangeAge() {
 		Babysitter b = new Babysitter();
 		b.setName("Jessica");

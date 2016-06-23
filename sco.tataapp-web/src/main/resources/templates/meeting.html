@@ -27,6 +27,7 @@
     	<li><strong>Lingue conosciute</strong>: <span th:each="l : ${searchRequest.langsFormatted}" th:text="${l + ' '}"></span></li>
     	<li><strong>Eta'</strong>: <span th:text="${searchRequest.rangeAge}"></span></li>
     	<li><strong>Automunita</strong>: <span th:if="${searchRequest.carOwner}">si</span><span th:if="${!searchRequest.carOwner}">no</span></li>
+    	<li><strong>Zona di lavoro</strong>: <span th:text="${searchRequest.serviceZone}"></span></li>
     </ul>   
        
        
