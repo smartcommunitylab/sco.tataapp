@@ -30,15 +30,6 @@ angular.module('tataapp.controllers.home', [])
         loop: true
     };
 
-    $scope.mailreceiver = Config.MAIL_RECEIVER;
-
-    /*$scope.entries = [];
-    var counter = 1;
-    while ($filter('translate')('info_' + counter + '_t') != ('info_' + counter + '_t')) {
-        $scope.entries.push('info_' + counter + '_t');
-        counter++;
-    }*/
-
     $scope.homePages = [];
     var homeCounter = 1;
     while ($filter('translate')('home_' + homeCounter + '_t') != ('home_' + homeCounter + '_t')) {
