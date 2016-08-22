@@ -19,7 +19,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 	$scope.mailPattern=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
 	$scope.onErrorSrc = "images/empty_avatar.png";
-	$scope.maxImgSize = 1048576; // bytes
+	$scope.maxImgSize = 5048576; // bytes
 	$scope.itaLang = "IT";
 	$scope.engLang = "EN";
 	$scope.gerLang = "DE";
@@ -218,6 +218,7 @@ angular.module('app.tata',[ 'ngRoute', 'ngResource', 'angularFileUpload', 'ngSan
 		$scope.showTataDetails = true;
 		$scope.vtata = tata;
 		$scope.vtata.profileImage = $scope.composeTataImageUrl(tata.id);
+		$scope.uploader.clearQueue();
 		if(tata.calendarURL) {
 			var calendarId = tata.calendarURL;
 			var htmlCode = '<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=it&amp;bgcolor=%23FFFFFF&src='+calendarId+'&amp;ctz=Europe%2FRome" style="border-width: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>';
