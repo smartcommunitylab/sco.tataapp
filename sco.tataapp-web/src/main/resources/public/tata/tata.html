@@ -549,14 +549,14 @@
 			<div class="col-md-12">
 				<label class="margins">{{ 'tatapage.view.description' | i18n
 					}}: </label>
-				<div ng-repeat="d in correctTextFormatting(vtata.description)">
+				<div ng-repeat="d in correctTextFormatting(vtata.description) track by $index">
 					<span>{{ d }}</span><br />
 				</div>
 			</div>
 			<div class="col-md-12">
 				<label class="margins">{{ 'tatapage.view.updates' | i18n }}:
 				</label>
-				<div ng-repeat="u in correctTextFormatting(vtata.updates)">
+				<div ng-repeat="u in correctTextFormatting(vtata.updates) track by $index">
 					<span>{{ u }}</span><br />
 				</div>
 			</div>
