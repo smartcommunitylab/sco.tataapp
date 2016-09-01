@@ -490,29 +490,31 @@
     /*bottom: 44px;*/
     bottom: 0;
     right: 0;
-    /*opacity: 0.9;*/
     position: absolute;
     z-index: -1;
     background: transparent no-repeat bottom right;
     background-size: 70%;
+	opacity: 0.5;
 }
 .tataapp-theme .info .info-page.info-page-1::after {
-    background-image: url('../img/wizard_00.png');
+    background-image: url('../img/tataapp_2.png');
+	background-size: 40%;
 }
 .tataapp-theme .info .info-page.info-page-2::after {
-    background-image: url('../img/wizard_01.png');
+    background-image: url('../img/tataapp_1.png');
+	background-size: 60%;
 }
 .tataapp-theme .info .info-page.info-page-3::after {
-    background-image: url('../img/wizard_02.png');
+    background-image: url('../img/tataapp_4.png');
 }
 .tataapp-theme .info .info-page.info-page-4::after {
-    background-image: url('../img/wizard_03.png');
+    background-image: url('../img/tataapp_5.png');
 }
 .tataapp-theme .info .info-page.info-page-5::after {
-    background-image: url('../img/wizard_04.png');
+    background-image: url('../img/tataapp_3.png');
 }
 .tataapp-theme .info .info-page.info-page-6::after {
-    background-image: url('../img/wizard_05.png');
+    background-image: url('../img/tataapp_6.png');
 }
 .tataapp-theme .info h1 {
     padding-top: 2em;
