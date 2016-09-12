@@ -1,10 +1,12 @@
 angular.module('tataapp.services.config', [])
 
-.factory('Config', function ($http, $q) {
+.factory('Config', function ($http, $q, $rootScope) {
     var configService = {};
 
     configService.AGENCY_ID = 'progetto92';
     configService.SERVER_URL = 'https://tn.smartcommunitylab.it/tataapp/public';
+
+    $rootScope.version = 'v 1.0.0';
 
     configService.timeFormat = 'HH:mm';
     configService.dateFormat = 'd MMMM yyyy';

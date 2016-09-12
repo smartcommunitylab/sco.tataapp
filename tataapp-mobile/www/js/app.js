@@ -213,7 +213,14 @@ angular.module('tataapp', [
             }
         }
     })
-
+    .state('app.credits', {
+        url: '/credits',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/credits.html'
+            }
+        }
+    })
     .state('app.faq', {
         url: '/faq',
         views: {
