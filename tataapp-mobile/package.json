@@ -14,6 +14,9 @@
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
   },
+  "standard": {
+    "globals": ["angular"]
+  },
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",

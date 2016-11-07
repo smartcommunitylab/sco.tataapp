@@ -1,9 +1,13 @@
 <ion-view title="{{'menu_who' | translate}}" class="who">
-    <ion-nav-buttons side="right">
-    </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+  </ion-nav-buttons>
 
-    <ion-content class="padding">
-        <div ng-bind-html="'who_1' | translate"></div>
-        <div class="image padding-top"><img src="img/progetto92.png" /></div>
-    </ion-content>
+  <ion-content class="padding">
+    <div ng-bind-html="'who_1' | translate"></div>
+    <div class="image padding-top">
+      <a href="#" onclick="window.open('http://www.progetto92.it/', '_system', 'location=yes'); return false;">
+        <img src="img/progetto92.png" />
+      </a>
+    </div>
+  </ion-content>
 </ion-view>

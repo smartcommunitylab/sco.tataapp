@@ -10,52 +10,63 @@
  */
 
 .button.button-fab {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    top: 17px;
-    right: 11px;
-    bottom: auto;
-    left: auto;
-    border-radius: 22px;
-    /*box-shadow: 2px 2px 2px #c8c8c8;*/
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: 17px;
+  right: 11px;
+  bottom: auto;
+  left: auto;
+  border-radius: 22px;
+  /*box-shadow: 2px 2px 2px #c8c8c8;*/
 }
+
 .checkboxes-horizontal {
-    text-align: center;
+  text-align: center;
 }
+
 .checkboxes-horizontal .item-checkbox {
-    display: inline-block;
-    padding: 0 16px 36px 16px;
+  display: inline-block;
+  padding: 0 16px 36px 16px;
 }
+
 .checkboxes-horizontal .item-checkbox .checkbox {
-    top: 44px;
-    padding: 0;
+  top: 44px;
+  padding: 0;
 }
+
 .list-accordion .list .item-accordion .item-accordion-header,
 .list-accordion .list .item-accordion .item-accordion-content,
 .list-accordion .list .item-accordion .item-accordion-content p {
-    white-space: normal;
+  white-space: normal;
 }
+
 .list-accordion .list .item-accordion .item-accordion-header i {
-    transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
+
 .list-accordion .list .item-accordion .item-accordion-header i.open {
-    transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }
+
 .list-accordion .list .item-accordion .item-accordion-header i::before {
-    font-size: 0.5em;
+  font-size: 0.5em;
 }
+
 .list-accordion .list .item-accordion .item-accordion-content {
-    border-top: 0;
-    transition: all 0.2s linear;
+  border-top: 0;
+  transition: all 0.2s linear;
 }
+
 .list-accordion .list .item-accordion .item-accordion-content.ng-hide {
-    line-height: 0px;
-    opacity: 0;
+  line-height: 0px;
+  opacity: 0;
 }
+
 .swiper-container .swiper-pagination {
-    display: none;
+  display: none;
 }
+
 
 /*
  * APP STYLE OVVERRIDES
@@ -65,154 +76,186 @@
 .tataapp-theme a:hover,
 .tataapp-theme a:active,
 .tataapp-theme a:visited {
-    color: #ee7b40;
-    text-decoration: none;
+  color: #ee7b40;
+  text-decoration: none;
 }
+
 .tataapp-theme .bar.bar-subheader .button.button-text {
-    color: #FFFFFF;
-    background-color: #68615d;
-    font-size: 1.2em;
+  color: #FFFFFF;
+  background-color: #68615d;
+  font-size: 1.2em;
 }
+
 .tataapp-theme .bar.bar-subheader {
-    background-color: #68615d;
-    border-color: #68615d;
-    background-image: none;
-    text-align: center;
+  background-color: #68615d;
+  border-color: #68615d;
+  background-image: none;
+  text-align: center;
 }
+
 .tataapp-theme .bar.bar-subheader h5 {
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 1.3em;
-    margin-top: 3px !important;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-top: 3px !important;
 }
+
 .tataapp-theme .bar.bar-subheader .ion-arrow-left-b,
 .tataapp-theme .bar.bar-subheader .ion-arrow-right-b {
-    color: #FFFFFF;
-    border: none;
-    background-color: #68615d;
+  color: #FFFFFF;
+  border: none;
+  background-color: #68615d;
 }
+
 .tataapp-theme .bar.bar-subheader .ion-arrow-left-b {
-    float: left;
+  float: left;
 }
+
 .tataapp-theme .bar.bar-subheader .ion-arrow-right-b {
-    float: right;
+  float: right;
 }
+
 .tataapp-theme .bar.bar-energized {
-    background-color: #ee7b40;
-    border-color: #ee7b40;
-    background-image: none;
+  background-color: #ee7b40;
+  border-color: #ee7b40;
+  background-image: none;
 }
+
 .tataapp-theme .bar.bar-energized .title {
-    color: #fff;
+  color: #fff;
 }
+
 .tataapp-theme .bar.bar-energized .button {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 1em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
 }
+
 .tataapp-theme .bar.bar-energized .button.button-fab {
-    color: #68615d;
+  color: #68615d;
 }
+
 .tataapp-theme .menu,
 .tataapp-theme .menu .list,
 .tataapp-theme .menu .list .item,
 .tataapp-theme .menu .list .item .item-content {
-    color: #fff;
-    background-color: #68615d;
-    border-color: #68615d;
+  color: #fff;
+  background-color: #68615d;
+  border-color: #68615d;
 }
+
 .tataapp-theme .menu .list .item span {
-    font-size: smaller;
+  font-size: smaller;
 }
+
 .tataapp-theme .button {
-    text-transform: uppercase;
-    font-size: 1em;
+  text-transform: uppercase;
+  font-size: 1em;
 }
+
 .tataapp-theme .button.button-stable {
-    border-color: transparent;
-    background-color: #c8c8c8;
-    color: #68615d;
+  border-color: transparent;
+  background-color: #c8c8c8;
+  color: #68615d;
 }
+
 .tataapp-theme .button.button-stable.button-clear {
-    border-color: transparent;
-    background: none;
-    box-shadow: none;
-    color: #c8c8c8;
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #c8c8c8;
 }
+
 .tataapp-theme .button.button-stable.button-outline {
-    border-color: #c8c8c8;
-    background: transparent;
-    color: #c8c8c8;
+  border-color: #c8c8c8;
+  background: transparent;
+  color: #c8c8c8;
 }
+
 .tataapp-theme .button.button-stable.button-outline.active,
 .tataapp-theme .button.button-stable.button-outline.activated {
-    background-color: #c8c8c8;
-    box-shadow: none;
-    color: #68615d;
+  background-color: #c8c8c8;
+  box-shadow: none;
+  color: #68615d;
 }
+
 .tataapp-theme .button.button-positive {
-    border-color: transparent;
-    background-color: #eecf40;
-    color: #68615d;
+  border-color: transparent;
+  background-color: #eecf40;
+  color: #68615d;
 }
+
 .tataapp-theme .button.button-positive.button-clear {
-    border-color: transparent;
-    background: none;
-    box-shadow: none;
-    color: #eecf40;
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #eecf40;
 }
+
 .tataapp-theme .button.button-positive.button-outline {
-    border-color: #eecf40;
-    background: transparent;
-    color: #eecf40;
+  border-color: #eecf40;
+  background: transparent;
+  color: #eecf40;
 }
+
 .tataapp-theme .button.button-positive.button-outline.active,
 .tataapp-theme .button.button-positive.button-outline.activated {
-    background-color: #eecf40;
-    box-shadow: none;
-    color: #68615d;
+  background-color: #eecf40;
+  box-shadow: none;
+  color: #68615d;
 }
+
 .tataapp-theme .button.button-light {
-    border-color: transparent;
-    background-color: #eecf40;
-    color: #68615d;
+  border-color: transparent;
+  background-color: #eecf40;
+  color: #68615d;
 }
-.tataapp-theme .toggle input:checked + .track {
-    background-color: #68615d;
-    border-color: #68615d;
+
+.tataapp-theme .toggle input:checked+.track {
+  background-color: #68615d;
+  border-color: #68615d;
 }
-.tataapp-theme .toggle-small input:checked + .track {
-    background-color: rgba(104, 97, 93, 0.5);
-    border-color: rgba(104, 97, 93, 0.5);
+
+.tataapp-theme .toggle-small input:checked+.track {
+  background-color: rgba(104, 97, 93, 0.5);
+  border-color: rgba(104, 97, 93, 0.5);
 }
-.tataapp-theme .toggle-small input:checked + .track .handle {
-    background: #68615d;
+
+.tataapp-theme .toggle-small input:checked+.track .handle {
+  background: #68615d;
 }
+
 .tataapp-theme .checkbox input:checked:before,
-.tataapp-theme .checkbox input:checked + .checkbox-icon:before {
-    border-color: #68615d;
-    background-color: #68615d;
+.tataapp-theme .checkbox input:checked+.checkbox-icon:before {
+  border-color: #68615d;
+  background-color: #68615d;
 }
+
 .tataapp-theme .list-accordion .list .item-accordion .item-accordion-header.activated {
-    /* orange */
-    background-color: rgba(238, 123, 64, 0.3);
+  /* orange */
+  background-color: rgba(238, 123, 64, 0.3);
 }
+
 .tataapp-theme .swiper-container .info-pagination {
-    color: #68615d;
+  color: #68615d;
 }
+
 .tataapp-theme .list-item {
-    min-height: 50px;
-    display: flex;
-    padding: 10px;
+  min-height: 50px;
+  display: flex;
+  padding: 10px;
 }
+
 .tataapp-theme .list-item .icon {
-    color: #68615d;
-    font-size: 2em;
+  color: #68615d;
+  font-size: 2em;
 }
+
 .tataapp-theme .list-item span {
-    padding-left: 15px;
-    padding-top: 5px;
+  padding-left: 15px;
+  padding-top: 5px;
 }
+
 
 /*
  * APP PAGES
@@ -222,8 +265,9 @@
 /* Home */
 
 .home .slider-slides img {
-    width: 100%;
+  width: 100%;
 }
+
 
 /*.home ul {
     display: inline-block;
@@ -243,317 +287,388 @@
 }*/
 
 .tataapp-theme .home h1 {
-    color: #68615d;
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
+  color: #68615d;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
 }
+
 .home .home-pagination {
-    color: #68615d;
-    text-align: center;
-    margin-bottom: 1em;
+  color: #68615d;
+  text-align: center;
+  margin-bottom: 1em;
 }
+
 .home .home-pagination i {
-    opacity: 0.3;
-    margin: 0.5em;
+  opacity: 0.3;
+  margin: 0.5em;
 }
+
 .home .home-pagination i.saw {
-    opacity: 1;
+  opacity: 1;
 }
+
 .home .more-info::before {
-    content: '\2026';
+  content: '\2026';
 }
+
 .home .bar-footer {
-    background-image: url('../img/progetto92.png');
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+  background-image: url('../img/progetto92.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
+
 
 /* Form */
 
 .tataapp-theme .form .item {
-    border: 0;
+  border: 0;
 }
+
 .tataapp-theme .form .padding-separator {
-    padding-top: 30px;
+  padding-top: 30px;
 }
+
 .tataapp-theme .form h5,
 .tataapp-theme .form h6 {
-    margin: 0;
+  margin: 0;
 }
+
 .tataapp-theme .form h5 {
-    text-transform: uppercase;
-    font-weight: bold;
+  text-transform: uppercase;
+  font-weight: bold;
 }
+
 .tataapp-theme .form h6 {
-    font-size: small;
+  font-size: small;
 }
+
 .tataapp-theme .form .scroll-bar-indicator {
-    /*opacity: 1 !important;*/
+  /*opacity: 1 !important;*/
 }
+
 .tataapp-theme .form .item-input,
 .tataapp-theme .form .item-toggle {
-    padding-left: 0;
+  padding-left: 0;
 }
+
 .tataapp-theme .form .item-input .input-label {
-    font-weight: bold;
-    width: inherit;
+  font-weight: bold;
+  width: inherit;
 }
+
 .tataapp-theme .form .item-input input {
-    border-bottom: 1px solid #68615d;
-    border-radius: 0;
+  border-bottom: 1px solid #68615d;
+  border-radius: 0;
 }
+
 .tataapp-theme .form .item-input span.date {
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-    border-bottom: 1px solid #68615d;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border-bottom: 1px solid #68615d;
 }
+
 
 /* Search */
 
-.tataapp-theme .form.search .item-input.item-stacked-label > .input-label {
-    width: 100%;
+.tataapp-theme .form.search .item-input.item-stacked-label>.input-label {
+  width: 100%;
 }
+
 .tataapp-theme .form.search .item-input.item-input-sub {
-    padding-left: 60px;
+  padding-left: 60px;
 }
+
 .tataapp-theme .form.search .item-input.item-input-sub .input-label {
-    font-weight: normal;
-    padding: 7px 10px 7px 0;
+  font-weight: normal;
+  padding: 7px 10px 7px 0;
 }
+
 .tataapp-theme .form.search .item-checkbox,
 .tataapp-theme .form.search .item-toggle {
-    border: 0;
+  border: 0;
 }
-.tataapp-theme .form.search .item-toggle > div > span {
-    white-space: normal;
+
+.tataapp-theme .form.search .item-toggle>div>span {
+  white-space: normal;
 }
+
 .tataapp-theme .form.search .search-tata-dow {
-    text-align: center;
-    padding-top: 20px;
-    margin-bottom: 0;
-    padding-bottom: 0;
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
+
 .tataapp-theme .form.search .search-tata-dow label.item-checkbox {
-    display: inline-block;
-    text-align: center;
+  display: inline-block;
+  text-align: center;
 }
+
 .tataapp-theme .form.search .search-tata-dow label.item-checkbox .checkbox {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    margin-top: auto;
-    padding-bottom: 0;
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  margin-top: auto;
+  padding-bottom: 0;
 }
+
 
 /* Search results*/
 
 .tataapp-theme .searchresults .item h2 {
-    line-height: 40px;
+  line-height: 40px;
 }
+
 
 /* Nanny */
 
 .tataapp-theme .nanny .item {
-    border: 0;
+  border: 0;
 }
+
 .tataapp-theme .nanny .lbl {
-    font-weight: bold;
+  font-weight: bold;
 }
+
 .tataapp-theme .nanny p,
 .tataapp-theme .nanny ul li {
-    color: #000;
-    overflow: auto;
-    white-space: normal;
+  color: #000;
+  overflow: auto;
+  white-space: normal;
 }
+
 .tataapp-theme .nanny ul li {
-    font-size: 14px;
+  font-size: 14px;
 }
+
 
 /* Meet */
 
 .form.meet .button-box.switch {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
+
 .tataapp-theme .form.meet .item-input span.input-label {
-    font-weight: normal;
+  font-weight: normal;
 }
+
 .tataapp-theme .form.meet .item-input span.count {
-    font-weight: bold;
+  font-weight: bold;
 }
+
 .tataapp-theme .form.meet .item-checkbox {
-    font-size: small;
+  font-size: small;
 }
-.tataapp-theme .form.meet .child > .item:first-child {
-    border-top: 1px solid #ddd;
+
+.tataapp-theme .form.meet .child>.item:first-child {
+  border-top: 1px solid #ddd;
 }
+
 
 /* Tata point */
 
 .tataapp-theme .points .item-thumbnail-left {
-    padding-left: 80px;
+  padding-left: 80px;
 }
+
 .tataapp-theme .points .item-thumbnail-left img {
-    width: auto;
-    height: auto;
+  width: auto;
+  height: auto;
 }
+
 .tataapp-theme .points .item h4 {
-    margin-top: 1em;
-    white-space: normal;
+  margin-top: 1em;
+  white-space: normal;
 }
-.tataapp-theme .point .list-item span > span {
-    padding: 0;
+
+.tataapp-theme .point .list-item span>span {
+  padding: 0;
 }
+
+
 /* Fee */
 
 .tataapp-theme .fee .pricelist {
-    margin-top: 30px;
+  margin-top: 30px;
 }
+
 .tataapp-theme .fee .pricelist h1,
 .tataapp-theme .fee .pricelist h2 {
-    text-align: center;
+  text-align: center;
 }
+
 .tataapp-theme .fee .pricelist h1 {
-    font-size: 1.5em;
-    text-transform: uppercase;
+  font-size: 1.5em;
+  text-transform: uppercase;
 }
+
 .tataapp-theme .fee .pricelist h2 {
-    font-size: 1em;
+  font-size: 1em;
 }
+
 .tataapp-theme .fee .pricelist p {
-    color: #b9272d;
-    font-size: small;
+  color: #b9272d;
+  font-size: small;
 }
+
 .tataapp-theme .fee .pricelist .table .tablerow {
-    border-bottom: 1px solid #ddd;
-    margin-top: 0;
+  border-bottom: 1px solid #ddd;
+  margin-top: 0;
 }
+
 .tataapp-theme .fee .pricelist .table .tablerow:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
+
 .tataapp-theme .fee .pricelist .table .tablerow .col {
-    text-align: center;
+  text-align: center;
 }
+
 .tataapp-theme .fee .pricelist .table .tablerow .col:not(:first-child):after {
-    content: '\20AC';
+  content: '\20AC';
 }
+
 .tataapp-theme .fee .pricelist .table .tablerow .col:last-child {
-    color: #b9272d;
+  color: #b9272d;
 }
+
 
 /* Estimate */
 
 .tataapp-theme .form.estimate .item-toggle {
-    font-weight: bold;
-}
-.tataapp-theme .form.estimate .note {
-    font-size: small;
-}
-.tataapp-theme .form.estimate .card {
-    text-align: center;
+  font-weight: bold;
 }
 
+.tataapp-theme .form.estimate .note {
+  font-size: small;
+}
+
+.tataapp-theme .form.estimate .card {
+  text-align: center;
+}
+
+
 /* Info */
+
 .info .scroll,
 .info .slider {
-    height: 100%;
+  height: 100%;
 }
+
 .info .info-pagination {
-    text-align: center;
-    margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 1em;
 }
+
 .info .info-pagination i {
-    opacity: 0.3;
-    margin: 0.5em;
+  opacity: 0.3;
+  margin: 0.5em;
 }
+
 .info .info-pagination i.saw {
-    opacity: 1;
+  opacity: 1;
 }
+
 .tataapp-theme .info .info-page {
-    /*margin-bottom: 44px;*/
-    height: 100%;
+  /*margin-bottom: 44px;*/
+  height: 100%;
 }
+
 .tataapp-theme .info .info-page p {
-    margin: 10px 0 0 0;
+  margin: 10px 0 0 0;
 }
+
 .tataapp-theme .info .info-page ul {
-    list-style: disc;
-    padding: 0 0 0 40px;
+  list-style: disc;
+  padding: 0 0 0 40px;
 }
+
 .tataapp-theme .info .info-page::after {
-    content: "";
-    top: 0;
-    left: 0;
-    /*bottom: 44px;*/
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-    background: transparent no-repeat bottom right;
-    background-size: 70%;
-	opacity: 0.5;
+  content: "";
+  top: 0;
+  left: 0;
+  /*bottom: 44px;*/
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background: transparent no-repeat bottom right;
+  background-size: 70%;
+  opacity: 0.5;
 }
+
 .tataapp-theme .info .info-page.info-page-1::after {
-    background-image: url('../img/tataapp_2.png');
-	background-size: 40%;
+  background-image: url('../img/tataapp_2.png');
+  background-size: 40%;
 }
+
 .tataapp-theme .info .info-page.info-page-2::after {
-    background-image: url('../img/tataapp_1.png');
-	background-size: 60%;
+  background-image: url('../img/tataapp_1.png');
+  background-size: 60%;
 }
+
 .tataapp-theme .info .info-page.info-page-3::after {
-    background-image: url('../img/tataapp_4.png');
+  background-image: url('../img/tataapp_4.png');
 }
+
 .tataapp-theme .info .info-page.info-page-4::after {
-    background-image: url('../img/tataapp_5.png');
+  background-image: url('../img/tataapp_5.png');
 }
+
 .tataapp-theme .info .info-page.info-page-5::after {
-    background-image: url('../img/tataapp_3.png');
+  background-image: url('../img/tataapp_3.png');
 }
+
 .tataapp-theme .info .info-page.info-page-6::after {
-    background-image: url('../img/tataapp_6.png');
+  background-image: url('../img/tataapp_6.png');
 }
+
 .tataapp-theme .info h1 {
-    padding-top: 2em;
-    text-align: center;
-    font-size: 1.2em;
-    text-transform: uppercase;
-    font-weight: bold;
+  padding-top: 2em;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: bold;
 }
+
 .tataapp-theme .info .zone {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
+
 
 /* Vouchers */
 
 .tataapp-theme .vouchers .image {
-    text-align: center;
+  text-align: center;
 }
+
 .tataapp-theme .vouchers .image img {
-    width: 50%;
+  width: 50%;
 }
+
 
 /* Who */
 
 .tataapp-theme .who .image {
-    text-align: center;
+  text-align: center;
 }
+
 .tataapp-theme .who .image img {
-    width: 90%;
+  width: 90%;
 }
 
 .credits_title {
-    color: #ee7b40;
-    font-size: 24px;
-    font-weight: bold;
-
+  color: #ee7b40;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .credits_subtitle {
-    margin-top: 20px !important;
-    font-size: 16px;
-    font-weight: bold;
+  margin-top: 20px !important;
+  font-size: 16px;
+  font-weight: bold;
 }
